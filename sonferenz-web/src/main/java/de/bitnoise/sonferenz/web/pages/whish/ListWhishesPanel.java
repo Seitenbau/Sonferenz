@@ -9,7 +9,6 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
@@ -18,7 +17,9 @@ import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.pages.talks.ListTalksPanel;
+import de.bitnoise.sonferenz.web.pages.whish.action.CreateWhish;
 import de.bitnoise.sonferenz.web.pages.whish.action.EditOrViewWhish;
+import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListWhishesPanel extends Panel
 {
@@ -113,6 +114,10 @@ public class ListWhishesPanel extends Panel
     
     DefaultDataTable<ModelWhishList> table = new DefaultDataTable<ModelWhishList>(
         "whishTable", builder.getColumns(), provider, 30);
+    
+    AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create Whish",
+            table, new CreateWhish());
+        table.addBottomToolbar(toolbar);
 
     add(table);
   }

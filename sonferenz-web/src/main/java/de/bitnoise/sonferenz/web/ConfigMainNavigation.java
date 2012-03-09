@@ -20,6 +20,7 @@ import de.bitnoise.sonferenz.web.component.state.IsActiveConference;
 import de.bitnoise.sonferenz.web.component.state.IsLoggedIn;
 import de.bitnoise.sonferenz.web.component.state.OnStateVoting;
 import de.bitnoise.sonferenz.web.component.state.VisibleOnRights;
+import de.bitnoise.sonferenz.web.pages.auth.LogoutPage;
 import de.bitnoise.sonferenz.web.pages.calculate.CalculateOverviewPage;
 import de.bitnoise.sonferenz.web.pages.conference.ConferenceOverviewPage;
 import de.bitnoise.sonferenz.web.pages.config.EditConfigurationPage;
@@ -38,7 +39,7 @@ public class ConfigMainNavigation
   public static List<NavCallbackInterface> getPages()
   {
     List<NavCallbackInterface> ret = new ArrayList<NavCallbackInterface>();
-    ret.add(new PageNavCallback(ConferencePage.class, "Home", new AllwaysVisible()));
+//    ret.add(new PageNavCallback(ConferencePage.class, "Home", new AllwaysVisible()));
 
     // admin
     ret.add(new PageNavCallback(UserOverviewPage.class, "Users",
@@ -73,7 +74,9 @@ public class ConfigMainNavigation
     ret.add(new PageNavCallback(MyProfilePage.class, "MyProfile",
         new IsLoggedIn()
         ));
-    ret.add(new PageNavCallback(TimeTablePage.class, "Timetable"));
+    ret.add(new PageNavCallback(LogoutPage.class, "Logout",
+            new IsLoggedIn()
+            ));
     return ret;
   }
 

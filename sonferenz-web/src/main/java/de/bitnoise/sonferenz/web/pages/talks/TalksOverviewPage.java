@@ -75,7 +75,7 @@ public class TalksOverviewPage extends KonferenzPage
   @Override
   protected void buildNavigation(ArrayList<NavCallbackInterface> navs)
   {
-    navs.add(new CreateTalk());
+//    navs.add(new CreateTalk());
   }
 
   @Override

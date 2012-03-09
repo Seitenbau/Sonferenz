@@ -1,12 +1,14 @@
 package de.bitnoise.sonferenz.web.pages.error;
 
+
 import org.apache.wicket.markup.html.panel.Panel;
 
-import de.bitnoise.sonferenz.web.action.IWebAction;
+import com.visural.wicket.aturl.At;
+
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPage;
-
+@At(url = "/unauthorisedAccess")
 public class UnauthorisedAccess extends KonferenzPage
 {
 

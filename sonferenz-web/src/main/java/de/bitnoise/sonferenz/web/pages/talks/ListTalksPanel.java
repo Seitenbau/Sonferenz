@@ -18,7 +18,10 @@ import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
+import de.bitnoise.sonferenz.web.pages.talks.action.CreateTalk;
 import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
+import de.bitnoise.sonferenz.web.pages.users.action.CreateNewUser;
+import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListTalksPanel extends Panel
 {
@@ -112,6 +115,10 @@ public class ListTalksPanel extends Panel
     add(new Label("headerText",text).setEscapeModelStrings(false));
     DefaultDataTable<ModelTalkList> table = new DefaultDataTable<ModelTalkList>(
         "talkTable", builder.getColumns(), provider, 30);
+    
+    AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create Talk",
+            table, new CreateTalk());
+        table.addBottomToolbar(toolbar);
     add(table);
   }
 

@@ -58,7 +58,7 @@ public class ConferenceOverviewPage extends KonferenzPage
   @Override
   protected void buildNavigation(ArrayList<NavCallbackInterface> elements)
   {
-    elements.add(new AddConference());
+//    elements.add(new AddConference());
   }
 
   public void edit(ConferenceListItem object)

@@ -8,13 +8,14 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
+import de.bitnoise.sonferenz.web.pages.conference.action.AddConference;
 import de.bitnoise.sonferenz.web.pages.conference.action.EditConference;
 import de.bitnoise.sonferenz.web.pages.conference.table.ConferenceListItem;
+import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListConferencesPanel extends Panel
 {
@@ -84,7 +85,11 @@ public class ListConferencesPanel extends Panel
     };
     DefaultDataTable<ConferenceListItem> table = new DefaultDataTable<ConferenceListItem>(
         "conferenceTable", builder.getColumns(), provider, 20);
+    
+	AddToolbarWithButton toolbar = new AddToolbarWithButton(
+				"+ create Conference", table, new AddConference());
+	table.addBottomToolbar(toolbar);
 
-    add(table);
+	add(table);
   }
 }

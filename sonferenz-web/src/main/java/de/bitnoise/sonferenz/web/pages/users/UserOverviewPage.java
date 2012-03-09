@@ -60,7 +60,7 @@ public class UserOverviewPage extends KonferenzPage
   @Override
   protected void buildNavigation(ArrayList<NavCallbackInterface> navs)
   {
-    navs.add(new CreateNewUser());
+//    navs.add(new CreateNewUser());
   }
 
   public void editUser(UserListItem object)

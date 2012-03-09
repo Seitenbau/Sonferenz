@@ -7,16 +7,17 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.html.resources.StyleSheetReference;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
+import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.web.ConfigMainNavigation;
 import de.bitnoise.sonferenz.web.component.confpan.CurrentConferencePanel;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.component.navigation.NavPanel;
 import de.bitnoise.sonferenz.web.component.user.CurrentUserPanel;
 import de.bitnoise.sonferenz.web.forms.KonferenzForm;
+import de.bitnoise.sonferenz.web.pages.auth.LoginPanel;
 
 public class KonferenzPage extends WebPage
 {
@@ -52,8 +53,13 @@ public class KonferenzPage extends WebPage
         return ConfigMainNavigation.getMainNaviagtion();
       }
     };
-    add(new NavPanel("nav", callbackModel));
-    add(new CurrentUserPanel("currentUser"));
+    
+		if (KonferenzSession.noUserLoggedIn()) {
+			add(new LoginPanel("nav"));
+		} else {
+			add(new NavPanel("nav", callbackModel));
+		}
+//    add(new CurrentUserPanel("currentUser"));
     add(new Label("footerText", de.bitnoise.sonferenz.Version.VERSION));
     add(new CurrentConferencePanel("currentConference"));
     add(getPageContent("pageContent"));

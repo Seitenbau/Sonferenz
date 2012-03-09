@@ -55,7 +55,7 @@ public class WhishOverviewPage extends KonferenzPage
   @Override
   protected void buildNavigation(ArrayList<NavCallbackInterface> navs)
   {
-    navs.add(new CreateWhish());
+//    navs.add(new CreateWhish());
   }
   @Override
   public Object getCurrentAction()
