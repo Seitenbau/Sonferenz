@@ -1,9 +1,9 @@
 # Sonferenz
 
-A simple web based tool for management conferences.
-The tool support submit and voting talks.
+A simple web based tool for management of conferences.
+The tool supports proposal of talks and voting for talks.
 
-Working in progress, more details about this project coming soon.
+Work is in progress, more details about this project are coming soon.
 
 ## Project Plan
 
