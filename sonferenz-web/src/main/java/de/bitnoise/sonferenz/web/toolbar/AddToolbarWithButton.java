@@ -4,16 +4,11 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractToolbar;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
-import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.model.Model;
 
 import de.bitnoise.sonferenz.web.action.IWebAction;
-import de.bitnoise.sonferenz.web.pages.HomePage;
-import de.bitnoise.sonferenz.web.pages.users.table.UserListItem;
 
 public class AddToolbarWithButton extends AbstractToolbar
 {

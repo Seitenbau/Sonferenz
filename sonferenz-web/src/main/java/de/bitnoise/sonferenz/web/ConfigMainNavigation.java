@@ -20,13 +20,13 @@ import de.bitnoise.sonferenz.web.component.state.IsActiveConference;
 import de.bitnoise.sonferenz.web.component.state.IsLoggedIn;
 import de.bitnoise.sonferenz.web.component.state.OnStateVoting;
 import de.bitnoise.sonferenz.web.component.state.VisibleOnRights;
-import de.bitnoise.sonferenz.web.pages.HomePage;
 import de.bitnoise.sonferenz.web.pages.calculate.CalculateOverviewPage;
 import de.bitnoise.sonferenz.web.pages.conference.ConferenceOverviewPage;
 import de.bitnoise.sonferenz.web.pages.config.EditConfigurationPage;
 import de.bitnoise.sonferenz.web.pages.config.EditTextePage;
 import de.bitnoise.sonferenz.web.pages.config.EditUserRolesPage;
 import de.bitnoise.sonferenz.web.pages.profile.MyProfilePage;
+import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.timetable.TimeTablePage;
 import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
@@ -38,7 +38,7 @@ public class ConfigMainNavigation
   public static List<NavCallbackInterface> getPages()
   {
     List<NavCallbackInterface> ret = new ArrayList<NavCallbackInterface>();
-    ret.add(new PageNavCallback(HomePage.class, "Home", new AllwaysVisible()));
+    ret.add(new PageNavCallback(ConferencePage.class, "Home", new AllwaysVisible()));
 
     // admin
     ret.add(new PageNavCallback(UserOverviewPage.class, "Users",

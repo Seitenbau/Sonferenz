@@ -9,7 +9,7 @@ import org.apache.wicket.model.Model;
 
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.FocusOnLoadBehavior;
-import de.bitnoise.sonferenz.web.pages.HomePage;
+import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
 public class LoginPanel extends FormPanel
@@ -65,7 +65,7 @@ public class LoginPanel extends FormPanel
 
   protected void OnSuccessfullLogin()
   {
-    setResponsePage(HomePage.class);
+    setResponsePage(ConferencePage.class);
     setRedirect(true);
   }
 

@@ -18,7 +18,7 @@ import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
 import de.bitnoise.sonferenz.service.v2.exceptions.ValidationException;
-import de.bitnoise.sonferenz.web.pages.HomePage;
+import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
 public class SubscribeActionPanel extends FormPanel
@@ -76,7 +76,7 @@ public class SubscribeActionPanel extends FormPanel
     {
       public void onSubmit()
       {
-        setResponsePage(HomePage.class);
+        setResponsePage(ConferencePage.class);
       }
     };
 

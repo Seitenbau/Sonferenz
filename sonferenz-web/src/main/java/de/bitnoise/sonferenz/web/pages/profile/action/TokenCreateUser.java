@@ -10,7 +10,6 @@ import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.forms.KonferenzForm;
 import de.bitnoise.sonferenz.web.forms.fields.StringInput;
-import de.bitnoise.sonferenz.web.pages.HomePage;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.profile.MyProfilePage;
 import de.bitnoise.sonferenz.web.pages.profile.TokenListItem;

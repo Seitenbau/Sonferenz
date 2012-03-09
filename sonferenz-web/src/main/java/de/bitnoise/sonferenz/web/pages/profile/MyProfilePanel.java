@@ -1,7 +1,5 @@
 package de.bitnoise.sonferenz.web.pages.profile;
 
-import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -10,10 +8,8 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.web.pages.HomePage;
-import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
-import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
 
 public class MyProfilePanel extends FormPanel
 {
@@ -49,7 +45,7 @@ public class MyProfilePanel extends FormPanel
     {
       public void onSubmit()
       {
-        setResponsePage(HomePage.class);
+        setResponsePage(ConferencePage.class);
       }
     };
 
@@ -62,7 +58,7 @@ public class MyProfilePanel extends FormPanel
 
   protected void onSubmitForm()
   {
-    setResponsePage(HomePage.class);
+    setResponsePage(ConferencePage.class);
     String newName = display.getValue();
     if (user.getName().equals(newName))
     {

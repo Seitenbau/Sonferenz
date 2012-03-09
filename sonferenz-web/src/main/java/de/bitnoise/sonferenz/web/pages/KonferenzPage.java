@@ -41,7 +41,8 @@ public class KonferenzPage extends WebPage
   protected void onInitialize()
   {
     super.onInitialize();
-    add(new StyleSheetReference("stylesheet", KonferenzPage.class, "style.less"));
+//    add(new StyleSheetReference("stylesheet", KonferenzPage.class, "style.less"));
+    //add(new StyleSheetReference("stylesheet", KonferenzPage.class, "/styles.css"));
 
     IModel<NavCallbackInterface> callbackModel = new LoadableDetachableModel<NavCallbackInterface>()
     {

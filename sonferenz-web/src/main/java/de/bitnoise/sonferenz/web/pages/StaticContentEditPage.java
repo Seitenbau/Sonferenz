@@ -87,12 +87,12 @@ public class StaticContentEditPage extends KonferenzPage
       };
 
       TextArea<String> field = new TextArea<String>("content", formContent); 
-      TinyMCESettings settings=new TinyMCESettings(Theme.advanced);
-      settings.setToolbarAlign(Align.left);
-      settings.setStatusbarLocation(Location.top);
-      settings.setRelativeUrls(false);
-      TinyMceBehavior tinyMceBehavior = new TinyMceBehavior(settings);
-      field.add(tinyMceBehavior);
+//      TinyMCESettings settings=new TinyMCESettings(Theme.advanced);
+//      settings.setToolbarAlign(Align.left);
+//      settings.setStatusbarLocation(Location.top);
+//      settings.setRelativeUrls(false);
+//      TinyMceBehavior tinyMceBehavior = new TinyMceBehavior(settings);
+//      field.add(tinyMceBehavior);
       
       form.add(field);
       form.add(new Button("submit"));

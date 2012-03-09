@@ -7,35 +7,24 @@ Autor: Michael Mosmann
  *****************************************/
 package de.bitnoise.sonferenz.web.component.confpan;
 
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.wicket.PageParameters;
-import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.repeater.Item;
-import org.apache.wicket.markup.repeater.RefreshingView;
-import org.apache.wicket.markup.repeater.util.ModelIteratorAdapter;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
-import de.bitnoise.sonferenz.web.pages.HomePage;
-import de.bitnoise.sonferenz.web.pages.conference.action.EditConference;
-import de.bitnoise.sonferenz.web.pages.talks.EditTalkPanel;
+import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.utils.WicketTools;
 
 public class CurrentConferencePanel extends Panel
@@ -71,7 +60,7 @@ public class CurrentConferencePanel extends Panel
       {
         ConferenceModel iModel = item.getModelObject();
         BookmarkablePageLink<WebPage> link = new BookmarkablePageLink<WebPage>(
-            "link", HomePage.class , HomePage.createParameters(iModel));
+            "link", ConferencePage.class , ConferencePage.createParameters(iModel));
         item.add(link);
         Label label = new Label("name", Model.of(iModel.getShortName()));
         link.add(label);

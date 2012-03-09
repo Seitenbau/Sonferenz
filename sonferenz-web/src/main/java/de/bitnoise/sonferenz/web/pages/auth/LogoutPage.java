@@ -4,7 +4,7 @@ import org.apache.wicket.markup.html.WebPage;
 
 import com.visural.wicket.aturl.At;
 
-import de.bitnoise.sonferenz.web.pages.HomePage;
+import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 
 @At(url="/logout")
 public class LogoutPage extends WebPage
@@ -13,6 +13,6 @@ public class LogoutPage extends WebPage
   {
     getSession().invalidate();
     setRedirect(true);
-    setResponsePage(HomePage.class);
+    setResponsePage(ConferencePage.class);
   }
 }

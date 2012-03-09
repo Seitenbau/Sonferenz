@@ -3,19 +3,15 @@ package de.bitnoise.sonferenz.web.forms;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.Model;
 
 import de.bitnoise.sonferenz.web.forms.fields.Field;
-import de.bitnoise.sonferenz.web.forms.fields.StringInput;
-import de.bitnoise.sonferenz.web.pages.HomePage;
 
 public class KonferenzContentPanel extends Panel
 {

@@ -3,20 +3,13 @@ package de.bitnoise.sonferenz;
 import org.apache.wicket.Request;
 import org.apache.wicket.Response;
 import org.apache.wicket.Session;
-import org.apache.wicket.injection.Injector;
-import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jquery.JQueryResourceReference;
 import com.visural.wicket.aturl.AtAnnotation;
-import com.visural.wicket.util.lesscss.LessCSSResourceStreamLocator;
 
-import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
-import de.bitnoise.sonferenz.service.v2.services.Eventing;
-import de.bitnoise.sonferenz.web.pages.HomePage;
 import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
 
 /**
@@ -31,9 +24,9 @@ public class WicketApplication extends WebApplication
    * @see org.apache.wicket.Application#getHomePage()
    */
   @Override
-  public Class<HomePage> getHomePage()
+  public Class<de.bitnoise.sonferenz.web.pages.statics.ConferencePage> getHomePage()
   {
-    return HomePage.class;
+    return de.bitnoise.sonferenz.web.pages.statics.ConferencePage.class;
   }
 
   /**
@@ -48,9 +41,9 @@ public class WicketApplication extends WebApplication
     // for Selenium debugging
     getDebugSettings().setOutputComponentPath(true);
 
-    // Activate lesscss
-    getResourceSettings().setResourceStreamLocator(
-        new LessCSSResourceStreamLocator(getResourceFinder()));
+//    // Activate lesscss
+//    getResourceSettings().setResourceStreamLocator(
+//        new LessCSSResourceStreamLocator(getResourceFinder()));
 
     // Visural JS stuff
     addRenderHeadListener(JavascriptPackageResource
