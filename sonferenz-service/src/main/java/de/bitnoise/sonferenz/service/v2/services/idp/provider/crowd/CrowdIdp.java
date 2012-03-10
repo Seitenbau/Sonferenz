@@ -167,6 +167,10 @@ public class CrowdIdp implements Idp
   public Identity getIdentity(String name)
   {
     Identity res = null;
+    if(restTemplate==null) 
+    {
+    	return null;
+    }
     try
     {
       CrowdUser result = restTemplate.getForObject(crowdRestService + TEMPLATE_USER, CrowdUser.class, name);
