@@ -71,7 +71,7 @@ public class ListUserPanel extends Panel
 
     SortableServiceDataProvider<UserModel, UserListItem> provider = createProvider();
     DefaultDataTable<UserListItem> table = new DefaultDataTable<UserListItem>(
-        "userTable", builder.getColumns(), provider, 20);
+        "userTable", builder.getColumns(), provider, 100);
 
     AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create User",
         table, new CreateNewUser());

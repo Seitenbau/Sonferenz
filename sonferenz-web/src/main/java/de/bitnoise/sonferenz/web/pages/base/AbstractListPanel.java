@@ -33,7 +33,7 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
     initColumns(builder);
     SortableServiceDataProvider<DB_MODEL, VIEW_MODEL> provider = createProvider();
     List<IColumn<VIEW_MODEL>> columns = builder.getColumns();
-    Integer maxPageSize = config.getIntegerValue(30,
+    Integer maxPageSize = config.getIntegerValue(100,
         "table." + headingId + ".paginationSize", 
         "table.paginationSize");
     DataTable<VIEW_MODEL> table = 

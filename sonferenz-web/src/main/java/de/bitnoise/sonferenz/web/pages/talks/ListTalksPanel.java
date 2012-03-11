@@ -114,7 +114,7 @@ public class ListTalksPanel extends Panel
     String text=content2.text("page.talkHeader","");
     add(new Label("headerText",text).setEscapeModelStrings(false));
     DefaultDataTable<ModelTalkList> table = new DefaultDataTable<ModelTalkList>(
-        "talkTable", builder.getColumns(), provider, 30);
+        "talkTable", builder.getColumns(), provider, 100);
     
     AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create Talk",
             table, new CreateTalk());

@@ -26,7 +26,7 @@ public abstract class ListPanel<T> extends Panel
   {
     super(id);
     InjectorHolder.getInjector().inject(this);
-    _maxRowsPerPage = 30;
+    _maxRowsPerPage = 100;
   }
 
   @Override

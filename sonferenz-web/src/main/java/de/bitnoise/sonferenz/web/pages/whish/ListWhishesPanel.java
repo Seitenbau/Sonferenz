@@ -113,7 +113,7 @@ public class ListWhishesPanel extends Panel
     add(new Label("headerText",text).setEscapeModelStrings(false));
     
     DefaultDataTable<ModelWhishList> table = new DefaultDataTable<ModelWhishList>(
-        "whishTable", builder.getColumns(), provider, 30);
+        "whishTable", builder.getColumns(), provider, 100);
     
     AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create Whish",
             table, new CreateWhish());
