@@ -46,7 +46,6 @@ public class InitEmptyDatabase
     config.initValue("mail.create.from", "soferenz@localhost");
     config.initValue("baseUrl", "http://localhost:8080/sonferenz-web");
 
-    texte.storeText("table.GlobalConfig.column.name", "");
     texte.storeText("menu.MyProfile", "Profile");
     texte.storeText("menu.Talks", "Talks");
     texte.storeText("menu.Whishes", "Whishes");
@@ -54,16 +53,19 @@ public class InitEmptyDatabase
     texte.storeText("menu.Config", "Config");
     texte.storeText("menu.Roles", "Roles");
     texte.storeText("menu.Users", "Users");
-    texte.storeText("toolbar.user.LogoutPage.label", "Logout");
-    texte.storeText("toolbar.user.LogoutPage.prefix", "");
+    texte.storeText("menu.Texte", "Texte");
+    texte.storeText("menu.Logout", "Logout");
     texte.storeText("menu.Timetable", "Timetable");
     texte.storeText("menu.Home", "Home");
-    texte.storeText("menu.null", "Menu");
+    texte.storeText("menu.null", "");
+    texte.storeText("menu.Add", "Add");
+    texte.storeText("datatable.no-records-found", "No records");
+    texte.storeText("toolbar.user.LogoutPage.label", "Logout");
+    texte.storeText("toolbar.user.LogoutPage.prefix", "");
     texte.storeText("toolbar.user.LoginPage.label", "Login");
     texte.storeText("toolbar.user.LoginPage.prefix", "");
+    texte.storeText("table.GlobalConfig.column.name", "");
     texte.storeText("table.GlobalConfig.column.value", "Value");
-    texte.storeText("datatable.no-records-found", "No records");
-    texte.storeText("menu.Add", "Add");
     texte.storeText("table.users.column.Name", "Name");
     texte.storeText("table.users.column.Provider", "Provider");
     texte.storeText("table.users.column.Rollen", "rollen");
