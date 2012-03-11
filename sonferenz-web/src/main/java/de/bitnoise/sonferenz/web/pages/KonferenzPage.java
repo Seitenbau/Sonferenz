@@ -14,6 +14,7 @@ import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.web.ConfigMainNavigation;
 import de.bitnoise.sonferenz.web.component.confpan.CurrentConferencePanel;
+import de.bitnoise.sonferenz.web.component.footer.FooterPanel;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.component.navigation.NavPanel;
 import de.bitnoise.sonferenz.web.component.user.CurrentUserPanel;
@@ -61,7 +62,7 @@ public abstract class KonferenzPage extends WebPage
 			add(new NavPanel("nav", callbackModel));
 		}
 //    add(new CurrentUserPanel("currentUser"));
-    add(new Label("footerText", de.bitnoise.sonferenz.Version.VERSION));
+    add(new FooterPanel("footer"));
     add(new CurrentConferencePanel("currentConference"));
     add(getPageContent("pageContent"));
   }
