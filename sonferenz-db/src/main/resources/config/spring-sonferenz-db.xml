@@ -19,12 +19,33 @@
 		transaction-manager="transactionManager" />
 
 	<context:annotation-config />
-<!-- 
+	
+    <!-- 
 	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
 		<property name="dataSource" ref="dataSource" />
 		<property name="changeLog" value="classpath:database/db-changelog-master.xml" />
 		<property name="contexts" value="production" />
 	</bean>
    -->
+   
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="${db.driver}" />
+    <property name="url" value="${db.url}" />
+    <property name="username" value="${db.user}" />
+    <property name="password" value="${db.password}" />
+  </bean>
+
+
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="persistenceUnitName" value="spring-jpa" />
+    <property name="jpaVendorAdapter">
+      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="showSql" value="false" />
+        <property name="generateDdl" value="true" />
+        <property name="database" value="${db.jpa.dialect}" />
+      </bean>
+    </property>
+  </bean>
 
 </beans>
