@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import de.bitnoise.sonferenz.service.v2.services.idp.provider.local.LocalIdp;
 public class InitEmptyDatabase
 {
   private static final String INIT_MARKER_KEY = "intern.database-is-initialized";
+  
+  private static final Logger logger  = LoggerFactory.getLogger(InitEmptyDatabase.class);
 
   @Autowired
   ConfigurationService config;
@@ -40,7 +44,9 @@ public class InitEmptyDatabase
     {
       return;
     }
-
+    logger.warn("#################################################################");
+    logger.warn("# DATABASE SEEMS TO BE EMPTY ... initializing with default Data #");
+    logger.warn("#################################################################");
     config.initValue(INIT_MARKER_KEY, 1);
     config.initValue("smtp.host", "localhost");
     config.initValue("mail.create.from", "soferenz@localhost");
