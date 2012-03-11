@@ -11,6 +11,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.web.ConfigMainNavigation;
 import de.bitnoise.sonferenz.web.component.confpan.CurrentConferencePanel;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
@@ -19,7 +20,7 @@ import de.bitnoise.sonferenz.web.component.user.CurrentUserPanel;
 import de.bitnoise.sonferenz.web.forms.KonferenzForm;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPanel;
 
-public class KonferenzPage extends WebPage
+public abstract class KonferenzPage extends WebPage
 {
   private KonferenzForm _form;
 

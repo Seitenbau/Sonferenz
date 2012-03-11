@@ -38,7 +38,7 @@ public class StaticContentPanel extends Panel
     }
     add(new Label("text", html).setEscapeModelStrings(false));
     PageParameters parameters = new PageParameters();
-    parameters.add("editId", _key);
+    parameters.add("id", _key);
     BookmarkablePageLink<String> editLink = new BookmarkablePageLink<String>(
         "editLink", StaticContentEditPage.class, parameters);
     boolean vis = KonferenzSession.hasRight(Right.Conference.Edit);

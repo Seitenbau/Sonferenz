@@ -8,6 +8,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
+import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 

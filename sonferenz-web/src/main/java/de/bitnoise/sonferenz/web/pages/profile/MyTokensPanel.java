@@ -12,6 +12,7 @@ import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
+import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;
 import de.bitnoise.sonferenz.web.pages.profile.action.TokenCreateUser;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;

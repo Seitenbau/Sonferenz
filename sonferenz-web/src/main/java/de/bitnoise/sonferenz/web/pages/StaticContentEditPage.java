@@ -8,6 +8,8 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import com.visural.wicket.aturl.At;
+
 import wicket.contrib.tinymce.TinyMceBehavior;
 import wicket.contrib.tinymce.settings.TinyMCESettings;
 import wicket.contrib.tinymce.settings.TinyMCESettings.Align;
@@ -15,7 +17,9 @@ import wicket.contrib.tinymce.settings.TinyMCESettings.Location;
 import wicket.contrib.tinymce.settings.TinyMCESettings.Theme;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
+import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 
+@At(url = "/editnode", urlParameters = { "id" })
 public class StaticContentEditPage extends KonferenzPage
 {
   @SpringBean
@@ -28,11 +32,7 @@ public class StaticContentEditPage extends KonferenzPage
     super();
     if (params != null)
     {
-      Object val = params.get("editId");
-      if (val != null)
-      {
-        _id = ((String[]) val)[0];
-      }
+    	_id = params.getString("id");
     }
   }
 
@@ -52,12 +52,17 @@ public class StaticContentEditPage extends KonferenzPage
       {
         html = "";
       }
-      return new EditPanel(id, _id, html);
+      return new EditPanel(id, _id, html){
+		@Override
+		protected void onSuccess() {
+			setResponsePage(ConferencePage.class);
+		}
+      };
     }
     return super.getPageContent(id);
   }
 
-  class EditPanel extends Panel
+  abstract class EditPanel extends Panel
   {
     String _key;
 
@@ -105,6 +110,9 @@ public class StaticContentEditPage extends KonferenzPage
       if(neu !=null ) {
         facade.saveText(_id,neu);
       }
+      onSuccess();
     }
+    
+    abstract protected void onSuccess();
   }
 }

@@ -24,6 +24,7 @@ import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
+import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.utils.WicketTools;
 
@@ -60,7 +61,7 @@ public class CurrentConferencePanel extends Panel
       {
         ConferenceModel iModel = item.getModelObject();
         BookmarkablePageLink<WebPage> link = new BookmarkablePageLink<WebPage>(
-            "link", ConferencePage.class , ConferencePage.createParameters(iModel));
+            "link", KonferenzPage.class , ConferencePage.createParameters(iModel));
         item.add(link);
         Label label = new Label("name", Model.of(iModel.getShortName()));
         link.add(label);

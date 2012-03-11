@@ -19,7 +19,7 @@ public class TokenCreateUser extends WebAction<IModel<TokenListItem>>
 
   public Page doAction(IModel<TokenListItem> model)
   {
-    return new KonferenzPage(new CreateUserToken());
+    return new KonferenzPage(new CreateUserToken()){};
   }
 
   class CreateUserToken extends KonferenzForm
