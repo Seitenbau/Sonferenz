@@ -3,12 +3,14 @@ package de.bitnoise.sonferenz.web.pages.config;
 import java.io.Serializable;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.Localizer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.StaticContentModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;

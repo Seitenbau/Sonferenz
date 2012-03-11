@@ -1,6 +1,10 @@
 package de.bitnoise.sonferenz.web.pages.config;
 
+import javax.security.auth.callback.TextInputCallback;
+
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextArea;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -73,10 +77,15 @@ public class EditTextEntry extends KonferenzPage
         valueModel = Model.of("");
       }
       addTextInputField("key", keyModel);
-
-      form.add(new RichTextEditorFormBehavior());
-      ReducedRichTextEditor rte = new ReducedRichTextEditor("value", valueModel);
-      form.add(rte);
+      if(allowHTML!=null && allowHTML) 
+      {
+	      form.add(new RichTextEditorFormBehavior());
+	      ReducedRichTextEditor rte = new ReducedRichTextEditor("value", valueModel);
+	      form.add(rte);
+      } else {
+    	  TextArea<String> field = new TextArea<String>("value", valueModel);
+    	  form.add(field);
+      }
     }
 
     @Override
@@ -91,6 +100,7 @@ public class EditTextEntry extends KonferenzPage
         } 
       }
       texte.saveText(keyModel.getObject(), neu);
+      getLocalizer().clearCache();
       setResponsePage(EditTextePage.class);
     }
 
