@@ -59,7 +59,7 @@ public class LoginPanel extends FormPanel
     }
     else
     {
-      feedback.warn("Login failed : " + errorMessage);
+      feedback.error("Login failed : " + errorMessage);
     }
   }
 

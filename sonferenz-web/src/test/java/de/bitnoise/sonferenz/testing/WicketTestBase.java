@@ -3,6 +3,7 @@ package de.bitnoise.sonferenz.testing;
 import static org.fest.reflect.core.Reflection.staticMethod;
 
 import org.apache.wicket.util.tester.WicketTester;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.mockito.Mock;
@@ -22,12 +23,18 @@ public abstract class WicketTestBase extends TestBase {
 	protected WicketTester tester;
 
 	@Before
-	public void setupWicketTester() {
+	public void setupMockedSession() {
 		tester = new WicketTester();
 		staticMethod("setInternalMockForSession")
 				.withParameterTypes(KonferenzSession.class)
-				.in(KonferenzSession.class)
-				.invoke(session);
+				.in(KonferenzSession.class).invoke(session);
+	}
+
+	@AfterClass
+	public static void resetMockedSession() {
+		staticMethod("setInternalMockForSession")
+				.withParameterTypes(KonferenzSession.class)
+				.in(KonferenzSession.class).invoke(new Object[] { null });
 	}
 
 }
