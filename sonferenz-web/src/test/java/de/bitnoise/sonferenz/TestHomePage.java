@@ -1,3 +1,4 @@
+package de.bitnoise.sonferenz;
 //package de.bitnosie.sonferenz;
 //
 //import org.apache.wicket.util.tester.WicketTester;

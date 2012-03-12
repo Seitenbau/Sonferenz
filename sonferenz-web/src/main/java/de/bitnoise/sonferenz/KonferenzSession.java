@@ -36,6 +36,8 @@ public class KonferenzSession extends WebSession
   private static List<String> adminRoles = new ArrayList<String>();
 
   private static ConferenceModel _conference;
+  
+  private static KonferenzSession _TestMockSession;
 
   @SpringBean
   AuthenticationService authService;
@@ -75,6 +77,10 @@ public class KonferenzSession extends WebSession
 
   public static KonferenzSession get()
   {
+    if (_TestMockSession != null)
+    {
+      return _TestMockSession;
+    }
     return (KonferenzSession) Session.get();
   }
 
@@ -231,5 +237,11 @@ public class KonferenzSession extends WebSession
       return false;
     }
     return active.getId().equals(_currentConference.getId());
+  }
+
+  @SuppressWarnings("unused") // called by tests via reflection
+  private static void setInternalMockForSession(KonferenzSession session)
+  {
+    _TestMockSession = session;
   }
 }

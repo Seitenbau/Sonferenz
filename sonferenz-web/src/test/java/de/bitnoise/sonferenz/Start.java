@@ -1,4 +1,4 @@
-package de.bitnosie.sonferenz;
+package de.bitnoise.sonferenz;
 
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;

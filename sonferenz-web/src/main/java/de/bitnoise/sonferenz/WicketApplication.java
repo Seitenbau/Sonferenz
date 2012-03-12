@@ -6,6 +6,8 @@ import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
 
 import com.jquery.JQueryResourceReference;
 import com.visural.wicket.aturl.AtAnnotation;
@@ -20,6 +22,8 @@ import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
  */
 public class WicketApplication extends WebApplication
 {
+  private SpringComponentInjector injector;
+	
   /**
    * @see org.apache.wicket.Application#getHomePage()
    */
@@ -29,6 +33,7 @@ public class WicketApplication extends WebApplication
     return de.bitnoise.sonferenz.web.pages.statics.ConferencePage.class;
   }
 
+  
   /**
    * @see org.apache.wicket.Application#init()
    */
@@ -74,7 +79,8 @@ public class WicketApplication extends WebApplication
   public void activateSpring()
   {
     // Activate Spring
-    addComponentInstantiationListener(new SpringComponentInjector(this));
+    injector = new SpringComponentInjector(this);
+    addComponentInstantiationListener(injector);
   }
 
   @Override
@@ -82,4 +88,12 @@ public class WicketApplication extends WebApplication
   {
     return new KonferenzSession(request);
   }
+  
+  @SuppressWarnings("unused") // only used by tests via reflection
+  private void setInternalMockContext(ApplicationContext applicationContext) throws BeansException
+  {
+    injector = new SpringComponentInjector(this, applicationContext,true);
+    addComponentInstantiationListener(injector);
+  }
+  
 }
