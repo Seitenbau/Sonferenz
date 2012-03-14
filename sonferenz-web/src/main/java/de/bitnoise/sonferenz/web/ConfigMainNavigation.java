@@ -72,6 +72,7 @@ public class ConfigMainNavigation
         new OnStateVoting()
         ));
     ret.add(new PageNavCallback(MyProfilePage.class, "MyProfile",
+        new VisibleOnRights(Right.Admin.Configure),
         new IsLoggedIn()
         ));
     ret.add(new PageNavCallback(LogoutPage.class, "Logout",
