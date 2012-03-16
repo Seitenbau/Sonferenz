@@ -15,7 +15,10 @@
       <id>projectlombok.org</id>
       <url>http://projectlombok.org/mavenrepo</url>
     </repository>
-
+    <repository>
+      <id>bitnoise.de</id>
+      <url>http://repo.bitnoise.de/artifacts/release/</url>
+    </repository>
   </repositories>
   <build>
     <plugins>
@@ -269,12 +272,12 @@ encoding/<project>=UTF-8]]>
       <dependency>
         <groupId>de.bitnoise.testing</groupId>
         <artifactId>bn-testing-common</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
       </dependency>
       <dependency>
         <groupId>de.bitnoise.testing</groupId>
         <artifactId>bn-testing-db</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
