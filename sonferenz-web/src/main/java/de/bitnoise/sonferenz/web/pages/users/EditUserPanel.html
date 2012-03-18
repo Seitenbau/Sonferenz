@@ -1,15 +1,22 @@
 <wicket:panel>
 	<div wicket:id="feedback"></div>
-	<form wicket:id="form">
+	<form wicket:id="form" class="formLayout">
 		<fieldset>
             <legend>Edit User  Details</legend>
-			UserName:   <input wicket:id="username"/><br/>
-			eMail:   <input wicket:id="email"/><br/>
-            User has roles : 
-        	<select wicket:id="roleSelect"></select><br/>
+			  <label> UserName:   </label>
+			  <input wicket:id="username"/>
+			<br/>
+			  <label> eMail:    </label>
+			  <input wicket:id="email"/>
+			<br/>
+			 <label> User has roles : </label>
+        	 <select wicket:id="roleSelect"></select>
+        	<br/>
         </fieldset>
-		<input type="submit" wicket:id="submit" value="Speichern"/>
-		<input type="submit" wicket:id="cancel" value="Abbrechen" />
+        <div class="formButtons">
+		  <input type="submit" wicket:id="submit" value="Speichern"/>
+		  <input type="submit" wicket:id="cancel" value="Abbrechen" />
+		</div>
 		
 	</form>
 </wicket:panel>

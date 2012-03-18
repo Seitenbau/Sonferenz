@@ -1,6 +1,7 @@
 package de.bitnoise.sonferenz.web.pages.users;
 
 import java.util.Set;
+import static de.bitnoise.sonferenz.web.pages.KonferenzPage.txt;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
@@ -18,6 +19,7 @@ import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
+import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.users.action.CreateNewUser;
 import de.bitnoise.sonferenz.web.pages.users.action.EditUser;
 import de.bitnoise.sonferenz.web.pages.users.table.UserListItem;
@@ -77,19 +79,15 @@ public class ListUserPanel extends Panel
         table, new CreateNewUser());
     table.addBottomToolbar(toolbar);
 
+    add(new AjaxLink("above","table.user.createLink") {
+		@Override
+		protected void onClickLink(AjaxRequestTarget target) {
+			UserOverviewPage page = new UserOverviewPage();
+			page .createNewUser();
+			setResponsePage(page );
+		}
+	});
     add(table);
-
-    AjaxFallbackLink<String> clearCaches = new AjaxFallbackLink<String>(
-        "clearCaches")
-    {
-      @Override
-      public void onClick(AjaxRequestTarget target)
-      {
-        // TODO REMOVE
-        System.out.println("removed feature");
-      }
-    };
-    add(clearCaches);
   }
 
   private SortableServiceDataProvider<UserModel, UserListItem> createProvider()

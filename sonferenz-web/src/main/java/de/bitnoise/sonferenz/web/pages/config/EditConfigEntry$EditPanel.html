@@ -1,12 +1,14 @@
 <wicket:panel>
 	<div wicket:id="feedback"></div>
-	<form wicket:id="form">
+	<form wicket:id="form" class="formLayout">
 		<fieldset>
             <legend>Bearbeiten</legend>
-			Key:     <input wicket:id="key"/><br/>
-			Value:   <input wicket:id="value" /><br/>
+			<label>Key:</label> <input wicket:id="key"/><br/>
+			<label>Value:</label><input wicket:id="value" /><br/>
         </fieldset>
+        <div  class="formButtons">
 		<input type="submit" wicket:id="submit" value="Speichern"/>
 		<input type="submit" wicket:id="cancel" value="Abbrechen" />
+		</div>
 	</form>
 </wicket:panel>

@@ -87,8 +87,8 @@ public abstract class KonferenzPage extends WebPage
     return null;
   }
 
-public IModel<String> txt(String id) {
-	return new StringResourceModel( id, Model.of(id));
-}
+	public  static IModel<String> txt(String id) {
+		return new StringResourceModel( id, Model.of(id));
+	}
 
 }

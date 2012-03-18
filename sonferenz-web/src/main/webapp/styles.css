@@ -256,6 +256,34 @@ div.tabpanel div.tab-row a:hover {
 	padding: 5px;
 }
 
+/* ********** table { */
+.tabelle thead {
+	background-color: #00437c;
+	border : 1px solid #00437c;
+    color: #fff;
+}
+	
+.tabelle tbody {
+	border : 1px solid;
+	border-color: #00437c;
+	padding: 10px;
+}
+tr.odd  {
+	background-color: #EFEFFF;
+}
+.tabelle td,.tabelle th {
+	padding : 2px;
+}
+
+.tabelle thead a{
+    color: #fff;
+}
+
+div.tableBar {
+	margin-bottom: 10px;
+}
+/* ********** table } */
+
 /* *********** } tabs */
 
 .normal li {

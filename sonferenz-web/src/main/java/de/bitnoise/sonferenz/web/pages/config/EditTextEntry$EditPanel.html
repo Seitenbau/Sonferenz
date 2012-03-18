@@ -1,14 +1,18 @@
 <wicket:panel>
 	<div wicket:id="feedback"></div>
-	<form wicket:id="form">
+	<form wicket:id="form" class="formLayout">
 		<fieldset>
             <legend>Bearbeiten</legend>
-			Key:     <input wicket:id="key"/><br/>
-			Value:   <br/>
-			<textarea style="width: 745px; height: 340px;" wicket:id="value"></textarea>
+			<label>Key:</label>
+			<input wicket:id="key"/>
+			<br/>
+			<label class="merged">Value:</label>
+			<textarea class="merged"   wicket:id="value"></textarea>
 			<br/>
         </fieldset>
+        <div  class="formButtons">
 		<input type="submit" wicket:id="submit" value="Speichern"/>
 		<input type="submit" wicket:id="cancel" value="Abbrechen" />
+		</div>
 	</form>
 </wicket:panel>
