@@ -27,6 +27,7 @@ import de.bitnoise.sonferenz.web.pages.config.EditConfigurationPage;
 import de.bitnoise.sonferenz.web.pages.config.EditTextePage;
 import de.bitnoise.sonferenz.web.pages.config.EditUserRolesPage;
 import de.bitnoise.sonferenz.web.pages.profile.MyProfilePage;
+import de.bitnoise.sonferenz.web.pages.settings.SettingsPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.timetable.TimeTablePage;
@@ -71,10 +72,14 @@ public class ConfigMainNavigation
         new IsActiveConference(),
         new OnStateVoting()
         ));
-    ret.add(new PageNavCallback(MyProfilePage.class, "MyProfile",
-        new VisibleOnRights(Right.Admin.Configure),
+    ret.add(new PageNavCallback(MyProfilePage.class, "Profile",
+        // new VisibleOnRights(Right.Admin.Configure),
         new IsLoggedIn()
         ));
+    ret.add(new PageNavCallback(SettingsPage.class, "Settings",
+    		// new VisibleOnRights(Right.Admin.Configure),
+    		new IsLoggedIn()
+    		));
     ret.add(new PageNavCallback(LogoutPage.class, "Logout",
             new IsLoggedIn()
             ));

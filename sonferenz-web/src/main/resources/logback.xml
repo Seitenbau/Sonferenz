@@ -15,7 +15,9 @@
   <logger name="de.bitnoise.sonferenz" level="warn" />
   <logger name="org.apache.wicket" level="error" />
   <logger name="ch.qos.logback" level="error" />
+  <!-- for ApacheDerby create or use old DB
   <logger name="org.hibernate.util.JDBCExceptionReporter" level="warn" />
+   -->
 
   <root level="warn">
     <appender-ref ref="STDOUT" />

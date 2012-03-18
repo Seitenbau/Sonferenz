@@ -26,7 +26,7 @@ public class MyProfilePage extends KonferenzPage
         protected void onInitPanels(RepeatingView view)
         {
           view.add( new MyProfilePanel(view.newChildId(), user) );
-          view.add( new MyTokensPanel(view.newChildId()) );
+//          view.add( new MyTokensPanel(view.newChildId()) );
         }
       };  
     }
