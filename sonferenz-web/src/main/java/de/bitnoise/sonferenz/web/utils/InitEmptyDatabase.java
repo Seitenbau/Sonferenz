@@ -53,15 +53,12 @@ public class InitEmptyDatabase
     config.initValue("baseUrl", "http://localhost:8080/sonferenz-web");
 
     texte.storeText("menu.MyProfile", "Profile");
-    texte.storeText("menu.Talks", "Talks");
-    texte.storeText("menu.Whishes", "Whishes");
-    texte.storeText("menu.Conference", "Conference");
-    texte.storeText("menu.Config", "Config");
-    texte.storeText("menu.Roles", "Roles");
-    texte.storeText("menu.Users", "Users");
-    texte.storeText("menu.Texte", "Texte");
+    texte.storeText("menu.Talks", "Vorträge");
+    texte.storeText("menu.Whishes", "Wünsche");
+    texte.storeText("menu.Profile", "Profil");
+    texte.storeText("menu.Administration", "Administration");
     texte.storeText("menu.Logout", "Logout");
-    texte.storeText("menu.Timetable", "Timetable");
+    texte.storeText("menu.Timetable", "Zeitplan");
     texte.storeText("menu.Home", "Home");
     texte.storeText("menu.null", "");
     texte.storeText("menu.Add", "Add");
@@ -80,11 +77,63 @@ public class InitEmptyDatabase
     texte.storeText("table.conference.column.Status", "Status");
     texte.storeText("table.conference.column.Name", "Name");
     
+    texte.storeText("table.whish.column.Like","Like");
+    texte.storeText("table.whish.column.Titel","Titel");
+   	texte.storeText("table.whish.column.Description","Beschreibung");
+    texte.storeText("table.whish.column.Verantwortlicher","Author");
+    texte.storeText("table.whish.create","Neuen Wunsch anlegen");
+    
+    texte.storeText("table.talks.column.Titel","Titel");
+    texte.storeText("table.talks.column.Description","Beschreibung");
+    texte.storeText("table.talks.column.Author","Author");
+    texte.storeText("table.talks.create","Neuen Vortrag einreichen");
+    
+    texte.storeText("profile.tab.profile","Mein Profil");
+    texte.storeText("profile.tab.invites","Einladen");
+    texte.storeText("profile.user.invites","Neuen Benutzer einladen");
+    
+    texte.storeText("table.tokenTable.column.action","Aktion");
+    texte.storeText("table.tokenTable.column.token","Token");
+    texte.storeText("table.tokenTable.column.url","Url");
+    
+    texte.storeText("admin.tab.users","Benutzer");
+    texte.storeText("admin.tab.roles","Rollen");
+    texte.storeText("admin.tab.conference","Konferenzen");
+    texte.storeText("admin.tab.config","Konfiguration");
+    texte.storeText("admin.tab.i18n","Texte");
+    texte.storeText("table.user.createLink","Neuen Benutzer anlegen");
+    
+    texte.storeText("table.TexteTable.column.name","text id");
+    texte.storeText("table.TexteTable.column.value","text");
+    
+    texte.storeText("org.apache.wicket.extensions.wizard.previous","Zurück");
+    texte.storeText("org.apache.wicket.extensions.wizard.next","Weiter");	
+    texte.storeText("org.apache.wicket.extensions.wizard.cancel","Abbrechen");
+    texte.storeText("org.apache.wicket.extensions.wizard.finish","Fertigstellen");
+    texte.storeText("table.whish.hint.Like1","");
+    
+    texte.storeText("username.InviteUserPanel$UserUnique","Benutzername muss eindeutig sein");
+    texte.storeText("username.Required","Ein Benutzername muss angegeben werden");
+    texte.storeText("email.Required","Eine email Addresse wird benötigt");
+    texte.storeText("email.InviteUserPanel$EMailNotUsed","email Addresse muss eindeutig sein");
+    texte.storeText("email.EmailAddressValidator","email Addresse ist ungültig");
+    texte.storeText("title.Required","Bitte Titel eingeben");
+    texte.storeText("title.StringValidator.maximum","Titel zu lang");
+    texte.storeText("author.StringValidator.maximum","Author zu lang");
+    texte.storeText("theOwner.Required","Bearbeitungsrechte müssen vergebene werden");
+    texte.storeText("description.StringValidator.maximum","Beschreibung zu lang");
+    
     texte.storeText("conferenceState.null", "- none -");
     texte.storeText("CREATED", "Created");
     texte.storeText("PLANNING", "Planning");
     texte.storeText("VOTING", "Voting");
     texte.storeText("PLANNED", "Planned");
+    
+    texte.storeText("page.home", "page.home: as admin you can change this text.");
+    texte.storeText("page.agenda", "page.agenda: as admin you can change this text.");
+    texte.storeText("page.review", "page.review: as admin you can change this text.");
+    texte.storeText("page.register", "page.register: as admin you can change this text.");
+    texte.storeText("page.contact", "page.contact: as admin you can change this text.");
 
     createRole(1,"ADMIN");
     createRole(2,"USER");

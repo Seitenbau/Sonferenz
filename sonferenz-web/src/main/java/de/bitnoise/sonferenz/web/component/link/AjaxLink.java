@@ -6,15 +6,17 @@ import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
+import de.bitnoise.sonferenz.web.pages.KonferenzPage;
+
 public abstract class AjaxLink extends Panel
 {
 
   String text;
 
-  public AjaxLink(String id, String labelText)
+  public AjaxLink(String id, String labelTextID)
   {
     super(id);
-    text = labelText;
+    text = labelTextID;
   }
 
   @Override
@@ -37,7 +39,7 @@ public abstract class AjaxLink extends Panel
 
   private Component createLabel(String id, String text)
   {
-    return new Label(id, text);
+    return new Label(id, KonferenzPage.txt(text));
   }
 
   abstract protected void onClickLink(AjaxRequestTarget target);

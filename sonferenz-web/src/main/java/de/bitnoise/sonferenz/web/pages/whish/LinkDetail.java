@@ -66,7 +66,7 @@ public class LinkDetail extends LikeColumn<ModelWhishList> implements
   public Component getHeader(String componentId)
   {
     Component hdr = super.getHeader(componentId);
-    if (_hint != null)
+    if (_hint != null && !_hint.isEmpty())
     {
       hdr.add(new BeautyTipBehavior(new ResourceModel(_hint))
           .setPositionPreference(TipPosition.bottom));

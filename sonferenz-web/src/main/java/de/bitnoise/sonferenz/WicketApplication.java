@@ -43,8 +43,8 @@ public class WicketApplication extends WebApplication
     super.init();
     activateSpring();
 
-    // for Selenium debugging
-    getDebugSettings().setOutputComponentPath(true);
+//    // for Selenium debugging
+//    getDebugSettings().setOutputComponentPath(true);
 
 //    // Activate lesscss
 //    getResourceSettings().setResourceStreamLocator(

@@ -6,6 +6,7 @@ import org.apache.wicket.Component;
 import org.apache.wicket.Localizer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.TableBuilder.ActionColumn;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
+import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;
 import de.bitnoise.sonferenz.web.pages.base.IconPanel;
 import de.bitnoise.sonferenz.web.pages.base.IconPanel.Type;
@@ -55,7 +57,7 @@ public class ListTextePanel extends
   @Override
   protected Component createAbovePanel(String id)
   {
-    AjaxLink btn = new AjaxLink(id, texte.text("config.texte.add", "Add text"))
+    AjaxLink btn = new AjaxLink(id, "config.texte.add") 
     {
       @Override
       protected void onClickLink(AjaxRequestTarget target)
