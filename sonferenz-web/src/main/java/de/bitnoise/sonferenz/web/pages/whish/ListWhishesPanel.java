@@ -1,5 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.whish;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
 import org.apache.wicket.injection.web.InjectorHolder;
@@ -16,7 +17,9 @@ import de.bitnoise.sonferenz.model.WhishModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
+import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.talks.ListTalksPanel;
+import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.whish.action.CreateWhish;
 import de.bitnoise.sonferenz.web.pages.whish.action.EditOrViewWhish;
 import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
@@ -115,10 +118,15 @@ public class ListWhishesPanel extends Panel
     DefaultDataTable<ModelWhishList> table = new DefaultDataTable<ModelWhishList>(
         "whishTable", builder.getColumns(), provider, 100);
     
-    AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create Whish",
-            table, new CreateWhish());
-        table.addBottomToolbar(toolbar);
-
+    add(new AjaxLink("above","table.whish.create") {
+		@Override
+		protected void onClickLink(AjaxRequestTarget target) {
+			 WhishOverviewPage page = new WhishOverviewPage();
+			    page.createNew();
+			setResponsePage(page );
+		}
+	});
+    
     add(table);
   }
 }

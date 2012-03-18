@@ -3,6 +3,7 @@ package de.bitnoise.sonferenz.web.pages.talks;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
 import org.apache.wicket.injection.web.InjectorHolder;
@@ -18,8 +19,10 @@ import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
+import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.talks.action.CreateTalk;
 import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
+import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
 import de.bitnoise.sonferenz.web.pages.users.action.CreateNewUser;
 import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
@@ -116,9 +119,18 @@ public class ListTalksPanel extends Panel
     DefaultDataTable<ModelTalkList> table = new DefaultDataTable<ModelTalkList>(
         "talkTable", builder.getColumns(), provider, 100);
     
-    AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create Talk",
-            table, new CreateTalk());
-        table.addBottomToolbar(toolbar);
+    add(new AjaxLink("above","table.talks.create") {
+		@Override
+		protected void onClickLink(AjaxRequestTarget target) {
+			TalksOverviewPage page = new TalksOverviewPage();
+		    page.createNew();
+			setResponsePage(page );
+		}
+	});
+    
+//    AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create Talk",
+//            table, new CreateTalk());
+//        table.addBottomToolbar(toolbar);
     add(table);
   }
 

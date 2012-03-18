@@ -75,10 +75,6 @@ public class ListUserPanel extends Panel
     DefaultDataTable<UserListItem> table = new DefaultDataTable<UserListItem>(
         "userTable", builder.getColumns(), provider, 100);
 
-    AddToolbarWithButton toolbar = new AddToolbarWithButton("+ create User",
-        table, new CreateNewUser());
-    table.addBottomToolbar(toolbar);
-
     add(new AjaxLink("above","table.user.createLink") {
 		@Override
 		protected void onClickLink(AjaxRequestTarget target) {
