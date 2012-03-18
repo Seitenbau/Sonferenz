@@ -9,6 +9,8 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.StringResourceModel;
 
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.model.ConferenceModel;
@@ -84,5 +86,9 @@ public abstract class KonferenzPage extends WebPage
   {
     return null;
   }
+
+public IModel<String> txt(String id) {
+	return new StringResourceModel( id, Model.of(id));
+}
 
 }

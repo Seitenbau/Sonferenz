@@ -6,6 +6,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
@@ -14,58 +15,64 @@ import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
 public class MyProfilePanel extends FormPanel
 {
-  @SpringBean
-  UiFacade facade;
+	@SpringBean
+	UiFacade facade;
 
-  TextField display;
+	TextField display;
 
-  UserModel user;
+	UserModel user;
 
-  public MyProfilePanel(String id, UserModel user)
-  {
-    super(id);
-    this.user = user;
-  }
+	public MyProfilePanel(String id)
+	{
+		super(id);
+		user = KonferenzSession.get().getCurrentUser();
+	}
 
-  @Override
-  protected void onInitialize()
-  {
-    super.onInitialize();
-    addFeedback(this, "feedback");
-    display = new TextField<String>("display", Model.of(user.getName()));
+	// public MyProfilePanel(String id, UserModel user)
+	// {
+	// super(id);
+	// this.user = user;
+	// }
 
-    Form<String> form = new Form<String>("form")
-    {
-      @Override
-      protected void onSubmit()
-      {
-        onSubmitForm();
-      }
-    };
-    Button cancel = new Button("cancel")
-    {
-      public void onSubmit()
-      {
-        setResponsePage(ConferencePage.class);
-      }
-    };
+	@Override
+	protected void onInitialize()
+	{
+		super.onInitialize();
+		addFeedback(this, "feedback");
+		display = new TextField<String>("display", Model.of(user.getName()));
 
-    add(form);
-    form.add(display);
-    form.add(new TextField("login", Model.of(user.getProvider().getAuthId())));
-    form.add(new Button("submit"));
-    form.add(cancel);
-  }
+		Form<String> form = new Form<String>("form")
+		{
+			@Override
+			protected void onSubmit()
+			{
+				onSubmitForm();
+			}
+		};
+		Button cancel = new Button("cancel")
+		{
+			public void onSubmit()
+			{
+				setResponsePage(ConferencePage.class);
+			}
+		};
 
-  protected void onSubmitForm()
-  {
-    setResponsePage(ConferencePage.class);
-    String newName = display.getValue();
-    if (user.getName().equals(newName))
-    {
-      return;
-    }
-    facade.userUpdate(user, newName);
-  }
+		add(form);
+		form.add(display);
+		form.add(new TextField("login", Model.of(user.getProvider().getAuthId())));
+		form.add(new Button("submit"));
+		form.add(cancel);
+	}
+
+	protected void onSubmitForm()
+	{
+		setResponsePage(ConferencePage.class);
+		String newName = display.getValue();
+		if (user.getName().equals(newName))
+		{
+			return;
+		}
+		facade.userUpdate(user, newName);
+	}
 
 }

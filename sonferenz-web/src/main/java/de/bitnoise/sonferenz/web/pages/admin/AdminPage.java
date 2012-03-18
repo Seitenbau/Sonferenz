@@ -5,9 +5,6 @@ import java.util.List;
 import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
 import org.apache.wicket.extensions.markup.html.tabs.ITab;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.model.StringResourceModel;
 
 import com.visural.wicket.aturl.At;
 
@@ -70,9 +67,5 @@ public class AdminPage extends KonferenzPage {
 		{
 			return new UnauthorizedPanel(id);
 		}
-	}
-
-	public IModel<String> txt(String id) {
-		return new StringResourceModel( id, Model.of(id));
 	}
 }

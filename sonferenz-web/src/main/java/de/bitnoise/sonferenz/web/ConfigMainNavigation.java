@@ -65,25 +65,10 @@ public class ConfigMainNavigation
         // new VisibleOnRights(Right.Admin.Configure),
         new IsLoggedIn()
         ));
-    ret.add(new PageNavCallback(SettingsPage.class, "Settings",
-    		// new VisibleOnRights(Right.Admin.Configure),
-    		new IsLoggedIn()
-    		));
-    
     
     // admin
     ret.add(new PageNavCallback(AdminPage.class, "Administration",
     		new VisibleOnRights(Right.Admin.Configure)));
-//    ret.add(new PageNavCallback(UserOverviewPage.class, "Users",
-//        new VisibleOnRights(Right.User.List)));
-//    ret.add(new PageNavCallback(ConferenceOverviewPage.class, "Conference",
-//        new VisibleOnRights(Right.Conference.List)));
-//    ret.add(new PageNavCallback(EditUserRolesPage.class, "Roles",
-//        new VisibleOnRights(Right.Admin.Configure)));
-//    ret.add(new PageNavCallback(EditConfigurationPage.class, "Config",
-//        new VisibleOnRights(Right.Admin.Configure)));
-//    ret.add(new PageNavCallback(EditTextePage.class, "Texte",
-//        new VisibleOnRights(Right.Admin.Configure)));
     
     ret.add(new PageNavCallback(LogoutPage.class, "Logout",
             new IsLoggedIn()

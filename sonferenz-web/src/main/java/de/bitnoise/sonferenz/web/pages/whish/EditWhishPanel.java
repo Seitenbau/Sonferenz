@@ -6,6 +6,7 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
+import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
@@ -119,6 +120,7 @@ public class EditWhishPanel extends FormPanel
     form.add(titleField);
     form.add(new RichTextEditorFormBehavior());
     form.add(rtf);
+//    form.add(new TextArea<String>("description", modelDesc));
     form.add(ddc);
     form.add(btnDel);
     form.add(new Button("submit"));

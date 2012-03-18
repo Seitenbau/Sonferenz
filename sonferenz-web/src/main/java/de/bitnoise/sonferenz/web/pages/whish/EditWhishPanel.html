@@ -1,21 +1,22 @@
 <wicket:panel>
 	<div wicket:id="feedback"></div>
-	<form wicket:id="form">
+	<form wicket:id="form" class="formLayout">
 		<fieldset class="editPaperPageFieldset">
             <legend>Wunsch bearbeiten</legend>
 				<label class="formItemLeft" id="labelTitel" for="titel"> Titel :   </label>
 				<input class="formItemRight formItemExpand" id="titel" wicket:id="title"/>
-			<br/><br/>
-				<label id="labelDescription">Beschreibung : (1. Absatz wird als Vorschau angezeigt)</label><br/>
-	            <textarea style="width: 745px; height: 340px;" wicket:id="description"></textarea>
-	       <br/><br/>
-	        	<label  >Rechte diesen Eintrag zu bearbeiten : </label>
+			<br/>
+				<label id="labelDescription" class="merged">Beschreibung : (1. Absatz wird als Vorschau angezeigt)</label><br/>
+	            <textarea class="merged" wicket:id="description"></textarea>
+	        <br/>
+	        	<label >Bearbeitungsrechte : </label>
 	        	<select  wicket:id="theOwner"></select>
-	       <br/><br/>
+	        <br/>
         </fieldset>
-		
+		<div class="formButtons">
 		<input type="submit" wicket:id="submit" value="Speichern"/>
 		<input type="submit" wicket:id="cancel" value="Abbrechen" />
-		<a href="#" class="gradientbuttons" wicket:id="delete">Delete</a>
+		<a href="#" class="button" wicket:id="delete">Delete</a>
+		</div>
 	</form>
 </wicket:panel>
