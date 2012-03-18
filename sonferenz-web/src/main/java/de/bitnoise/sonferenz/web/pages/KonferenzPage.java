@@ -15,6 +15,7 @@ import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.web.ConfigMainNavigation;
 import de.bitnoise.sonferenz.web.component.confpan.CurrentConferencePanel;
 import de.bitnoise.sonferenz.web.component.footer.FooterPanel;
+import de.bitnoise.sonferenz.web.component.lvl2.SecondLevelBar;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.component.navigation.NavPanel;
 import de.bitnoise.sonferenz.web.component.user.CurrentUserPanel;
@@ -44,23 +45,13 @@ public abstract class KonferenzPage extends WebPage
   protected void onInitialize()
   {
     super.onInitialize();
-//    add(new StyleSheetReference("stylesheet", KonferenzPage.class, "style.less"));
-    //add(new StyleSheetReference("stylesheet", KonferenzPage.class, "/styles.css"));
 
-    IModel<NavCallbackInterface> callbackModel = new LoadableDetachableModel<NavCallbackInterface>()
-    {
-      @Override
-      protected NavCallbackInterface load()
-      {
-        return ConfigMainNavigation.getMainNaviagtion();
-      }
-    };
-    
-		if (KonferenzSession.noUserLoggedIn()) {
-			add(new LoginPanel("nav"));
-		} else {
-			add(new NavPanel("nav", callbackModel));
-		}
+    add(new SecondLevelBar("nav"));
+//		if (KonferenzSession.noUserLoggedIn()) {
+//			add(new LoginPanel("nav"));
+//		} else {
+//			add(new NavPanel("nav", callbackModel));
+//		}
 //    add(new CurrentUserPanel("currentUser"));
     add(new FooterPanel("footer"));
     add(new CurrentConferencePanel("currentConference"));

@@ -14,59 +14,66 @@ import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
 public class LoginPanel extends FormPanel
 {
-  final Model<String> modelUsername = new Model<String>();
+	final Model<String> modelUsername = new Model<String>();
 
-  final Model<String> modelPassword = new Model<String>();
+	final Model<String> modelPassword = new Model<String>();
 
-  private FeedbackPanel feedback;
+	private FeedbackPanel feedback;
 
-  public LoginPanel(String id)
-  {
-    super(id);
-  }
+	public LoginPanel(String id)
+	{
+		super(id);
+	}
 
-  @Override
-  protected void onInitialize()
-  {
-    super.onInitialize();
-    Form<String> form = new Form<String>("form")
-    {
-      @Override
-      protected void onSubmit()
-      {
-        loginUser();
-      }
-    };
-    form.add(new TextField<String>("username", modelUsername)
-        .add(new FocusOnLoadBehavior()));
-    form.add(new PasswordTextField("password", modelPassword));
-    form.add(new Button("submit"));
+	@Override
+	protected void onInitialize()
+	{
+		super.onInitialize();
+		Form<String> form = new Form<String>("form")
+		{
+			@Override
+			protected void onSubmit()
+			{
+				loginUser();
+			}
+		};
+		form.add(new TextField<String>("username", modelUsername)
+		        .add(new FocusOnLoadBehavior()));
+		form.add(new PasswordTextField("password", modelPassword));
+		form.add(new Button("submit"));
 
-    feedback = new FeedbackPanel("feedback");
-    add(feedback.setOutputMarkupId(true));
-    add(form);
-  }
+		feedback = new FeedbackPanel("feedback");
+		add(feedback.setOutputMarkupId(true));
+		add(form);
+	}
 
-  protected void loginUser()
-  {
-    String username = modelUsername.getObject();
-    String password = modelPassword.getObject();
-    String errorMessage = KonferenzSession.get().authenticate(username,
-        password);
-    if (errorMessage == null)
-    {
-      OnSuccessfullLogin();
-    }
-    else
-    {
-      feedback.error("Login failed : " + errorMessage);
-    }
-  }
+	@Override
+	protected void onConfigure() {
+		super.onConfigure();
 
-  protected void OnSuccessfullLogin()
-  {
-    setResponsePage(ConferencePage.class);
-    setRedirect(true);
-  }
+		setVisible(KonferenzSession.noUserLoggedIn());
+	}
+
+	protected void loginUser()
+	{
+		String username = modelUsername.getObject();
+		String password = modelPassword.getObject();
+		String errorMessage = KonferenzSession.get().authenticate(username,
+		        password);
+		if (errorMessage == null)
+		{
+			OnSuccessfullLogin();
+		}
+		else
+		{
+			feedback.error("Login failed : " + errorMessage);
+		}
+	}
+
+	protected void OnSuccessfullLogin()
+	{
+		setResponsePage(ConferencePage.class);
+		setRedirect(true);
+	}
 
 }

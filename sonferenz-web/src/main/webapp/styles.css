@@ -71,13 +71,35 @@ body.repaint {
 
 
 #currentConferenceListBox {
-  display: none;
+   display: none; 
+}
+.currentConferenceList {
+  float: left;
+  margin-top: -43px;
 }
 
+
+.currentConferenceList ul {
+  list-style: none;
+}
+
+.currentConferenceList li {
+  float: left;
+  margin-right: 15px;
+}
+
+.currentConferenceList a {
+  color: #00437c;
+}
+
+
 .secondLevelMenu {
-  float: right;
-  margin-top: -20px;
-  padding-bottom: 20px;
+  float: left;
+  margin-top: -40px;
+  padding-bottom: 0px;
+  margin-left: 335px;
+  border-bottom: 1px dotted ;
+  border-color:#505053; 
 }
 
 .secondLevelMenu ul {
@@ -88,10 +110,55 @@ body.repaint {
   float: left;
   margin-right: 15px;
 }
+.secondLevelMenu li:last-child {
+  margin-right: 1px;
+}
 
 .secondLevelMenu a {
   color: #00437c;
+}
 
+.secondLevelLogin {
+  float: right;
+  margin-top: -40px;
+  padding-bottom: 0px;
+}
+
+.secondLevelLogin ul {
+  list-style: none;
+}
+
+.secondLevelLogin li {
+  float: left;
+  margin-right: 15px;
+}
+
+.secondLevelLogin a {
+  color: #00437c;
+}
+
+.nicEdit-main ul li {
+   list-style-type: circle;
+   list-style-position:inside;
+} 
+.nicEdit-main ol li {
+   list-style-type: decimal;
+   list-style-position:inside;
+}
+.viewTalkDescription ul li {
+	list-style-type: circle;
+   list-style-position:inside;
+}
+.viewTalkDescription ol li {
+   list-style-type: decimal;
+   list-style-position:inside;
+}
+.contentArea h3 {
+   font-size: 150%;
+   margin-bottom: 10px;
+}
+.readOnlyViewFooter {
+	border-top: 1px dashed;
 }
 
 input,
