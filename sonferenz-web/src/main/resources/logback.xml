@@ -15,8 +15,9 @@
   <logger name="de.bitnoise.sonferenz" level="warn" />
   <logger name="org.apache.wicket" level="error" />
   <logger name="ch.qos.logback" level="error" />
+  <logger name="org.hibernate.util.JDBCExceptionReporter" level="warn" />
 
-  <root level="error">
+  <root level="warn">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="CYCLIC" />
   </root>

@@ -18,9 +18,13 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
+				<value>classpath:/config/application.properties</value>
 				<value>WEB-INF/config/application.properties</value>
+				<value>file:${SONFERENZ_CONFIG_FOLDER}/application.properties</value>
 			</list>
 		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+ 		<property name="searchSystemEnvironment" value="true" />
 	</bean>
 
 	<security:global-method-security
