@@ -20,6 +20,7 @@ import de.bitnoise.sonferenz.web.component.state.IsActiveConference;
 import de.bitnoise.sonferenz.web.component.state.IsLoggedIn;
 import de.bitnoise.sonferenz.web.component.state.OnStateVoting;
 import de.bitnoise.sonferenz.web.component.state.VisibleOnRights;
+import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
 import de.bitnoise.sonferenz.web.pages.auth.LogoutPage;
 import de.bitnoise.sonferenz.web.pages.calculate.CalculateOverviewPage;
 import de.bitnoise.sonferenz.web.pages.conference.ConferenceOverviewPage;
@@ -41,18 +42,6 @@ public class ConfigMainNavigation
   {
     List<NavCallbackInterface> ret = new ArrayList<NavCallbackInterface>();
 //    ret.add(new PageNavCallback(ConferencePage.class, "Home", new AllwaysVisible()));
-
-    // admin
-    ret.add(new PageNavCallback(UserOverviewPage.class, "Users",
-        new VisibleOnRights(Right.User.List)));
-    ret.add(new PageNavCallback(ConferenceOverviewPage.class, "Conference",
-        new VisibleOnRights(Right.Conference.List)));
-    ret.add(new PageNavCallback(EditUserRolesPage.class, "Roles",
-        new VisibleOnRights(Right.Admin.Configure)));
-    ret.add(new PageNavCallback(EditConfigurationPage.class, "Config",
-        new VisibleOnRights(Right.Admin.Configure)));
-    ret.add(new PageNavCallback(EditTextePage.class, "Texte",
-        new VisibleOnRights(Right.Admin.Configure)));
 
     // users
     ret.add(new PageNavCallback(WhishOverviewPage.class, "Whishes",
@@ -80,6 +69,22 @@ public class ConfigMainNavigation
     		// new VisibleOnRights(Right.Admin.Configure),
     		new IsLoggedIn()
     		));
+    
+    
+    // admin
+    ret.add(new PageNavCallback(AdminPage.class, "Administration",
+    		new VisibleOnRights(Right.Admin.Configure)));
+//    ret.add(new PageNavCallback(UserOverviewPage.class, "Users",
+//        new VisibleOnRights(Right.User.List)));
+//    ret.add(new PageNavCallback(ConferenceOverviewPage.class, "Conference",
+//        new VisibleOnRights(Right.Conference.List)));
+//    ret.add(new PageNavCallback(EditUserRolesPage.class, "Roles",
+//        new VisibleOnRights(Right.Admin.Configure)));
+//    ret.add(new PageNavCallback(EditConfigurationPage.class, "Config",
+//        new VisibleOnRights(Right.Admin.Configure)));
+//    ret.add(new PageNavCallback(EditTextePage.class, "Texte",
+//        new VisibleOnRights(Right.Admin.Configure)));
+    
     ret.add(new PageNavCallback(LogoutPage.class, "Logout",
             new IsLoggedIn()
             ));

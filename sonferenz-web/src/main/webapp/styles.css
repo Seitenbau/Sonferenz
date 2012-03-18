@@ -247,6 +247,7 @@ div.tabpanel div.tab-row a:hover {
 	margin-top: 20px;
 	position:relative; 
 	top:-1px;
+	padding: 5px;
 }
 
 /* *********** } tabs */
