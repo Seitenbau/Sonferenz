@@ -2,11 +2,14 @@ package de.bitnoise.sonferenz.web.pages.profile.action;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
+import de.bitnoise.sonferenz.service.v2.exceptions.ValidationException;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.forms.KonferenzForm;
 import de.bitnoise.sonferenz.web.forms.fields.StringInput;
@@ -39,7 +42,7 @@ public class TokenCreateUser extends WebAction<IModel<TokenListItem>>
       email.getInput().add(EmailAddressValidator.getInstance());
     }
 
-    public void onSubmitForm(Component target)
+    public void onSubmitForm(Form target)
     {
       String user = username.getValue();
       String mail = email.getValue();
@@ -47,7 +50,8 @@ public class TokenCreateUser extends WebAction<IModel<TokenListItem>>
       target.setResponsePage(MyProfilePage.class);
     }
 
-    public void onCancelForm(Component target)
+
+	public void onCancelForm(Form target)
     {
       target.setResponsePage(MyProfilePage.class);
     }

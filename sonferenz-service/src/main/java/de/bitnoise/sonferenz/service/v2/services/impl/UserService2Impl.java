@@ -225,4 +225,10 @@ public class UserService2Impl implements UserService
     return roleRepo.findAll(request);
   }
 
+  @Override
+  public boolean checkUserNotExists(String username) {
+    UserModel result = userRepo.findByName(username);
+    return result == null;
+  }
+
 }

@@ -36,4 +36,6 @@ public interface UserService
   boolean checkMailNotExists(String mail);
 
   Page<UserRole> getAllRoles(PageRequest request);
+
+  boolean checkUserNotExists(String username);
 }

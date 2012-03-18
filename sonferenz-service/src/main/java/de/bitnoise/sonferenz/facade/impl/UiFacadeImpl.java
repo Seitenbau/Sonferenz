@@ -345,4 +345,9 @@ public class UiFacadeImpl implements UiFacade
   {
     return idpService.getAvailableProviders();
   }
+
+  @Override
+  public boolean checkUserNotExists(String username) {
+    return userFacade.checkUserNotExists(username);
+  }
 }

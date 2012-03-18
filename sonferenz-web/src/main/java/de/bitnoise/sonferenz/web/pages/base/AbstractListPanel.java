@@ -41,6 +41,7 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
     addToolbars(table,provider);
     add(table);
     add(createAbovePanel("above"));
+    setOutputMarkupId(true);
   }
 
   protected Component createAbovePanel(String id)

@@ -56,12 +56,17 @@ public class MyProfilePanel extends FormPanel
 				setResponsePage(ConferencePage.class);
 			}
 		};
-
+		display.setEnabled(false);
+		
 		add(form);
 		form.add(display);
-		form.add(new TextField("login", Model.of(user.getProvider().getAuthId())));
+		TextField login = new TextField("login", Model.of(user.getProvider().getAuthId()));
+		login.setEnabled(false);
+		form.add(login);
+		/* 
 		form.add(new Button("submit"));
 		form.add(cancel);
+		*/
 	}
 
 	protected void onSubmitForm()

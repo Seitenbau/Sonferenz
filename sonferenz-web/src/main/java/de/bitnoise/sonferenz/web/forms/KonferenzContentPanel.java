@@ -47,7 +47,7 @@ public class KonferenzContentPanel extends Panel
       _legend = new Label("legend", Model.of(""));
     }
 
-    Form<String> form = new Form<String>("form")
+    final Form<String> form = new Form<String>("form")
     {
       @Override
       protected void onSubmit()
@@ -59,7 +59,7 @@ public class KonferenzContentPanel extends Panel
     {
       public void onSubmit()
       {
-        _callback.onCancelForm(this);
+        _callback.onCancelForm(form);
       }
     };
     Button submit = new Button("submit");

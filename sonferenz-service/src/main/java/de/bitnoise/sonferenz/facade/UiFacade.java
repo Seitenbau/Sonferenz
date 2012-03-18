@@ -25,6 +25,8 @@ public interface UiFacade
   void addTalksToConference(ConferenceModel conference, List<TalkModel> asTalks);
 
   boolean checkMailNotExists(String mail);
+  
+  boolean checkUserNotExists(String username);
 
   void createIdentity(String provider, String username, String password, String email,Collection<UserRoles> newRoles);
 

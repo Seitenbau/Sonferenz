@@ -201,9 +201,17 @@ input[type=submit] {
   padding: 1px 4px 1px 4px;
 }
 
-.likePanel {
-  list-style: none;
+/* ********** like panel {*/
+.likePanel ul {
+   display: block;
+   text-align:justify;
 }
+
+.likePanel li {
+	list-style-type: none;
+    display: inline-block;
+}
+/* ********** like panel } */
 
 .secondLevelMenu a:hover {
   text-decoration: underline;
@@ -255,6 +263,17 @@ div.tabpanel div.tab-row a:hover {
 	top:-1px;
 	padding: 5px;
 }
+
+/* ********* Feedback { */
+ul.feedbackPanel {
+	border: 1px solid red;
+	padding: 2px;
+}
+.feedbackPanel li{
+	list-style-position: inside;
+}
+/* ********* Feedback } */
+
 
 /* ********** table { */
 .tabelle thead {

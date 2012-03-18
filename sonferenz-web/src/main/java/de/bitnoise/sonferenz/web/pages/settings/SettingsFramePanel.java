@@ -9,7 +9,7 @@ import org.apache.wicket.extensions.markup.html.tabs.ITab;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
-import de.bitnoise.sonferenz.web.pages.profile.MyTokensPanel;
+import de.bitnoise.sonferenz.web.pages.profile.MyInvitesPanel;
 
 public class SettingsFramePanel extends Panel {
 
@@ -32,7 +32,7 @@ public class SettingsFramePanel extends Panel {
 		tabs.add(new AbstractTab( Model.of ("userInvite") ) {
 			@Override
 			public Panel getPanel(String panelId) {
-				return new MyTokensPanel(panelId);
+				return new MyInvitesPanel(panelId);
 //				return new TabUserInvite(panelId);
 			}
 		});

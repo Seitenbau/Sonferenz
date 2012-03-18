@@ -10,6 +10,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import com.visural.wicket.aturl.At;
 
 import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.component.panels.MultiPanel;
 import de.bitnoise.sonferenz.web.component.tabs.TabPanel;
@@ -35,26 +36,21 @@ public class MyProfilePage extends KonferenzPage
 						return new MyProfilePanel(panelId);
 					}
 				});
-				tabs.add(new AbstractTab(txt("profile.tab.settings")) {
-					@Override
-					public Panel getPanel(String panelId) {
-						return new MySettingsPanel(panelId);
-					}
-				});
-				tabs.add(new AbstractTab(txt("profile.tab.invites")) {
-					@Override
-					public Panel getPanel(String panelId) {
-						return new MyTokensPanel(panelId);
-					}
-				});
+//				tabs.add(new AbstractTab(txt("profile.tab.settings")) {
+//					@Override
+//					public Panel getPanel(String panelId) {
+//						return new MySettingsPanel(panelId);
+//					}
+//				});
+				if ( KonferenzSession.hasRight(Right.Actions.InviteUser) ) {
+					tabs.add(new AbstractTab(txt("profile.tab.invites")) {
+						@Override
+						public Panel getPanel(String panelId) {
+							return new MyInvitesPanel(panelId);
+						}
+					});
+				}
 			}};
-//        @Override
-//        protected void onInitPanels(RepeatingView view)
-//        {
-//          view.add( new MyProfilePanel(view.newChildId(), user) );
-////          view.add( new MyTokensPanel(view.newChildId()) );
-//        }
-//      };  
     }
     else
     {

@@ -1,0 +1,18 @@
+<wicket:panel>
+	<div wicket:id="feedback"></div>
+	<form wicket:id="form" class="formLayout">
+		<fieldset class="editPaperPageFieldset">
+            <legend>Benutzer einladen</legend>
+				<label id="labelTitel" for="username"> Benutzername :   </label>
+				<input id="username" wicket:id="username"/>
+			<br/>
+				<label id="labelTitel" for="email"> eMail :   </label>
+				<input id="email" wicket:id="email"/>
+	        <br/>
+        </fieldset>
+		<div class="formButtons">
+		  <input type="submit" wicket:id="submit" value="Speichern"/>
+		  <input type="submit" wicket:id="cancel" value="Abbrechen" />
+		</div>
+	</form>
+</wicket:panel>
