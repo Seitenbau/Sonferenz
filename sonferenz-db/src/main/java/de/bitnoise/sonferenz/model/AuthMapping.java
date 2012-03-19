@@ -1,6 +1,7 @@
 package de.bitnoise.sonferenz.model;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -43,8 +44,10 @@ public class AuthMapping extends ModelBase implements DoInterface<Integer>
   UserModel user;
 
   @Basic
+  @Column(length=100)
   String authType;
 
   @Basic
+  @Column(length=100)
   String authId;
 }
