@@ -8,6 +8,7 @@ import de.bitnoise.sonferenz.repo.RoleRepository;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
+import de.bitnoise.sonferenz.service.v2.services.impl.EventingImpl;
 import de.bitnoise.sonferenz.testing.TestBase;
 import static org.mockito.Mockito.*;
 
@@ -20,6 +21,8 @@ public class InitEmptyDatabaseTest extends TestBase {
 	@Mock
 	UserService user;
 	@Mock
+	EventingImpl eventing;
+	@Mock
 	RoleRepository roles;
 
 	@Before
@@ -29,6 +32,7 @@ public class InitEmptyDatabaseTest extends TestBase {
 		sut.texte = texte;
 		sut.user = user;
 		sut.roles = roles;
+		sut.eventing= eventing;
 		when(config.getIntegerValue(-1, "intern.database-is-initialized"))
 				.thenReturn(-1);
 	}
