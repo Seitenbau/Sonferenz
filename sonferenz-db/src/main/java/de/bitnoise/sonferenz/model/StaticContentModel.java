@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
 
 
@@ -24,6 +25,7 @@ public class StaticContentModel implements DoInterface<Integer>
   Integer id;
   
   @Column
+  @Index(name="name")
   String name;
   
   @Column

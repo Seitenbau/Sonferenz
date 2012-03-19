@@ -20,6 +20,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import org.hibernate.annotations.CollectionOfElements;
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
 
 
@@ -34,6 +35,7 @@ public class ConfigurationModel implements DoInterface<Integer>
   Integer id;
   
   @Column
+  @Index(name="name")
   String name;
   
   @Column
