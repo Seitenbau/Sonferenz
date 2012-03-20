@@ -12,7 +12,7 @@
   </appender>
   
   <logger name="org.apache.wicket" level="error" />
-  <logger name="de.bitnoise.sonferenz" level="warn" />
+  <logger name="de.bitnoise.sonferenz" level="debug" />
   <logger name="org.apache.wicket" level="error" />
   <logger name="ch.qos.logback" level="error" />
   <logger name="org.hibernate" level="error" />

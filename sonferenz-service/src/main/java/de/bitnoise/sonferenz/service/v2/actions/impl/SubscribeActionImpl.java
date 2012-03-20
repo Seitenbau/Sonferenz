@@ -3,11 +3,8 @@ package de.bitnoise.sonferenz.service.v2.actions.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.google.common.eventbus.Subscribe;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.AuthMapping;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.UserRoles;
@@ -25,7 +21,6 @@ import de.bitnoise.sonferenz.repo.AuthmappingRepository;
 import de.bitnoise.sonferenz.repo.UserRepository;
 import de.bitnoise.sonferenz.service.v2.actions.ActionResult;
 import de.bitnoise.sonferenz.service.v2.actions.ActionState;
-import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.IncrementUseageCount;
 import de.bitnoise.sonferenz.service.v2.actions.KonferenzAction;
 import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
@@ -75,8 +70,7 @@ public class SubscribeActionImpl implements KonferenzAction
   {
     template = new SimpleMailMessage();
     template.setSubject(
-        texte.text("action.subscribe.mail.subject",
-            "Details for your new user account"));
+        texte.text("action.subscribe.mail.subject"));
   }
 
   @Autowired
@@ -109,10 +103,8 @@ public class SubscribeActionImpl implements KonferenzAction
     {
       SimpleMailMessage message = new SimpleMailMessage(template);
       message.setTo(mail);
-      StringBuffer body = new StringBuffer();
-      body.append("You have been invited ... ");
-      body.append("\r\n");
-      body.append(ActionResult.ACTION_URL);
+      String body = texte.text("action.subscribe.mail.body");
+      body = body.replace("{link}", ActionResult.ACTION_URL);
       message.setText(body.toString());
       mailer.sendMessage(result.getContentReplacer(), message);
     }

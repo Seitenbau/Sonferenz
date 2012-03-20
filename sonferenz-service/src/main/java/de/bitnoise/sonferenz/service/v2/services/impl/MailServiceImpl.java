@@ -24,8 +24,11 @@ public class MailServiceImpl implements MailService
   JavaMailSenderImpl sender;
 
   String from;
+  
 
   boolean initialized;
+
+private String replyTo;
 
   public void initMail()
   {
@@ -45,6 +48,7 @@ public class MailServiceImpl implements MailService
 
     sender = tmp;
     from = config.getStringValue("mail.create.from");
+    replyTo = config.getStringValue("mail.create.replyTo");
   }
 
   @Override
@@ -57,7 +61,8 @@ public class MailServiceImpl implements MailService
     body = params.process(body);
     msg.setText(body);
     msg.setFrom(from);
-
+    msg.setReplyTo(replyTo);
+    
     try
     {
       sender.send(msg);

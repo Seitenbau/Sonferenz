@@ -62,8 +62,10 @@ public class InitEmptyDatabase
       logger.warn("# ");
       config.initValue(INIT_MARKER_KEY, 1);
       config.initValue("smtp.host", "localhost");
-      config.initValue("mail.create.from", "soferenz@localhost");
+      config.initValue("mail.create.from", "sonferenz");
+      config.initValue("mail.create.replyTo", "sonferenz@localhost");
       config.initValue("baseUrl", "http://localhost:8080/sonferenz-web");
+      
       logger.warn("config created");
       
       texte.storeText("menu.MyProfile", "Profile");
@@ -161,6 +163,12 @@ public class InitEmptyDatabase
           "page.register: as admin you can change this text.");
       texte.storeText("page.contact",
           "page.contact: as admin you can change this text.");
+      
+      texte.storeText("action.subscribe.mail.subject", "You have been invited to SDC!");
+      texte.storeText("action.subscribe.mail.body", "Follow this link to complete: {link}");
+      texte.storeText("action.verify.mail.subject", "Details for your new user account");
+      texte.storeText("action.verify.mail.body", "Please confirm your email by open the folling link in your browser: {link}");
+
       logger.warn("texts created");
 
       createRole(1, "ADMIN");

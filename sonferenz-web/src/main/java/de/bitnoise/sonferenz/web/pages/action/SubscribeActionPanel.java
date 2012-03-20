@@ -18,6 +18,10 @@ import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
 import de.bitnoise.sonferenz.service.v2.exceptions.ValidationException;
+import de.bitnoise.sonferenz.service.v2.services.idp.IdpService;
+import de.bitnoise.sonferenz.service.v2.services.idp.impl.IdpServiceImpl;
+import de.bitnoise.sonferenz.service.v2.services.idp.provider.Idp;
+import de.bitnoise.sonferenz.service.v2.services.idp.provider.crowd.CrowdIdp;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
@@ -124,6 +128,7 @@ public class SubscribeActionPanel extends FormPanel
       _data.setUserName(display.getValue());
       _data.setPassword(password1.getValue());
       _data.setMail(email1.getValue());
+      _data.setProvider(CrowdIdp.IDP_NAME);
       facade.executeAction(_data);
       setResponsePage(ActionSuccessPage.class);
     }
