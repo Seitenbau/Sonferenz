@@ -121,6 +121,11 @@ public class KonferenzSession extends WebSession
       }
       return "Error at login";
     }
+    catch (Throwable t) 
+    {
+      logger.error("Error at login", t);
+      return "Error at login!";
+    }
   }
 
   public static boolean hasRight(String... requestedRight)
