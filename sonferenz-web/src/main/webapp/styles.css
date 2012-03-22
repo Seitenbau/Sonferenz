@@ -133,6 +133,10 @@ body.repaint {
   margin-right: 15px;
 }
 
+.feedbackPanel li {
+  float: none;
+}
+
 .secondLevelLogin a {
   color: #00437c;
 }
