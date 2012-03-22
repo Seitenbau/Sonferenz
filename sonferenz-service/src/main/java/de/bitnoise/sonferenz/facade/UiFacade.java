@@ -28,8 +28,10 @@ public interface UiFacade
   
   boolean checkUserNotExists(String username);
 
-  void createIdentity(String provider, String username, String password, String email,Collection<UserRoles> newRoles);
+  void createIdentity(String provider, String username, String displayname, String password, String email,Collection<UserRoles> newRoles);
 
+  void createIdentity(String provider, String username, String password, String email,Collection<UserRoles> newRoles);
+  
   void deleteTalk(TalkModel talk);
 
   void deleteWhish(WhishModel talk);

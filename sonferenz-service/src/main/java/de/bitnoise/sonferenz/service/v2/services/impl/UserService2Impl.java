@@ -129,7 +129,7 @@ public class UserService2Impl implements UserService
 
   @Override
   @Transactional
-  public UserModel createIdentity(String provider, String username, String password,String email,
+  public UserModel createIdentity(String provider, String username, String displayname, String password,String email,
       Collection<UserRoles> newRoles)
   {
     idpService.createIdentity(provider, username, password);
@@ -140,7 +140,7 @@ public class UserService2Impl implements UserService
     authRepo.save(auth);
 
     UserModel user = new UserModel();
-    user.setName(username);
+    user.setName(displayname);
     user.setProvider(auth);
     user.setEmail(email);
     user.setRoles(new HashSet<UserRole>());

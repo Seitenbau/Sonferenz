@@ -65,6 +65,20 @@ public class SubscribeActionPanel extends FormPanel
     login = new TextField("login", Model.of(""));
     email1 = new TextField("mail1", Model.of(""));
     email2 = new TextField("mail2", Model.of(""));
+    
+    /* in case of an invite, the email & username already exist.*/
+    if (_data.getEMail() != null)
+    {
+    	email1.setModelValue(_data.getEMail());
+    	email1.setEnabled(false);
+    	email2.setModelValue(_data.getEMail());
+    	email2.setEnabled(false);
+    }
+    if (_data.getLoginName() != null)
+    {
+    	display.setModelValue(_data.getLoginName());
+    }
+    
     password1 = new PasswordTextField("password1", Model.of(""));
     password2 = new PasswordTextField("password2", Model.of(""));
 
@@ -127,8 +141,12 @@ public class SubscribeActionPanel extends FormPanel
       _data.setLoginName(login.getValue());
       _data.setUserName(display.getValue());
       _data.setPassword(password1.getValue());
-      _data.setMail(email1.getValue());
       _data.setProvider(CrowdIdp.IDP_NAME);
+      if (_data.getEMail() != null)
+      {
+    	  /* in case of an invite, the email already exist.*/
+    	  _data.setMail(email1.getValue());
+      }
       facade.executeAction(_data);
       setResponsePage(ActionSuccessPage.class);
     }

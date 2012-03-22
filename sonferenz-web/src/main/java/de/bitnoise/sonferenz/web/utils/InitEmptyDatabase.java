@@ -180,7 +180,7 @@ public class InitEmptyDatabase
       newRoles.add(UserRoles.USER);
       newRoles.add(UserRoles.MANAGER);
       newRoles.add(UserRoles.ADMIN);
-      user.createIdentity(LocalIdp.IDP_NAME, "admin", "admin",
+      user.createIdentity(LocalIdp.IDP_NAME, "admin", "admin", "admin",
           "admin@localhost", newRoles);
       logger.warn("users created");
       logger

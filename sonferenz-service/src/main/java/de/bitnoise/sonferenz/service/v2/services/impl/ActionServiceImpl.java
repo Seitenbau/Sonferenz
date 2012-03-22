@@ -121,6 +121,10 @@ public class ActionServiceImpl implements ActionService
     {
       return null;
     }
+    if (row.getUsed() > 0)
+    {
+      return null;
+    }
     Date expires = row.getExpiry();
     if (new LocalDateTime(expires).isBefore(LocalDateTime.now()))
     {

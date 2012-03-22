@@ -170,10 +170,16 @@ public class UiFacadeImpl implements UiFacade
   }
 
   @Override
+  public void createIdentity(String provider, String username, String displayname, String password, String email, Collection<UserRoles> newRoles)
+  {
+    userFacade.createIdentity(provider, username, displayname, password, email, newRoles);
+  } 
+  
+  @Override
   public void createIdentity(String provider, String username, String password, String email, Collection<UserRoles> newRoles)
   {
-    userFacade.createIdentity(provider, username, password, email, newRoles);
-  }
+    this.createIdentity(provider, username, username, password, email, newRoles);
+  } 
 
   @Override
   public void saveUser(UserModel user, Collection<UserRoles> newRoles)

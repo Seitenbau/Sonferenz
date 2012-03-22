@@ -109,7 +109,7 @@ public class CrowdIdp implements Idp
       CrowdPassword passwordo = new CrowdPassword();
       passwordo.setValue(password);
       crowdUser.setPassword(passwordo);
-      crowdUser.setEmail("dummy@seitenbau.com");
+      crowdUser.setEmail("sdcuser@seitenbau.com");
       crowdUser.setFirstname("firstname");
       crowdUser.setLastname("lastname");
       crowdUser.setActive("true");

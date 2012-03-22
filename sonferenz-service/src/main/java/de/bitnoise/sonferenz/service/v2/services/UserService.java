@@ -14,7 +14,7 @@ import de.bitnoise.sonferenz.service.v2.services.idp.Identity;
 
 public interface UserService
 {
-  UserModel createIdentity(String provider, String username, String password,String email,
+  UserModel createIdentity(String provider, String username, String displayname, String password,String email,
       Collection<UserRoles> newRoles);
 
   List<String> getAllUserRoles(String username, String providerType);

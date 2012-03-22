@@ -150,10 +150,10 @@ public class SubscribeActionImpl implements KonferenzAction
     Collection<UserRoles> newRoles = new ArrayList<UserRoles>();
     newRoles.add(UserRoles.USER);
     
-    UserModel user = userService.createIdentity(data.getProvider(), data.getLoginName(),
+    UserModel user = userService.createIdentity(data.getProvider(), data.getLoginName(), data.getUserName(),
         data.getPassword(), data.getEMail(), newRoles);
     
-    actionVerify.createAction(user, data.getEMail());
+//    actionVerify.createAction(user, data.getEMail());
   }
 
   public String createToken()
