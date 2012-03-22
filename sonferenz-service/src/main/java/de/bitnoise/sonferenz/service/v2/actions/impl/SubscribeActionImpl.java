@@ -93,6 +93,11 @@ public class SubscribeActionImpl implements KonferenzAction
     {
       throw new ValidationException("Login Name allready inuse");
     }
+    String body = texte.text("action.subscribe.mail.body");
+    if (body  == null)
+    {
+      throw new ValidationException("Missing Mail Body : key='action.subscribe.mail.body' ");
+    }
 
     ActionCreateUser newUser = new ActionCreateUser();
     newUser.setLoginName(user);
@@ -103,7 +108,6 @@ public class SubscribeActionImpl implements KonferenzAction
     {
       SimpleMailMessage message = new SimpleMailMessage(template);
       message.setTo(mail);
-      String body = texte.text("action.subscribe.mail.body");
       body = body.replace("{link}", ActionResult.ACTION_URL);
       message.setText(body.toString());
       mailer.sendMessage(result.getContentReplacer(), message);

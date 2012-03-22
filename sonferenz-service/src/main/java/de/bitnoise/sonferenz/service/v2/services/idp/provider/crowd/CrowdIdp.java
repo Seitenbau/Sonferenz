@@ -185,9 +185,9 @@ public class CrowdIdp implements Idp
         res.setEmail(result.getEmail());
       }
     }
-    catch (HttpClientErrorException e)
+    catch (Throwable e) 
     {
-      logger.debug(e.getMessage());
+      logger.error("Error while querying Crowd",e);
     }
     return res;
   }
