@@ -63,6 +63,7 @@ public class ConfigMainNavigation
         ));
     ret.add(new PageNavCallback(MyProfilePage.class, "Profile",
         // new VisibleOnRights(Right.Admin.Configure),
+        new VisibleOnRights(Right.Actions.InviteUser),
         new IsLoggedIn()
         ));
     
