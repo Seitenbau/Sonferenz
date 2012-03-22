@@ -1,5 +1,8 @@
 package de.bitnoise.sonferenz.service.v2.services.impl;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -10,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import de.bitnoise.sonferenz.model.AuthMapping;
 import de.bitnoise.sonferenz.model.UserModel;
+import de.bitnoise.sonferenz.model.UserRole;
+import de.bitnoise.sonferenz.model.UserRoles;
 import de.bitnoise.sonferenz.repo.AuthmappingRepository;
+import de.bitnoise.sonferenz.repo.RoleRepository;
 import de.bitnoise.sonferenz.repo.UserRepository;
 import de.bitnoise.sonferenz.service.v2.Detach;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
@@ -27,6 +33,9 @@ public class AuthenticationServiceImpl implements AuthenticationService
   
   @Autowired
   UserRepository userRepo;
+
+  @Autowired
+  RoleRepository rolesRepo;
 
   @Override
   @Transactional
@@ -107,7 +116,14 @@ public class AuthenticationServiceImpl implements AuthenticationService
     UserModel neuerUser = new UserModel();
     neuerUser.setName(providerId);
     neuerUser.setEmail(email);
-    // TODO: Add default role
+    Set<UserRole> newRoles = new HashSet<UserRole>();
+	
+    UserRole userRole = rolesRepo.findByName(UserRoles.USER.toString());
+    Set<UserRole> roles=new HashSet<UserRole>();
+    roles.add(userRole);
+    neuerUser.setRoles(roles);
+    
+	neuerUser.setRoles(newRoles);
     userRepo.save(neuerUser);
     return neuerUser;
   }
