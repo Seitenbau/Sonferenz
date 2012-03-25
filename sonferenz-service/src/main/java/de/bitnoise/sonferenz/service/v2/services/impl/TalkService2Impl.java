@@ -73,7 +73,7 @@ public class TalkService2Impl implements TalkService
   public Page<TalkModel> getVotableTalks(PageRequest request)
   {
     Page<TalkModel> result = talkRepo.test(request);
-    Detach.detach(result) ;
+    Detach.detachTM(result) ;
     return  result;
   }
 

@@ -44,6 +44,7 @@ public class ConfigMainNavigation
 //    ret.add(new PageNavCallback(ConferencePage.class, "Home", new AllwaysVisible()));
 
     // users
+    /*
     ret.add(new PageNavCallback(WhishOverviewPage.class, "Whishes",
         new VisibleOnRights(Right.Whish.List)
         ));
@@ -51,6 +52,7 @@ public class ConfigMainNavigation
         new VisibleOnRights(Right.Talk.List),
         new IsActiveConference()
         ));
+        */
     ret.add(new PageNavCallback(VotingOverviewPage.class, "Voting",
         new VisibleOnRights(Right.Vote.canVote),
         new IsActiveConference(),

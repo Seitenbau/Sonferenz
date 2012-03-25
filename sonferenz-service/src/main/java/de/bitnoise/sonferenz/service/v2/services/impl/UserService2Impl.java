@@ -115,7 +115,7 @@ public class UserService2Impl implements UserService
   @Transactional(readOnly = true)
   public Page<UserModel> getAllUsers(PageRequest request)
   {
-    return Detach.detach(userRepo.findAll(request));
+    return Detach.detachUM(userRepo.findAll(request));
   }
 
   @Override

@@ -54,13 +54,13 @@ public class Detach
     Hibernate.initialize(item);
   }
 
-  public static Page<UserModel> detach(Page<UserModel> findAll)
+  public static Page<UserModel> detachUM(Page<UserModel> findAll)
   {
     detach(findAll.getContent());
     return findAll;
   }
 
-  public static void detach(Page<TalkModel> result)
+  public static void detachTM(Page<TalkModel> result)
   {
     if (result == null || result.getContent() == null)
     {

@@ -78,6 +78,13 @@ public class InitEmptyDatabase
       texte.storeText("menu.Home", "Home");
       texte.storeText("menu.null", "");
       texte.storeText("menu.Add", "Add");
+      
+      texte.storeText("menu.1lvl.conference","Konferenz");
+      texte.storeText("menu.1lvl.whishes","Wünsche");
+      texte.storeText("menu.1lvl.talks","Vorträge");
+      texte.storeText("menu.1lvl.contact","Kontakt");
+      texte.storeText("menu.1lvl.register","Anmeldung");
+  	
       texte.storeText("datatable.no-records-found", "No records");
       texte.storeText("toolbar.user.LogoutPage.label", "Logout");
       texte.storeText("toolbar.user.LogoutPage.prefix", "");
