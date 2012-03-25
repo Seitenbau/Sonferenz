@@ -2,24 +2,12 @@ package de.bitnoise.sonferenz.web.component.lvl1;
 
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.LoadableDetachableModel;
 
 import de.bitnoise.sonferenz.KonferenzSession;
-import de.bitnoise.sonferenz.service.v2.services.impl.ConferenceFacadeImplTest;
-import de.bitnoise.sonferenz.web.ConfigMainNavigation;
-import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
-import de.bitnoise.sonferenz.web.component.navigation.NavPanel;
-import de.bitnoise.sonferenz.web.pages.auth.LoginPanel;
-import de.bitnoise.sonferenz.web.pages.statics.AgendaPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.statics.ContactPage;
 import de.bitnoise.sonferenz.web.pages.statics.RegisterPage;
-import de.bitnoise.sonferenz.web.pages.statics.ReviewPage;
-import de.bitnoise.sonferenz.web.pages.talks.ListTalksPanel;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
-import de.bitnoise.sonferenz.web.pages.talks.ViewTalkPage;
-import de.bitnoise.sonferenz.web.pages.whish.ViewWhishPage;
 import de.bitnoise.sonferenz.web.pages.whish.WhishOverviewPage;
 
 public class FirstLevelBar extends Panel {
