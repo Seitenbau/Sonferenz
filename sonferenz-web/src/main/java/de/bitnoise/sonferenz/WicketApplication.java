@@ -4,6 +4,7 @@ import org.apache.wicket.Request;
 import org.apache.wicket.Response;
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
+import org.apache.wicket.markup.html.SecurePackageResourceGuard;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.beans.BeansException;
@@ -74,6 +75,11 @@ public class WicketApplication extends WebApplication
       throw new RuntimeException(e);
     }
     
+    SecurePackageResourceGuard guard = new SecurePackageResourceGuard();
+    guard.addPattern("+*.png");
+    guard.addPattern("+*.gif");
+    guard.addPattern("+*.js");
+    getResourceSettings().setPackageResourceGuard(guard);
   }
   
   public void activateSpring()
