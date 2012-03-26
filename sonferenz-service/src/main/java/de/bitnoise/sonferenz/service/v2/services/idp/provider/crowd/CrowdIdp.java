@@ -1,6 +1,7 @@
 package de.bitnoise.sonferenz.service.v2.services.idp.provider.crowd;
 
 import java.net.ConnectException;
+import java.net.URI;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;

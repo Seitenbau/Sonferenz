@@ -1,29 +1,33 @@
 <wicket:panel>
 	<div wicket:id="feedback"></div>
-	<form wicket:id="form">
+	<form wicket:id="form" class="formLayout">
 		<fieldset class="editProfileFieldset">
 			<legend>Benutzerkonto erstellen</legend>
-			<label class="formItemLeft" id="labelLoginName" for="login">Login Name :</label>
-			<input type="text"   class="formItemRight formItemExpand" id="login" wicket:id="login" /> 
+			  <label id="labelLoginName" for="login">Login Name :</label>
+			  <input type="text" id="login" wicket:id="login" /> 
 			<br />
-			<label class="formItemLeft" id="labelDisplayName" for="display">Display Name :</label> 
-			<input type="text" class="formItemRight formItemExpand" id="display" wicket:id="display" /> 
+			  <label id="labelDisplayName" for="display">Display Name :</label> 
+			  <input type="text" id="display" wicket:id="display" /> 
 			<br />
-			<label class="formItemLeft" id="labelMail1" for="mail1">eMail :</label> 
-			<input class="formItemRight formItemExpand" id="mail1" wicket:id="mail1" /> 
+			  <label id="labelMail1" for="mail1">eMail :</label> 
+			  <input id="mail1" wicket:id="mail1" /> 
 			<br />
-			<label class="formItemLeft" id="labelMail2" for="mail2">eMail (confirm):</label> 
-			<input class="formItemRight formItemExpand" id="mail2" wicket:id="mail2" /> 
+			<!-- 
+			  <label id="labelMail2" for="mail2">eMail (confirm):</label> 
+			  <input id="mail2" wicket:id="mail2" /> 
 			<br />
-			<label class="formItemLeft" id="labelPassword1" for="password1"> password : </label>
-			<input  class="formItemRight"  wicket:id="password1" type="password"/>
+			 -->
+			  <label id="labelPassword1" for="password1"> password : </label>
+			  <input wicket:id="password1" type="password"/>
 			<br />
-			<label class="formItemLeft" id="labelPassword2" for="password2"> password (confirm) : </label>
-			<input  class="formItemRight" wicket:id="password2" type="password"/>
+			  <label id="labelPassword2" for="password2"> password (confirm) : </label>
+			  <input wicket:id="password2" type="password"/>
 			<br />
 		</fieldset>
-		<input type="submit" wicket:id="submit" value="Speichern" /> 
-		<input type="submit" wicket:id="cancel" value="Abbrechen" />
+		<div class="formButtons">
+		  <input type="submit" wicket:id="submit" value="Speichern" /> 
+		  <input type="submit" wicket:id="cancel" value="Abbrechen" />
+		</div>
 		
 	</form>
 	

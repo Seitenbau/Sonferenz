@@ -341,9 +341,9 @@ public class UiFacadeImpl implements UiFacade
   SubscribeActionImpl _actionSubscribe;
   
   @Override
-  public void createToken(String user, String mail)
+  public void createToken(String user, String mail,String body,String subject)
   {
-    _actionSubscribe.createNewUserToken(user, mail);
+    _actionSubscribe.createNewUserToken(user, mail, body,subject);
   }
 
   @Override
@@ -353,7 +353,8 @@ public class UiFacadeImpl implements UiFacade
   }
 
   @Override
-  public boolean checkUserNotExists(String username) {
+  public boolean checkUserNotExists(String username) 
+  {
     return userFacade.checkUserNotExists(username);
   }
 }

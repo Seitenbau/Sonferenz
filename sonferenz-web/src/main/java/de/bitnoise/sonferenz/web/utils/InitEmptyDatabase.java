@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import de.bitnoise.sonferenz.KonferenzDefines;
 import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
 import de.bitnoise.sonferenz.repo.RoleRepository;
@@ -146,6 +147,12 @@ public class InitEmptyDatabase
           "email Addresse muss eindeutig sein");
       texte.storeText("email.EmailAddressValidator",
           "email Addresse ist ungültig");
+      texte.storeText("password1.Required", "Passwort benötigt");
+      texte.storeText("password2.Required", "Passwort Bestätigung benötigt");
+      texte.storeText("password1.PatternValidator", "Passwort entspricht nicht Muster : " + KonferenzDefines.PASSWORD_REGEX);
+      texte.storeText("display.Required", "Displayname wird benötigt");
+      texte.storeText("display.PatternValidator", "Display Name entspricht nicht Muster : " + KonferenzDefines.REGEX_USER_DISPLAY);
+      texte.storeText("login.PatternValidator", "Login Name entspricht nicht Muster : " + KonferenzDefines.REGEX_USERNAME);
       texte.storeText("title.Required", "Bitte Titel eingeben");
       texte.storeText("title.StringValidator.maximum", "Titel zu lang");
       texte.storeText("author.StringValidator.maximum", "Author zu lang");
@@ -153,6 +160,7 @@ public class InitEmptyDatabase
           "Bearbeitungsrechte müssen vergebene werden");
       texte.storeText("description.StringValidator.maximum",
           "Beschreibung zu lang");
+      texte.storeText("action.success", "Your account has been created.");
 
       texte.storeText("conferenceState.null", "- none -");
       texte.storeText("CREATED", "Created");

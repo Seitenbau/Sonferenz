@@ -42,7 +42,7 @@ public class UserService2Impl implements UserService
 
   @Autowired
   RoleRepository roleRepo;
-  
+
   @Autowired
   IdpService idpService;
 
@@ -129,11 +129,12 @@ public class UserService2Impl implements UserService
 
   @Override
   @Transactional
-  public UserModel createIdentity(String provider, String username, String displayname, String password,String email,
+  public UserModel createIdentity(String provider, String username,
+      String displayname, String password, String email,
       Collection<UserRoles> newRoles)
   {
     idpService.createIdentity(provider, username, password);
-    
+
     AuthMapping auth = new AuthMapping();
     auth.setAuthId(username);
     auth.setAuthType(provider);
@@ -149,7 +150,7 @@ public class UserService2Impl implements UserService
 
     auth.setUser(user);
     authRepo.save(auth);
-    
+
     return user;
   }
 
@@ -226,9 +227,14 @@ public class UserService2Impl implements UserService
   }
 
   @Override
-  public boolean checkUserNotExists(String username) {
+  public boolean checkUserNotExists(String username)
+  {
     UserModel result = userRepo.findByName(username);
-    return result == null;
+    if (result == null)
+    {
+      return authRepo.findByAuthId(username) == null;
+    }
+    return true;
   }
 
 }

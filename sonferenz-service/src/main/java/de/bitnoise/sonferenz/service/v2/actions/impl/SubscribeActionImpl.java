@@ -76,7 +76,8 @@ public class SubscribeActionImpl implements KonferenzAction
   @Autowired
   ActionService actionService;
 
-  public void createNewUserToken(String user, String mail)
+  public void createNewUserToken(String user, String mail, String forceBody,
+      String subject)
   {
     UserModel foundMail = userRepo.findByEmail(mail);
     if (foundMail != null)
@@ -88,17 +89,31 @@ public class SubscribeActionImpl implements KonferenzAction
     {
       throw new ValidationException("Username allready inuse");
     }
-    AuthMapping foundLogin = authRepo.findByAuthIdAndAuthType(user, LocalIdp.IDP_NAME);
+    AuthMapping foundLogin = authRepo.findByAuthIdAndAuthType(user,
+        LocalIdp.IDP_NAME);
     if (foundLogin != null)
     {
       throw new ValidationException("Login Name allready inuse");
     }
-    String body = texte.text("action.subscribe.mail.body");
-    if (body  == null)
+    String body = forceBody;
+    if (body == null || !body.contains("${link}"))
     {
-      throw new ValidationException("Missing Mail Body : key='action.subscribe.mail.body' ");
+      body = texte.text("action.subscribe.mail.body");
+      if (body == null)
+      {
+        throw new ValidationException(
+            "Missing Mail Body : key='action.subscribe.mail.body' ");
+      }
     }
-
+    if (subject != null)
+    {
+      template.setSubject(subject);
+    }
+    else
+    {
+      template.setSubject(
+          texte.text("action.subscribe.mail.subject"));
+    }
     ActionCreateUser newUser = new ActionCreateUser();
     newUser.setLoginName(user);
     newUser.setMail(mail);
@@ -108,7 +123,7 @@ public class SubscribeActionImpl implements KonferenzAction
     {
       SimpleMailMessage message = new SimpleMailMessage(template);
       message.setTo(mail);
-      body = body.replace("{link}", ActionResult.ACTION_URL);
+      body = body.replace("${link}", ActionResult.ACTION_URL);
       message.setText(body.toString());
       mailer.sendMessage(result.getContentReplacer(), message);
     }
@@ -153,11 +168,12 @@ public class SubscribeActionImpl implements KonferenzAction
 
     Collection<UserRoles> newRoles = new ArrayList<UserRoles>();
     newRoles.add(UserRoles.USER);
-    
-    UserModel user = userService.createIdentity(data.getProvider(), data.getLoginName(), data.getUserName(),
+
+    UserModel user = userService.createIdentity(data.getProvider(),
+        data.getLoginName(), data.getUserName(),
         data.getPassword(), data.getEMail(), newRoles);
-    
-//    actionVerify.createAction(user, data.getEMail());
+
+    // actionVerify.createAction(user, data.getEMail());
   }
 
   public String createToken()
@@ -175,7 +191,7 @@ public class SubscribeActionImpl implements KonferenzAction
   public static class ActionCreateUser implements ActionState,
       IncrementUseageCount
   {
-    
+
     String loginName;
 
     public String getLoginName()
@@ -269,7 +285,7 @@ public class SubscribeActionImpl implements KonferenzAction
     {
       this.provider = provider;
     }
-    
+
   }
 
 }

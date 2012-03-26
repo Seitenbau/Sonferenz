@@ -10,7 +10,7 @@
   <packaging>war</packaging>
 
   <properties>
-    <wicket.version>1.4.19</wicket.version>
+    <wicket.version>1.4.20</wicket.version>
     <slf4j.version>1.6.4</slf4j.version>
     <jetty.version>7.3.0.v20110203</jetty.version>
   </properties>

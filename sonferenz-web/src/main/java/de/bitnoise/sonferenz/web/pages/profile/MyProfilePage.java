@@ -30,12 +30,6 @@ public class MyProfilePage extends KonferenzPage
     	return new TabPanel(id) {
 			@Override
 			protected void createTabs(List<ITab> tabs) {
-				tabs.add(new AbstractTab(txt("profile.tab.profile")) {
-					@Override
-					public Panel getPanel(String panelId) {
-						return new MyProfilePanel(panelId);
-					}
-				});
 //				tabs.add(new AbstractTab(txt("profile.tab.settings")) {
 //					@Override
 //					public Panel getPanel(String panelId) {
@@ -50,6 +44,12 @@ public class MyProfilePage extends KonferenzPage
 						}
 					});
 				}
+				tabs.add(new AbstractTab(txt("profile.tab.profile")) {
+				  @Override
+				  public Panel getPanel(String panelId) {
+				    return new MyProfilePanel(panelId);
+				  }
+				});
 			}};
     }
     else

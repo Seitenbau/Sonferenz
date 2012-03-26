@@ -14,7 +14,6 @@ import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;
-import de.bitnoise.sonferenz.web.pages.profile.action.TokenCreateUser;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 
 public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel>
@@ -45,7 +44,7 @@ public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel
 			@Override
 			protected void onClickLink(AjaxRequestTarget target)
 			{
-				 setResponsePage(  InviteUserPage.class);
+				 setResponsePage(InviteUserPage.class);
 			}
 		};
 		return btn;

@@ -41,7 +41,7 @@ public class SubscribeActionPanel extends FormPanel
 
   TextField<String> email1;
 
-  TextField<String> email2;
+//  TextField<String> email2;
 
   public SubscribeActionPanel(String id, Aktion aktion)
   {
@@ -62,19 +62,21 @@ public class SubscribeActionPanel extends FormPanel
     display = new TextField<String>("display", Model.of(""));
     login = new TextField("login", Model.of(""));
     email1 = new TextField("mail1", Model.of(""));
-    email2 = new TextField("mail2", Model.of(""));
+//    email2 = new TextField("mail2", Model.of(""));
     
     /* in case of an invite, the email & username already exist.*/
     if (_data.getEMail() != null)
     {
     	email1.setModelValue(_data.getEMail());
     	email1.setEnabled(false);
-    	email2.setModelValue(_data.getEMail());
-    	email2.setEnabled(false);
+//    	email2.setModelValue(_data.getEMail());
+//    	email2.setEnabled(false);
     }
     if (_data.getLoginName() != null)
     {
     	display.setModelValue(_data.getLoginName());
+    	login.setModelValue(_data.getLoginName());
+    	login.setEnabled(false);
     }
     
     password1 = new PasswordTextField("password1", Model.of(""));
@@ -99,12 +101,15 @@ public class SubscribeActionPanel extends FormPanel
     // add validators
     login.setRequired(true);
     login.add(new PatternValidator(KonferenzDefines.REGEX_USERNAME));
+    login.add(new UserUnique());
+    display.add(new UserUnique());
+    display.setRequired(true);
     display.add(new PatternValidator(KonferenzDefines.REGEX_USER_DISPLAY));
     password1.add(new PatternValidator(KonferenzDefines.PASSWORD_REGEX));
     email1.add(EmailAddressValidator.getInstance());
     email1.add(new EMailNotUsed());
     form.add(new EqualPasswordInputValidator(password1, password2));
-    form.add(new EqualInputValidator(email1, email2));
+//    form.add(new EqualInputValidator(email1, email2));
 
     // add components
     add(form);
@@ -113,9 +118,27 @@ public class SubscribeActionPanel extends FormPanel
     form.add(password1);
     form.add(password2);
     form.add(email1);
-    form.add(email2);
+//    form.add(email2);
     form.add(new Button("submit"));
     form.add(cancel);
+  }
+  
+  public class UserUnique<String> extends AbstractValidator<String>
+  {
+    @Override
+    protected void onValidate(IValidatable<String> validatable)
+    {
+      java.lang.String x = (java.lang.String) validatable.getValue();
+      if (!facade.checkUserNotExists(x))
+      {
+        error(validatable);
+      }
+    }
+
+    @Override
+    public java.lang.String toString() {
+      return "Username schon vergeben";
+    }
   }
 
   public class EMailNotUsed extends AbstractValidator<String>
