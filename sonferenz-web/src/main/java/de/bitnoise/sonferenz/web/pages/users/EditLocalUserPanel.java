@@ -20,6 +20,7 @@ import com.visural.common.web.HtmlSanitizer;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.LocalUserModel;
 import de.bitnoise.sonferenz.model.UserRoles;
+import de.bitnoise.sonferenz.service.v2.exceptions.UserExistsException;
 
 public class EditLocalUserPanel extends FormPanel
 {
@@ -120,8 +121,14 @@ public class EditLocalUserPanel extends FormPanel
     Collection<UserRoles> newRoles = modelRoles.getObject();
     _user.setName(valueName);
     String password = modelPassword1.getObject();
-    facade.createIdentity(selectedProvider, valueName, password, null, newRoles);
-    
-    setResponsePage(UserOverviewPage.class);
+    try
+    {
+	    facade.createIdentity(selectedProvider, valueName, password, null, newRoles);
+	    setResponsePage(UserOverviewPage.class);
+    }
+    catch (UserExistsException e)
+    {
+    	error(e.getMessage());
+    }
   }
 }

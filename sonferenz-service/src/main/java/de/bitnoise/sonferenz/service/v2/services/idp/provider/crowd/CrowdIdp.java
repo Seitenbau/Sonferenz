@@ -18,6 +18,7 @@ import com.google.common.eventbus.Subscribe;
 
 import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
+import de.bitnoise.sonferenz.service.v2.exceptions.UserExistsException;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.idp.Identity;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.Idp;
@@ -123,13 +124,22 @@ public class CrowdIdp implements Idp
         restTemplate.postForLocation(crowdRestService + TEMPLATE_GROUP, group, name);
       }
     }
+    catch (HttpClientErrorException e)
+    {
+    	String text = e.getResponseBodyAsString();
+    	if (text.contains("User already exists"))
+    	{
+    		throw new UserExistsException( "User '"+name+"' already exists");
+    	}
+    	throw new GeneralConferenceException("Internal Error while connection to IDP Backend");
+    }
     catch (RuntimeException ce)
     {
       if (ce.getCause() instanceof ConnectException)
       {
         throw new GeneralConferenceException("Unable to Connect to IDP Backend");
       }
-      throw new GeneralConferenceException("Internal Error while connection to IDP Backend");
+      throw new GeneralConferenceException("Internal Error while connection to IDP Backend"); 
     }
   }
 
