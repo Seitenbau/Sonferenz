@@ -8,6 +8,8 @@ import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
+import de.bitnoise.sonferenz.WicketApplication;
+
 public class LikePanel extends Panel {
 
 	private Model<Boolean> _model;
@@ -30,9 +32,11 @@ public class LikePanel extends Panel {
 		super.onInitialize();
 		setOutputMarkupId(true);
 		final ResourceReference refOn = new ResourceReference(
-				"/images/sun_on.gif");
+		    WicketApplication.class,
+				"images/sun_on.gif");
 		final ResourceReference refOff = new ResourceReference(
-				"/images/sun_off.gif");
+		    WicketApplication.class,
+				"images/sun_off.gif");
 		ResourceReference ref = refOn;
 		if (_model.getObject().booleanValue()) {
 			ref = refOn;

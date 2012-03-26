@@ -16,6 +16,8 @@ import org.apache.wicket.model.ResourceModel;
 import com.visural.wicket.behavior.beautytips.BeautyTipBehavior;
 import com.visural.wicket.behavior.beautytips.TipPosition;
 
+import de.bitnoise.sonferenz.WicketApplication;
+
 public abstract class VoteMultiStateColumn<T extends IMutiState> extends
     AbstractColumn<T>
 {
@@ -64,9 +66,9 @@ public abstract class VoteMultiStateColumn<T extends IMutiState> extends
   protected abstract <T extends IMutiState> boolean onChange(
       AjaxRequestTarget target, IModel<T> model, int next);
 
-  final ResourceReference img0 = new ResourceReference("/images/state-0.gif");
-  final ResourceReference img1 = new ResourceReference("/images/state-1.gif");
-  final ResourceReference img2 = new ResourceReference("/images/state-2.gif");
+  final ResourceReference img0 = new ResourceReference(WicketApplication.class,"images/state-0.gif");
+  final ResourceReference img1 = new ResourceReference(WicketApplication.class,"images/state-1.gif");
+  final ResourceReference img2 = new ResourceReference(WicketApplication.class,"images/state-2.gif");
 
   public class MultiStatePanel<T extends IMutiState> extends Panel
   {
