@@ -61,7 +61,6 @@ public class ListWhishesPanel extends Panel
             setTitle("Description");
             setEscaping(false);
             setModelProperty("description");
-            sortable();
           }
         });
         addColumn(new Column() {

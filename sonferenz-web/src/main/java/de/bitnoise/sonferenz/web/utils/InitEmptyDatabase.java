@@ -162,6 +162,7 @@ public class InitEmptyDatabase
           "Beschreibung zu lang");
       texte.storeText("action.success", "Your account has been created.");
       texte.storeText("mailbody.InviteUserPanel$ContainsToken", "Missing ${link} in body");
+      texte.storeText("title.Required", "Titel muss angegeben werden");
 
       texte.storeText("conferenceState.null", "- none -");
       texte.storeText("CREATED", "Created");

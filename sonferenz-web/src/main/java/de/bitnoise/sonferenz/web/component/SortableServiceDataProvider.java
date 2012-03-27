@@ -10,6 +10,9 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 
@@ -60,7 +63,17 @@ public abstract class SortableServiceDataProvider<TYPE_DB, TYPE_UI extends Seria
   protected List<TYPE_DB> getAllItemList(int first, int count, String propertyToSort, boolean ascending)
   {
     int f = first/count;
-    PageRequest request = new PageRequest(f, count);
+    PageRequest request;
+    if(propertyToSort!=null) {
+      Direction direction=Direction.DESC;
+      if(ascending) {
+        direction=Direction.ASC;
+      }
+      Sort sort=new Sort(new Order(direction, propertyToSort));
+      request = new PageRequest(f, count,sort);
+    } else {
+      request = new PageRequest(f, count);
+    }
     Page<TYPE_DB> result = getAllItems(request);
     return result.getContent();
   }

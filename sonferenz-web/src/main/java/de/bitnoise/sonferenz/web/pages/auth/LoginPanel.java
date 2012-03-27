@@ -1,5 +1,7 @@
 package de.bitnoise.sonferenz.web.pages.auth;
 
+import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
+import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -43,6 +45,7 @@ public class LoginPanel extends FormPanel
 		form.add(new Button("submit"));
 
 		feedback = new FeedbackPanel("feedback");
+		feedback.setFilter(new ContainerFeedbackMessageFilter(this));
 		add(feedback.setOutputMarkupId(true));
 		add(form);
 	}
