@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.bitnoise.sonferenz</groupId>
 		<artifactId>sonferenz-parent</artifactId>
-		<version>0.3.0-rc1</version>
+		<version>0.3.0-rc2</version>
 	</parent>
 	<groupId>de.bitnoise.sonferenz</groupId>
 	<artifactId>sonferenz-db</artifactId>
