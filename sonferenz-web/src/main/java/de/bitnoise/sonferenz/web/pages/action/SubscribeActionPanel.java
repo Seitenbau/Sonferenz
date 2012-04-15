@@ -75,8 +75,8 @@ public class SubscribeActionPanel extends FormPanel
     if (_data.getLoginName() != null)
     {
     	display.setModelValue(_data.getLoginName());
-    	login.setModelValue(_data.getLoginName());
-    	login.setEnabled(false);
+    	//login.setModelValue(_data.getLoginName());
+    	login.setEnabled(true);
     }
     
     password1 = new PasswordTextField("password1", Model.of(""));
