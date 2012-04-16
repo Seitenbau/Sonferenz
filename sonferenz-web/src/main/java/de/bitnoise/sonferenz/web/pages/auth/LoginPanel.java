@@ -1,6 +1,5 @@
 package de.bitnoise.sonferenz.web.pages.auth;
 
-import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
@@ -11,7 +10,7 @@ import org.apache.wicket.model.Model;
 
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.FocusOnLoadBehavior;
-import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
+import de.bitnoise.sonferenz.web.pages.statics.InfoPage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
 public class LoginPanel extends FormPanel
@@ -75,7 +74,7 @@ public class LoginPanel extends FormPanel
 
 	protected void OnSuccessfullLogin()
 	{
-		setResponsePage(ConferencePage.class);
+		setResponsePage(InfoPage.class);
 		setRedirect(true);
 	}
 

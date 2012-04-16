@@ -180,6 +180,8 @@ public class InitEmptyDatabase
           "page.register: as admin you can change this text.");
       texte.storeText("page.contact",
           "page.contact: as admin you can change this text.");
+      texte.storeText("page.info",
+              "page.info: as admin you can change this text.");
       
       texte.storeText("action.subscribe.mail.subject", "You have been invited to SDC!");
       texte.storeText("action.subscribe.mail.body", "Follow this link to complete: {link}");

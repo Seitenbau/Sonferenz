@@ -6,6 +6,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.statics.ContactPage;
+import de.bitnoise.sonferenz.web.pages.statics.InfoPage;
 import de.bitnoise.sonferenz.web.pages.statics.RegisterPage;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.whish.WhishOverviewPage;
@@ -20,8 +21,9 @@ public class FirstLevelBar extends Panel {
 	protected void onInitialize() {
 		super.onInitialize();
 		RepeatingView items = new RepeatingView("repeater");
-		items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class));
+		
 		if (!KonferenzSession.noUserLoggedIn()) {
+			items.add(new MenuButton("info", items.newChildId(), InfoPage.class));
 			items.add(new MenuButton("whishes", items.newChildId(), WhishOverviewPage.class));
 			items.add(new MenuButton("talks", items.newChildId(), TalksOverviewPage.class));
 			/* 
@@ -30,7 +32,12 @@ public class FirstLevelBar extends Panel {
 			items.add(new MenuButton("agenda", items.newChildId(), AgendaPage.class));
 			*/
 		}
-		items.add(new MenuButton("register", items.newChildId(), RegisterPage.class));
+		else
+		{
+			items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class));
+			items.add(new MenuButton("register", items.newChildId(), RegisterPage.class));
+		}
+		
 		items.add(new MenuButton("contact", items.newChildId(), ContactPage.class));
 		add(items);
 	}

@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import com.jquery.JQueryResourceReference;
 import com.visural.wicket.aturl.AtAnnotation;
 
+import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
 
 /**
@@ -29,9 +30,16 @@ public class WicketApplication extends WebApplication
    * @see org.apache.wicket.Application#getHomePage()
    */
   @Override
-  public Class<de.bitnoise.sonferenz.web.pages.statics.ConferencePage> getHomePage()
+  public Class getHomePage()
   {
-    return de.bitnoise.sonferenz.web.pages.statics.ConferencePage.class;
+	  if (KonferenzSession.noUserLoggedIn()) {
+		  return de.bitnoise.sonferenz.web.pages.statics.ConferencePage.class;
+	  }
+	  else
+	  {
+		  return de.bitnoise.sonferenz.web.pages.statics.InfoPage.class;
+	  }
+    
   }
 
   
