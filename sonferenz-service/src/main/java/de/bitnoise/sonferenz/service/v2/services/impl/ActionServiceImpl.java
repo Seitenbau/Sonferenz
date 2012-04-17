@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -216,7 +217,8 @@ public class ActionServiceImpl implements ActionService
     entity.setToken(token);
     entity.setActive(true);
     entity.setCreator(authService.getCurrentUser());
-    int maxValidity = 24 * 60; // 24h
+    entity.setTitle(data.getTitle());
+    int maxValidity = 5 * 24 * 60; // 5 Tage
     DateTime result = DateTime.now().plus(Period.minutes(maxValidity));
     entity.setExpiry(result.toDate());
     entity.setUsed(0);

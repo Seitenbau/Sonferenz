@@ -60,14 +60,14 @@ public class ListTalksPanel extends Panel
             action(new EditOrViewTalk());
           }
         });
-        addColumn(new Column()
-        {
-          {
-            setTitle("Description");
-            setEscaping(false);
-            setModelProperty("description");
-          }
-        });
+//        addColumn(new Column()
+//        {
+//          {
+//            setTitle("Description");
+//            setEscaping(false);
+//            setModelProperty("description");
+//          }
+//        });
         addColumn(new Column()
         {
           {

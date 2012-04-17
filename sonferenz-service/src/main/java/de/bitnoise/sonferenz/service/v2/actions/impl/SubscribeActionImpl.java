@@ -286,6 +286,11 @@ public class SubscribeActionImpl implements KonferenzAction
       this.provider = provider;
     }
 
+	@Override
+    public String getTitle() {
+	    return "Invite of user : '" + mail + "'";
+    }
+
   }
 
 }

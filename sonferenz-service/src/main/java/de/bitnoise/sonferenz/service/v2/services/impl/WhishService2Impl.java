@@ -43,18 +43,21 @@ public class WhishService2Impl implements WhishService
   }
 
   @Override
+  @Transactional 
   public void unWhish(WhishModel whish)
   {
     UserModel user = authService.getCurrentUser();
   }
 
   @Override
+  @Transactional 
   public void deleteWhish(WhishModel whish)
   {
     whishRepo.delete(whish);
   }
 
   @Override
+  @Transactional 
   public void saveWhish(WhishModel whish)
   {
     if (whish.getOwner() == null)
@@ -72,6 +75,7 @@ public class WhishService2Impl implements WhishService
   }
 
   @Override
+  @Transactional 
   public void like(UserModel user, WhishModel whish)
   {
     LikeModel current = likeRepo.findByUserAndWhish(user, whish);
@@ -91,6 +95,7 @@ public class WhishService2Impl implements WhishService
   }
 
   @Override
+  @Transactional 
   public void unLike(UserModel user, WhishModel whish)
   {
     LikeModel current = likeRepo.findByUserAndWhish(user, whish);
@@ -108,6 +113,7 @@ public class WhishService2Impl implements WhishService
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Integer getWhishLikeCount(UserModel user, WhishModel whish)
   {
     LikeModel current = likeRepo.findByUserAndWhish(user, whish);
@@ -116,6 +122,14 @@ public class WhishService2Impl implements WhishService
       return null;
     }
     return current.getLikes();
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<WhishModel> getMyWhishes(PageRequest request) {
+	  UserModel current = authService.getCurrentUserOrFail();
+	  Page<WhishModel> result = whishRepo.findAllByOwner(current);
+	  return result;
   }
 
 }

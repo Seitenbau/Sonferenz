@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class TokenListItem implements Serializable
 {
-  public String action;
-  public String token; 
   public String url; 
+  public String title;
+  public String state;
+  public String expires; 
 }

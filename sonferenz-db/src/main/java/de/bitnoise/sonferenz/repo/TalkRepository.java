@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.UserModel;
 
 public interface TalkRepository extends JpaRepository<TalkModel, Integer>
 {
@@ -22,4 +23,6 @@ public interface TalkRepository extends JpaRepository<TalkModel, Integer>
 
   @Query("select count(t) from TalkModel t where t.conference is not null")
   Long countAllVotable();
+
+  Page<TalkModel> findByOwner(UserModel owner);
 }

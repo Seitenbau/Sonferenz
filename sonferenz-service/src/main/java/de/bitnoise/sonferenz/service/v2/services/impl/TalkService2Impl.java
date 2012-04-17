@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.repo.TalkRepository;
 import de.bitnoise.sonferenz.service.v2.Detach;
+import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
 
 @Service
@@ -75,6 +77,15 @@ public class TalkService2Impl implements TalkService
     Page<TalkModel> result = talkRepo.test(request);
     Detach.detachTM(result) ;
     return  result;
+  }
+
+  @Autowired
+  AuthenticationService authService;
+  
+  @Override
+  public Page<TalkModel> getMyTalks(PageRequest request) {
+	  UserModel current = authService.getCurrentUserOrFail();
+	  return talkRepo.findByOwner(current);
   }
 
 }

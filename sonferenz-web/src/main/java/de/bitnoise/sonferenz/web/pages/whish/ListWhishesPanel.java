@@ -63,14 +63,14 @@ public class ListWhishesPanel extends Panel
             setModelProperty("description");
           }
         });
-        addColumn(new Column() {
-          {
-            setTitle("Verantwortlicher");
-            setEscaping(false);
-            setModelProperty("owner");
-            sortable();
-          }
-        });
+//        addColumn(new Column() {
+//          {
+//            setTitle("Verantwortlicher");
+//            setEscaping(false);
+//            setModelProperty("owner");
+//            sortable();
+//          }
+//        });
       }
     };
 

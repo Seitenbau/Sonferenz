@@ -20,6 +20,7 @@ import de.bitnoise.sonferenz.repo.RoleRepository;
 import de.bitnoise.sonferenz.repo.UserRepository;
 import de.bitnoise.sonferenz.service.v2.Detach;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
+import de.bitnoise.sonferenz.service.v2.exceptions.NoRightsExcpetion;
 import de.bitnoise.sonferenz.service.v2.security.ProviderType;
 import de.bitnoise.sonferenz.service.v2.security.ProvidesEmail;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
@@ -124,5 +125,15 @@ public class AuthenticationServiceImpl implements AuthenticationService
     
     userRepo.save(neuerUser);
     return neuerUser;
+  }
+
+  @Override
+  @Transactional
+  public UserModel getCurrentUserOrFail() {
+	UserModel user = getCurrentUser();
+	if(user==null) {
+		throw new NoRightsExcpetion("You're not logged in");
+	}
+	return user;
   }
 }

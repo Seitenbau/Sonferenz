@@ -112,7 +112,7 @@ public class InitEmptyDatabase
       texte.storeText("table.talks.column.Author", "Author");
       texte.storeText("table.talks.create", "Neuen Vortrag einreichen");
 
-      texte.storeText("profile.tab.profile", "Mein Profil");
+      texte.storeText("profile.tab.profile", "Einstellungen");
       texte.storeText("profile.tab.invites", "Einladen");
       texte.storeText("profile.user.invites", "Neuen Benutzer einladen");
 
@@ -188,11 +188,24 @@ public class InitEmptyDatabase
       texte.storeText("action.verify.mail.subject", "Details for your new user account");
       texte.storeText("action.verify.mail.body", "Please confirm your email by open the folling link in your browser: {link}");
 
+      // since 0.2.1
+      texte.storeText("display.MyProfilePanel$UserUnique", "Benutzer Name schon vergeben");
+      texte.storeText("table.tokenTable.column.state", "Zustand");
+      texte.storeText("table.tokenTable.column.title", "Beschreibung");
+      texte.storeText("table.tokenTable.column.url", "Link");
+      texte.storeText("table.tokenTable.column.expires", "Gueltigkeit");
+      texte.storeText("profile.tab.overview", "Profil");
+      texte.storeText("table.myTalks.column.Titel", "Meine Vorträge");
+      texte.storeText("table.myWhishes.column.Titel", "Meine Wünsche");
+      texte.storeText("menu.1lvl.info", "Konferenz");
+
+
       logger.warn("texts created");
 
       createRole(1, "ADMIN");
       createRole(2, "USER");
       createRole(3, "MANAGER");
+      createRole(4, "INVITE");
       logger.warn("roles created");
 
       Collection<UserRoles> newRoles = new ArrayList<UserRoles>();

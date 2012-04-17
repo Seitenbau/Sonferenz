@@ -234,7 +234,7 @@ public class UserService2Impl implements UserService
     {
       return authRepo.findByAuthId(username) == null;
     }
-    return true;
+    return false;
   }
 
 }

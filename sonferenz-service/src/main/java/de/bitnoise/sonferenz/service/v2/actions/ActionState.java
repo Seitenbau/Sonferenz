@@ -14,4 +14,10 @@ public interface ActionState extends Serializable
    * @return The ActionName
    */
   String getActionName();
+
+  /**
+   * Get a human readable shot description to show in UI etc.
+   * @return
+   */
+  String getTitle();
 }

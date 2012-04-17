@@ -47,5 +47,8 @@ public class ActionModel implements DoInterface<Integer>
   @Column(nullable=true)
   @Type(type = "text")
   String data;
+  
+  @Column
+  String title;
 
 }

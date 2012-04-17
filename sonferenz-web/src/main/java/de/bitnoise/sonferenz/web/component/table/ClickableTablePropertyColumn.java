@@ -64,15 +64,15 @@ public class ClickableTablePropertyColumn<T> extends AbstractColumn<T>
     }
     cellItem.add(new AttributeAppender("class", true, Model.of("column_"
         + cellItem.getIndex()), " "));
-    if (access)
+    PropertyModel<Object> labelModel = new PropertyModel<Object>(rowModel, property);
+	if (access)
     {
-      cellItem.add(new LinkPanel(_action, componentId, rowModel,
-          new PropertyModel<Object>(rowModel, property)));
+      LinkPanel linkPanel = new LinkPanel(_action, componentId, rowModel, labelModel);
+	  cellItem.add(linkPanel);
     }
     else
     {
-      cellItem.add(new Label(componentId, new PropertyModel<Object>(rowModel,
-          property)));
+      cellItem.add(new Label(componentId, labelModel));
     }
   }
 

@@ -14,6 +14,7 @@ import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPage;
 import de.bitnoise.sonferenz.web.pages.talks.ModelTalkList;
+import de.bitnoise.sonferenz.web.pages.talks.RefToTalk;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.talks.ViewTalkPage;
 import de.bitnoise.sonferenz.web.pages.voting.UserVoteItem;
@@ -64,9 +65,9 @@ public class EditOrViewTalk extends WebAction<IModel<Object>>
   {
     Object obj = model.getObject();
     TalkModel talk = null;
-    if (obj instanceof ModelTalkList)
+    if (obj instanceof RefToTalk)
     {
-      talk = ((ModelTalkList) obj).talk;
+      talk = ((RefToTalk) obj).getTalk();
     }
     else if (obj instanceof UserVoteItem)
     {

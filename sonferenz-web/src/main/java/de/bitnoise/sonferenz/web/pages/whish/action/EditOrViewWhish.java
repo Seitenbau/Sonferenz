@@ -14,6 +14,7 @@ import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPage;
 import de.bitnoise.sonferenz.web.pages.whish.ModelWhishList;
+import de.bitnoise.sonferenz.web.pages.whish.ReftoWhish;
 import de.bitnoise.sonferenz.web.pages.whish.ViewWhishPage;
 import de.bitnoise.sonferenz.web.pages.whish.WhishOverviewPage;
 
@@ -25,9 +26,9 @@ public class EditOrViewWhish extends WebAction<IModel<Object>> implements
   {
     Object obj = model.getObject();
     WhishModel whish = null;
-    if (obj instanceof ModelWhishList)
+    if (obj instanceof ReftoWhish)
     {
-      whish = ((ModelWhishList) obj).whish;
+      whish = ((ReftoWhish) obj).getWhish();
     }
     if (obj instanceof WhishModel)
     {
@@ -58,7 +59,9 @@ public class EditOrViewWhish extends WebAction<IModel<Object>> implements
   {
     Object obj = model.getObject();
     WhishModel whish = null;
-    if (obj instanceof ModelWhishList)
+    if (obj instanceof ReftoWhish) {
+    	whish = ((ReftoWhish) obj).getWhish();
+    } else if (obj instanceof ModelWhishList)
     {
       whish = ((ModelWhishList) obj).whish;
     }

@@ -26,4 +26,6 @@ public interface TalkService
 
   Page<TalkModel> getVotableTalks(PageRequest request);
 
+  Page<TalkModel> getMyTalks(PageRequest request);
+
 }

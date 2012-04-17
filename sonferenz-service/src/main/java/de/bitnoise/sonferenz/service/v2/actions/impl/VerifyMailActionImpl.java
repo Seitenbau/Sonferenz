@@ -21,13 +21,17 @@ public class VerifyMailActionImpl implements KonferenzAction
 {
   public static class VerifyMailActionData implements ActionState
   {
-
     public static final String ACTION_ID = "verifyMail";
 
     @Override
     public String getActionName()
     {
       return ACTION_ID;
+    }
+
+	@Override
+    public String getTitle() {
+	    return "verify changed email";
     }
 
   }

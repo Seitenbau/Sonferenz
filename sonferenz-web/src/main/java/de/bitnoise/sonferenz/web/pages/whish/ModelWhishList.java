@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import de.bitnoise.sonferenz.model.WhishModel;
 
-public class ModelWhishList implements Serializable 
+public class ModelWhishList implements Serializable, ReftoWhish 
 {
     public String title;
     public String owner;
@@ -13,5 +13,9 @@ public class ModelWhishList implements Serializable
     public Integer like;
     public Integer sumLike;
     public Integer  id;
+	@Override
+    public WhishModel getWhish() {
+	    return whish;
+    }
 
 }

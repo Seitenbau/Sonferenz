@@ -18,7 +18,7 @@ import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.users.ListUserPanel;
 
-@At(url = "/profile")
+@At(url = "/user/profile")
 public class MyProfilePage extends KonferenzPage
 {
   @Override
@@ -30,6 +30,12 @@ public class MyProfilePage extends KonferenzPage
     	return new TabPanel(id) {
 			@Override
 			protected void createTabs(List<ITab> tabs) {
+				tabs.add(new AbstractTab(txt("profile.tab.overview")) {
+					@Override
+					public Panel getPanel(String panelId) {
+						return new MyOverviewPanel(panelId);
+					}
+				});
 //				tabs.add(new AbstractTab(txt("profile.tab.settings")) {
 //					@Override
 //					public Panel getPanel(String panelId) {
@@ -37,12 +43,12 @@ public class MyProfilePage extends KonferenzPage
 //					}
 //				});
 				if ( KonferenzSession.hasRight(Right.Actions.InviteUser) ) {
-					tabs.add(new AbstractTab(txt("profile.tab.invites")) {
-						@Override
-						public Panel getPanel(String panelId) {
-							return new MyInvitesPanel(panelId);
-						}
-					});
+				  tabs.add(new AbstractTab(txt("profile.tab.invites")) {
+				    @Override
+				    public Panel getPanel(String panelId) {
+				      return new MyInvitesPanel(panelId);
+				    }
+				  });
 				}
 				tabs.add(new AbstractTab(txt("profile.tab.profile")) {
 				  @Override

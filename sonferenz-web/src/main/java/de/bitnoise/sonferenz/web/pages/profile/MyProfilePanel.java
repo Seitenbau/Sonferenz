@@ -5,7 +5,11 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.validation.IValidatable;
+import org.apache.wicket.validation.validator.AbstractValidator;
+import org.apache.wicket.validation.validator.PatternValidator;
 
+import de.bitnoise.sonferenz.KonferenzDefines;
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
@@ -21,6 +25,8 @@ public class MyProfilePanel extends FormPanel
 	TextField display;
 
 	UserModel user;
+
+	String _old;
 
 	public MyProfilePanel(String id)
 	{
@@ -39,7 +45,8 @@ public class MyProfilePanel extends FormPanel
 	{
 		super.onInitialize();
 		addFeedback(this, "feedback");
-		display = new TextField<String>("display", Model.of(user.getName()));
+		_old = user.getName();
+		display = new TextField<String>("display", Model.of(_old));
 
 		Form<String> form = new Form<String>("form")
 		{
@@ -56,22 +63,21 @@ public class MyProfilePanel extends FormPanel
 				setResponsePage(ConferencePage.class);
 			}
 		};
-		display.setEnabled(false);
-		
+		display.add(new UserUnique());
+		display.add(new PatternValidator(KonferenzDefines.REGEX_USER_DISPLAY));
+		display.setRequired(true);
 		add(form);
 		form.add(display);
 		TextField login = new TextField("login", Model.of(user.getProvider().getAuthId()));
 		login.setEnabled(false);
 		form.add(login);
-		/* 
 		form.add(new Button("submit"));
 		form.add(cancel);
-		*/
 	}
 
 	protected void onSubmitForm()
 	{
-		setResponsePage(ConferencePage.class);
+		setResponsePage(MyProfilePage.class);
 		String newName = display.getValue();
 		if (user.getName().equals(newName))
 		{
@@ -80,4 +86,21 @@ public class MyProfilePanel extends FormPanel
 		facade.userUpdate(user, newName);
 	}
 
+	public class UserUnique extends AbstractValidator<String>
+	  {
+	    @Override
+	    protected void onValidate(IValidatable<String> validatable)
+	    {
+	      java.lang.String x = (java.lang.String) validatable.getValue();
+	      if (!_old.equals(x) && !facade.checkUserNotExists(x))
+	      {
+	        error(validatable);
+	      }
+	    }
+
+	    @Override
+	    public java.lang.String toString() {
+	      return "Username schon vergeben";
+	    }
+	  }
 }

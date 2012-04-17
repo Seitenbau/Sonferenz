@@ -27,4 +27,6 @@ public interface WhishService
 
   Integer getWhishLikeCount(UserModel user, WhishModel whish);
 
+  Page<WhishModel> getMyWhishes(PageRequest request);
+
 }
