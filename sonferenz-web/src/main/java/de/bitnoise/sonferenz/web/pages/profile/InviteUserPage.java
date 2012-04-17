@@ -6,7 +6,7 @@ import com.visural.wicket.aturl.At;
 
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 
-@At(url="/user/invite")
+@At(url="/profile/invite")
 public class InviteUserPage extends KonferenzPage {
 	@Override
 	protected Panel getPageContent(String id) {

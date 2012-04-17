@@ -18,7 +18,7 @@ import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.users.ListUserPanel;
 
-@At(url = "/user/profile")
+@At(url = "/profile")
 public class MyProfilePage extends KonferenzPage
 {
   @Override

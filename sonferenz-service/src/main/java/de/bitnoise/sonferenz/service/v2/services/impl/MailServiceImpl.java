@@ -6,7 +6,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import com.google.common.eventbus.Subscribe;
+
 import de.bitnoise.sonferenz.service.v2.actions.ContentReplacement;
+import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
 import de.bitnoise.sonferenz.service.v2.exceptions.ValidationException;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.MailService;
@@ -28,7 +31,7 @@ public class MailServiceImpl implements MailService
 
   boolean initialized;
 
-private String replyTo;
+  private String replyTo;
 
   public void initMail()
   {
@@ -49,6 +52,13 @@ private String replyTo;
     sender = tmp;
     from = config.getStringValue("mail.create.from");
     replyTo = config.getStringValue("mail.create.replyTo");
+  }
+  
+  @Subscribe
+  public void onConfigReload(ConfigReload event)
+  {
+    initialized=false;
+    initMail();
   }
 
   @Override
