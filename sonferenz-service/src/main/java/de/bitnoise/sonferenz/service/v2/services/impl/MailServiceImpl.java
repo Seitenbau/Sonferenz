@@ -84,4 +84,26 @@ public class MailServiceImpl implements MailService
     }
   }
 
+  @Override
+  public void sendMessage(SimpleMailMessage msgToSend)
+  {
+    initMail();
+    SimpleMailMessage msg = new SimpleMailMessage(msgToSend);
+    String body = msg.getText();
+    body = body.replace("${url.base}", baseUrl);
+    msg.setText(body);
+    msg.setFrom(from);
+    msg.setReplyTo(replyTo);
+    
+    try
+    {
+      sender.send(msg);
+    }
+    catch (MailSendException t)
+    {
+      throw new ValidationException("Error while sending the mail Mail. "
+          + t.getMessage());
+    }
+  }
+
 }

@@ -29,6 +29,8 @@ import de.bitnoise.sonferenz.model.WhishModel;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
+import de.bitnoise.sonferenz.service.v2.services.idp.provider.crowd.CrowdIdp;
+import de.bitnoise.sonferenz.service.v2.services.idp.provider.local.LocalIdp;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
@@ -95,9 +97,9 @@ public class InviteUserPanel extends FormPanel
 		FormComponent<String> subjectField = new TextField<String>("subject", modelSubject);
 		FormComponent<String> userField = new TextField<String>("username", modelUsername);
 		userField
-		        .setRequired(true)
-		        .add(new MaximumLengthValidator(32))
-		        .add(new InputHintBehavior(form, "Eindeutiger Benutzername", "color: #aaa;"));
+//		        .setRequired(true)
+		        .add(new MaximumLengthValidator(15))
+		        .add(new InputHintBehavior(form, "optional: Display Name", "color: #aaa;"));
 		;
 		FormComponent<String> emailField = new TextField<String>("email", modelEMail);
 		emailField
@@ -182,9 +184,21 @@ public class InviteUserPanel extends FormPanel
 		String valueEMail = modelEMail.getObject();
 		String valueBody = modelBody.getObject();
 		String valueSubject= modelSubject.getObject();
+		String provider=CrowdIdp.IDP_NAME;
+		if( config.isAvaiable("idp.default-provider") ) {
+      provider=config.getStringValue("idp.default-provider");
+    }
+		
+		if(valueUser==null || valueUser.isEmpty()) {
+		  valueUser=valueEMail;
+		  int at = valueEMail.indexOf("@");
+		  if(at!=-1) {
+		    valueUser = valueEMail.substring(0, at);
+		  }
+		}
 		// done
 		try {
-			facade.createToken(valueUser, valueEMail,valueBody,valueSubject);
+      facade.createToken(valueUser, valueEMail,valueBody,valueSubject,provider);
 			setResponsePage(MyProfilePage.class);
 		} catch (Exception e) {
 			error(e.toString());

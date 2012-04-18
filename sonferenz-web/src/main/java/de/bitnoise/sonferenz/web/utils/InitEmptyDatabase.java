@@ -198,6 +198,8 @@ public class InitEmptyDatabase
       texte.storeText("table.myTalks.column.Titel", "Meine Vorträge");
       texte.storeText("table.myWhishes.column.Titel", "Meine Wünsche");
       texte.storeText("menu.1lvl.info", "Konferenz");
+      texte.storeText("action.subscribe.confirm.mail.body", "You've subscribed as ${username} ${email} ${url}");
+      texte.storeText("username.StringValidator.maximum", "Benutzername zu lang");
 
 
       logger.warn("texts created");

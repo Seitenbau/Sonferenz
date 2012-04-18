@@ -114,7 +114,7 @@ public interface UiFacade
 
   boolean vote(TalkModel talk, UserModel user, int increment);
 
-  void createToken(String user, String mail,String body, String subject);
+  void createToken(String user, String mail,String body, String subject, String provider);
   
   List<String> availableProviders();
 

@@ -75,9 +75,9 @@ public class SubscribeActionPanel extends FormPanel
     if (_data.getLoginName() != null)
     {
     	display.setModelValue(_data.getLoginName());
-    	//login.setModelValue(_data.getLoginName());
-    	login.setEnabled(true);
+    	login.setModelValue(_data.getLoginName());
     }
+    //login.setEnabled(true);
     
     password1 = new PasswordTextField("password1", Model.of(""));
     password2 = new PasswordTextField("password2", Model.of(""));
@@ -162,7 +162,7 @@ public class SubscribeActionPanel extends FormPanel
       _data.setLoginName(login.getValue());
       _data.setUserName(display.getValue());
       _data.setPassword(password1.getValue());
-      _data.setProvider(CrowdIdp.IDP_NAME);
+      //_data.setProvider(CrowdIdp.IDP_NAME);
       if (_data.getEMail() != null)
       {
     	  /* in case of an invite, the email already exist.*/

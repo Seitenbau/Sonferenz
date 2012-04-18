@@ -341,9 +341,9 @@ public class UiFacadeImpl implements UiFacade
   SubscribeActionImpl _actionSubscribe;
   
   @Override
-  public void createToken(String user, String mail,String body,String subject)
+  public void createToken(String user, String mail,String body,String subject, String provider)
   {
-    _actionSubscribe.createNewUserToken(user, mail, body,subject);
+    _actionSubscribe.createNewUserToken(user, mail, body,subject,provider);
   }
 
   @Override

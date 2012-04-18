@@ -27,6 +27,7 @@ import de.bitnoise.sonferenz.service.v2.exceptions.RepositoryException;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
 import de.bitnoise.sonferenz.service.v2.services.idp.Identity;
 import de.bitnoise.sonferenz.service.v2.services.idp.IdpService;
+import de.bitnoise.sonferenz.service.v2.services.idp.provider.local.LocalIdp;
 
 @Service
 public class UserService2Impl implements UserService

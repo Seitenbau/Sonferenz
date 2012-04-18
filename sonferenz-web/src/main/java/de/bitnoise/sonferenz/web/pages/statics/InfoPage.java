@@ -9,7 +9,7 @@ import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.StaticContentPanel;
 
-@At(url = "/user/info")
+@At(url = "/info")
 public class InfoPage extends KonferenzPage {
 	@Override
 	protected Panel getPageContent(String id) {

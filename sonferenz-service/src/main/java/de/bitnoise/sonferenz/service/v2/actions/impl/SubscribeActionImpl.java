@@ -21,6 +21,7 @@ import de.bitnoise.sonferenz.repo.AuthmappingRepository;
 import de.bitnoise.sonferenz.repo.UserRepository;
 import de.bitnoise.sonferenz.service.v2.actions.ActionResult;
 import de.bitnoise.sonferenz.service.v2.actions.ActionState;
+import de.bitnoise.sonferenz.service.v2.actions.ContentReplacement;
 import de.bitnoise.sonferenz.service.v2.actions.IncrementUseageCount;
 import de.bitnoise.sonferenz.service.v2.actions.KonferenzAction;
 import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
@@ -31,6 +32,7 @@ import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.MailService;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
+import de.bitnoise.sonferenz.service.v2.services.idp.provider.crowd.CrowdIdp;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.local.LocalIdp;
 
 @Service
@@ -77,7 +79,7 @@ public class SubscribeActionImpl implements KonferenzAction
   ActionService actionService;
 
   public void createNewUserToken(String user, String mail, String forceBody,
-      String subject)
+      String subject,String provider)
   {
     UserModel foundMail = userRepo.findByEmail(mail);
     if (foundMail != null)
@@ -117,6 +119,13 @@ public class SubscribeActionImpl implements KonferenzAction
     ActionCreateUser newUser = new ActionCreateUser();
     newUser.setLoginName(user);
     newUser.setMail(mail);
+    if (provider == null || 
+        ( provider.equals(CrowdIdp.IDP_NAME) && provider.equals(LocalIdp.IDP_NAME) ))
+    {
+      newUser.setProvider(CrowdIdp.IDP_NAME);
+    } else {
+      newUser.setProvider(provider);
+    }
 
     ActionResult result = actionService.createAction(this, newUser);
     if (result.wasSuccessfull())
@@ -165,6 +174,12 @@ public class SubscribeActionImpl implements KonferenzAction
     {
       throw new ValidationException("Login Name allready inuse");
     }
+    String body = texte.text("action.subscribe.confirm.mail.body");
+    if (body == null)
+    {
+      throw new ValidationException(
+          "Missing Mail Body : key='action.subscribe.confirm.mail.body' ");
+    }
 
     Collection<UserRoles> newRoles = new ArrayList<UserRoles>();
     newRoles.add(UserRoles.USER);
@@ -174,6 +189,16 @@ public class SubscribeActionImpl implements KonferenzAction
         data.getPassword(), data.getEMail(), newRoles);
 
     // actionVerify.createAction(user, data.getEMail());
+
+    // Send confirmation mail
+    String baseUrl = config.getStringValue("baseUrl");
+    body = body.replace("${username}", data.getUserName());
+    body = body.replace("${email}", data.getEMail());
+    body = body.replace("${baseUrl}", baseUrl);
+    SimpleMailMessage message = new SimpleMailMessage(template);
+    message.setTo(data.getEMail());
+    message.setText(body.toString());
+    mailer.sendMessage(message);
   }
 
   public String createToken()
@@ -286,9 +311,10 @@ public class SubscribeActionImpl implements KonferenzAction
       this.provider = provider;
     }
 
-	@Override
-    public String getTitle() {
-	    return "Invite of user : '" + mail + "'";
+    @Override
+    public String getTitle()
+    {
+      return "Invite of user : '" + mail + "'";
     }
 
   }
