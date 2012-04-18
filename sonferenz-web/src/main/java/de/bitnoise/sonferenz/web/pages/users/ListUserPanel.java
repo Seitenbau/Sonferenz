@@ -48,11 +48,20 @@ public class ListUserPanel extends Panel
         addColumn(new Column()
         {
           {
-            setTitle("Name");
-            setModelProperty("name");
+            setTitle("Login");
+            setModelProperty("login");
             sortable();
             action(new EditUser());
           }
+        });
+        addColumn(new Column()
+        {
+        	{
+        		setTitle("Name");
+        		setModelProperty("name");
+        		sortable();
+        		action(new EditUser());
+        	}
         });
         addColumn(new Column()
         {
@@ -99,7 +108,8 @@ public class ListUserPanel extends Panel
         user.provider = "-";
         if (p != null)
         {
-          user.provider = p.getAuthType();
+           user.login = p.getAuthId();
+           user.provider = p.getAuthType();
         }
         user.roles = makeString(dbObject.getRoles());
         user.user = dbObject;

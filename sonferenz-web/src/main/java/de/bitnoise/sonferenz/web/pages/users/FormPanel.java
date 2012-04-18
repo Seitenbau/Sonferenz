@@ -36,10 +36,12 @@ public class FormPanel extends Panel
     page.add(new FeedbackPanel(id) .setOutputMarkupId(true));
   }
 
-  protected void addTextInputField(Form<String> form, String id,
+  protected TextField<String> addTextInputField(Form<String> form, String id,
       Model<String> model, boolean required)
   {
-    form.add(new TextField<String>(id, model).setRequired(required));
+    TextField<String> field = new TextField<String>(id, model);
+	form.add(field.setRequired(required));
+	return field;
   }
 
   protected void addTextInputField(Form<String> form, String id,

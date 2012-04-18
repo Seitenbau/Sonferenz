@@ -176,4 +176,17 @@ public class ConfigurationFromDbImpl implements ConfigurationService
     return value;
   }
 
+  @Override
+  public void saveIntegerValue(String key, int value) {
+    ConfigurationModel found = repo.findByName(key);
+    if (found == null)
+    {
+      found = new ConfigurationModel();
+      found.setName(key);
+    }
+    found.setValueString(Integer.toString(value));
+    repo.save(found);
+
+    events.post(new ConfigReload());
+  }
 }

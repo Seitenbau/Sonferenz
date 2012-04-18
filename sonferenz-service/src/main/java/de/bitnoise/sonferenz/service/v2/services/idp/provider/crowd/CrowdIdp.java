@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.common.eventbus.Subscribe;
 
+import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 import de.bitnoise.sonferenz.service.v2.exceptions.UserExistsException;
@@ -201,6 +202,16 @@ public class CrowdIdp implements Idp
       logger.error("Error while querying Crowd",e);
     }
     return res;
+  }
+
+  @Override
+  public boolean supportsPasswordChange() {
+	return false;
+  }
+
+  @Override
+  public void setUserPassword(UserModel user, String newPassword) {
+	  throw new UnsupportedOperationException();
   }
 
 }

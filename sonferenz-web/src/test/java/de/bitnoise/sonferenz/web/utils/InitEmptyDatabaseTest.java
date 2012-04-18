@@ -34,7 +34,7 @@ public class InitEmptyDatabaseTest extends TestBase {
 		sut.roles = roles;
 		sut.eventing= eventing;
 		when(config.getIntegerValue(-1, "intern.database-is-initialized"))
-				.thenReturn(-1);
+		.thenReturn(-1);
 	}
 
 	@Test
@@ -45,12 +45,16 @@ public class InitEmptyDatabaseTest extends TestBase {
 		sut.initAemptyDatabase();
 
 		// verify
-		verify(config).initValue(anyString(), anyInt());
+	    verify(config,times(2)).getIntegerValue(-1, "intern.database-is-initialized");
 		verify(config).initValue("intern.database-is-initialized", 1);
+		verify(config).saveIntegerValue("intern.database-is-initialized", 2);
+		
+		// Many setup calls :
+		// verifyNoMoreInteractions(config);
 	}
 
 	@Test
-	public void testDoNotInitialize() {
+	public void testVersion2() {
 		// prepare
 		when(config.getIntegerValue(-1, "intern.database-is-initialized"))
 				.thenReturn(1);
@@ -59,8 +63,12 @@ public class InitEmptyDatabaseTest extends TestBase {
 		sut.initAemptyDatabase();
 
 		// verify
-		verify(config).getIntegerValue(-1, "intern.database-is-initialized");
+		// verify
+	    verify(config,times(2)).getIntegerValue(-1, "intern.database-is-initialized");
+		verify(config).saveIntegerValue("intern.database-is-initialized", 2);
+		
 		verifyNoMoreInteractions(config);
-		verifyZeroInteractions(texte, user, roles);
+//		verifyZeroInteractions(texte, user, roles);
 	}
+	
 }

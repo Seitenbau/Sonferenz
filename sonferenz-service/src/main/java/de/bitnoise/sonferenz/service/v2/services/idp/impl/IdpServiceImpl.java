@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.services.idp.Identity;
 import de.bitnoise.sonferenz.service.v2.services.idp.IdpService;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.Idp;
@@ -60,6 +61,13 @@ public class IdpServiceImpl implements IdpService
       }
     }
     return null;
+  }
+  
+  @Override
+  public Idp getProviderForUser(UserModel user)
+  {
+	  String type = user.getProvider().getAuthType();
+	  return getIdp(type);
   }
 
   @Override

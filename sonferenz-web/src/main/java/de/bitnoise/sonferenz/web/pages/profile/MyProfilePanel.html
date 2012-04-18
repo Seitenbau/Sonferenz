@@ -4,11 +4,14 @@
 	<form wicket:id="form" class="formLayout">
 		<fieldset class="editProfileFieldset">
 			<legend>Benutzer Details</legend>
-			<label class="formItemLeft" id="labelLoginName" for="login">Login Name :</label>
-			<input type="text" readonly="readonly" class="formItemRight formItemExpand" id="login" wicket:id="login" /> 
+			  <label id="labelemail" for="login">eMail :</label>
+			  <input type="text" readonly="readonly" id="email" wicket:id="email" /> 
 			<br />
-			<label class="formItemLeft" id="labelDisplayName" for="display" >Display Name :</label> 
-			<input class="formItemRight formItemExpand" id="display" wicket:id="display" /> 
+			  <label id="labelLoginName" for="login">Login Name :</label>
+			  <input type="text" readonly="readonly" id="login" wicket:id="login" /> 
+			<br />
+			  <label id="labelDisplayName" for="display" >Display Name :</label> 
+			  <input id="display" wicket:id="display" /> 
 			<br />
 		</fieldset>
 		<div class="formButtons">

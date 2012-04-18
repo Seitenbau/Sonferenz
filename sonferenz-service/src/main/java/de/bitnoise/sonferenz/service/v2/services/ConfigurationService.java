@@ -29,4 +29,6 @@ public interface ConfigurationService
   public void saveStringValue(String key, String value);
 
   public String getStringValueOr(String defaultValue, String key);
+
+  public void saveIntegerValue(String key, int value);
 }

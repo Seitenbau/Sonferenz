@@ -1,5 +1,7 @@
 package de.bitnoise.sonferenz.web.pages.profile;
 
+import java.util.List;
+
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -8,6 +10,7 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -23,6 +26,8 @@ import com.visural.wicket.behavior.inputhint.InputHintBehavior;
 import com.visural.wicket.component.confirmer.ConfirmerLink;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
+import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.WhishModel;
@@ -41,6 +46,7 @@ public class InviteUserPanel extends FormPanel
 	Model<String> modelEMail = new Model<String>();
 	Model<String> modelBody = new Model<String>();
 	Model<String> modelSubject= new Model<String>();
+	Model<String> modelProvider= new Model<String>();
 
 	@SpringBean
 	UiFacade facade;
@@ -54,7 +60,7 @@ public class InviteUserPanel extends FormPanel
 	ConfigurationService config;
 	
 	@SpringBean
-  StaticContentService texte;
+    StaticContentService texte;
 	
 	@Override
 	protected void onInitialize()
@@ -99,7 +105,7 @@ public class InviteUserPanel extends FormPanel
 		userField
 //		        .setRequired(true)
 		        .add(new MaximumLengthValidator(15))
-		        .add(new InputHintBehavior(form, "optional: Display Name", "color: #aaa;"));
+		        .add(new InputHintBehavior(form, "optionaler Vorschlag", "color: #aaa;"));
 		;
 		FormComponent<String> emailField = new TextField<String>("email", modelEMail);
 		emailField
@@ -107,7 +113,15 @@ public class InviteUserPanel extends FormPanel
 		        .add(new MaximumLengthValidator(128))
 		        .add(new InputHintBehavior(form, "eMail", "color: #aaa;"));
 		;
-
+		
+		List<String> providers = facade.availableProviders();
+		if( config.isAvaiable("idp.default-provider") ) {
+	      modelProvider.setObject( config.getStringValue("idp.default-provider") );
+	    } else {
+	      modelProvider.setObject( CrowdIdp.IDP_NAME );
+	    }
+		FormComponent<String> providerField = new DropDownChoice<String>("provider",modelProvider, providers);
+		providerField.setEnabled(KonferenzSession.hasRight(Right.Admin.Configure));
 		subjectField.add(new MaximumLengthValidator(200));
 		subjectField.setRequired(true);
 		textField.add(new ContainsToken());
@@ -119,6 +133,7 @@ public class InviteUserPanel extends FormPanel
 		form.add(emailField);
 		form.add(textField);
 		form.add(subjectField);
+		form.add(providerField);
 		form.add(new Button("submit"));
 		add(form);
 	}
@@ -184,10 +199,14 @@ public class InviteUserPanel extends FormPanel
 		String valueEMail = modelEMail.getObject();
 		String valueBody = modelBody.getObject();
 		String valueSubject= modelSubject.getObject();
-		String provider=CrowdIdp.IDP_NAME;
+		String provider = CrowdIdp.IDP_NAME;
 		if( config.isAvaiable("idp.default-provider") ) {
-      provider=config.getStringValue("idp.default-provider");
-    }
+          provider=config.getStringValue("idp.default-provider");
+        }
+		String providerInput=modelProvider.getObject();
+		if(providerInput!=null) {
+			provider=providerInput;
+		}
 		
 		if(valueUser==null || valueUser.isEmpty()) {
 		  valueUser=valueEMail;
