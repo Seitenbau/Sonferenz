@@ -119,8 +119,10 @@ public class AuthenticationServiceImpl implements AuthenticationService
     neuerUser.setEmail(email);
 	
     UserRole userRole = rolesRepo.findByName(UserRoles.USER.toString());
+    UserRole inviteRole = rolesRepo.findByName(UserRoles.INVITE.toString());
     Set<UserRole> roles=new HashSet<UserRole>();
     roles.add(userRole);
+    roles.add(inviteRole);
     neuerUser.setRoles(roles);
     
     userRepo.save(neuerUser);
