@@ -2,6 +2,9 @@ package de.bitnoise.sonferenz.service.v2.services.idp;
 
 import java.util.List;
 
+import de.bitnoise.sonferenz.model.UserModel;
+import de.bitnoise.sonferenz.service.v2.services.idp.provider.Idp;
+
 
 public interface IdpService
 {
@@ -18,5 +21,7 @@ public interface IdpService
   List<String> getAvailableProviders();
   
   Identity getIdentity(String provider, String name);
+
+  Idp getProviderForUser(UserModel user);
   
 }

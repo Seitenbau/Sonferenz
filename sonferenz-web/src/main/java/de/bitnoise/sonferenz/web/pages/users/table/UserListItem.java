@@ -9,5 +9,6 @@ public class UserListItem implements Serializable
   public String name;
   public String roles;
   public String provider;
+  public String login;
   public UserModel user;
 }

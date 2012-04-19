@@ -23,10 +23,10 @@ public class MyProfilePanel extends FormPanel
 	UiFacade facade;
 
 	TextField display;
-
 	UserModel user;
 
 	String _old;
+	String _login;
 
 	public MyProfilePanel(String id)
 	{
@@ -46,6 +46,7 @@ public class MyProfilePanel extends FormPanel
 		super.onInitialize();
 		addFeedback(this, "feedback");
 		_old = user.getName();
+		_login = user.getProvider().getAuthId();
 		display = new TextField<String>("display", Model.of(_old));
 
 		Form<String> form = new Form<String>("form")
@@ -68,9 +69,12 @@ public class MyProfilePanel extends FormPanel
 		display.setRequired(true);
 		add(form);
 		form.add(display);
+		TextField email = new TextField("email", Model.of(user.getEmail()));
+		email.setEnabled(false);
 		TextField login = new TextField("login", Model.of(user.getProvider().getAuthId()));
 		login.setEnabled(false);
 		form.add(login);
+		form.add(email);
 		form.add(new Button("submit"));
 		form.add(cancel);
 	}
@@ -91,8 +95,14 @@ public class MyProfilePanel extends FormPanel
 	    @Override
 	    protected void onValidate(IValidatable<String> validatable)
 	    {
-	      java.lang.String x = (java.lang.String) validatable.getValue();
-	      if (!_old.equals(x) && !facade.checkUserNotExists(x))
+	      java.lang.String neu = (java.lang.String) validatable.getValue();
+	      if ( _old.equals(neu) ) {
+	    	  return;
+	      }
+	      if( neu.equals(_login)) {
+	    	  return;
+	      }
+	      if(!facade.checkUserNotExists(neu))
 	      {
 	        error(validatable);
 	      }

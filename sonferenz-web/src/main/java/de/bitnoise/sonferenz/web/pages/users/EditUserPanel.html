@@ -2,14 +2,20 @@
 	<div wicket:id="feedback"></div>
 	<form wicket:id="form" class="formLayout">
 		<fieldset>
-            <legend>Edit User  Details</legend>
-			  <label> UserName:   </label>
+            <legend>Edit User Details</legend>
+			  <label>Login Name:</label>
+			  <input wicket:id="loginName"/>
+			<br/>
+			  <label>Display Name:</label>
 			  <input wicket:id="username"/>
 			<br/>
-			  <label> eMail:    </label>
+			  <label>eMail:</label>
 			  <input wicket:id="email"/>
 			<br/>
-			 <label> User has roles : </label>
+			  <label>Password:</label>
+			  <input wicket:id="password"/>
+			<br/>
+			 <label>User has roles :</label>
         	 <select wicket:id="roleSelect"></select>
         	<br/>
         </fieldset>
