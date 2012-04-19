@@ -4,7 +4,9 @@ import javax.persistence.Column;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.EmptyPanel;
+import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -18,6 +20,7 @@ import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.UserModel;
+import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;
@@ -30,12 +33,16 @@ public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel
 
 	UserModel user;
 
+	@SpringBean
+  StaticContentService text;
+
 	public MyInvitesPanel(String id)
 	{
 		super(id, "tokenTable");
+		setHideWhenEmpty(true);
 	}
 
-	@Override
+  @Override
 	protected void initColumns(TableBuilder<TokenListItem> builder)
 	{
 		builder.addColumn("state");
@@ -47,15 +54,31 @@ public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel
 	@Override
 	protected Component createAbovePanel(final String id)
 	{
-		AjaxLink btn = new AjaxLink(id, "profile.user.invites")
-		{
-			@Override
-			protected void onClickLink(AjaxRequestTarget target)
-			{
-				 setResponsePage(InviteUserPage.class);
-			}
-		};
-		return btn;
+	  return new InvitesTop(id);
+	}
+	
+	class InvitesTop extends Panel {
+    public InvitesTop(String id)
+    {
+      super(id);
+    }
+    @Override
+    protected void onInitialize()
+    {
+      super.onInitialize();
+      AjaxLink btn = new AjaxLink("button", "profile.user.invites")
+      {
+        @Override
+        protected void onClickLink(AjaxRequestTarget target)
+        {
+           setResponsePage(InviteUserPage.class);
+        }
+      };
+      add ( btn);
+      add(new Label("headerText",text.text("page.profile.invite.header",""))
+      .setEscapeModelStrings(false));
+    }
+	  
 	}
 
 	@Override

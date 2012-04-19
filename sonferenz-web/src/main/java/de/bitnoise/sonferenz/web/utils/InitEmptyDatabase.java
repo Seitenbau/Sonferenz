@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.wicket.markup.html.basic.Label;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,11 @@ public class InitEmptyDatabase
     
     texte.storeText("action.subscribe.confirm.mail.body", "You've subscribed as $${username} $${email} $${url}");
     texte.storeText("mailbody.InviteUserPanel$ContainsToken", "Missing $${link} in body");
+    texte.storeText("profile.user.invites", "Einladung erstellen");
+    
+    texte.storeText("page.profile.invite.header", "<p/>");
+    texte.storeText("page.profile.talk.header", "");
+    texte.storeText("page.profile.whish.header", "");
 
 		createRole(4, "INVITE");
 	}

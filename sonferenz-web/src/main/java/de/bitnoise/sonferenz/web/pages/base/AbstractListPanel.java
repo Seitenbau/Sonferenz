@@ -25,6 +25,10 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
 {
   @SpringBean
   ConfigurationService config;
+  
+  boolean _hideOnEmpty;
+
+  private DataTable<VIEW_MODEL> table;
 
   public AbstractListPanel(String id, String headingId)
   {
@@ -36,14 +40,30 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
     Integer maxPageSize = config.getIntegerValue(100,
         "table." + headingId + ".paginationSize", 
         "table.paginationSize");
-    DataTable<VIEW_MODEL> table = 
-    new DataTable<VIEW_MODEL>("contentTable", columns.toArray(new IColumn[columns.size()]), provider, maxPageSize) ;
+    table =  new DataTable<VIEW_MODEL>("contentTable", columns.toArray(new IColumn[columns.size()]), provider, maxPageSize) ;
     addToolbars(table,provider);
     add(table);
     add(createAbovePanel("above"));
     setOutputMarkupId(true);
   }
+  
+  @Override
+  protected void onConfigure()
+  {
+    super.onConfigure();
+    if(_hideOnEmpty && getTotalCount(new PageRequest(0, 1)) == 0 ) {
+      table.setVisibilityAllowed(false); 
+    } else {
+      table.setVisibilityAllowed(true); 
+    }
+  }
 
+  protected void setHideWhenEmpty(boolean b)
+  {
+    _hideOnEmpty = b;
+  }
+
+  
   protected Component createAbovePanel(String id)
   {
     return new EmptyPanel(id);
