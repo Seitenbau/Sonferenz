@@ -80,15 +80,16 @@ public class InitEmptyDatabase
 		texte.storeText("table.myTalks.column.Titel", "Meine Vorträge");
 		texte.storeText("table.myWhishes.column.Titel", "Meine Wünsche");
 		texte.storeText("menu.1lvl.info", "Konferenz");
-		texte.storeText("action.subscribe.confirm.mail.body", "You've subscribed as ${username} ${email} ${url}");
 		texte.storeText("username.StringValidator.maximum", "Benutzername zu lang");
 		texte.storeText("table.users.column.Login", "Login");
-		texte.storeText("mailbody.InviteUserPanel$ContainsToken", "Missing ${link} in body");
 		texte.storeText("email.StringValidator.maximum", "eMail zu lang");
 		texte.storeText("display.SubscribeActionPanel$UserUnique", "Benutzername existiert schon");
 		texte.storeText("password2.EqualPasswordInputValidator", "Passwörter nicht identisch");
     texte.storeText("display.PatternValidator", "Display Name entspricht nicht Muster : " + KonferenzDefines.REGEX_USER_DISPLAY);
     texte.storeText("login.PatternValidator", "Login Name entspricht nicht Muster : " + KonferenzDefines.REGEX_USERNAME);
+    
+    texte.storeText("action.subscribe.confirm.mail.body", "You've subscribed as $${username} $${email} $${url}");
+    texte.storeText("mailbody.InviteUserPanel$ContainsToken", "Missing $${link} in body");
 
 		createRole(4, "INVITE");
 	}
