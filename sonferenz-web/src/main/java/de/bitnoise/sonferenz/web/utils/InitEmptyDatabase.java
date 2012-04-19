@@ -94,8 +94,7 @@ public class InitEmptyDatabase
     texte.storeText("profile.user.invites", "Einladung erstellen");
     
     texte.storeText("page.profile.invite.header", "<p/>");
-    texte.storeText("page.profile.talk.header", "");
-    texte.storeText("page.profile.whish.header", "");
+    texte.storeText("page.profile.talk.header", "<br/>");
 
 		createRole(4, "INVITE");
 	}
