@@ -83,6 +83,13 @@ public class InitEmptyDatabase
 		texte.storeText("action.subscribe.confirm.mail.body", "You've subscribed as ${username} ${email} ${url}");
 		texte.storeText("username.StringValidator.maximum", "Benutzername zu lang");
 		texte.storeText("table.users.column.Login", "Login");
+		texte.storeText("mailbody.InviteUserPanel$ContainsToken", "Missing ${link} in body");
+		texte.storeText("email.StringValidator.maximum", "eMail zu lang");
+		texte.storeText("display.SubscribeActionPanel$UserUnique", "Benutzername existiert schon");
+		texte.storeText("password2.EqualPasswordInputValidator", "Passwörter nicht identisch");
+    texte.storeText("display.PatternValidator", "Display Name entspricht nicht Muster : " + KonferenzDefines.REGEX_USER_DISPLAY);
+    texte.storeText("login.PatternValidator", "Login Name entspricht nicht Muster : " + KonferenzDefines.REGEX_USERNAME);
+
 		createRole(4, "INVITE");
 	}
 
@@ -192,7 +199,6 @@ public class InitEmptyDatabase
 		texte.storeText("description.StringValidator.maximum",
 		        "Beschreibung zu lang");
 		texte.storeText("action.success", "Your account has been created.");
-		texte.storeText("mailbody.InviteUserPanel$ContainsToken", "Missing ${link} in body");
 		texte.storeText("title.Required", "Titel muss angegeben werden");
 
 		texte.storeText("conferenceState.null", "- none -");

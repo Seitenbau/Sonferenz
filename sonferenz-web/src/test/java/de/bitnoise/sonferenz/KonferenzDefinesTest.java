@@ -10,7 +10,7 @@ public class KonferenzDefinesTest implements KonferenzDefines
   {
     assertThat("".matches(REGEX_USERNAME)).isFalse();
     assertThat("12".matches(REGEX_USERNAME)).isFalse();
-    assertThat("12345678901234567890123A".matches(REGEX_USERNAME)).isFalse();
+    assertThat("123456789012345678901234567890123456789012A".matches(REGEX_USERNAME)).isFalse();
   }
 
   @Test
@@ -33,7 +33,7 @@ public class KonferenzDefinesTest implements KonferenzDefines
   public void testRegexUsername_True()
   {
     assertThat("123".matches(REGEX_USERNAME)).isTrue();
-    assertThat("12345678901234567890123".matches(REGEX_USERNAME)).isTrue();
+    assertThat("123456789012345678901234567890123456789012".matches(REGEX_USERNAME)).isTrue();
   }
 
   @Test
