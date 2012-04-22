@@ -21,5 +21,7 @@ public interface ActionService
 
   ActionResult createAction(KonferenzAction action, ActionState data);
 
+  Page<ActionModel> getAllUserActions(PageRequest request, UserModel user);
+
 
 }

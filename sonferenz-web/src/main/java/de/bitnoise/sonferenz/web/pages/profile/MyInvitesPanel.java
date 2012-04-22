@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import ch.qos.logback.core.rolling.helper.PeriodicityType;
 
 import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.UserModel;
@@ -42,12 +43,15 @@ public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel
 		setHideWhenEmpty(true);
 	}
 
-  @Override
+    @Override
 	protected void initColumns(TableBuilder<TokenListItem> builder)
 	{
 		builder.addColumn("state");
 		builder.addColumn("title");
-		builder.addColumn("url");
+		if( KonferenzSession.hasRight(Right.Actions.ManageInviteUser) ) {
+		  builder.addColumn("url");
+		  builder.addColumn("username");
+		}
 		builder.addColumn("expires");
 	}
 
@@ -88,6 +92,7 @@ public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel
 		String action = dbObject.getAction();
 		String token = dbObject.getToken();
 		item.title = dbObject.getTitle();
+		item.username = dbObject.getCreator().getName();
 		DateTime expiry = new DateTime(dbObject.getExpiry());
 		DateTime now = DateTime.now();
 		Duration d = new Duration(now, expiry);
@@ -122,7 +127,11 @@ public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel
 	protected Page<ActionModel> getItems(PageRequest request)
 	{
 		UserModel user = KonferenzSession.get().getCurrentUser();
-		return facade.getUserActions(request, user);
+		if( KonferenzSession.hasRight(Right.Actions.ManageInviteUser) ) {
+			return facade.getAllUserActions(request,user);
+		} else {
+			return facade.getUserActions(request, user);
+		}
 	}
 
 }

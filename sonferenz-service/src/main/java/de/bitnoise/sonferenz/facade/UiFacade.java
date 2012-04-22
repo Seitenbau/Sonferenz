@@ -118,4 +118,6 @@ public interface UiFacade
   
   List<String> availableProviders();
 
+  Page<ActionModel> getAllUserActions(PageRequest request, UserModel user);
+
 }

@@ -7,5 +7,6 @@ public class TokenListItem implements Serializable
   public String url; 
   public String title;
   public String state;
-  public String expires; 
+  public String expires;
+  public String username; 
 }

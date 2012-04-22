@@ -357,4 +357,9 @@ public class UiFacadeImpl implements UiFacade
   {
     return userFacade.checkUserNotExists(username);
   }
+
+  @Override
+  public Page<ActionModel> getAllUserActions(PageRequest request, UserModel user) {
+	  return _actions.getAllUserActions(request, user);
+  }
 }

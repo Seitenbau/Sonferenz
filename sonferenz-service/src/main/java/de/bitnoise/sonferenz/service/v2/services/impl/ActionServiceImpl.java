@@ -136,6 +136,7 @@ public class ActionServiceImpl implements ActionService
   }
 
   @Override
+  @Transactional(readOnly=true)
   public Page<ActionModel> getUserActions(PageRequest request, UserModel user)
   {
     return repo.findByCreator(user, request);
@@ -297,5 +298,11 @@ public class ActionServiceImpl implements ActionService
     }
     Aktion a = new Aktion(row.getId(), row.getAction(), row.getToken(), data);
     return a;
+  }
+
+  @Override
+  @Transactional(readOnly=true)
+  public Page<ActionModel> getAllUserActions(PageRequest request, UserModel user) {
+	return repo.findAll(request);
   }
 }

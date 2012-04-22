@@ -18,6 +18,7 @@ public interface Right
   }
   
   interface Actions {
+	String ManageInviteUser = "action.invite.manage";
     String InviteUser = "action.invite.newUser";
   }
 

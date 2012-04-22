@@ -59,7 +59,11 @@ public class InitEmptyDatabase
 			}
 			if (isDatabaseOlderThanVersion(2))
 			{
-				updateTo_v0_2_1();
+				updateTo_v0_3_1();
+			}
+			if (isDatabaseOlderThanVersion(3))
+			{
+				updateTo_v0_3_2();
 			}
 		} finally
 		{
@@ -68,10 +72,17 @@ public class InitEmptyDatabase
 		}
 	}
 
-	void updateTo_v0_2_1() {
+	void updateTo_v0_3_2() {
+		logger .warn("# DATABASE update to version 3 #");
+		config.saveIntegerValue(INIT_MARKER_KEY, 3);
+		// since 0.3.2
+		texte.storeText("table.tokenTable.column.username", "erstellt von");
+	}
+	
+	void updateTo_v0_3_1() {
 		logger .warn("# DATABASE update to version 2 #");
 		config.saveIntegerValue(INIT_MARKER_KEY, 2);
-		// since 0.2.1
+		// since 0.3.1
 		texte.storeText("display.MyProfilePanel$UserUnique", "Benutzer Name schon vergeben");
 		texte.storeText("table.tokenTable.column.state", "Zustand");
 		texte.storeText("table.tokenTable.column.title", "Beschreibung");
