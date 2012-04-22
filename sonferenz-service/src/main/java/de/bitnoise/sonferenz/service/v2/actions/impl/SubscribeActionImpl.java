@@ -193,6 +193,7 @@ public class SubscribeActionImpl implements KonferenzAction
     // Send confirmation mail
     String baseUrl = config.getStringValue("baseUrl");
     body = body.replace("${username}", data.getUserName());
+    body = body.replace("${loginname}", data.getLoginName());
     body = body.replace("${email}", data.getEMail());
     body = body.replace("${baseUrl}", baseUrl);
     SimpleMailMessage message = new SimpleMailMessage(template);
