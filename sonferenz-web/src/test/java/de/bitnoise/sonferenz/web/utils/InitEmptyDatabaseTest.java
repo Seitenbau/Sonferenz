@@ -54,10 +54,10 @@ public class InitEmptyDatabaseTest extends TestBase {
 	}
 
 	@Test
-	public void testVersion2() {
+	public void testLatestVersion() {
 		// prepare
 		when(config.getIntegerValue(-1, "intern.database-is-initialized"))
-				.thenReturn(1);
+				.thenReturn(2);
 
 		// execute
 		sut.initAemptyDatabase();
@@ -65,7 +65,7 @@ public class InitEmptyDatabaseTest extends TestBase {
 		// verify
 		// verify
 	    verify(config,times(3)).getIntegerValue(-1, "intern.database-is-initialized");
-		verify(config).saveIntegerValue("intern.database-is-initialized", 2);
+		verify(config).saveIntegerValue("intern.database-is-initialized", 3);
 		
 		verifyNoMoreInteractions(config);
 //		verifyZeroInteractions(texte, user, roles);
