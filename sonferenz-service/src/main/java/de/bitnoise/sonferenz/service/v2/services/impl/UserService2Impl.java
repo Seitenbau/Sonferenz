@@ -2,6 +2,7 @@ package de.bitnoise.sonferenz.service.v2.services.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -146,6 +147,7 @@ public class UserService2Impl implements UserService
     user.setProvider(auth);
     user.setEmail(email);
     user.setRoles(new HashSet<UserRole>());
+    user.setCreatedAt(new Date());
     setupRoles(user, newRoles);
     userRepo.save(user);
 

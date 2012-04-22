@@ -1,7 +1,9 @@
 package de.bitnoise.sonferenz.web.pages.users;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.wicket.injection.web.InjectorHolder;
@@ -77,7 +79,7 @@ public class EditUserPanel extends FormPanel
 		form.add(cancel);
 
 		addTextInputField(form, "loginName", modelLogin, false)
-			.setEnabled(false);
+		        .setEnabled(false);
 		addTextInputField(form, "username", modelName, true);
 		addTextInputField(form, "email", modelEMail, false);
 
@@ -101,6 +103,11 @@ public class EditUserPanel extends FormPanel
 		        "roleSelect", modelRoles, choices);
 		form.add(roleSelect);
 
+		addTextInputField(form, "created", asDate(_user.getCreatedAt()), false)
+		        .setEnabled(false);
+		addTextInputField(form, "lastlogin", asDate(_user.getLastLogin()), false)
+		        .setEnabled(false);
+
 		// List<IColumn<UserRolesItem>> columns = new
 		// ArrayList<IColumn<UserRolesItem>>();
 		// columns.add(new PropertyColumn<UserRolesItem>(Model.of("name"),
@@ -113,6 +120,15 @@ public class EditUserPanel extends FormPanel
 
 		add(form);
 
+	}
+
+	private Model<String> asDate(Date datum) {
+		String dateAsString = "-";
+		if (datum != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+			dateAsString = sdf.format(datum);
+		}
+		return Model.of(dateAsString);
 	}
 
 	class MyModel implements IModel<Collection<UserRoles>>
@@ -150,13 +166,13 @@ public class EditUserPanel extends FormPanel
 			valueEMail = HtmlSanitizer.sanitize(valueEMail);
 		}
 		String pwd = modelPassword.getObject();
-		if (pwd != null && idpProvider.supportsPasswordChange() ) {
-			
-		   if (!pwd.matches(KonferenzDefines.PASSWORD_REGEX)  ) { 
-			   error("Invalid password style " + KonferenzDefines.PASSWORD_REGEX);
-			   return;
-		   }  
-		   idpProvider.setUserPassword(_user,pwd);
+		if (pwd != null && idpProvider.supportsPasswordChange()) {
+
+			if (!pwd.matches(KonferenzDefines.PASSWORD_REGEX)) {
+				error("Invalid password style " + KonferenzDefines.PASSWORD_REGEX);
+				return;
+			}
+			idpProvider.setUserPassword(_user, pwd);
 		}
 		Collection<UserRoles> newRoles = modelRoles.getObject();
 		_user.setName(valueName);

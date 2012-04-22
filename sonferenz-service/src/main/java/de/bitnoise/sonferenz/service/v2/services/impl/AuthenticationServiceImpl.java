@@ -1,9 +1,13 @@
 package de.bitnoise.sonferenz.service.v2.services.impl;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,9 +30,9 @@ import de.bitnoise.sonferenz.service.v2.security.ProvidesEmail;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
 
 @Service
-public class AuthenticationServiceImpl implements AuthenticationService
+public class AuthenticationServiceImpl implements AuthenticationService, ApplicationListener<ApplicationEvent>
 {
-
+			
   @Autowired
   AuthmappingRepository authRepo;
   
@@ -59,7 +63,6 @@ public class AuthenticationServiceImpl implements AuthenticationService
     {
       return null;
     }
-    Thread t = Thread.currentThread();
     Authentication authentication = context.getAuthentication();
     if (authentication == null)
     {
@@ -117,6 +120,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     UserModel neuerUser = new UserModel();
     neuerUser.setName(providerId);
     neuerUser.setEmail(email);
+    neuerUser.setCreatedAt(new Date());
 	
     UserRole userRole = rolesRepo.findByName(UserRoles.USER.toString());
     UserRole inviteRole = rolesRepo.findByName(UserRoles.INVITE.toString());
@@ -137,5 +141,62 @@ public class AuthenticationServiceImpl implements AuthenticationService
 		throw new NoRightsExcpetion("You're not logged in");
 	}
 	return user;
+  }
+  
+  @Override
+  @Transactional
+  public void onApplicationEvent(ApplicationEvent event) {
+		if(event instanceof AuthenticationSuccessEvent) {
+			AuthenticationSuccessEvent ase = (AuthenticationSuccessEvent) event;
+			onSuccessfullLogin(ase.getAuthentication());
+		}
+  }
+
+  protected void onSuccessfullLogin(Authentication authentication) {
+	    if (authentication == null)
+	    {
+	      return ;
+	    }
+	    String providerId = authentication.getName();
+	    String providerType = null;
+	    Object principal = authentication.getPrincipal();
+	    if (principal instanceof LdapUserDetails)
+	    {
+	      providerType = "ldap";
+	    }
+	    if (authentication instanceof ProviderType)
+	    {
+	      providerType = ((ProviderType) authentication).getProviderType();
+	    }
+	    if (principal instanceof ProviderType)
+	    {
+	      providerType = ((ProviderType) principal)
+	          .getProviderType();
+	    }
+	    if (providerType == null)
+	    {
+	      return ;
+	    }
+	    UserModel benutzer;
+	    AuthMapping mapping = authRepo.findByAuthIdAndAuthType(providerId, providerType);
+	    if (mapping == null)
+	    {
+	      String email = null;
+	      if (principal instanceof ProvidesEmail)
+	      {
+	        ProvidesEmail  user = (ProvidesEmail) principal;
+	        email = user.getEmail();
+	      }
+	      benutzer = neuenNutzerAnlegen(providerId, email);
+	      neuesAuthMappingAnlegen(benutzer, providerId, providerType);
+	    } else {
+	    	benutzer = mapping.getUser();
+	    }
+	    // Set last login date
+	    if(benutzer.getCreatedAt() == null) {
+	    	benutzer.setCreatedAt(new Date());
+	    }
+	    benutzer.setLastLogin(new Date());
+	    userRepo.save(benutzer);
   }
 }
