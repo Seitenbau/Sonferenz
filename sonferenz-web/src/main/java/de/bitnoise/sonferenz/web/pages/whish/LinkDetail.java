@@ -45,7 +45,9 @@ public class LinkDetail extends LikeColumn<ModelWhishList> implements
     {
       facade.unLikeWhish(user, object.whish);
     }
-    RequestCycle.get().setResponsePage(target.getPage());
+    if(target!=null) {
+      RequestCycle.get().setResponsePage(target.getPage());
+    }
   }
 
   @Override
