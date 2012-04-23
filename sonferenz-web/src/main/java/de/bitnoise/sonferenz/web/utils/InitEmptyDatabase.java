@@ -77,6 +77,7 @@ public class InitEmptyDatabase
 		config.saveIntegerValue(INIT_MARKER_KEY, 3);
 		// since 0.3.2
 		texte.storeText("table.tokenTable.column.username", "erstellt von");
+		texte.storeText("login.SubscribeActionPanel$UserUnique", "Login Name schon vergeben");
 	}
 	
 	void updateTo_v0_3_1() {
