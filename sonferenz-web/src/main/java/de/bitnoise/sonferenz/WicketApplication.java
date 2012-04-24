@@ -59,9 +59,9 @@ public class WicketApplication extends WebApplication
 //    getResourceSettings().setResourceStreamLocator(
 //        new LessCSSResourceStreamLocator(getResourceFinder()));
 
-    // Visural JS stuff
-    addRenderHeadListener(JavascriptPackageResource
-        .getHeaderContribution(new JQueryResourceReference()));
+//    // Visural JS stuff
+//    addRenderHeadListener(JavascriptPackageResource
+//        .getHeaderContribution(new JQueryResourceReference()));
 
     getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
     getRequestCycleSettings().setResponseRequestEncoding("UTF-8");
