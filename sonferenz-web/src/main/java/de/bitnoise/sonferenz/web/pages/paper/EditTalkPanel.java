@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.talks;
+package de.bitnoise.sonferenz.web.pages.paper;
 
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;

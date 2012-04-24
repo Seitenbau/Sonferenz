@@ -11,6 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConfigurationModel;
@@ -51,7 +52,9 @@ public class ListConfigPanel extends
     builder.addActions("actions", new Edit());
     builder.addColumn("name");
     builder.addColumn("value");
+    builder.setDefaultSort("name");
   }
+  
 
   @Override
   protected Component createAbovePanel(String id)

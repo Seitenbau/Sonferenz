@@ -32,6 +32,8 @@ public class TableBuilder<S> implements Serializable
 
   private String _prefix;
 
+  private String _defaultSort;
+
   public TableBuilder(String resourceTableName)
   {
     _prefix = resourceTableName;
@@ -251,9 +253,18 @@ public class TableBuilder<S> implements Serializable
     };
     add(column);
   }
+  
+  public void setDefaultSort(String column) {
+    _defaultSort=column;
+  }
 
   public abstract static class ActionColumn<T> implements Serializable
   {
     abstract public Component populate(String id, T row);
+  }
+
+  public String getDefaultSorting()
+  {
+    return _defaultSort;
   }
 }

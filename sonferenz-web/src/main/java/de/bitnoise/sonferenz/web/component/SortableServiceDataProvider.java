@@ -72,12 +72,19 @@ public abstract class SortableServiceDataProvider<TYPE_DB, TYPE_UI extends Seria
       Sort sort=new Sort(new Order(direction, propertyToSort));
       request = new PageRequest(f, count,sort);
     } else {
-      request = new PageRequest(f, count);
+      Sort sort=createDefaultSorting();
+      if(sort!=null) {
+        request = new PageRequest(f, count, sort);
+      } else {
+        request = new PageRequest(f, count);
+      }
     }
     Page<TYPE_DB> result = getAllItems(request);
     return result.getContent();
   }
 
+  protected abstract Sort createDefaultSorting();
+  
   protected abstract Page<TYPE_DB> getAllItems(PageRequest request);
 
   public abstract int size();

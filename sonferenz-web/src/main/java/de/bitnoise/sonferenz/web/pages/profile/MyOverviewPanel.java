@@ -18,10 +18,10 @@ import de.bitnoise.sonferenz.service.v2.services.WhishService;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.TableBuilder.Column;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;
+import de.bitnoise.sonferenz.web.pages.paper.EditTalkPanel;
+import de.bitnoise.sonferenz.web.pages.paper.RefToTalk;
+import de.bitnoise.sonferenz.web.pages.paper.action.EditOrViewTalk;
 import de.bitnoise.sonferenz.web.pages.profile.MyOverviewPanel.TalkListItem;
-import de.bitnoise.sonferenz.web.pages.talks.EditTalkPanel;
-import de.bitnoise.sonferenz.web.pages.talks.RefToTalk;
-import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
 import de.bitnoise.sonferenz.web.pages.whish.ReftoWhish;
 import de.bitnoise.sonferenz.web.pages.whish.action.EditOrViewWhish;
 

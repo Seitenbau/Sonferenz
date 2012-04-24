@@ -1,10 +1,10 @@
-package de.bitnoise.sonferenz.web.pages.talks.action;
+package de.bitnoise.sonferenz.web.pages.paper.action;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.model.IModel;
 
 import de.bitnoise.sonferenz.web.action.WebMenuAction;
-import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.paper.TalksOverviewPage;
 
 public class CreateTalk extends WebMenuAction<IModel<Object>>
 {

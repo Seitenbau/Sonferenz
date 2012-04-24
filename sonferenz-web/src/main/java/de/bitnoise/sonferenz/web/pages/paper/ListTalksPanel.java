@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.talks;
+package de.bitnoise.sonferenz.web.pages.paper;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +12,9 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 
 
 import de.bitnoise.sonferenz.facade.UiFacade;
@@ -20,8 +23,8 @@ import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
-import de.bitnoise.sonferenz.web.pages.talks.action.CreateTalk;
-import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
+import de.bitnoise.sonferenz.web.pages.paper.action.CreateTalk;
+import de.bitnoise.sonferenz.web.pages.paper.action.EditOrViewTalk;
 import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
 import de.bitnoise.sonferenz.web.pages.users.action.CreateNewUser;
 import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
@@ -59,6 +62,7 @@ public class ListTalksPanel extends Panel
             sortable();
             action(new EditOrViewTalk());
           }
+
         });
 //        addColumn(new Column()
 //        {
@@ -110,6 +114,12 @@ public class ListTalksPanel extends Panel
       public int size()
       {
         return facade.getAllTalksCount();
+      }
+
+      @Override
+      protected Sort createDefaultSorting()
+      {
+        return new Sort(new Order(Direction.ASC, "title"));
       }
 
     };

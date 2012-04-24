@@ -13,6 +13,8 @@ import org.apache.wicket.model.StringResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 
 import de.bitnoise.sonferenz.KonferenzSession;
@@ -26,7 +28,7 @@ import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.table.ListPanel;
 import de.bitnoise.sonferenz.web.component.table.VoteColumn;
 import de.bitnoise.sonferenz.web.component.table.VoteMultiStateColumn;
-import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
+import de.bitnoise.sonferenz.web.pages.paper.action.EditOrViewTalk;
 
 public class ListVotesPanel extends ListPanel<UserVoteItem>
 {
@@ -186,6 +188,12 @@ public class ListVotesPanel extends ListPanel<UserVoteItem>
         }
         // voteService.vote(dbObject, dbObject.getOwner(), 2);
         return item;
+      }
+      
+      @Override
+      protected Sort createDefaultSorting()
+      {
+        return new Sort(Direction.ASC,"title");
       }
     };
 //    SortableServiceDataProvider2<TalkModel, UserVoteItem> provider = new SortableServiceDataProvider2<TalkModel, TalkModel>(

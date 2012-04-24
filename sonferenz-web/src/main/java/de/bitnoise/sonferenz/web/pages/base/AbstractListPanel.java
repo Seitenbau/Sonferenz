@@ -15,6 +15,9 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
@@ -30,6 +33,8 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
 
   private DataTable<VIEW_MODEL> table;
 
+  private String _defaultSort;
+
   public AbstractListPanel(String id, String headingId)
   {
     super(id);
@@ -37,6 +42,7 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
     initColumns(builder);
     SortableServiceDataProvider<DB_MODEL, VIEW_MODEL> provider = createProvider();
     List<IColumn<VIEW_MODEL>> columns = builder.getColumns();
+    _defaultSort = builder.getDefaultSorting();
     Integer maxPageSize = config.getIntegerValue(100,
         "table." + headingId + ".paginationSize", 
         "table.paginationSize");
@@ -99,7 +105,20 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
       {
         return transferDbToViewModel(dbObject);
       }
+      
+      @Override
+      protected Sort createDefaultSorting()
+      {
+        return createDefaultSort();
+      }
     };
+  }
+
+  protected Sort createDefaultSort() {
+     if(_defaultSort==null) {
+       return null;
+     }
+     return new Sort(Direction.ASC,_defaultSort);
   }
 
   protected abstract VIEW_MODEL transferDbToViewModel(DB_MODEL dbObject);

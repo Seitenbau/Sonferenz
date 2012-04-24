@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.talks;
+package de.bitnoise.sonferenz.web.pages.paper;
 
 import java.io.Serializable;
 

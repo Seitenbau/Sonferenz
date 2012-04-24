@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.talks;
+package de.bitnoise.sonferenz.web.pages.paper;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.model.Model;
@@ -9,9 +9,9 @@ import com.visural.wicket.aturl.At;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
-import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
+import de.bitnoise.sonferenz.web.pages.paper.action.EditOrViewTalk;
 
-@At(url = "/talk")
+@At(url = "/paper")
 public class ViewTalkPage extends KonferenzPage
 {
   public static final String PARAM_ID = "id";

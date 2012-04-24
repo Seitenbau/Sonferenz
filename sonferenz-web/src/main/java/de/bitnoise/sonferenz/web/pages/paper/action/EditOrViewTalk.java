@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.talks.action;
+package de.bitnoise.sonferenz.web.pages.paper.action;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.PageParameters;
@@ -13,10 +13,10 @@ import de.bitnoise.sonferenz.web.action.ActionBookmark;
 import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPage;
-import de.bitnoise.sonferenz.web.pages.talks.ModelTalkList;
-import de.bitnoise.sonferenz.web.pages.talks.RefToTalk;
-import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
-import de.bitnoise.sonferenz.web.pages.talks.ViewTalkPage;
+import de.bitnoise.sonferenz.web.pages.paper.ModelTalkList;
+import de.bitnoise.sonferenz.web.pages.paper.RefToTalk;
+import de.bitnoise.sonferenz.web.pages.paper.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.paper.ViewTalkPage;
 import de.bitnoise.sonferenz.web.pages.voting.UserVoteItem;
 
 public class EditOrViewTalk extends WebAction<IModel<Object>>

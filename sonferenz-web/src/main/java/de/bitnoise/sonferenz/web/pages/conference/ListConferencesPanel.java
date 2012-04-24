@@ -7,6 +7,9 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
@@ -81,6 +84,12 @@ public class ListConferencesPanel extends Panel
       public int size()
       {
         return facade.getAllConferencesCount();
+      }
+      
+      @Override
+      protected Sort createDefaultSorting()
+      {
+        return new Sort(new Order(Direction.ASC, "shortName"));
       }
     };
     DefaultDataTable<ConferenceListItem> table = new DefaultDataTable<ConferenceListItem>(

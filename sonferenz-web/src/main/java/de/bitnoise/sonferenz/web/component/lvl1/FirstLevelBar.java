@@ -4,11 +4,11 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
 import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.web.pages.paper.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.statics.ContactPage;
 import de.bitnoise.sonferenz.web.pages.statics.InfoPage;
 import de.bitnoise.sonferenz.web.pages.statics.RegisterPage;
-import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.whish.WhishOverviewPage;
 
 public class FirstLevelBar extends Panel {

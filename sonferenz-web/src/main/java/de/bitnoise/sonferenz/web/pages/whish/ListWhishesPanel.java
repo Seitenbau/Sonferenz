@@ -9,6 +9,8 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
@@ -18,8 +20,8 @@ import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
-import de.bitnoise.sonferenz.web.pages.talks.ListTalksPanel;
-import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.paper.ListTalksPanel;
+import de.bitnoise.sonferenz.web.pages.paper.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.whish.action.CreateWhish;
 import de.bitnoise.sonferenz.web.pages.whish.action.EditOrViewWhish;
 import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
@@ -108,6 +110,12 @@ public class ListWhishesPanel extends Panel
       public int size()
       {
         return facade.getWhishesCount();
+      }
+      
+      @Override
+      protected Sort createDefaultSorting()
+      {
+        return new Sort(Direction.ASC,"title");
       }
     };
     

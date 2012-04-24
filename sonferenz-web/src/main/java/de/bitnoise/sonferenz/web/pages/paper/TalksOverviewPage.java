@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.talks;
+package de.bitnoise.sonferenz.web.pages.paper;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.talks.action.CreateTalk;
+import de.bitnoise.sonferenz.web.pages.paper.action.CreateTalk;
 
 @At(url = "/talks")
 public class TalksOverviewPage extends KonferenzPage

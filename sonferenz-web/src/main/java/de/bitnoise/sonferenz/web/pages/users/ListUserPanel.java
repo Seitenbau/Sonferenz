@@ -11,6 +11,8 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 
 import de.bitnoise.sonferenz.facade.UiFacade;
@@ -145,6 +147,12 @@ public class ListUserPanel extends Panel
       public int size()
       {
         return facade.getUserCount();
+      }
+
+      @Override
+      protected Sort createDefaultSorting()
+      {
+        return new Sort(Direction.ASC,"login");
       }
     };
     return provider;
