@@ -31,7 +31,7 @@ public class VotingOverviewPage extends KonferenzPage
     {
       return new UnauthorizedPanel(id);
     }
-    return new ListVotesPanel(id);
+    return new ListVotesPanel2(id);
   }
 
   @Override

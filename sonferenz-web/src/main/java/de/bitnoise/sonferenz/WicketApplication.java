@@ -88,6 +88,7 @@ public class WicketApplication extends WebApplication
     guard.addPattern("+*.gif");
     guard.addPattern("+*.js");
     guard.addPattern("+*.css");
+    guard.addPattern("+*.cur");
     getResourceSettings().setPackageResourceGuard(guard);
   }
   

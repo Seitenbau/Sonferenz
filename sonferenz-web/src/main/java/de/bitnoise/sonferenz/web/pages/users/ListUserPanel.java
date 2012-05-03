@@ -52,7 +52,6 @@ public class ListUserPanel extends Panel
           {
             setTitle("Login");
             setModelProperty("login");
-            sortable();
             action(new EditUser());
           }
         });
@@ -152,7 +151,7 @@ public class ListUserPanel extends Panel
       @Override
       protected Sort createDefaultSorting()
       {
-        return new Sort(Direction.ASC,"login");
+        return new Sort(Direction.ASC,"name");
       }
     };
     return provider;
