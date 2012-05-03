@@ -53,11 +53,11 @@ public class ConfigMainNavigation
         new IsActiveConference()
         ));
         */
-    ret.add(new PageNavCallback(VotingOverviewPage.class, "Voting",
-        new VisibleOnRights(Right.Vote.canVote),
-        new IsActiveConference(),
-        new OnStateVoting()
-        ));
+//    ret.add(new PageNavCallback(VotingOverviewPage.class, "Voting",
+//        new VisibleOnRights(Right.Vote.canVote),
+//        new IsActiveConference(),
+//        new OnStateVoting()
+//        ));
     ret.add(new PageNavCallback(CalculateOverviewPage.class, "Calculate",
         new VisibleOnRights(Right.Admin.ViewCalculation),
         new IsActiveConference(),

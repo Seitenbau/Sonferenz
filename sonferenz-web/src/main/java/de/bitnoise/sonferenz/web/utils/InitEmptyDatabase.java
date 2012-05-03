@@ -72,6 +72,13 @@ public class InitEmptyDatabase
 		}
 	}
 
+	void updateTo_v0_3_3() {
+	  logger .warn("# DATABASE update to version 4 #");
+	  config.saveIntegerValue(INIT_MARKER_KEY, 4);
+	  // since 0.3.2
+	  texte.storeText("menu.1lvl.voting", "Voting");
+	}
+	
 	void updateTo_v0_3_2() {
 		logger .warn("# DATABASE update to version 3 #");
 		config.saveIntegerValue(INIT_MARKER_KEY, 3);

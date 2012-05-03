@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.VoteModel;
 import de.bitnoise.sonferenz.repo.TalkRepository;
 import de.bitnoise.sonferenz.repo.VoteRepository;
+import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
 
 @Service
@@ -25,8 +25,11 @@ public class VoteService2Impl implements VoteService
   @Autowired
   VoteRepository voteRepo;
 
+  @Autowired
+  AuthenticationService auth;
+
   @Override
-  @Transactional 
+  @Transactional
   public void removeAllVotestForTalk(List<TalkModel> talks)
   {
     if (talks == null)
@@ -47,7 +50,7 @@ public class VoteService2Impl implements VoteService
   }
 
   @Override
-  @Transactional 
+  @Transactional
   public boolean vote(TalkModel talk, UserModel user, int increment)
   {
     ConferenceModel conference = talk.getConference();
@@ -114,15 +117,41 @@ public class VoteService2Impl implements VoteService
       UserModel user, int minState)
   {
     List<VoteModel> rest = voteRepo.findByUserAndRateing(user, minState);
-    for(VoteModel v : rest) {
+    for (VoteModel v : rest)
+    {
       TalkModel t = v.getTalk();
       Hibernate.initialize(v);
-      if(t!=null) {
-        Hibernate.initialize (t.getVotes() );
+      if (t != null)
+      {
+        Hibernate.initialize(t.getVotes());
       }
     }
     return rest;
   }
 
-   
+  @Override
+  @Transactional
+  public List<VoteModel> getMyVotes()
+  {
+    UserModel user = auth.getCurrentUser();
+    if (user == null)
+    {
+      throw new IllegalStateException("No User logged in");
+    }
+    List<VoteModel> votes = voteRepo.findByUser(user);
+    Hibernate.initialize(votes);
+    return votes;
+  }
+
+  @Override
+  @Transactional
+  public void saveMyVotes(List<VoteModel> votes)
+  {
+    UserModel user = auth.getCurrentUser();
+    voteRepo.deleteInBatch( voteRepo.findByUser(user) );
+    for(VoteModel vote : votes) {
+    voteRepo.saveAndFlush(vote);
+    }
+  }
+
 }

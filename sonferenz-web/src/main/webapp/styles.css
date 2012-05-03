@@ -105,6 +105,9 @@ a.firstLevelMenuButton {
 a.firstLevelMenuButton.conference {
 	background-position: 0px 0
 }
+a.firstLevelMenuButton.voting {
+	background-position: -464px 0
+}
 a.firstLevelMenuButton.agenda {
 	background-position: -92px 0
 }
@@ -1372,4 +1375,23 @@ body.repaint {
 	height: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
+}
+
+/* Drag drop */
+
+.initiate {
+	width: 1px;
+	padding-right: 10px;
+	background-color: gray;
+}
+
+.votinglist {
+	 border: 1px solid #CCCCCC;
+     border-radius: 3px 3px 3px 3px;
+     padding: 5px;
+}
+
+.header {
+	border-bottom: 1px solid #CCCCCC;
+	padding-bottom: 3px;
 }
