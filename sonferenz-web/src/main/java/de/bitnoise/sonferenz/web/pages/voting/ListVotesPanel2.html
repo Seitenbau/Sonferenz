@@ -1,17 +1,34 @@
 <wicket:panel>
 	<span class="header voting">
 		<p>
-		  Bringe die Vortr&auml;ge via drag'n'drop in die Reihenfolge die du bevorzugen w&uuml;rdest.<br/>
-		  Am besten bringst du am besten die obersten 10 Vortr&auml;ge in Reihe. ( 6 besuchbare Vortr&auml;ge plus 4 Ersatz Vortr&auml;ge )
+			Bringe die Vortr&auml;ge via drag'n'drop in die Reihenfolge die du
+			bevorzugen w&uuml;rdest.<br /> Am besten bringst du am besten die
+			obersten 10 Vortr&auml;ge in Reihe. ( 6 besuchbare Vortr&auml;ge plus
+			4 Ersatz Vortr&auml;ge )
 		</p>
 	</span>
-	<div wicket:id="voting" class="votinglist">
-		<div class="header">
-			<span class="head">&nbsp;</span> 
-			<span class="head">Meine Vortragsliste :</span>
+	<div class="header">
+		<span class="head">&nbsp;</span> 
+		<span class="head">Meine Vortragsliste :</span>
+	</div>
+	<div class="votingBlock">
+		<div class="votenumbers">
+			<div class="vote-numbering needed"><span>1.</span></div>
+			<div class="vote-numbering needed"><span>2.</span></div>
+			<div class="vote-numbering needed"><span>3.</span></div>
+			<div class="vote-numbering needed"><span>4.</span></div>
+			<div class="vote-numbering needed"><span>5.</span></div>
+			<div class="vote-numbering needed"><span>6.</span></div>
+			<div class="vote-numbering should"><span>7.</span></div>
+			<div class="vote-numbering should"><span>8.</span></div>
+			<div class="vote-numbering should"><span>9.</span></div>
+			<div class="vote-numbering should"><span>10.</span></div>
 		</div>
-		<div wicket:id="items" class="item draglist">
-			<span class="initiate">&nbsp;</span> <span wicket:id="title">[title]</span>
+		<div wicket:id="voting" class="votinglist">
+			<div wicket:id="items" class="item draglist">
+				<span class="initiate">&nbsp;</span> 
+				<span wicket:id="title">[title]</span>
+			</div>
 		</div>
 	</div>
 	<br class="spacer" />
