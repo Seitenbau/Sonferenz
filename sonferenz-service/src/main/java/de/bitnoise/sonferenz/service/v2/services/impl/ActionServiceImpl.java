@@ -219,7 +219,7 @@ public class ActionServiceImpl implements ActionService
     entity.setActive(true);
     entity.setCreator(authService.getCurrentUser());
     entity.setTitle(data.getTitle());
-    int maxValidity = 5 * 24 * 60; // 5 Tage
+    int maxValidity = 21 * 24 * 60; // 21 Tage
     DateTime result = DateTime.now().plus(Period.minutes(maxValidity));
     entity.setExpiry(result.toDate());
     entity.setUsed(0);
