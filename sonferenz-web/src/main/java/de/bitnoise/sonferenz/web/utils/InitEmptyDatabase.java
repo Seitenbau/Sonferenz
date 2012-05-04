@@ -77,6 +77,8 @@ public class InitEmptyDatabase
 	  config.saveIntegerValue(INIT_MARKER_KEY, 4);
 	  // since 0.3.2
 	  texte.storeText("menu.1lvl.voting", "Voting");
+	  texte.storeText("admin.tab.logs",   "Logs");
+	  texte.storeText("admin.tab.voteresult", "Results");
 	}
 	
 	void updateTo_v0_3_2() {

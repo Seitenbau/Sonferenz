@@ -21,7 +21,7 @@ public class VoteList extends ArrayList<VoteItem> {
     int from= indexOf(drag);
     int to = indexOf(drop);
     remove(from);
-    if(from<to) {
+    if(from<=to) {
       to--;
     }
     add(to+1,drag);

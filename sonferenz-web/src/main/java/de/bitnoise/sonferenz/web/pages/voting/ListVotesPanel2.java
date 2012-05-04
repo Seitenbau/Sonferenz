@@ -49,6 +49,8 @@ public class ListVotesPanel2 extends Panel
 
   private AjaxFallbackLink<String> save;
 
+  int max = 10;
+
   public ListVotesPanel2(String id)
   {
     super(id);
@@ -94,7 +96,7 @@ public class ListVotesPanel2 extends Panel
         }
       }
     }.drag("div.item").initiate("span.initiate"));
-    
+
     DropTarget dropTarget = new DropTarget(Operation.MOVE)
     {
       @Override
@@ -163,7 +165,7 @@ public class ListVotesPanel2 extends Panel
       @Override
       public int compare(VoteItem o1, VoteItem o2)
       {
-        return o1.getRateing().compareTo(o2.getRateing());
+        return o2.getRateing().compareTo(o1.getRateing());
       }
     });
     return foos;
@@ -205,12 +207,16 @@ public class ListVotesPanel2 extends Panel
   protected void onSave(AjaxRequestTarget target)
   {
     UserModel user = KonferenzSession.get().getCurrentUser();
-    int i = 1;
+    int i = max;
     List<VoteModel> neueVotes = new ArrayList<VoteModel>();
     for (VoteItem f : currentVoteListe)
     {
       VoteModel vote = new VoteModel();
-      vote.setRateing(i++);
+      vote.setRateing(i);
+      if (i > 0)
+      {
+        i--;
+      }
       vote.setTalk(f.getTalk());
       vote.setUser(user);
       neueVotes.add(vote);

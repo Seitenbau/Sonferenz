@@ -1,5 +1,6 @@
 package de.bitnoise.sonferenz.service.v2.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -14,7 +15,10 @@ import de.bitnoise.sonferenz.model.VoteModel;
 import de.bitnoise.sonferenz.repo.TalkRepository;
 import de.bitnoise.sonferenz.repo.VoteRepository;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
+import de.bitnoise.sonferenz.service.v2.services.ConferenceService;
+import de.bitnoise.sonferenz.service.v2.services.UserService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
+import de.bitnoise.sonferenz.service.v2.services.VotedItem;
 
 @Service
 public class VoteService2Impl implements VoteService
@@ -27,6 +31,12 @@ public class VoteService2Impl implements VoteService
 
   @Autowired
   AuthenticationService auth;
+
+  @Autowired
+  ConferenceService conf;
+  
+  @Autowired
+  UserService userService;
 
   @Override
   @Transactional
@@ -148,10 +158,62 @@ public class VoteService2Impl implements VoteService
   public void saveMyVotes(List<VoteModel> votes)
   {
     UserModel user = auth.getCurrentUser();
-    voteRepo.deleteInBatch( voteRepo.findByUser(user) );
-    for(VoteModel vote : votes) {
-    voteRepo.saveAndFlush(vote);
+    voteRepo.deleteInBatch(voteRepo.findByUser(user));
+    for (VoteModel vote : votes)
+    {
+      voteRepo.saveAndFlush(vote);
     }
   }
 
+  @Override
+  @Transactional
+  public List<UserModel> getAllUsersNotVoted(ConferenceModel conference)
+  {
+    List<UserModel> allUsers = userService.getAllUsers();
+    List<UserModel> list=new ArrayList<UserModel>();
+    for(UserModel user :allUsers) {
+      // TODO : add conference checks + move logic into db select
+      List<VoteModel> res = voteRepo.findByUser(user);
+      if(res==null || res.isEmpty()) {
+        list.add(user);
+      }
+    }
+    return list;
+  }
+  
+  @Override
+  @Transactional
+  public List<VotedItem> getVoteLevel(ConferenceModel conference)
+  {
+    List<TalkModel> allTalks = conf.getAllTalksForConference(conference);
+    List<VotedItem> list = new ArrayList<VotedItem>();
+    for (TalkModel talk : allTalks)
+    {
+      List<VoteModel> votes = voteRepo.findByTalk(talk);
+      VotedItem item = new VotedItem();
+      item.setTalk(talk.getTitle());
+      calcVotes(item, votes);
+      list.add(item);
+    }
+    return list;
+  }
+
+  private void calcVotes(VotedItem item, List<VoteModel> votes)
+  {
+    if (votes == null)
+    {
+      return;
+    }
+    int rateing = 0;
+    for (VoteModel vote : votes)
+    {
+      if (!vote.getRateing().equals(Integer.MAX_VALUE))
+      {
+        rateing += vote.getRateing();
+      }
+    }
+    item.setVotes(rateing);
+  }
+
+ 
 }

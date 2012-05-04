@@ -18,6 +18,8 @@ import de.bitnoise.sonferenz.web.pages.config.ListConfigPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListRolesPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListTextePanel;
 import de.bitnoise.sonferenz.web.pages.users.ListUserPanel;
+import de.bitnoise.sonferenz.web.pages.users.LogOutputPanel;
+import de.bitnoise.sonferenz.web.pages.users.VotingResultPanel;
 
 @At(url = "/admin")
 public class AdminPage extends KonferenzPage {
@@ -59,6 +61,18 @@ public class AdminPage extends KonferenzPage {
 						public Panel getPanel(String panelId) {
 							return new ListTextePanel(panelId);
 						}
+					});
+					tabs.add(new AbstractTab(txt("admin.tab.logs")) {
+					  @Override
+					  public Panel getPanel(String panelId) {
+					    return new LogOutputPanel(panelId);
+					  }
+					});
+					tabs.add(new AbstractTab(txt("admin.tab.voteresult")) {
+					  @Override
+					  public Panel getPanel(String panelId) {
+					    return new VotingResultPanel(panelId);
+					  }
 					});
 				}
 			};
