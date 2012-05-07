@@ -62,7 +62,6 @@ public class ListTalksPanel extends Panel
             sortable();
             action(new EditOrViewTalk());
           }
-
         });
 //        addColumn(new Column()
 //        {

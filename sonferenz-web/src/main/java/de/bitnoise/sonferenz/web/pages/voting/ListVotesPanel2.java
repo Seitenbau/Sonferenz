@@ -11,13 +11,16 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
+import org.apache.wicket.PageParameters;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.CSSPackageResource;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -33,7 +36,10 @@ import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.VoteModel;
+import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
+import de.bitnoise.sonferenz.web.pages.KonferenzPage;
+import de.bitnoise.sonferenz.web.pages.paper.ViewTalkPage;
 import de.bitnoise.sonferenz.web.pages.voting.ListVotesPanel2.NumberItem;
 import de.bitnoise.sonferenz.web.utils.WicketTools;
 
@@ -57,6 +63,9 @@ public class ListVotesPanel2 extends Panel
 	private VoteList currentVoteListe;
 
 	private AjaxFallbackLink<String> save;
+	
+	@SpringBean
+	StaticContentService content2;
 
 	int max = 10;
 
@@ -106,7 +115,12 @@ public class ListVotesPanel2 extends Panel
 			protected void populateItem(ListItem<VoteItem> item)
 			{
 				VoteItem object = item.getModel().getObject();
-				item.add(new Label("title", Model.of(object.getTalk().getTitle())));
+				PageParameters param = new PageParameters();
+			    param.add(ViewTalkPage.PARAM_ID, "" + object.getTalk().getId());
+			    BookmarkablePageLink title = new BookmarkablePageLink("title", ViewTalkPage.class, param);
+				Label txt = new Label("text", Model.of(object.getTalk().getTitle()));
+				title.add(txt);
+				item.add(title);
 			}
 		};
 
@@ -171,7 +185,11 @@ public class ListVotesPanel2 extends Panel
 				onSave(target);
 			}
 		};
+		String text = content2.text("page.vote.header");
+		Label description=new Label("description",Model.of(text));
+		description.setEscapeModelStrings(false);
 		add(save);
+		add(description);
 		save.setOutputMarkupId(true);
 		save.setEnabled(false);
 	}

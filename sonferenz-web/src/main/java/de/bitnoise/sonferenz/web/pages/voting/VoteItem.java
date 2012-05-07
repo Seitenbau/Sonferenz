@@ -26,4 +26,5 @@ class VoteItem implements Serializable
   {
     return _talk;
   }
+  
 }
