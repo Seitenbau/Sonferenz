@@ -39,6 +39,9 @@ public class ConferenceModel extends ModelBase implements DoInterface<Integer>
   
   @Column
   Integer votesPerUser;
+  
+  @Column
+  Integer votesRecommend;
 
   @Enumerated(EnumType.STRING)
   ConferenceState state;

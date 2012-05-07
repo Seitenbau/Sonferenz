@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.visural.wicket.aturl.At;
 
+import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.state.OnStateVoting;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
@@ -27,7 +28,7 @@ public class VotingOverviewPage extends KonferenzPage
   @Override
   protected Panel getPageContent(String id)
   {
-    if (!new OnStateVoting().canBeDisplayed())
+    if (KonferenzSession.noUserLoggedIn() || !new OnStateVoting().canBeDisplayed())
     {
       return new UnauthorizedPanel(id);
     }

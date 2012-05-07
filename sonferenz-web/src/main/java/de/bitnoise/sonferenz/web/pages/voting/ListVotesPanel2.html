@@ -12,17 +12,19 @@
 		<span class="head">Meine Vortragsliste :</span>
 	</div>
 	<div class="votingBlock">
-		<div class="votenumbers">
-			<div class="vote-numbering needed"><span>1.</span></div>
-			<div class="vote-numbering needed"><span>2.</span></div>
-			<div class="vote-numbering needed"><span>3.</span></div>
-			<div class="vote-numbering needed"><span>4.</span></div>
-			<div class="vote-numbering needed"><span>5.</span></div>
-			<div class="vote-numbering needed"><span>6.</span></div>
-			<div class="vote-numbering should"><span>7.</span></div>
-			<div class="vote-numbering should"><span>8.</span></div>
-			<div class="vote-numbering should"><span>9.</span></div>
-			<div class="vote-numbering should"><span>10.</span></div>
+		<div wicket:id="vote-numbering" class="votenumbers">
+			<div wicket:id="number" class="vote-numbering"><span wicket:id="numberItem">1.</span></div>
+			<wicket:remove>
+				<div class="vote-numbering needed"><span>2.</span></div>
+				<div class="vote-numbering needed"><span>3.</span></div>
+				<div class="vote-numbering needed"><span>4.</span></div>
+				<div class="vote-numbering needed"><span>5.</span></div>
+				<div class="vote-numbering needed"><span>6.</span></div>
+				<div class="vote-numbering should"><span>7.</span></div>
+				<div class="vote-numbering should"><span>8.</span></div>
+				<div class="vote-numbering should"><span>9.</span></div>
+				<div class="vote-numbering should"><span>10.</span></div>
+			</wicket:remove>
 		</div>
 		<div wicket:id="voting" class="votinglist">
 			<div wicket:id="items" class="item draglist">

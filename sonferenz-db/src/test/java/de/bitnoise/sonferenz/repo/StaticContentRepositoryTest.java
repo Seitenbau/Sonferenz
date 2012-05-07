@@ -31,7 +31,7 @@ public class StaticContentRepositoryTest extends DbTestBase
 
   @Test
   public void findByName_Empty() throws Exception
-  {
+  { 
     // prepare
     // execute
     StaticContentModel result = sut.findByName("  ");

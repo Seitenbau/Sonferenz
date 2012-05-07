@@ -30,6 +30,7 @@ public class EditConferenceWizard extends Wizard
 {
   final Model<String> modelTitle = new Model<String>();
   final Model<String> modelVotesPerUser = new Model<String>();
+  final Model<String> modelVotesRecomend = new Model<String>();
   final Model<ConferenceState> modelState = new Model<ConferenceState>();
   private IModel<Boolean> modelActive = new Model<Boolean>();
   private IncrementalList<TalkToConference> liste;
@@ -68,6 +69,8 @@ public class EditConferenceWizard extends Wizard
       add(new TextField<String>("title", modelTitle).setRequired(true));
       add(new TextField<String>("votesPerUser", modelVotesPerUser)
           .setRequired(true));
+      add(new TextField<String>("votesRecomend", modelVotesRecomend)
+    		  .setRequired(true));
       add(dropState);
       add(activeCheck);
     }
@@ -206,6 +209,9 @@ public class EditConferenceWizard extends Wizard
     modelVotesPerUser
         .setObject(Integer.toString((_conference.getVotesPerUser() == null ? 0
             : _conference.getVotesPerUser())));
+    modelVotesRecomend
+    .setObject(Integer.toString((_conference.getVotesRecommend() == null ? 0
+    		: _conference.getVotesRecommend())));
   }
 
   @Override
@@ -222,6 +228,7 @@ public class EditConferenceWizard extends Wizard
     String valueTitle = modelTitle.getObject();
     Boolean active = modelActive.getObject();
     Integer votesPerUser = Integer.valueOf(modelVotesPerUser.getObject());
+    Integer votesRecomend = Integer.valueOf(modelVotesRecomend.getObject());
     List<TalkToConference> data = modelTalks.getObject();
     List<TalkModel> talks = new ArrayList<TalkModel>();
     if (liste != null)
@@ -235,6 +242,7 @@ public class EditConferenceWizard extends Wizard
     _conference.setShortName(valueTitle);
     _conference.setActive(active);
     _conference.setVotesPerUser(votesPerUser);
+    _conference.setVotesRecommend(votesRecomend);
     facade.storeConference(_conference);
 
     doStateActions(_conference,oldState, newState);
