@@ -1377,21 +1377,48 @@ body.repaint {
 	-moz-box-sizing: border-box;
 }
 
-/* Drag drop */
+* Drag drop */
 
-.initiate {
-	width: 1px;
-	padding-right: 10px;
-	background-color: gray;
+.header {
+	padding-bottom: 10px;
+}
+
+.votingBlock {
+    padding-bottom: 20px;
+}
+
+.votenumbers {
+    float: left;
+}
+
+.votenumbers .vote-numbering {
+    height: 20px;
+    padding: 2px 3px 0 0;
+    margin: 0 0 2px 0;
+    text-align: right;
+}
+
+.votenumbers .vote-numbering.needed {
+    background-color: #00437C;
+    color: #fff;
 }
 
 .votinglist {
-	 border: 1px solid #CCCCCC;
-     border-radius: 3px 3px 3px 3px;
-     padding: 5px;
+    margin-left: 20px;
+    border-left-width: 0px;
 }
 
-.header {
-	border-bottom: 1px solid #CCCCCC;
-	padding-bottom: 3px;
+.votinglist .item {
+    height: 20px;
+    margin-left: 10px;
+    margin-bottom: 2px;
+    padding: 2px 3px 0 0;
+}
+
+.votinglist .item .initiate {
+    height: 20px;
+    cursor: move;
+    width: 1px;
+    padding-right: 8px;
+    background: url("images/dragdrop_handle.png") no-repeat 2px 3px transparent;
 }
