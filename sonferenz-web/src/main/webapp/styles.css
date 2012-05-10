@@ -1386,6 +1386,8 @@ body.repaint {
 
 .votenumbers {
     float: left;
+    padding-left: 3px;
+    margin-right: 10px;
 }
 
 .votenumbers .vote-numbering {
@@ -1400,7 +1402,8 @@ body.repaint {
 }
 
 .votinglist {
-    margin-left: 20px;
+    margin-left: 23px;
+    border-left: 1px solid;
 }
 
 .votinglist .item {
@@ -1410,10 +1413,36 @@ body.repaint {
     padding: 2px 3px 0 0;
 }
 
-.votinglist .item .initiate {
+.dragitem {
     height: 20px;
     cursor: move;
     width: 1px;
     padding-right: 8px;
     background: url("images/dragdrop_handle.png") no-repeat 2px 3px transparent;
+}
+.votinglist .item .initiate {
+    height: 20px;
+    cursor: move;
+    width: 1px;
+    padding-right: 8px;
+}
+
+img.infolink {
+    height: 10px;
+    display: inline;
+    padding-left: 3px;
+}
+
+.vote {
+    border: 1px solid #00437C;
+    border-radius: 0px 0px 3px 3px;
+    border-collapse: collapse;
+}
+
+.voteheader {
+	padding:3px;
+	background-color: #00437C;
+    border: 1px solid #00437C;
+	color: #FFFFFF;
+	border-radius: 3px 3px 0px 0px;
 }

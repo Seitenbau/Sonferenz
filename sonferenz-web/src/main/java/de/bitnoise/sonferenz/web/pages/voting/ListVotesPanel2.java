@@ -16,6 +16,7 @@ import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.CSSPackageResource;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -116,10 +117,11 @@ public class ListVotesPanel2 extends Panel
 			{
 				VoteItem object = item.getModel().getObject();
 				PageParameters param = new PageParameters();
-			    param.add(ViewTalkPage.PARAM_ID, "" + object.getTalk().getId());
-			    BookmarkablePageLink title = new BookmarkablePageLink("title", ViewTalkPage.class, param);
+			  param.add(ViewTalkPage.PARAM_ID, "" + object.getTalk().getId());
+			  
+			  BookmarkablePageLink title = new BookmarkablePageLink("link", ViewTalkPage.class, param);
 				Label txt = new Label("text", Model.of(object.getTalk().getTitle()));
-				title.add(txt);
+				item.add(txt);
 				item.add(title);
 			}
 		};
@@ -187,7 +189,7 @@ public class ListVotesPanel2 extends Panel
 		String text = content2.text("page.vote.header");
 		Label description=new Label("description",Model.of(text));
 		description.setEscapeModelStrings(false);
-		add(new Label("headerText",content2.text("page.vote.table.header", "Meine Wunschreihenfolge :")));
+		add(new Label("headerText",content2.text("page.vote.table.header", "Wunschreihenfolge :")));
 		add(save);
 		add(description);
 		save.setOutputMarkupId(true);
