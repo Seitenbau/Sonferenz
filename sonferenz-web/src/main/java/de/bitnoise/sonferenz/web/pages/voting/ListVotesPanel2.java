@@ -2,6 +2,7 @@ package de.bitnoise.sonferenz.web.pages.voting;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -117,10 +118,31 @@ public class ListVotesPanel2 extends Panel
 			@Override
 			protected void populateItem(ListItem<VoteItem> item)
 			{
-				VoteItem object = item.getModel().getObject();
+				final VoteItem object = item.getModel().getObject();
 				PageParameters param = new PageParameters();
 			  param.add(ViewTalkPage.PARAM_ID, "" + object.getTalk().getId());
-			  
+			  item.add(new AjaxFallbackLink<String>("moveup"){
+          @Override
+          public void onClick(AjaxRequestTarget target)
+          {
+            Collection<? extends Component> components = target.getComponents();
+//            System.out.println(object.getTalk().getTitle());
+            currentVoteListe.moveup(object);
+            save.add(new SimpleAttributeModifier("class", "button savevote active"));
+            target.addComponent(list);
+            target.addComponent(save);
+        }});
+			  item.add(new AjaxFallbackLink<String>("movedown"){
+			    @Override
+			    public void onClick(AjaxRequestTarget target)
+			    {
+			      Collection<? extends Component> components = target.getComponents();
+//            System.out.println(object.getTalk().getTitle());
+			      currentVoteListe.movedown(object);
+			      save.add(new SimpleAttributeModifier("class", "button savevote active"));
+			      target.addComponent(list);
+			      target.addComponent(save);
+			    }});
 			  BookmarkablePageLink title = new BookmarkablePageLink("link", ViewTalkPage.class, param);
 				Label txt = new Label("text", Model.of(object.getTalk().getTitle()));
 				item.add(txt);

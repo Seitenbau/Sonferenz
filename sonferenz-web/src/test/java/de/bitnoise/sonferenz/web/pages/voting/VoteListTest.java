@@ -38,6 +38,22 @@ public class VoteListTest
     // step 2
     foos.addBefore(item2, item1);
     assertThat(foos).startsWith(item2, item1, item3);
+    
+    // step 3
+    foos.movedown(item1);
+    assertThat(foos).startsWith(item2, item3 , item1);
+    
+    // step 4
+    foos.moveup(item1);
+    assertThat(foos).startsWith(item2, item1 , item3);
+    
+    // step 5
+    foos.movedown(item3);
+    assertThat(foos).startsWith(item2, item1 , item3);
+    
+    // step 6
+    foos.moveup(item2);
+    assertThat(foos).startsWith(item2, item1 , item3);
   }
 
 }

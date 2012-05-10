@@ -1433,6 +1433,16 @@ img.infolink {
     display: inline;
     padding-left: 3px;
 }
+img.moveup {
+    height: 10px;
+    display: inline;
+    padding-left: 3px;
+}
+img.movedown {
+    height: 10px;
+    display: inline;
+    padding-left: 3px;
+}
 
 .vote {
     border: 1px solid #00437C;
