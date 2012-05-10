@@ -1381,10 +1381,7 @@ body.repaint {
 
 .header {
 	padding-bottom: 10px;
-}
-
-.votingBlock {
-    padding-bottom: 20px;
+    font-weight: bold;
 }
 
 .votenumbers {
@@ -1399,13 +1396,11 @@ body.repaint {
 }
 
 .votenumbers .vote-numbering.needed {
-    background-color: #00437C;
-    color: #fff;
+    font-weight: bold;
 }
 
 .votinglist {
     margin-left: 20px;
-    border-left-width: 0px;
 }
 
 .votinglist .item {

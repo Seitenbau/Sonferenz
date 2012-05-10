@@ -18,7 +18,7 @@ function webkitRepaint (el) {
 }
 $(function() {
   /* webkit bugfix https://bugs.webkit.org/show_bug.cgi?id=53166 */
-  if ($.browser.webkit) {
+  if (jQuery.browser.webkit) {
     window.addEventListener('resize', function() {
       webkitRepaint(document.body);
     }, false);
