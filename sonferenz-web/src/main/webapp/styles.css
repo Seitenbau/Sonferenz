@@ -1406,10 +1406,12 @@ body.repaint {
     border-left: 1px solid;
 }
 
+.votingBlock {
+}
+
 .votinglist .item {
     height: 20px;
     margin-left: 10px;
-    margin-bottom: 2px;
     padding: 2px 3px 0 0;
 }
 
@@ -1439,10 +1441,18 @@ img.infolink {
     border-collapse: collapse;
 }
 
+.savevote {
+	 padding: 1px 3px 1px 3px;
+}
+
 .voteheader {
 	padding:3px;
 	background-color: #00437C;
     border: 1px solid #00437C;
 	color: #FFFFFF;
 	border-radius: 3px 3px 0px 0px;
+}
+
+.buttons {
+	padding: 5px;
 }

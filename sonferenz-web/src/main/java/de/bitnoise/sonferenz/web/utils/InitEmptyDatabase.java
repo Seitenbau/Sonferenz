@@ -65,6 +65,10 @@ public class InitEmptyDatabase
 			{
 				updateTo_v0_3_2();
 			}
+			if (isDatabaseOlderThanVersion(4))
+			{
+			  updateTo_v0_3_3();
+			}
 		} finally
 		{
 			eventing.activateEventing();

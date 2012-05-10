@@ -4,37 +4,36 @@
 		<span class="head"><span wicket:id="headerText">1.</span></span>
 	</div>
 	<div class="vote">
-	<div class="votingBlock">
-		<div class="votenumbers">
-			<div wicket:id="vote-numbering" class="vote-numbering">
-			   <span wicket:id="numberItem">1.</span>
+		<div class="votingBlock">
+			<div class="votenumbers">
+				<div wicket:id="vote-numbering" class="vote-numbering">
+				   <span wicket:id="numberItem">1.</span>
+				</div>
+				<wicket:remove>
+					<div class="vote-numbering needed"><span>2.</span></div>
+					<div class="vote-numbering needed"><span>3.</span></div>
+					<div class="vote-numbering needed"><span>4.</span></div>
+					<div class="vote-numbering needed"><span>5.</span></div>
+					<div class="vote-numbering needed"><span>6.</span></div>
+					<div class="vote-numbering should"><span>7.</span></div>
+					<div class="vote-numbering should"><span>8.</span></div>
+					<div class="vote-numbering should"><span>9.</span></div>
+					<div class="vote-numbering should"><span>10.</span></div>
+				</wicket:remove>
 			</div>
-			<wicket:remove>
-				<div class="vote-numbering needed"><span>2.</span></div>
-				<div class="vote-numbering needed"><span>3.</span></div>
-				<div class="vote-numbering needed"><span>4.</span></div>
-				<div class="vote-numbering needed"><span>5.</span></div>
-				<div class="vote-numbering needed"><span>6.</span></div>
-				<div class="vote-numbering should"><span>7.</span></div>
-				<div class="vote-numbering should"><span>8.</span></div>
-				<div class="vote-numbering should"><span>9.</span></div>
-				<div class="vote-numbering should"><span>10.</span></div>
-			</wicket:remove>
-		</div>
-		<div wicket:id="voting" class="votinglist">
-			<div wicket:id="items" class="item draglist initiate">
-				<span class="dragitem initiate" >&nbsp;</span> 
-				<span class="initiate" wicket:id="text" >[title]</span>
-				<span><a class="infolink" wicket:id="link" target="_blank">
-				  <img class="infolink" src="images/glyphicons_152_new_window.png"/>
-				</a></span>
+			<div wicket:id="voting" class="votinglist">
+				<div wicket:id="items" class="item draglist initiate">
+					<span class="dragitem initiate" >&nbsp;</span> 
+					<span class="initiate" wicket:id="text" >[title]</span>
+					<span><a class="infolink" wicket:id="link" target="_blank">
+					  <img class="infolink" src="images/glyphicons_152_new_window.png"/>
+					</a></span>
+				</div>
 			</div>
 		</div>
 	</div>
-	<br class="spacer" />
-	<div class="buttons">
-		<a href="#" wicket:id="save" class="button">save</a>
-	</div>
-	</div>
+		<div class="buttons">
+			<a href="#" wicket:id="save" class="button savevote">&Auml;nderungen speichern</a>
+		</div>
 </wicket:panel>
 
