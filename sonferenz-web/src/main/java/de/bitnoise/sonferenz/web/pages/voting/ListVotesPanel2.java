@@ -145,7 +145,6 @@ public class ListVotesPanel2 extends Panel
 			public void onDrop(AjaxRequestTarget target, Transfer transfer,
 			        Location location) throws Reject
 			{
-				save.setEnabled(true);
 				VoteItem x = transfer.getData();
 				if (location==null || location.getComponent() == list)
 				{
@@ -188,10 +187,10 @@ public class ListVotesPanel2 extends Panel
 		String text = content2.text("page.vote.header");
 		Label description=new Label("description",Model.of(text));
 		description.setEscapeModelStrings(false);
+		add(new Label("headerText",content2.text("page.vote.table.header", "Meine Wunschreihenfolge :")));
 		add(save);
 		add(description);
 		save.setOutputMarkupId(true);
-		save.setEnabled(false);
 	}
 
 	List<NumberItem> buildNumberList() {
@@ -290,7 +289,6 @@ public class ListVotesPanel2 extends Panel
 			neueVotes.add(vote);
 		}
 		votes.saveMyVotes(neueVotes);
-		save.setEnabled(false);
 		target.addComponent(save);
 	}
 }
