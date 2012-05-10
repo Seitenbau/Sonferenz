@@ -17,6 +17,8 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.markup.html.CSSPackageResource;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -147,6 +149,7 @@ public class ListVotesPanel2 extends Panel
 			public void onDrop(AjaxRequestTarget target, Transfer transfer,
 			        Location location) throws Reject
 			{
+			  save.add(new SimpleAttributeModifier("class", "button savevote active"));
 				VoteItem x = transfer.getData();
 				if (location==null || location.getComponent() == list)
 				{
@@ -190,6 +193,7 @@ public class ListVotesPanel2 extends Panel
 		Label description=new Label("description",Model.of(text));
 		description.setEscapeModelStrings(false);
 		add(new Label("headerText",content2.text("page.vote.table.header", "Wunschreihenfolge :")));
+		save.add(new SimpleAttributeModifier("class", "button savevote inactive"));
 		add(save);
 		add(description);
 		save.setOutputMarkupId(true);
@@ -291,6 +295,7 @@ public class ListVotesPanel2 extends Panel
 			neueVotes.add(vote);
 		}
 		votes.saveMyVotes(neueVotes);
+		save.add(new SimpleAttributeModifier("class", "button savevote inactive"));
 		target.addComponent(save);
 	}
 }

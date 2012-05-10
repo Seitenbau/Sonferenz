@@ -1393,7 +1393,6 @@ body.repaint {
 .votenumbers .vote-numbering {
     height: 20px;
     padding: 2px 3px 0 0;
-    margin: 0 0 2px 0;
     text-align: right;
 }
 
@@ -1456,3 +1455,6 @@ img.infolink {
 .buttons {
 	padding: 5px;
 }
+a.inactive {
+	background-color: gray;
+} 

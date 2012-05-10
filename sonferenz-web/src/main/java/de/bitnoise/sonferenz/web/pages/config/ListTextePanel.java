@@ -52,6 +52,7 @@ public class ListTextePanel extends
     builder.addActions("action", new Edit());
     builder.addColumn("name");
     builder.addColumn("value");
+    builder.setDefaultSort("name");
   }
 
   @Override

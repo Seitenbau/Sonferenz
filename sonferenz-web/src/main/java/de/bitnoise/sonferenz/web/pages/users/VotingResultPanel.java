@@ -68,7 +68,7 @@ public class VotingResultPanel extends Panel
     StringBuffer sb = new StringBuffer();
     sb.append("created : ");
     sb.append(new Date());
-    sb.append("</br><ul>");
+    sb.append("</br><hr/>Noch nicht abgestimmt haben : <br/><ul>");
     List<UserModel> users = vservice.getAllUsersNotVoted(conference);
     for(UserModel user :users ) {
       sb.append("<li>");
@@ -76,7 +76,7 @@ public class VotingResultPanel extends Panel
     }
     sb.append("</ul>");
     
-    sb.append("</br><ul>");
+    sb.append("</br><hr/>Zwischenergebnis : <br/><ul>");
     for(VotedItem item : state ) {
       sb.append("<li>");
       sb.append(item.getTitle());
