@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.css"> 
   <!-- <link wicket:id="stylesheet" />  -->
   <script src="assets/modules/MODUL-23258527-f9bb-41c6-865a-a8ed23314dcc-MODUL/js/jquery-1.7.1.min.js"></script>
-
+  <link rel="shortcut icon" href="favicon.ico">
 <script>
 function webkitRepaint (el) {
   el.className = el.className + ' repaint';
@@ -16,6 +16,14 @@ function webkitRepaint (el) {
     el.className = el.className.replace(/( repaint)+$/, '');
   }, 0);
 }
+$(function() {
+  /* webkit bugfix https://bugs.webkit.org/show_bug.cgi?id=53166 */
+  if ($.browser.webkit) {
+    window.addEventListener('resize', function() {
+      webkitRepaint(document.body);
+    }, false);
+  }
+});
 </script>
 </head>
 <body id="MUNIT-9139f28b-d046-41ef-8933-d888e938bbfb-MUNIT" class="MUNIT-05ded946-7685-45a2-a1e0-31b7b7df767d-MUNIT">
