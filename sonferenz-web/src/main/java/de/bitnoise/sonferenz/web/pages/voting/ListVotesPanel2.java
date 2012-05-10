@@ -89,14 +89,14 @@ public class ListVotesPanel2 extends Panel
 			protected void populateItem(ListItem<NumberItem> item) {
 				NumberItem object = item.getModel().getObject();
 				Label label = new Label("numberItem", Model.of(object.getNumber()));
-				WebMarkupContainer div = new WebMarkupContainer("number");
+//				WebMarkupContainer div = new WebMarkupContainer("number");
 				String cssClass = "should";
 				if (object.getRequired()) {
 					cssClass = "needed";
 				}
-				WicketTools.addCssClass(div, cssClass);
-				div.add(label);
-				item.add(div);
+				WicketTools.addCssClass(item, cssClass);
+				item.add(label);
+//				item.add(div);
 			}
 		};
 		add(numbers);
@@ -147,7 +147,7 @@ public class ListVotesPanel2 extends Panel
 			{
 				save.setEnabled(true);
 				VoteItem x = transfer.getData();
-				if (location.getComponent() == list)
+				if (location==null || location.getComponent() == list)
 				{
 					// foos.add(x);
 				}
