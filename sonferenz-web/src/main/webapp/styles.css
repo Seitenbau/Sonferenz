@@ -1401,7 +1401,7 @@ body.repaint {
 }
 
 .votinglist {
-    margin-left: 23px;
+    margin-left: 30px;
     border-left: 1px solid;
 }
 
@@ -1410,9 +1410,10 @@ body.repaint {
 
 .votinglist .item {
     height: 20px;
-    margin-left: 10px;
+    margin-left: 1px;
     padding: 2px 3px 0 0;
 }
+
 
 .dragitem {
     height: 20px;
@@ -1420,6 +1421,7 @@ body.repaint {
     width: 1px;
     padding-right: 8px;
     background: url("images/dragdrop_handle.png") no-repeat 2px 3px transparent;
+    margin-left: 5px;
 }
 .votinglist .item .initiate {
     height: 20px;
@@ -1436,12 +1438,10 @@ img.infolink {
 img.moveup {
     height: 10px;
     display: inline;
-    padding-left: 3px;
 }
 img.movedown {
     height: 10px;
     display: inline;
-    padding-left: 3px;
 }
 
 .vote {
