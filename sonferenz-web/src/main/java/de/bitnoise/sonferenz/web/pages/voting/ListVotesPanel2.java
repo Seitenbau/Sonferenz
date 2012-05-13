@@ -42,6 +42,7 @@ import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.VoteModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
+import de.bitnoise.sonferenz.web.component.text.StaticTextPanel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.paper.ViewTalkPage;
 import de.bitnoise.sonferenz.web.pages.voting.ListVotesPanel2.NumberItem;
@@ -211,13 +212,13 @@ public class ListVotesPanel2 extends Panel
 				onSave(target);
 			}
 		};
-		String text = content2.text("page.vote.header");
-		Label description=new Label("description",Model.of(text));
-		description.setEscapeModelStrings(false);
+		
+		add(new StaticTextPanel("panelFooter","page.vote.footer"));
+		add(new StaticTextPanel("description","page.vote.header"));
+		
 		add(new Label("headerText",content2.text("page.vote.table.header", "Wunschreihenfolge :")));
 		save.add(new SimpleAttributeModifier("class", "button savevote inactive"));
 		add(save);
-		add(description);
 		save.setOutputMarkupId(true);
 	}
 

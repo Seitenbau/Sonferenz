@@ -16,10 +16,10 @@ public class InfoPage extends KonferenzPage {
 		return new StaticContentPanel(id, "page.info");
 	}
 
-	public static PageParameters createParameters(ConferenceModel iModel) {
-		PageParameters pp = new PageParameters();
-		pp.add("info", String.valueOf(iModel.getId()));
-		return pp;
-	}
+//	public static PageParameters createParameters(ConferenceModel iModel) {
+//		PageParameters pp = new PageParameters();
+//		pp.add("info", String.valueOf(iModel.getId()));
+//		return pp;
+//	}
 
 }

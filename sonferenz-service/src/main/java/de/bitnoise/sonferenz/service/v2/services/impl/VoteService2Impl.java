@@ -210,6 +210,7 @@ public class VoteService2Impl implements VoteService
       if (!vote.getRateing().equals(Integer.MAX_VALUE))
       {
         rateing += vote.getRateing();
+        item.addUser(vote.getUser());
       }
     }
     item.setVotes(rateing);

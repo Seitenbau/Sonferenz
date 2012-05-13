@@ -1467,4 +1467,44 @@ img.movedown {
 }
 a.inactive {
 	background-color: gray;
-} 
+}
+
+ul.talk {
+	border: 1px solid #00437C;
+	list-style: none inline none;
+	border-radius: 5px 5px 5px 5px;
+	padding: 3px;
+	margin-bottom: 5px;
+}
+li.talkName {
+	list-style: none;
+    display: inline;
+}
+li.talkVotes {
+	list-style: none;
+    display: inline;
+    float: right;
+}
+li.talkUsers {
+	list-style: none;
+    display: block;
+}
+
+ul.talkUsers {
+	 list-style: none inline none;
+}
+li.talkUser {
+    display: inline;
+    padding-left: 5px;
+}
+ul.missingVote {
+	border: 1px solid red;
+	list-style: none inline none;
+	border-radius: 5px 5px 5px 5px;
+	padding: 3px;
+	margin-bottom: 5px;
+}
+li.missingVoteName {
+	list-style: none;
+    display: inline;
+}

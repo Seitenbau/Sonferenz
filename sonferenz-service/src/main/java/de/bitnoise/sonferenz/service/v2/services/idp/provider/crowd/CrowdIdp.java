@@ -21,12 +21,16 @@ import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 import de.bitnoise.sonferenz.service.v2.exceptions.UserExistsException;
+import de.bitnoise.sonferenz.service.v2.monitor.IMonitorState;
+import de.bitnoise.sonferenz.service.v2.monitor.IMonitorable;
+import de.bitnoise.sonferenz.service.v2.monitor.MonitorState;
+import de.bitnoise.sonferenz.service.v2.monitor.MonitorStateEnum;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.idp.Identity;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.Idp;
 
 @Service
-public class CrowdIdp implements Idp
+public class CrowdIdp implements Idp ,IMonitorable
 {
   private static final Logger logger = LoggerFactory.getLogger(CrowdIdp.class);
 
@@ -55,6 +59,8 @@ public class CrowdIdp implements Idp
   @Autowired
   ConfigurationService config;
 
+  MonitorStateEnum _state = MonitorStateEnum.NOT_SETUP;
+
   @Subscribe
   public void onConfigReload(ConfigReload event)
   {
@@ -66,14 +72,17 @@ public class CrowdIdp implements Idp
     if (crowdRestService == null || crowdUsername == null)
     {
       logger.warn("Missing Crowd Configuration");
+      _state = MonitorStateEnum.NOT_SETUP;
     }
     else
     { // init client
+      _state = MonitorStateEnum.UNKNOWN;
       HttpClient client = new HttpClient();
       UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(crowdUsername, crowdPassword);
       client.getState().setCredentials(AuthScope.ANY, credentials);
       CommonsClientHttpRequestFactory commons = new CommonsClientHttpRequestFactory(client);
       restTemplate = new RestTemplate(commons);
+      _state = MonitorStateEnum.OK;
     }
   }
 
@@ -212,6 +221,11 @@ public class CrowdIdp implements Idp
   @Override
   public void setUserPassword(UserModel user, String newPassword) {
 	  throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public IMonitorState getState() {
+    return new MonitorState("IDP","IDP.Provider.Crowd", _state);
   }
 
 }
