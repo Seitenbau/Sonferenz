@@ -248,22 +248,29 @@ public class ListVotesPanel2 extends Panel
 	{
 		Map<Integer, VoteModel> votesPerTalk = getMyCurrentVotestPerTalk();
 		List<TalkModel> talks = getAllTalks();
-
+		boolean didVote=false;
 		final VoteList foos = new VoteList();
 		for (TalkModel talk : talks)
 		{
 			Integer rating = getRatingForTalk(votesPerTalk, talk);
 			foos.add(new VoteItem(rating, talk));
-		}
-
-		Collections.sort(foos, new Comparator<VoteItem>()
-		{
-			@Override
-			public int compare(VoteItem o1, VoteItem o2)
-			{
-				return o2.getRateing().compareTo(o1.getRateing());
+			if(!rating.equals(Integer.MAX_VALUE)) {
+			  didVote = true;
 			}
-		});
+		}
+		if(didVote) {
+  		Collections.sort(foos, new Comparator<VoteItem>()
+  		{
+  			@Override
+  			public int compare(VoteItem o1, VoteItem o2)
+  			{
+  				return o2.getRateing().compareTo(o1.getRateing());
+  			}
+  		});
+		} else {
+		  // Not voted, randomize list
+		  Collections.shuffle(foos);
+		}
 		return foos;
 	}
 
