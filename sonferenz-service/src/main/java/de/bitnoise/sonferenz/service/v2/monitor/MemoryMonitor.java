@@ -15,11 +15,13 @@ public class MemoryMonitor implements IMonitorableList {
     Runtime rt = Runtime.getRuntime();
     long totalMemory = rt.totalMemory();
     long freeMemory = rt.freeMemory();
+    long maxMemory = rt.maxMemory();
     long usedMemory = totalMemory - freeMemory;
 
     list.add(new MonitorState("MEM", "TotalMemory", MonitorStateEnum.OK, MB(totalMemory)));
     list.add(new MonitorState("MEM", "FreeMemory", MonitorStateEnum.OK, MB(freeMemory)));
     list.add(new MonitorState("MEM", "UsedMemory", MonitorStateEnum.OK, MB(usedMemory)));
+    list.add(new MonitorState("MEM", "MaxMemory", MonitorStateEnum.OK, MB(maxMemory)));
 
     return list;
   }
