@@ -207,10 +207,13 @@ public class VoteService2Impl implements VoteService
     int rateing = 0;
     for (VoteModel vote : votes)
     {
-      if (!vote.getRateing().equals(Integer.MAX_VALUE))
+      Integer rate = vote.getRateing();
+      if (!rate.equals(Integer.MAX_VALUE))
       {
-        rateing += vote.getRateing();
-        item.addUser(vote.getUser());
+        rateing += rate;
+        if(!rate.equals(0)) {
+          item.addUser(vote.getUser());
+        }
       }
     }
     item.setVotes(rateing);

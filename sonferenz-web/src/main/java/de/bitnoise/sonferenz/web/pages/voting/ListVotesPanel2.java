@@ -72,6 +72,7 @@ public class ListVotesPanel2 extends Panel
 	@SpringBean
 	StaticContentService content2;
 
+	// FIXME: MAX
 	int max = 10;
 
 	public ListVotesPanel2(String id)
