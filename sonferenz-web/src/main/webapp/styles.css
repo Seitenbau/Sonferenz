@@ -1479,11 +1479,13 @@ ul.talk {
 li.talkName {
 	list-style: none;
     display: inline;
+    font-weight: bold;
 }
 li.talkVotes {
 	list-style: none;
     display: inline;
     float: right;
+    font-weight: bold;
 }
 li.talkUsers {
 	list-style: none;
@@ -1494,7 +1496,7 @@ ul.talkUsers {
 	 list-style: none inline none;
 }
 li.talkUser {
-    display: inline;
+    display: inline-block;
     padding-left: 5px;
 }
 ul.missingVote {
