@@ -12,7 +12,19 @@ public class VotedItem implements Serializable
 
   Integer _votes;
 
+  Integer _absoluteVotes;
+  
   Set<String> _users;
+  
+  Boolean _checked;
+
+  public Boolean getChecked() {
+    return _checked;
+  }
+
+  public void setChecked(Boolean _checked) {
+    this._checked = _checked;
+  }
 
   public String getTitle()
   {
@@ -32,6 +44,15 @@ public class VotedItem implements Serializable
   public void setVotes(Integer votes)
   {
     _votes = votes;
+  }
+  
+
+  public void setAbsoluteVotes(Integer avotes) {
+    _absoluteVotes=avotes;
+  }
+
+  public Integer getAbsoluteVotes() {
+    return _absoluteVotes;
   }
 
   public void setTalk(String title)

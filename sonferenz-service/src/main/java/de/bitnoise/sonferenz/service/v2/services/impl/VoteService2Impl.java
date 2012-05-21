@@ -216,6 +216,7 @@ public class VoteService2Impl implements VoteService
         }
       }
     }
+    item.setAbsoluteVotes(item.getUsers().size());
     item.setVotes(rateing);
   }
 

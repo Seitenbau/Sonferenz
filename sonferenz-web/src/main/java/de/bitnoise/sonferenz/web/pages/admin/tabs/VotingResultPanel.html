@@ -2,14 +2,31 @@
   <div   class="tableBar"></div>
   <table id="userTable" class="tabelle"></table>
   
-  <span wicket:id="content"/>
   <h2 class="missingVote">noch nicht abgestimmt:</h2>
   <div wicket:id="missingVoteList" class="missingVoteList">
      <ul class="missingVote">
        <li wicket:id="missingVoteName" class="missingVoteName"></li>
      </ul>
   </div>
+  <h2 class="voteResult">Konferenz auswählen :</h2>
   
+  <form wicket:id="form" class="formLayout">
+    <fieldset>
+        <legend>Endergebnis berechnen</legend>
+        <label>Berechnungsart:   </label>
+        <select wicket:id="calculateAs"></select>
+      <br/>
+        <label>UserName:   </label>
+        <input wicket:id="topcount"/>
+      <br/>
+    </fieldset>
+    <div  class="formButtons">
+      <input type="submit"  value="Berechne Liste"/>
+    </div>
+  </form>
+  <span wicket:id="result"></span>
+  
+  <br/>
   <h2 class="voteResult">Zwischenergebnis :</h2>
   <div wicket:id="talkList" class="talkList">
      <ul class="talk">
@@ -19,6 +36,7 @@
      </ul>
   </div>
  <wicket:fragment wicket:id="fragment1">
+   <div wicket:id="userCount"></div>
    <ul class="talkUsers"> 
      <li wicket:id="userList" class="talkUser"><span wicket:id="name">u1</span>,</li>
    </ul>

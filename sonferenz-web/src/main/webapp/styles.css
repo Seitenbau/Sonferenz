@@ -381,6 +381,10 @@ div.tableBar {
 	padding-bottom: 25px;
 }
 
+.formLayout.checkbox {
+	padding: 20px;
+}
+
 .formLayout label,.formLayout input,.formLayout select {
 	display: block;
 	min-width: 120px;
