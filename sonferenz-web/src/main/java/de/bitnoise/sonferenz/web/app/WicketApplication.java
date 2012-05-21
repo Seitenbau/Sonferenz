@@ -3,18 +3,14 @@ package de.bitnoise.sonferenz.web.app;
 import org.apache.wicket.Request;
 import org.apache.wicket.Response;
 import org.apache.wicket.Session;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.SecurePackageResourceGuard;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 
-import com.jquery.JQueryResourceReference;
 import com.visural.wicket.aturl.AtAnnotation;
 
-import de.bitnoise.sonferenz.Start;
-import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
 
 /**
