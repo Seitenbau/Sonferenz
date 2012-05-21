@@ -1,6 +1,8 @@
 package de.bitnoise.sonferenz;
 
 import org.junit.Test;
+
+import de.bitnoise.sonferenz.web.app.KonferenzDefines;
 import static org.fest.assertions.Assertions.*;
 
 public class KonferenzDefinesTest implements KonferenzDefines

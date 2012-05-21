@@ -12,9 +12,9 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.StringResourceModel;
 
-import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.web.ConfigMainNavigation;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.confpan.CurrentConferencePanel;
 import de.bitnoise.sonferenz.web.component.footer.FooterPanel;
 import de.bitnoise.sonferenz.web.component.lvl1.FirstLevelBar;

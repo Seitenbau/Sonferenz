@@ -11,10 +11,10 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.StaticContentModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.TableBuilder.ActionColumn;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;

@@ -6,7 +6,7 @@ import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import de.bitnoise.sonferenz.WicketApplication;
+import de.bitnoise.sonferenz.web.app.WicketApplication;
 
 public abstract class IconPanel extends Panel
 {

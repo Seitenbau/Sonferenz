@@ -16,7 +16,7 @@ import org.apache.wicket.model.ResourceModel;
 import com.visural.wicket.behavior.beautytips.BeautyTipBehavior;
 import com.visural.wicket.behavior.beautytips.TipPosition;
 
-import de.bitnoise.sonferenz.WicketApplication;
+import de.bitnoise.sonferenz.web.app.WicketApplication;
 
 public abstract class VoteMultiStateColumn<T extends IMutiState> extends
     AbstractColumn<T>

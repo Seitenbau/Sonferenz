@@ -9,7 +9,7 @@ import org.junit.Rule;
 import org.mockito.Mock;
 import org.springframework.context.ApplicationContext;
 
-import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.testing.mockito.MockitoRule;
 
 /**

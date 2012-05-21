@@ -8,27 +8,27 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.visural.wicket.aturl.At;
 
-import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.model.UserModel;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.tabs.TabPanel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.AppStatePanel;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.LogOutputPanel;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.VotingResultPanel;
 import de.bitnoise.sonferenz.web.pages.conference.ListConferencesPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListConfigPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListRolesPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListTextePanel;
-import de.bitnoise.sonferenz.web.pages.users.AppStatePanel;
-import de.bitnoise.sonferenz.web.pages.users.ListUserPanel;
-import de.bitnoise.sonferenz.web.pages.users.LogOutputPanel;
-import de.bitnoise.sonferenz.web.pages.users.VotingResultPanel;
 
 @At(url = "/admin")
 public class AdminPage extends KonferenzPage {
 	@Override
 	protected Panel getPageContent(String id)
 	{
-		final UserModel user = KonferenzSession.get().getCurrentUser();
-		if (user != null)
+		if (KonferenzSession.get().hasRight(Right.Admin.Configure))
 		{
 			return new TabPanel(id) {
 				@Override

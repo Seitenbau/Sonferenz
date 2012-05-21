@@ -16,12 +16,12 @@ import org.springframework.data.domain.PageRequest;
 
 import ch.qos.logback.core.rolling.helper.PeriodicityType;
 
-import de.bitnoise.sonferenz.KonferenzSession;
-import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;

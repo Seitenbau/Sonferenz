@@ -8,9 +8,9 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 
-import de.bitnoise.sonferenz.KonferenzSession;
-import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 
 public class StaticContentPanel extends Panel
 {

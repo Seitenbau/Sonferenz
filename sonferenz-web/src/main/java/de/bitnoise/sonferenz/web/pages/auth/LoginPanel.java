@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.Model;
 
-import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.FocusOnLoadBehavior;
 import de.bitnoise.sonferenz.web.pages.statics.InfoPage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;

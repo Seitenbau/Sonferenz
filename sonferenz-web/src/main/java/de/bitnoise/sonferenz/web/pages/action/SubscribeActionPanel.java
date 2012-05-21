@@ -13,13 +13,13 @@ import org.apache.wicket.validation.validator.AbstractValidator;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 import org.apache.wicket.validation.validator.PatternValidator;
 
-import de.bitnoise.sonferenz.KonferenzDefines;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
 import de.bitnoise.sonferenz.service.v2.exceptions.UserExistsException;
 import de.bitnoise.sonferenz.service.v2.exceptions.ValidationException;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.crowd.CrowdIdp;
+import de.bitnoise.sonferenz.web.app.KonferenzDefines;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 

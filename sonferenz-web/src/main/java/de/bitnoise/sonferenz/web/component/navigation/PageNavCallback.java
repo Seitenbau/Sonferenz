@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.apache.wicket.Page;
 
-import de.bitnoise.sonferenz.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 
 public class PageNavCallback extends AbstractNavCallback

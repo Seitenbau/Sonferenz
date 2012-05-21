@@ -34,7 +34,6 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import de.bitnoise.sonferenz.KonferenzSession;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.TalkModel;
@@ -42,9 +41,10 @@ import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.VoteModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.text.StaticTextPanel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
-import de.bitnoise.sonferenz.web.pages.paper.ViewTalkPage;
+import de.bitnoise.sonferenz.web.pages.proposal.ViewTalkPage;
 import de.bitnoise.sonferenz.web.pages.voting.ListVotesPanel2.NumberItem;
 import de.bitnoise.sonferenz.web.utils.WicketTools;
 

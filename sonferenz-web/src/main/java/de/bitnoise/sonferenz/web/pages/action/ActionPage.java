@@ -10,12 +10,12 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.visural.wicket.aturl.At;
 import com.visural.wicket.aturl.URLType;
 
-import de.bitnoise.sonferenz.KonferenzSession;
-import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.service.v2.actions.ActionState;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.conference.EditConferenceWizard;

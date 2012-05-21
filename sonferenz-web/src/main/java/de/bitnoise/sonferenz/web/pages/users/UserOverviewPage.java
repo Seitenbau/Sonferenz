@@ -9,14 +9,15 @@ import org.apache.wicket.model.Model;
 
 import com.visural.wicket.aturl.At;
 
-import de.bitnoise.sonferenz.KonferenzSession;
-import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.model.UserModel;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.users.action.CreateNewUser;
-import de.bitnoise.sonferenz.web.pages.users.table.UserListItem;
+import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
+import de.bitnoise.sonferenz.web.pages.admin.model.UserListItem;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
 
 @At(url = "/users")
 public class UserOverviewPage extends KonferenzPage

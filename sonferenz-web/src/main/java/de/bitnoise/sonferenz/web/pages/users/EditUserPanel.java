@@ -16,13 +16,13 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.visural.common.web.HtmlSanitizer;
 
-import de.bitnoise.sonferenz.KonferenzDefines;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
 import de.bitnoise.sonferenz.service.v2.services.idp.IdpService;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.Idp;
+import de.bitnoise.sonferenz.web.app.KonferenzDefines;
 
 public class EditUserPanel extends FormPanel
 {

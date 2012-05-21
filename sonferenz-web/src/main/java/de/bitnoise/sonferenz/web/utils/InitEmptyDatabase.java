@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.bitnoise.sonferenz.KonferenzDefines;
 import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
 import de.bitnoise.sonferenz.repo.RoleRepository;
@@ -22,6 +21,7 @@ import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.local.LocalIdp;
 import de.bitnoise.sonferenz.service.v2.services.impl.EventingImpl;
+import de.bitnoise.sonferenz.web.app.KonferenzDefines;
 
 @Service
 public class InitEmptyDatabase

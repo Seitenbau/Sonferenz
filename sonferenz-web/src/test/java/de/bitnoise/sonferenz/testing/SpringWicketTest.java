@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.fest.reflect.core.Reflection.*;
-import de.bitnoise.sonferenz.WicketApplication;
+import de.bitnoise.sonferenz.web.app.WicketApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations =

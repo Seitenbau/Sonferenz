@@ -20,12 +20,12 @@ import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValid
 
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
 
-import de.bitnoise.sonferenz.KonferenzSession;
-import de.bitnoise.sonferenz.Right;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.idp.provider.crowd.CrowdIdp;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
 public class InviteUserPanel extends FormPanel

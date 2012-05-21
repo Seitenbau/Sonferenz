@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.apache.wicket.Page;
 
-import de.bitnoise.sonferenz.Right;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.navigation.AbstractNavCallback;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.component.navigation.PageNavCallback;
@@ -27,14 +27,14 @@ import de.bitnoise.sonferenz.web.pages.conference.ConferenceOverviewPage;
 import de.bitnoise.sonferenz.web.pages.config.EditConfigurationPage;
 import de.bitnoise.sonferenz.web.pages.config.EditTextePage;
 import de.bitnoise.sonferenz.web.pages.config.EditUserRolesPage;
-import de.bitnoise.sonferenz.web.pages.paper.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.profile.MyProfilePage;
+import de.bitnoise.sonferenz.web.pages.proposal.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.schedule.SchedulePage;
 import de.bitnoise.sonferenz.web.pages.settings.SettingsPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
-import de.bitnoise.sonferenz.web.pages.timetable.TimeTablePage;
+import de.bitnoise.sonferenz.web.pages.suggestion.WhishOverviewPage;
 import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
 import de.bitnoise.sonferenz.web.pages.voting.VotingOverviewPage;
-import de.bitnoise.sonferenz.web.pages.whish.WhishOverviewPage;
 
 public class ConfigMainNavigation
 {
