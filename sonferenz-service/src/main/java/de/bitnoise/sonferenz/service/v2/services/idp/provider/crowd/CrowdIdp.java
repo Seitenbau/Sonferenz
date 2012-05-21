@@ -17,9 +17,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.common.eventbus.Subscribe;
 
+import de.bitnoise.sonferenz.model.LocalUserModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.events.ConfigReload;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
+import de.bitnoise.sonferenz.service.v2.exceptions.RepositoryException;
 import de.bitnoise.sonferenz.service.v2.exceptions.UserExistsException;
 import de.bitnoise.sonferenz.service.v2.monitor.IMonitorState;
 import de.bitnoise.sonferenz.service.v2.monitor.IMonitorable;
@@ -215,12 +217,22 @@ public class CrowdIdp implements Idp ,IMonitorable
 
   @Override
   public boolean supportsPasswordChange() {
-	return false;
+    return true;
   }
 
   @Override
   public void setUserPassword(UserModel user, String newPassword) {
-	  throw new UnsupportedOperationException();
+    if (!user.getProvider().getAuthType().equals(IDP_NAME)) {
+      throw new RepositoryException("Provider dosn't match for this user");
+    }
+    try
+    {
+      String username = user.getProvider().getAuthId();
+      setPassword(username, newPassword);
+    } catch (Throwable t)
+    {
+      throw new RepositoryException(t);
+    }
   }
 
   @Override
