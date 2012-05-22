@@ -29,7 +29,7 @@ public class VoteModel implements DoInterface<Integer>
   Integer rateing;
 
   @OneToOne 
-  TalkModel talk;
+  ProposalModel talk;
   
   @OneToOne
   UserModel user;

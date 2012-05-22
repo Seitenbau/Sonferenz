@@ -4,10 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.model.WhishModel;
+import de.bitnoise.sonferenz.model.SuggestionModel;
 
-public interface WhishRepository extends JpaRepository<WhishModel, Integer>
+public interface SuggestionRepository extends JpaRepository<SuggestionModel, Integer>
 {
 
-	Page<WhishModel> findAllByOwner(UserModel current);
+	Page<SuggestionModel> findAllByOwner(UserModel current);
 }

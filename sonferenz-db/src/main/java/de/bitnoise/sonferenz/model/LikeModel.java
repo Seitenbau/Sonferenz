@@ -29,7 +29,7 @@ public class LikeModel implements DoInterface<Integer>
   Integer likes;
 
   @OneToOne
-  WhishModel whish;
+  SuggestionModel whish;
 
   @OneToOne
   UserModel user;

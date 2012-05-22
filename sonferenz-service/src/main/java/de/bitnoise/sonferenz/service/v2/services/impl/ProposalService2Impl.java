@@ -9,72 +9,72 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.repo.TalkRepository;
+import de.bitnoise.sonferenz.repo.ProposalRepository;
 import de.bitnoise.sonferenz.service.v2.Detach;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
-import de.bitnoise.sonferenz.service.v2.services.TalkService;
+import de.bitnoise.sonferenz.service.v2.services.ProposalService;
 
 @Service
-public class TalkService2Impl implements TalkService
+public class ProposalService2Impl implements ProposalService
 {
   @Autowired
-  TalkRepository talkRepo;
+  ProposalRepository proposalRepo;
 
   @Override
   @Transactional(readOnly=true)
-  public List<TalkModel> getAllTalks()
+  public List<ProposalModel> getAllProposals()
   {
-    return talkRepo.findAll();
+    return proposalRepo.findAll();
   }
 
   @Override
   @Transactional 
-  public void deleteTalk(TalkModel talk)
+  public void deleteProposal(ProposalModel talk)
   {
-    talkRepo.delete(talk);
+    proposalRepo.delete(talk);
   }
 
   @Override
   @Transactional 
-  public void saveTalk(TalkModel talk)
+  public void saveProposal(ProposalModel talk)
   {
-    talkRepo.save(talk);
+    proposalRepo.save(talk);
   }
 
   @Override
   @Transactional(readOnly=true)
-  public TalkModel getTalkById(int id)
+  public ProposalModel getProposalById(int id)
   {
-    return talkRepo.findOne(id);
+    return proposalRepo.findOne(id);
   }
   @Override
   @Transactional(readOnly=true)
   public int getCount()
   {
-    return (int) talkRepo.count();
+    return (int) proposalRepo.count();
   }
 
   @Override
   @Transactional(readOnly=true)
-  public Page<TalkModel> getTalks(PageRequest request)
+  public Page<ProposalModel> getProposals(PageRequest request)
   {
-    return talkRepo.findAll(request);
+    return proposalRepo.findAll(request);
   }
 
   @Override
   @Transactional(readOnly=true)
-  public long getVotableTalksCount()
+  public long getVotableProposalsCount()
   {
-    return talkRepo.countAllVotable();
+    return proposalRepo.countAllVotable();
   }
 
   @Override
   @Transactional(readOnly=true)
-  public Page<TalkModel> getVotableTalks(PageRequest request)
+  public Page<ProposalModel> getVotableProposals(PageRequest request)
   {
-    Page<TalkModel> result = talkRepo.test(request);
+    Page<ProposalModel> result = proposalRepo.test(request);
     Detach.detachTM(result) ;
     return  result;
   }
@@ -83,9 +83,9 @@ public class TalkService2Impl implements TalkService
   AuthenticationService authService;
   
   @Override
-  public Page<TalkModel> getMyTalks(PageRequest request) {
+  public Page<ProposalModel> getMyProposals(PageRequest request) {
 	  UserModel current = authService.getCurrentUserOrFail();
-	  return talkRepo.findByOwner(current);
+	  return proposalRepo.findByOwner(current);
   }
 
 }

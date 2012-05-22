@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 
 
 import de.bitnoise.sonferenz.model.ConferenceModel;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.VoteModel;
-import de.bitnoise.sonferenz.repo.TalkRepository;
+import de.bitnoise.sonferenz.repo.ProposalRepository;
 import de.bitnoise.sonferenz.repo.VoteRepository;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 import de.bitnoise.sonferenz.service.v2.extend.CalculateTalkOrder;
@@ -26,7 +26,7 @@ import de.bitnoise.sonferenz.service.v2.services.CalcualtionService;
 public class CalcualtionServiceImpl implements CalcualtionService
 {
   @Autowired
-  TalkRepository talkRepo;
+  ProposalRepository talkRepo;
 
   @Autowired
   VoteRepository voteRepo;
@@ -181,17 +181,17 @@ public class CalcualtionServiceImpl implements CalcualtionService
 
   public class TimeTableImpl implements TimeTable
   {
-    List<List<TalkModel>> _tracks;
+    List<List<ProposalModel>> _tracks;
     List<TalkDetails> _allTalks;
 
     @Override
-    public List<TalkModel> getTrack(int track)
+    public List<ProposalModel> getTrack(int track)
     {
       if (_tracks == null)
       {
-        _tracks = new ArrayList<List<TalkModel>>();
-        _tracks.add(new ArrayList<TalkModel>());
-        _tracks.add(new ArrayList<TalkModel>());
+        _tracks = new ArrayList<List<ProposalModel>>();
+        _tracks.add(new ArrayList<ProposalModel>());
+        _tracks.add(new ArrayList<ProposalModel>());
       }
       return _tracks.get(track);
     }

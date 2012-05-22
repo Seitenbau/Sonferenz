@@ -28,7 +28,7 @@ import org.hibernate.annotations.Type;
 @Table 
 @EqualsAndHashCode(of =
   { "id" })
-public class WhishModel extends ModelBase implements DoInterface<Integer>
+public class SuggestionModel extends ModelBase implements DoInterface<Integer>
 {
   @Id
   @GeneratedValue

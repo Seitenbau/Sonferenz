@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.suggestion;
+package de.bitnoise.sonferenz.web.pages.talks;
 
 import java.util.ArrayList;
 
@@ -9,16 +9,16 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.visural.wicket.aturl.At;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.SuggestionModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
+import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.suggestion.action.CreateWhish;
 
-@At(url = "/suggestions")
-public class WhishOverviewPage extends KonferenzPage
+@At(url = "/talks")
+public class TalksOverviewPage extends KonferenzPage
 {
   public enum State
   {
@@ -26,59 +26,58 @@ public class WhishOverviewPage extends KonferenzPage
   }
 
   State state = State.LIST;
-
-  SuggestionModel _whish;
-
-  @SpringBean
-  UiFacade facade;
+  TalkModel _talk;
 
   @Override
   protected Panel getPageContent(String id)
   {
-    if (!KonferenzSession.hasRight(Right.Whish.List))
+    if (!KonferenzSession.hasRight(Right.Talk.List) && !state.equals(State.VIEW))
     {
       return new UnauthorizedPanel(id);
     }
     switch (state)
     {
     case LIST:
-      return new ListWhishesPanel(id);
+      return new ListTalksPanel(id);
     case EDIT:
-    case NEW:
-      return new EditWhishPanel(id, _whish);
+      return new EditTalkPanel(id, _talk);
     case VIEW:
-      return new ViewWhishPanel(id, _whish);
+      return new ViewTalkPanel(id, _talk);
+    case NEW:
+      return new EditTalkPanel(id, _talk);
     default:
       return new EmptyPanel(id);
     }
   }
-  @Override
-  protected void buildNavigation(ArrayList<NavCallbackInterface> navs)
-  {
-//    navs.add(new CreateWhish());
-  }
-  @Override
-  public Object getCurrentAction()
-  {
-    return state;
-  }
 
-  public void editTalk(SuggestionModel talk)
+  public void editTalk(TalkModel talk)
   {
     state = State.EDIT;
-    _whish = talk;
+    _talk = talk;
   }
 
-  public void viewTalk(SuggestionModel talk)
+  public void viewTalk(TalkModel talk)
   {
     state = State.VIEW;
-    _whish = talk;
+    _talk = talk;
   }
 
   public void createNew()
   {
     state = State.NEW;
-    _whish = new SuggestionModel();
-    _whish.setOwner(facade.getCurrentUser());
+    _talk = new TalkModel();
+    _talk.setOwner(KonferenzSession.get().getCurrentUser());
+  }
+
+  @Override
+  protected void buildNavigation(ArrayList<NavCallbackInterface> navs)
+  {
+//    navs.add(new CreateTalk());
+  }
+
+  @Override
+  public Object getCurrentAction()
+  {
+    return state;
   }
 }

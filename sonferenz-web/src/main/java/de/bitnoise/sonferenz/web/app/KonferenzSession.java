@@ -25,6 +25,7 @@ import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
+import de.bitnoise.sonferenz.service.v2.model.AppContext;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
 
 public class KonferenzSession extends WebSession
@@ -254,5 +255,12 @@ public class KonferenzSession extends WebSession
   private static void setInternalMockForSession(KonferenzSession session)
   {
     _TestMockSession = session;
+  }
+
+  public static AppContext context()
+  {
+    return new AppContext()
+    {
+    };
   }
 }

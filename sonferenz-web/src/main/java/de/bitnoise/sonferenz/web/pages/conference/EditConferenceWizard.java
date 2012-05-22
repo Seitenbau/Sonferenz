@@ -22,7 +22,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ConferenceState;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.web.component.drop.DropDownEnumChoice;
 import de.bitnoise.sonferenz.web.pages.conference.table.TalkToConference;
 
@@ -111,9 +111,9 @@ public class EditConferenceWizard extends Wizard
     protected void onInitialize()
     {
       // Create elements
-      List<TalkModel> all = facade.getAllTalks();
+      List<ProposalModel> all = facade.getAllProposals();
       List<TalkToConference> talks = asTalkToConference(all);
-      List<TalkModel> cur = facade.getAllTalksForConference(_conference);
+      List<ProposalModel> cur = facade.getAllProposalsForConference(_conference);
       liste = new IncrementalList<TalkToConference>(asTalkToConference(cur));
       modelTalks = new ListModel<TalkToConference>(liste);
 
@@ -138,10 +138,10 @@ public class EditConferenceWizard extends Wizard
       super.onInitialize();
     }
 
-    private List<TalkToConference> asTalkToConference(List<TalkModel> all)
+    private List<TalkToConference> asTalkToConference(List<ProposalModel> all)
     {
       List<TalkToConference> talks = new ArrayList<TalkToConference>();
-      for (TalkModel talk : all)
+      for (ProposalModel talk : all)
       {
         TalkToConference item = new TalkToConference();
         item.author = talk.getAuthor();
@@ -230,13 +230,13 @@ public class EditConferenceWizard extends Wizard
     Integer votesPerUser = Integer.valueOf(modelVotesPerUser.getObject());
     Integer votesRecomend = Integer.valueOf(modelVotesRecomend.getObject());
     List<TalkToConference> data = modelTalks.getObject();
-    List<TalkModel> talks = new ArrayList<TalkModel>();
+    List<ProposalModel> talks = new ArrayList<ProposalModel>();
     if (liste != null)
     {
-      facade.removeAllVotestForTalk(asTalks(liste.getRemovedItems()));
+      facade.removeAllVotestForProposal(asTalks(liste.getRemovedItems()));
       facade.removeTalksFromConference(_conference,
           asTalks(liste.getRemovedItems()));
-      facade.addTalksToConference(_conference, asTalks(liste.getAllItems()));
+      facade.addProposalToConference(_conference, asTalks(liste.getAllItems()));
     }
     _conference.setState(newState);
     _conference.setShortName(valueTitle);
@@ -270,9 +270,9 @@ public class EditConferenceWizard extends Wizard
     
   }
 
-  private List<TalkModel> asTalks(List<TalkToConference> rawList)
+  private List<ProposalModel> asTalks(List<TalkToConference> rawList)
   {
-    List<TalkModel> result = new ArrayList<TalkModel>();
+    List<ProposalModel> result = new ArrayList<ProposalModel>();
     if (rawList == null)
     {
       return result;

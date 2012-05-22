@@ -2,16 +2,16 @@ package de.bitnoise.sonferenz.web.pages.voting;
 
 import java.io.Serializable;
 
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 
 class VoteItem implements Serializable
 {
 
-  TalkModel _talk;
+  ProposalModel _talk;
 
   Integer _position;
 
-  public VoteItem(Integer rating, TalkModel talk)
+  public VoteItem(Integer rating, ProposalModel talk)
   {
     _position=rating;
     _talk = talk;
@@ -22,7 +22,7 @@ class VoteItem implements Serializable
     return _position;
   }
 
-  public TalkModel getTalk()
+  public ProposalModel getTalk()
   {
     return _talk;
   }

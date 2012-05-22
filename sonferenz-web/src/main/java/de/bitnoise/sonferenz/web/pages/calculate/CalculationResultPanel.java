@@ -10,7 +10,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.service.v2.extend.ports.TimeTable;
 import de.bitnoise.sonferenz.service.v2.extend.ports.TimeTable.TalkDetails;
 import de.bitnoise.sonferenz.service.v2.services.CalcualtionService;
@@ -112,21 +112,21 @@ public class CalculationResultPanel extends Panel
   private void apppendTrackList(StringBuilder sb, TimeTable liste)
   {
     sb.append("<table class=\"tracks\">");
-    Iterator<TalkModel> t0 = liste.getTrack(0).iterator();
-    Iterator<TalkModel> t1 = liste.getTrack(1).iterator();
+    Iterator<ProposalModel> t0 = liste.getTrack(0).iterator();
+    Iterator<ProposalModel> t1 = liste.getTrack(1).iterator();
     while (t0.hasNext())
     {
       sb.append("<tr>");
-      TalkModel talk0 = t0.next();
+      ProposalModel talk0 = t0.next();
       buildTD(sb, talk0);
-      TalkModel talk1 = t1.next();
+      ProposalModel talk1 = t1.next();
       buildTD(sb, talk1);
       sb.append("</tr>");
     }
     sb.append("</table>");
   }
 
-  private void buildTD(StringBuilder sb, TalkModel talk)
+  private void buildTD(StringBuilder sb, ProposalModel talk)
   {
     if (talk == null)
     {

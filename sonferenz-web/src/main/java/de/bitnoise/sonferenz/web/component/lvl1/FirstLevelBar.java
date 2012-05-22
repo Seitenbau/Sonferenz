@@ -6,7 +6,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.state.OnStateCallForPapers;
 import de.bitnoise.sonferenz.web.component.state.OnStateVoting;
-import de.bitnoise.sonferenz.web.pages.proposal.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.statics.ContactPage;
 import de.bitnoise.sonferenz.web.pages.statics.InfoPage;
@@ -39,7 +39,7 @@ public class FirstLevelBar extends Panel
       if (new OnStateCallForPapers().canBeDisplayed())
       {
         items.add(new MenuButton("whishes", items.newChildId(),WhishOverviewPage.class));
-        items.add(new MenuButton("talks", items.newChildId(),TalksOverviewPage.class));
+        items.add(new MenuButton("talks", items.newChildId(),ProposalOverviewPage.class));
       }
       /*
        * items.add(new MenuButton("archive", items.newChildId(),

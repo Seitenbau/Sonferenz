@@ -3,11 +3,11 @@ package de.bitnoise.sonferenz.service.v2.extend.ports;
 import java.util.List;
 import java.util.Set;
 
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 
 public interface TimeTable
 {
-  List<TalkModel> getTrack(int track);
+  List<ProposalModel> getTrack(int track);
 
   List<TalkDetails> getRawList();
 

@@ -9,16 +9,16 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.visural.wicket.aturl.At;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.proposal.action.CreateTalk;
+import de.bitnoise.sonferenz.web.pages.proposal.action.CreateProposal;
 
-@At(url = "/talks")
-public class TalksOverviewPage extends KonferenzPage
+@At(url = "/proposals")
+public class ProposalOverviewPage extends KonferenzPage
 {
   public enum State
   {
@@ -26,7 +26,7 @@ public class TalksOverviewPage extends KonferenzPage
   }
 
   State state = State.LIST;
-  private TalkModel _talk;
+  private ProposalModel _talk;
 
   @SpringBean
   UiFacade facade;
@@ -41,25 +41,25 @@ public class TalksOverviewPage extends KonferenzPage
     switch (state)
     {
     case LIST:
-      return new ListTalksPanel(id);
+      return new ListProposalPanel(id);
     case EDIT:
-      return new EditTalkPanel(id, _talk);
+      return new EditProposalPanel(id, _talk);
     case VIEW:
-      return new ViewTalkPanel(id, _talk);
+      return new ViewProposalPanel(id, _talk);
     case NEW:
-      return new EditTalkPanel(id, _talk);
+      return new EditProposalPanel(id, _talk);
     default:
       return new EmptyPanel(id);
     }
   }
 
-  public void editTalk(TalkModel talk)
+  public void editTalk(ProposalModel talk)
   {
     state = State.EDIT;
     _talk = talk;
   }
 
-  public void viewTalk(TalkModel talk)
+  public void viewTalk(ProposalModel talk)
   {
     state = State.VIEW;
     _talk = talk;
@@ -68,7 +68,7 @@ public class TalksOverviewPage extends KonferenzPage
   public void createNew()
   {
     state = State.NEW;
-    _talk = new TalkModel();
+    _talk = new ProposalModel();
     _talk.setOwner(facade.getCurrentUser());
   }
 

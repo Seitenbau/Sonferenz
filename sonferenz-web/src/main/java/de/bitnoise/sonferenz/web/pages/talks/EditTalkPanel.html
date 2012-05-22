@@ -1,0 +1,27 @@
+<wicket:panel>
+	<div wicket:id="feedback"></div>
+	<form wicket:id="form" class="formLayout">
+		<fieldset class="editPaperPageFieldset">
+            <legend>Vortrag bearbeiten</legend>
+				<label class="formItemLeft" id="labelTitel" for="titel">Titel :</label>
+				<input class="formItemRight formItemExpand" id="titel" wicket:id="title"/>
+			<br/>
+				<label class="formItemLeft"  id="labelAuthor" for="author">Vortragender :</label>
+				<input class="formItemRight formItemExpand" id="author" wicket:id="author"/>
+			<br/> 
+				<label id="labelDescription" class="merged">Beschreibung : (1. Absatz wird als Vorschau angezeigt)</label>
+	            <textarea class="merged" wicket:id="description"></textarea>
+	        <br/> 
+	        	<label  >Bearbeitungsrechte : </label>
+	        	<select wicket:id="theOwner"></select>
+	        <br/> 
+        </fieldset>
+		<div class="formButtons">
+		<input type="submit" wicket:id="submit" value="Speichern"/>
+		<input type="submit" wicket:id="cancel" value="Abbrechen" />
+		<!-- 
+		<a href="#" class="button" wicket:id="delete">Delete</a>
+		 -->
+		</div>
+	</form>
+</wicket:panel>

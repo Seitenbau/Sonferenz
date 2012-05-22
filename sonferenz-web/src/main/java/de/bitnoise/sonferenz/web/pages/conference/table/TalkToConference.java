@@ -2,14 +2,14 @@ package de.bitnoise.sonferenz.web.pages.conference.table;
 
 import java.io.Serializable;
 
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 
 public class TalkToConference implements Serializable
 {
   public Integer id;
   public String title;
   public String author;
-  public TalkModel talk;
+  public ProposalModel talk;
 
   @Override
   public boolean equals(Object arg0)

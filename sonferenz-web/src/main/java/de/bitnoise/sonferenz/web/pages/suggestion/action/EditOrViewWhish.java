@@ -7,7 +7,7 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 
-import de.bitnoise.sonferenz.model.WhishModel;
+import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.web.action.ActionBookmark;
 import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.action.WebAction;
@@ -25,14 +25,14 @@ public class EditOrViewWhish extends WebAction<IModel<Object>> implements
   public Page doAction(IModel<Object> model)
   {
     Object obj = model.getObject();
-    WhishModel whish = null;
+    SuggestionModel whish = null;
     if (obj instanceof ReftoWhish)
     {
       whish = ((ReftoWhish) obj).getWhish();
     }
-    if (obj instanceof WhishModel)
+    if (obj instanceof SuggestionModel)
     {
-      whish = ((WhishModel) obj);
+      whish = ((SuggestionModel) obj);
     }
     if (whish != null)
     {
@@ -58,7 +58,7 @@ public class EditOrViewWhish extends WebAction<IModel<Object>> implements
   public Link createBookmark(IModel<Object> model, String id)
   {
     Object obj = model.getObject();
-    WhishModel whish = null;
+    SuggestionModel whish = null;
     if (obj instanceof ReftoWhish) {
     	whish = ((ReftoWhish) obj).getWhish();
     } else if (obj instanceof ModelWhishList)

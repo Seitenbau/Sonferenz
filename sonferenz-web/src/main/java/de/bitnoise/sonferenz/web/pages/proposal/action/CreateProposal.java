@@ -4,19 +4,19 @@ import org.apache.wicket.Page;
 import org.apache.wicket.model.IModel;
 
 import de.bitnoise.sonferenz.web.action.WebMenuAction;
-import de.bitnoise.sonferenz.web.pages.proposal.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
 
-public class CreateTalk extends WebMenuAction<IModel<Object>>
+public class CreateProposal extends WebMenuAction<IModel<Object>>
 {
 
-  public CreateTalk()
+  public CreateProposal()
   {
-    super("Add", TalksOverviewPage.State.NEW);
+    super("Add", ProposalOverviewPage.State.NEW);
   }
 
   public Page doAction(IModel<Object> model)
   {
-    TalksOverviewPage page = new TalksOverviewPage();
+    ProposalOverviewPage page = new ProposalOverviewPage();
     page.createNew();
     return page;
   }

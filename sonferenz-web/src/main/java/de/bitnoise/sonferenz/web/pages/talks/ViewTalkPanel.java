@@ -1,9 +1,10 @@
-package de.bitnoise.sonferenz.web.pages.proposal;
+package de.bitnoise.sonferenz.web.pages.talks;
 
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
 
 
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 

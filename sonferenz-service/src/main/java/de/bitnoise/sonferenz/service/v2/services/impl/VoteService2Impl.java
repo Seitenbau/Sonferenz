@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.bitnoise.sonferenz.model.ConferenceModel;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.VoteModel;
-import de.bitnoise.sonferenz.repo.TalkRepository;
+import de.bitnoise.sonferenz.repo.ProposalRepository;
 import de.bitnoise.sonferenz.repo.VoteRepository;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
 import de.bitnoise.sonferenz.service.v2.services.ConferenceService;
@@ -24,7 +24,7 @@ import de.bitnoise.sonferenz.service.v2.services.VotedItem;
 public class VoteService2Impl implements VoteService
 {
   @Autowired
-  TalkRepository talkRepo;
+  ProposalRepository talkRepo;
 
   @Autowired
   VoteRepository voteRepo;
@@ -40,13 +40,13 @@ public class VoteService2Impl implements VoteService
 
   @Override
   @Transactional
-  public void removeAllVotestForTalk(List<TalkModel> talks)
+  public void removeAllVotestForTalk(List<ProposalModel> talks)
   {
     if (talks == null)
     {
       return;
     }
-    for (TalkModel talk : talks)
+    for (ProposalModel talk : talks)
     {
       List<VoteModel> votes = voteRepo.findByTalk(talk);
       if (votes != null)
@@ -61,7 +61,7 @@ public class VoteService2Impl implements VoteService
 
   @Override
   @Transactional
-  public boolean vote(TalkModel talk, UserModel user, int increment)
+  public boolean vote(ProposalModel talk, UserModel user, int increment)
   {
     ConferenceModel conference = talk.getConference();
     if (conference == null)
@@ -129,7 +129,7 @@ public class VoteService2Impl implements VoteService
     List<VoteModel> rest = voteRepo.findByUserAndRateing(user, minState);
     for (VoteModel v : rest)
     {
-      TalkModel t = v.getTalk();
+      ProposalModel t = v.getTalk();
       Hibernate.initialize(v);
       if (t != null)
       {
@@ -185,13 +185,15 @@ public class VoteService2Impl implements VoteService
   @Transactional
   public List<VotedItem> getVoteLevel(ConferenceModel conference)
   {
-    List<TalkModel> allTalks = conf.getAllTalksForConference(conference);
+    List<ProposalModel> allProposals = conf.getAllProposalsForConference(conference);
     List<VotedItem> list = new ArrayList<VotedItem>();
-    for (TalkModel talk : allTalks)
+    for (ProposalModel proposal : allProposals)
     {
-      List<VoteModel> votes = voteRepo.findByTalk(talk);
+      List<VoteModel> votes = voteRepo.findByTalk(proposal);
       VotedItem item = new VotedItem();
-      item.setTalk(talk.getTitle());
+      item.setTalk(proposal.getTitle());
+      item.setProposalId(proposal.getId());
+      item.setAuthor(proposal.getOwner().getName());
       calcVotes(item, votes);
       list.add(item);
     }

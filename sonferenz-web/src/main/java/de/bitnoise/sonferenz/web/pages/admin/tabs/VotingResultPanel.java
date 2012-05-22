@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -56,6 +57,7 @@ import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.drop.DropDownEnumChoice;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.component.panels.KonferenzTabPanel;
+import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
 import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
 import de.bitnoise.sonferenz.web.pages.admin.actions.EditUser;
 import de.bitnoise.sonferenz.web.pages.admin.model.UserListItem;
@@ -149,6 +151,8 @@ public class VotingResultPanel extends KonferenzTabPanel
           checkBox.add(new Label("talkName", object.getTitle()));
           // item.add(new UsersList("talkUsers", "fragment1", item, object.getUsers()));
           checkBox.add(new Label("talkVotes", Integer.valueOf(object.getVotes()).toString()));
+          checkBox.add(new Label("talkAbsolute", Integer.valueOf( object.getAbsoluteVotes() ).toString() ));
+          checkBox.add(new Label("talkAuthor", object.getAuthor()));
         }
       };
       form.add(liste);
@@ -156,12 +160,21 @@ public class VotingResultPanel extends KonferenzTabPanel
     
     protected void doSubmit() {
        List< VotedItem> items = (List<VotedItem>) _state.getObject();
-       for(VotedItem item : items) {
+       ConferenceModel conference = cservice.getActiveConference();
+       if(! conference.getState().equals(ConferenceState.VOTING) ) {
+         error("Conference not in voting state");
+         return;
+       }
+       for(VotedItem item : items) 
+       {
          if(item.getChecked()) {
            System.out.print("[x] ");
+           cservice.addTalkForProposalToConference(conference, item.getProposalId());
          }
          System.out.println(item.getTitle());
        }
+       cservice.setState(conference,ConferenceState.VOTED);
+       setResponsePage(AdminPage.class);
     }
 
     @Override
@@ -182,7 +195,11 @@ public class VotingResultPanel extends KonferenzTabPanel
             @Override
             public int compare(VotedItem o1, VotedItem o2)
             {
-              return o2.getAbsoluteVotes().compareTo(o1.getAbsoluteVotes());
+              int val = o2.getAbsoluteVotes().compareTo(o1.getAbsoluteVotes());
+              if(val!=0) {
+                return val;
+              }
+              return o2.getVotes().compareTo(o1.getVotes());
             }
           });
         } else {
@@ -191,13 +208,26 @@ public class VotingResultPanel extends KonferenzTabPanel
             @Override
             public int compare(VotedItem o1, VotedItem o2)
             {
-              return o2.getVotes().compareTo(o1.getVotes());
+              int val = o2.getVotes().compareTo(o1.getVotes());
+              if(val!=0) {
+                return val;
+              }
+              return o2.getAbsoluteVotes().compareTo(o1.getAbsoluteVotes());
             }
           });
         }
         boolean check = true;
         int i = 1;
+        HashMap<String, Boolean> hashMap = new HashMap<String,Boolean>();
         for (VotedItem item : state) {
+          Boolean used = hashMap.get(item.getAuthor());
+          if( used!=null) {
+            if(check) {
+              System.out.println("removed : " + item.getTitle());
+            }
+            continue;
+          }
+          hashMap.put(item.getAuthor(),true);
           item.setChecked(check);
           if (i++ >= cs.getCount()) {
             check = false;

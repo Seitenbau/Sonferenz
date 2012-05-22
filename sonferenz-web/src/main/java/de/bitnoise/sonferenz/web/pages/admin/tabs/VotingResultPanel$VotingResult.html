@@ -6,9 +6,14 @@
     <fieldset>
         <legend>Endergebnis festlegen</legend>
         <div wicket:id="talkList" class="talkList"> 
-          <input wicket:id="checked" class="checkbox" type="checkbox" value="talk_1">
-          <span wicket:id="talkVotes" class="talkVotes"></span> : <span wicket:id="talkName" class="talkName"></span>
-          </input>
+          <div class="checkbox">
+            <input wicket:id="checked" class="checkbox" type="checkbox" value="talk_1">
+             <span wicket:id="talkAbsolute" class="talkVotes"></span>/
+             <span wicket:id="talkVotes" class="talkVotes"></span> : 
+              <b><span wicket:id="talkName" class="talkName"></span></b> (
+              <span wicket:id="talkAuthor" class="talkName"></span>)
+            </input>
+          </div>
         </div>
       <br/>
     </fieldset>

@@ -11,18 +11,16 @@ import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ConfigurationModel;
 import de.bitnoise.sonferenz.model.StaticContentModel;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
-import de.bitnoise.sonferenz.model.WhishModel;
+import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
 
 public interface UiFacade
 {
-
-  void addTalksToConference(ConferenceModel conference, List<TalkModel> asTalks);
 
   boolean checkMailNotExists(String mail);
   
@@ -32,9 +30,9 @@ public interface UiFacade
 
   void createIdentity(String provider, String username, String password, String email,Collection<UserRoles> newRoles);
   
-  void deleteTalk(TalkModel talk);
+  void deleteProposal(ProposalModel talk);
 
-  void deleteWhish(WhishModel talk);
+  void deleteSuggestion(SuggestionModel talk);
 
   void executeAction(ActionCreateUser data);
 
@@ -48,17 +46,17 @@ public interface UiFacade
 
   Page<UserRole> getAllRoles(PageRequest request);
 
-  List<TalkModel> getAllTalks();
+  List<ProposalModel> getAllProposals();
 
-  int getAllTalksCount();
+  int getAllProposalsCount();
 
-  List<TalkModel> getAllTalksForConference(ConferenceModel conference);
+  List<ProposalModel> getAllProposalsForConference(ConferenceModel conference);
 
   List<UserModel> getAllUsers();
 
   Page<UserModel> getAllUsers(PageRequest request);
 
-  Page<WhishModel> getAllWhishes(PageRequest request);
+  Page<SuggestionModel> getAllSuggestions(PageRequest request);
 
   ConferenceModel getConference(int id);
 
@@ -66,9 +64,9 @@ public interface UiFacade
 
   UserModel getCurrentUser();
 
-  TalkModel getTalkById(int id);
+  ProposalModel getProposalById(int id);
 
-  Page<TalkModel> getTalks(PageRequest request);
+  Page<ProposalModel> getProposals(PageRequest request);
 
   String getText(String id);
 
@@ -78,46 +76,49 @@ public interface UiFacade
 
   int getUserCount();
 
-  Page<TalkModel> getVotableTalks(PageRequest request);
+  Page<ProposalModel> getVotableProposals(PageRequest request);
 
-  long getVotableTalksCount();
+  long getVotableSuggestionCount();
 
-  WhishModel getWhishById(int id);
+  SuggestionModel getSuggestionById(int id);
 
   int getWhishesCount();
 
-  Integer getWhishLikeCount(UserModel user, WhishModel whish);
+  Integer getWhishLikeCount(UserModel user, SuggestionModel whish);
 
-  void likeWhish(UserModel user, WhishModel whish);
+  void likeSuggestion(UserModel user, SuggestionModel whish);
 
-  void removeAllVotestForTalk(List<TalkModel> asTalks);
+  void removeAllVotestForProposal(List<ProposalModel> asTalks);
 
-  void removeTalksFromConference(ConferenceModel conference, List<TalkModel> asTalks);
+  void removeTalksFromConference(ConferenceModel conference, List<ProposalModel> asTalks);
 
-  void saveTalk(TalkModel talk);
+  void saveProposal(ProposalModel talk);
 
   void saveText(String id, String neu);
 
   void saveUser(UserModel user, Collection<UserRoles> newRoles);
 
-  void saveWhish(WhishModel talk);
+  void saveSuggestion(SuggestionModel talk);
 
   void storeConference(ConferenceModel conference);
 
-  void unLikeWhish(UserModel user, WhishModel whish);
+  void unLikeSuggestion(UserModel user, SuggestionModel whish);
 
-  void unwhish(WhishModel whish);
+  void unSuggest(SuggestionModel whish);
 
   void userUpdate(UserModel user, String newName);
 
   Aktion validateAction(String action, String token);
 
-  boolean vote(TalkModel talk, UserModel user, int increment);
+  boolean vote(ProposalModel talk, UserModel user, int increment);
 
   void createToken(String user, String mail,String body, String subject, String provider);
   
   List<String> availableProviders();
 
   Page<ActionModel> getAllUserActions(PageRequest request, UserModel user);
+
+  void addProposalToConference(ConferenceModel conference,
+      List<ProposalModel> asTalks);
 
 }

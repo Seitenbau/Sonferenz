@@ -14,11 +14,11 @@ import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ConfigurationModel;
 import de.bitnoise.sonferenz.model.StaticContentModel;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
-import de.bitnoise.sonferenz.model.WhishModel;
+import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
@@ -27,10 +27,10 @@ import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
 import de.bitnoise.sonferenz.service.v2.services.ConferenceService;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
-import de.bitnoise.sonferenz.service.v2.services.TalkService;
+import de.bitnoise.sonferenz.service.v2.services.ProposalService;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
-import de.bitnoise.sonferenz.service.v2.services.WhishService;
+import de.bitnoise.sonferenz.service.v2.services.SuggestionService;
 import de.bitnoise.sonferenz.service.v2.services.idp.IdpService;
 
 @Service
@@ -49,7 +49,7 @@ public class UiFacadeImpl implements UiFacade
   StaticContentService content;
 
   @Autowired
-  TalkService _talks;
+  ProposalService _proposals;
 
   @Autowired
   UserService userFacade;
@@ -58,7 +58,7 @@ public class UiFacadeImpl implements UiFacade
   AuthenticationService authService;
 
   @Autowired
-  WhishService whishService;
+  SuggestionService _suggestions;
 
   @Autowired
   VoteService voteService;
@@ -91,22 +91,22 @@ public class UiFacadeImpl implements UiFacade
   }
 
   @Override
-  public void deleteTalk(TalkModel talk)
+  public void deleteProposal(ProposalModel talk)
   {
-    _talks.deleteTalk(talk);
+    _proposals.deleteProposal(talk);
   }
 
   @Override
-  public void saveTalk(TalkModel talk)
+  public void saveProposal(ProposalModel talk)
   {
-    _talks.saveTalk(talk);
+    _proposals.saveProposal(talk);
   }
 
   @Override
-  public TalkModel getTalkById(int id)
+  public ProposalModel getProposalById(int id)
   {
-    return _talks
-        .getTalkById(id);
+    return _proposals
+        .getProposalById(id);
   }
 
   @Override
@@ -122,15 +122,15 @@ public class UiFacadeImpl implements UiFacade
   }
 
   @Override
-  public Page<TalkModel> getTalks(PageRequest request)
+  public Page<ProposalModel> getProposals(PageRequest request)
   {
-    return _talks.getTalks(request);
+    return _proposals.getProposals(request);
   }
 
   @Override
-  public int getAllTalksCount()
+  public int getAllProposalsCount()
   {
-    return _talks.getCount();
+    return _proposals.getCount();
   }
 
   @Override
@@ -142,13 +142,13 @@ public class UiFacadeImpl implements UiFacade
   @Override
   public int getWhishesCount()
   {
-    return whishService.getCount();
+    return _suggestions.getCount();
   }
 
   @Override
-  public Page<WhishModel> getAllWhishes(PageRequest request)
+  public Page<SuggestionModel> getAllSuggestions(PageRequest request)
   {
-    return whishService.getWhishes(request);
+    return _suggestions.getSuggestions(request);
   }
 
   @Override
@@ -188,93 +188,93 @@ public class UiFacadeImpl implements UiFacade
   }
 
   @Override
-  public void unwhish(WhishModel whish)
+  public void unSuggest(SuggestionModel whish)
   {
-    whishService.unWhish(whish);
+    _suggestions.unSuggest(whish);
   }
 
   @Override
-  public void deleteWhish(WhishModel whish)
+  public void deleteSuggestion(SuggestionModel whish)
   {
-    whishService.deleteWhish(whish);
+    _suggestions.deleteSuggestion(whish);
   }
 
   @Override
-  public void saveWhish(WhishModel whish)
+  public void saveSuggestion(SuggestionModel whish)
   {
-    whishService.saveWhish(whish);
+    _suggestions.saveSuggestion(whish);
   }
 
   @Override
-  public WhishModel getWhishById(int id)
+  public SuggestionModel getSuggestionById(int id)
   {
-    return whishService.getWhishById(id);
+    return _suggestions.getSuggestionById(id);
   }
 
   @Override
-  public void likeWhish(UserModel user, WhishModel whish)
+  public void likeSuggestion(UserModel user, SuggestionModel whish)
   {
-    whishService.like(user, whish);
+    _suggestions.like(user, whish);
   }
 
   @Override
-  public void unLikeWhish(UserModel user, WhishModel whish)
+  public void unLikeSuggestion(UserModel user, SuggestionModel whish)
   {
-    whishService.unLike(user, whish);
+    _suggestions.unLike(user, whish);
   }
 
   @Override
-  public Integer getWhishLikeCount(UserModel user, WhishModel whish)
+  public Integer getWhishLikeCount(UserModel user, SuggestionModel whish)
   {
-    return whishService.getWhishLikeCount(user, whish);
+    return _suggestions.getSuggestionLikeCount(user, whish);
   }
 
   @Override
-  public List<TalkModel> getAllTalks()
+  public List<ProposalModel> getAllProposals()
   {
-    return _talks.getAllTalks();
+    return _proposals.getAllProposals();
   }
 
   @Override
-  public List<TalkModel> getAllTalksForConference(ConferenceModel conference)
+  public List<ProposalModel> getAllProposalsForConference(ConferenceModel conference)
   {
-    return _conference.getAllTalksForConference(conference);
+    return _conference.getAllProposalsForConference(conference);
   }
 
   @Override
-  public void removeAllVotestForTalk(List<TalkModel> talks)
+  public void removeAllVotestForProposal(List<ProposalModel> talks)
   {
     voteService.removeAllVotestForTalk(talks);
   }
 
   @Override
-  public void removeTalksFromConference(ConferenceModel conference, List<TalkModel> asTalks)
+  public void removeTalksFromConference(ConferenceModel conference, List<ProposalModel> asTalks)
   {
-    _conference.removeTalksFromConference(conference, asTalks);
+    _conference.removeProposalsFromConference(conference, asTalks);
   }
 
   @Override
-  public void addTalksToConference(ConferenceModel conference, List<TalkModel> asTalks)
+  public void addProposalToConference(ConferenceModel conference, List<ProposalModel> asTalks)
   {
-    _conference.addTalksToConference(conference, asTalks);
+    _conference.addProposalsToConference(conference, asTalks);
   }
 
   @Override
-  public boolean vote(TalkModel talk, UserModel user, int increment)
+  public boolean vote(ProposalModel talk, UserModel user, int increment)
   {
     return voteService.vote(talk, user, increment);
   }
 
   @Override
-  public long getVotableTalksCount()
+  public long getVotableSuggestionCount()
   {
-    return _talks.getVotableTalksCount();
+    return _proposals.getVotableProposalsCount();
   }
 
   @Override
-  public Page<TalkModel> getVotableTalks(PageRequest request)
+  public Page<ProposalModel> getVotableProposals(PageRequest request)
   {
-    return _talks.getVotableTalks(request);
+    return _proposals.getVotableProposals(request);
   }
 
   @Override

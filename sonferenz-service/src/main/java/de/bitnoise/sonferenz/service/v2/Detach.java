@@ -6,9 +6,9 @@ import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 
 import de.bitnoise.sonferenz.model.ConferenceModel;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.model.WhishModel;
+import de.bitnoise.sonferenz.model.SuggestionModel;
 
 public class Detach
 {
@@ -42,14 +42,14 @@ public class Detach
     return item;
   }
 
-  public static TalkModel detach(TalkModel item)
+  public static ProposalModel detach(ProposalModel item)
   {
     Hibernate.initialize(item);
     Hibernate.initialize(item.getVotes());
     return item;
   }
 
-  public static void detach(WhishModel item)
+  public static void detach(SuggestionModel item)
   {
     Hibernate.initialize(item);
   }
@@ -60,13 +60,13 @@ public class Detach
     return findAll;
   }
 
-  public static void detachTM(Page<TalkModel> result)
+  public static void detachTM(Page<ProposalModel> result)
   {
     if (result == null || result.getContent() == null)
     {
       return;
     }
-    for (TalkModel t : result)
+    for (ProposalModel t : result)
     {
       Hibernate.initialize(t);
       Hibernate.initialize(t.getVotes());

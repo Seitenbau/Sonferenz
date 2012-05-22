@@ -11,10 +11,18 @@ import org.springframework.data.jpa.repository.Query;
 
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ProposalModel;
-import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
 
-public interface TalkRepository extends JpaRepository<TalkModel, Integer>
+public interface ProposalRepository extends JpaRepository<ProposalModel, Integer>
 {
-  Page<TalkModel> findByOwner(UserModel owner);
+
+  List<ProposalModel> findAllByConference(ConferenceModel conference);
+
+  @Query("select t from ProposalModel t where t.conference is not null")
+  Page<ProposalModel> test(Pageable  request);
+
+  @Query("select count(t) from ProposalModel t where t.conference is not null")
+  Long countAllVotable();
+
+  Page<ProposalModel> findByOwner(UserModel owner);
 }

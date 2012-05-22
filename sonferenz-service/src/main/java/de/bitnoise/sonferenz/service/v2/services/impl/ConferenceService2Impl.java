@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 
 import de.bitnoise.sonferenz.model.ConferenceModel;
+import de.bitnoise.sonferenz.model.ConferenceState;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.repo.ConferenceRepository;
+import de.bitnoise.sonferenz.repo.ProposalRepository;
 import de.bitnoise.sonferenz.repo.TalkRepository;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 import de.bitnoise.sonferenz.service.v2.exceptions.RepositoryException;
@@ -21,6 +24,9 @@ public class ConferenceService2Impl implements ConferenceService
 {
   @Autowired
   ConferenceRepository conferenceRepo;
+  
+  @Autowired
+  ProposalRepository proposalRepo;
   
   @Autowired
   TalkRepository talkRepo;
@@ -69,30 +75,30 @@ public class ConferenceService2Impl implements ConferenceService
   }
 
   @Override
-  public List<TalkModel> getAllTalksForConference(ConferenceModel conference) throws GeneralConferenceException
+  public List<ProposalModel> getAllProposalsForConference(ConferenceModel conference) throws GeneralConferenceException
   {
-    return talkRepo.findAllByConference(conference);
+    return proposalRepo.findAllByConference(conference);
   }
 
   @Override
-  public void removeTalksFromConference(ConferenceModel _conference, List<TalkModel> talksToRemove)
+  public void removeProposalsFromConference(ConferenceModel _conference, List<ProposalModel> talksToRemove)
       throws GeneralConferenceException
   {
-    for (TalkModel talk : talksToRemove)
+    for (ProposalModel talk : talksToRemove)
     {
       talk.setConference(null);
-      talkRepo.save(talk);
+      proposalRepo.save(talk);
     }
   }
 
   @Override
-  public void addTalksToConference(ConferenceModel conference, List<TalkModel> talksToAdd)
+  public void addProposalsToConference(ConferenceModel conference, List<ProposalModel> talksToAdd)
       throws GeneralConferenceException
   {
-    for (TalkModel talk : talksToAdd)
+    for (ProposalModel talk : talksToAdd)
     {
       talk.setConference(conference);
-      talkRepo.save(talk);
+      proposalRepo.save(talk);
     }
   }
 
@@ -107,5 +113,28 @@ public class ConferenceService2Impl implements ConferenceService
   {
     return conferenceRepo.findOne(id);
   }
+
+  @Override
+  public void addTalkForProposalToConference(ConferenceModel conference,
+      Integer proposalId)
+  {
+    ProposalModel proposal = proposalRepo.findOne(proposalId);
+    TalkModel talk = new TalkModel();
+    talk.setConference(conference);
+    talk.setDescription(proposal.getDescription());
+    talk.setOwner(proposal.getOwner());
+    talk.setTitle(proposal.getTitle());
+    talk.setAuthor(proposal.getAuthor());
+    
+    talkRepo.save(talk);
+  }
+
+  @Override
+  public void setState(ConferenceModel conference, ConferenceState voted)
+  {
+    conference.setState(voted);
+    conferenceRepo.save(conference);
+  }
+
 
 }

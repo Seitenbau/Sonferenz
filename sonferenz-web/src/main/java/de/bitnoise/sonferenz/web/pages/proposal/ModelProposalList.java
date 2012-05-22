@@ -2,9 +2,9 @@ package de.bitnoise.sonferenz.web.pages.proposal;
 
 import java.io.Serializable;
 
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 
-public class ModelTalkList implements Serializable, RefToTalk
+public class ModelProposalList implements Serializable, RefToProposal
 {
 	public String title;
 	public String author;
@@ -12,10 +12,10 @@ public class ModelTalkList implements Serializable, RefToTalk
 	public String description;
 	public boolean editable;
 	public int rating;
-	public TalkModel talk;
+	public ProposalModel talk;
 
 	@Override
-	public TalkModel getTalk() {
+	public ProposalModel getTalk() {
 		return talk;
 	}
 }

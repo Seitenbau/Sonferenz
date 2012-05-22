@@ -18,6 +18,19 @@ public class VotedItem implements Serializable
   
   Boolean _checked;
 
+  String _author;
+
+  Integer _proposalId;
+
+  public void setAuthor(String author)
+  {
+    _author = author;
+  }
+  
+  public void setProposalId(Integer integer) {
+    _proposalId=integer;
+  }
+
   public Boolean getChecked() {
     return _checked;
   }
@@ -72,6 +85,16 @@ public class VotedItem implements Serializable
       return new HashSet<String>();
     }
     return _users;
+  }
+
+  public String getAuthor()
+  {
+    return _author;
+  }
+
+  public Integer getProposalId()
+  {
+    return _proposalId;
   }
 
 }

@@ -1,4 +1,4 @@
-package de.bitnoise.sonferenz.web.pages.suggestion;
+package de.bitnoise.sonferenz.web.pages.talks;
 
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;
@@ -6,7 +6,6 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
-import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
@@ -19,24 +18,31 @@ import com.visural.wicket.component.confirmer.ConfirmerLink;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
+import de.bitnoise.sonferenz.model.ProposalModel;
+import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.model.SuggestionModel;
+import de.bitnoise.sonferenz.service.v2.services.TalkService;
+import de.bitnoise.sonferenz.service.v2.services.UserService;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
-public class EditWhishPanel extends FormPanel
+public class EditTalkPanel extends FormPanel
 {
   final Model<String> modelTitle = new Model<String>();
+  final Model<String> modelAuthor = new Model<String>();
   Model<String> modelDesc = new Model<String>();
   Model<UserModel> modelUser = new Model<UserModel>();
 
+  @SpringBean
+  TalkService talkService;
   
   @SpringBean
-  UiFacade facade;
+  UserService userService;
 
-  private SuggestionModel _talk;
 
-  public EditWhishPanel(String id, SuggestionModel talk)
+  TalkModel _talk;
+
+  public EditTalkPanel(String id, TalkModel talk)
   {
     super(id);
     InjectorHolder.getInjector().inject(this);
@@ -50,6 +56,7 @@ public class EditWhishPanel extends FormPanel
 
     // Prepare model
     modelTitle.setObject(_talk.getTitle());
+    modelAuthor.setObject(_talk.getAuthor());
     modelDesc.setObject(_talk.getDescription());
     modelUser.setObject(_talk.getOwner());
 
@@ -67,25 +74,26 @@ public class EditWhishPanel extends FormPanel
     Button cancel = new Button("cancel") {
       public void onSubmit()
       {
-        setResponsePage(WhishOverviewPage.class);
+        setResponsePage(TalksOverviewPage.class);
       }
     };
     cancel.setDefaultFormProcessing(false);
     form.add(cancel);
 
     FormComponent<String> titleField = new TextField<String>("title", modelTitle);
-    titleField
-        .setRequired(true)
-        .add(new MaximumLengthValidator(254))
-        .add(new InputHintBehavior(form, "Kurz und pr\u00e4gnant", "color: #aaa;"));
-        ;
+    TextField<String> authorfield = new TextField<String>("author", modelAuthor);
+    titleField.setRequired(true);
+    titleField.add(new MaximumLengthValidator(254));
+    titleField.add(new InputHintBehavior(form, "Kurz und pr\u00e4gnant", "color: #aaa;"));
+    authorfield.add(new MaximumLengthValidator(254));
+    authorfield.add(new InputHintBehavior(form, "Der/Die Vortragende(en)", "color: #aaa;"));
     
     // List<? extends UserModel> choices = userService.listAllUsers();
     LoadableDetachableModel choices = new LoadableDetachableModel() {
       @Override
       protected Object load()
       {
-        return facade.getAllUsers();
+        return userService.getAllUsers();
       }
     };
     IChoiceRenderer<UserModel> render = new IChoiceRenderer<UserModel>() {
@@ -103,26 +111,26 @@ public class EditWhishPanel extends FormPanel
         modelUser, choices, render);
     ddc.setRequired(true);
 
-    ConfirmerLink  btnDel = new ConfirmerLink("delete") {
-      
-      public void onClick()
-      {
-        facade.deleteSuggestion(_talk);
-        setResponsePage(WhishOverviewPage.class);
-      }
-    };
-    if (_talk.isNew())
-    {
-      btnDel.setVisible(false);
-    }
-    ReducedRichTextEditor rtf = new ReducedRichTextEditor("description", modelDesc);
-    rtf.add(new MaximumLengthValidator(1000 * 5));
+//    ConfirmerLink  btnDel = new ConfirmerLink("delete") {
+//      
+//      public void onClick()
+//      {
+//        // talkService.deleteTalk(_talk);
+//        setResponsePage(TalksOverviewPage.class);
+//      }
+//    };
+//    if (_talk.isNew() || _talk.getConference()!=null)
+//    {
+//      btnDel.setVisible(false);
+//    }
+    
     form.add(titleField);
+    form.add(authorfield);
     form.add(new RichTextEditorFormBehavior());
-    form.add(rtf);
-//    form.add(new TextArea<String>("description", modelDesc));
+    ReducedRichTextEditor rte = new ReducedRichTextEditor("description", modelDesc);
+    form.add(rte);
     form.add(ddc);
-    form.add(btnDel);
+//    form.add(btnDel);
     form.add(new Button("submit"));
     add(form);
   }
@@ -131,14 +139,16 @@ public class EditWhishPanel extends FormPanel
   protected void clickedOnSave()
   {
     String valueTitle = modelTitle.getObject();
+    String valueAuthor = modelAuthor.getObject();
     String valueDescRaw = modelDesc.getObject();
     String valueDesc = HtmlSanitizer.sanitize(valueDescRaw);
     UserModel valueUser = modelUser.getObject();
     _talk.setOwner(valueUser);
     _talk.setTitle(valueTitle);
+    _talk.setAuthor(valueAuthor);
     _talk.setDescription(valueDesc);
-    facade.saveSuggestion(_talk);
-    setResponsePage(WhishOverviewPage.class);
+    talkService.saveTalk(_talk);
+    setResponsePage(TalksOverviewPage.class);
   }
 
 }

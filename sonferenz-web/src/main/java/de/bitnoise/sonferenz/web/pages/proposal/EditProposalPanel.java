@@ -18,12 +18,12 @@ import com.visural.wicket.component.confirmer.ConfirmerLink;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
-public class EditTalkPanel extends FormPanel
+public class EditProposalPanel extends FormPanel
 {
   final Model<String> modelTitle = new Model<String>();
   final Model<String> modelAuthor = new Model<String>();
@@ -34,9 +34,9 @@ public class EditTalkPanel extends FormPanel
   UiFacade facade;
 
 
-  private TalkModel _talk;
+  private ProposalModel _talk;
 
-  public EditTalkPanel(String id, TalkModel talk)
+  public EditProposalPanel(String id, ProposalModel talk)
   {
     super(id);
     InjectorHolder.getInjector().inject(this);
@@ -68,7 +68,7 @@ public class EditTalkPanel extends FormPanel
     Button cancel = new Button("cancel") {
       public void onSubmit()
       {
-        setResponsePage(TalksOverviewPage.class);
+        setResponsePage(ProposalOverviewPage.class);
       }
     };
     cancel.setDefaultFormProcessing(false);
@@ -109,8 +109,8 @@ public class EditTalkPanel extends FormPanel
       
       public void onClick()
       {
-        facade.deleteTalk(_talk);
-        setResponsePage(TalksOverviewPage.class);
+        facade.deleteProposal(_talk);
+        setResponsePage(ProposalOverviewPage.class);
       }
     };
     if (_talk.isNew() || _talk.getConference()!=null)
@@ -141,8 +141,8 @@ public class EditTalkPanel extends FormPanel
     _talk.setTitle(valueTitle);
     _talk.setAuthor(valueAuthor);
     _talk.setDescription(valueDesc);
-    facade.saveTalk(_talk);
-    setResponsePage(TalksOverviewPage.class);
+    facade.saveProposal(_talk);
+    setResponsePage(ProposalOverviewPage.class);
   }
 
 }

@@ -14,14 +14,14 @@ import org.springframework.data.domain.Sort.Direction;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.model.WhishModel;
+import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
-import de.bitnoise.sonferenz.web.pages.proposal.ListTalksPanel;
-import de.bitnoise.sonferenz.web.pages.proposal.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.proposal.ListProposalPanel;
+import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
 import de.bitnoise.sonferenz.web.pages.suggestion.action.CreateWhish;
 import de.bitnoise.sonferenz.web.pages.suggestion.action.EditOrViewWhish;
 import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
@@ -77,14 +77,14 @@ public class ListWhishesPanel extends Panel
     };
 
     ISortableDataProvider<ModelWhishList> 
-    provider = new SortableServiceDataProvider<WhishModel, ModelWhishList>( ) {
+    provider = new SortableServiceDataProvider<SuggestionModel, ModelWhishList>( ) {
       @Override
-      protected ModelWhishList transferType(WhishModel dbObject)
+      protected ModelWhishList transferType(SuggestionModel dbObject)
       {
         return load2(dbObject);
       }
 
-      private ModelWhishList load2(WhishModel dbObject)
+      private ModelWhishList load2(SuggestionModel dbObject)
       {
         UserModel user = KonferenzSession.get().getCurrentUser();
         ModelWhishList item = new ModelWhishList();
@@ -95,15 +95,15 @@ public class ListWhishesPanel extends Panel
         item.sumLike = dbObject.getLikes();
         item.owner = dbObject.getOwner().getName();
         String desc = dbObject.getDescription();
-        item.description=ListTalksPanel.creatShort(desc);
+        item.description=ListProposalPanel.creatShort(desc);
         item.whish = dbObject;
         return item;
       }
 
       @Override
-      protected Page<WhishModel> getAllItems(PageRequest request)
+      protected Page<SuggestionModel> getAllItems(PageRequest request)
       {
-        return facade.getAllWhishes(request);
+        return facade.getAllSuggestions(request);
       }
 
       @Override

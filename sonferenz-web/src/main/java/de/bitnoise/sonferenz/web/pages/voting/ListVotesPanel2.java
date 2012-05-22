@@ -36,7 +36,7 @@ import org.springframework.data.domain.PageRequest;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.VoteModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
@@ -44,7 +44,7 @@ import de.bitnoise.sonferenz.service.v2.services.VoteService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.text.StaticTextPanel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
-import de.bitnoise.sonferenz.web.pages.proposal.ViewTalkPage;
+import de.bitnoise.sonferenz.web.pages.proposal.ViewProposalPage;
 import de.bitnoise.sonferenz.web.pages.voting.ListVotesPanel2.NumberItem;
 import de.bitnoise.sonferenz.web.utils.WicketTools;
 
@@ -122,7 +122,7 @@ public class ListVotesPanel2 extends Panel
 			{
 				final VoteItem object = item.getModel().getObject();
 				PageParameters param = new PageParameters();
-			  param.add(ViewTalkPage.PARAM_ID, "" + object.getTalk().getId());
+			  param.add(ViewProposalPage.PARAM_ID, "" + object.getTalk().getId());
 			  item.add(new AjaxFallbackLink<String>("moveup"){
           @Override
           public void onClick(AjaxRequestTarget target)
@@ -145,7 +145,7 @@ public class ListVotesPanel2 extends Panel
 			      target.addComponent(list);
 			      target.addComponent(save);
 			    }});
-			  BookmarkablePageLink title = new BookmarkablePageLink("link", ViewTalkPage.class, param);
+			  BookmarkablePageLink title = new BookmarkablePageLink("link", ViewProposalPage.class, param);
 				Label txt = new Label("text", Model.of(object.getTalk().getTitle()));
 				item.add(txt);
 				item.add(title);
@@ -248,10 +248,10 @@ public class ListVotesPanel2 extends Panel
 	public VoteList buildVoteList()
 	{
 		Map<Integer, VoteModel> votesPerTalk = getMyCurrentVotestPerTalk();
-		List<TalkModel> talks = getAllTalks();
+		List<ProposalModel> talks = getAllTalks();
 		boolean didVote=false;
 		final VoteList foos = new VoteList();
-		for (TalkModel talk : talks)
+		for (ProposalModel talk : talks)
 		{
 			Integer rating = getRatingForTalk(votesPerTalk, talk);
 			foos.add(new VoteItem(rating, talk));
@@ -276,7 +276,7 @@ public class ListVotesPanel2 extends Panel
 	}
 
 	public int getRatingForTalk(Map<Integer, VoteModel> votesPerTalk,
-	        TalkModel talk)
+	        ProposalModel talk)
 	{
 		VoteModel myVote = votesPerTalk.get(talk.getId());
 		if (myVote == null)
@@ -290,10 +290,10 @@ public class ListVotesPanel2 extends Panel
 		return myVote.getRateing();
 	}
 
-	public List<TalkModel> getAllTalks()
+	public List<ProposalModel> getAllTalks()
 	{
-		Page<TalkModel> pages = facade.getVotableTalks(new PageRequest(0, 9999));
-		List<TalkModel> talks = pages.getContent();
+		Page<ProposalModel> pages = facade.getVotableProposals(new PageRequest(0, 9999));
+		List<ProposalModel> talks = pages.getContent();
 		return talks;
 	}
 

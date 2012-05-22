@@ -7,7 +7,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.visural.wicket.aturl.At;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.WhishModel;
+import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.suggestion.action.EditOrViewWhish;
 
@@ -23,7 +23,7 @@ public class ViewWhishPage extends KonferenzPage
   {
     super();
     int id = parameters.getInt(PARAM_ID);
-    WhishModel whish = facade.getWhishById(id);
+    SuggestionModel whish = facade.getSuggestionById(id);
     Model model = new Model(whish);
     setResponsePage(new EditOrViewWhish().doAction(model));
   }

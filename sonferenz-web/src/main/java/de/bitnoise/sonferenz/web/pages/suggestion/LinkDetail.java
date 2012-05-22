@@ -39,11 +39,11 @@ public class LinkDetail extends LikeColumn<ModelWhishList> implements
     UserModel user = KonferenzSession.get().getCurrentUser();
     if (newValue.getObject())
     {
-      facade.likeWhish(user, object.whish);
+      facade.likeSuggestion(user, object.whish);
     }
     else
     {
-      facade.unLikeWhish(user, object.whish);
+      facade.unLikeSuggestion(user, object.whish);
     }
     if(target!=null) {
       RequestCycle.get().setResponsePage(target.getPage());

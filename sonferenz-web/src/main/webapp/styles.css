@@ -1514,3 +1514,10 @@ li.missingVoteName {
 	list-style: none;
     display: inline;
 }
+div.checkbox {
+	clear:both;
+}
+input.checkbox {
+	width: 20%;
+}
+}

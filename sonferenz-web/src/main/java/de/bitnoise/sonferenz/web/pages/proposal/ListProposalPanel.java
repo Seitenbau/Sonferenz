@@ -18,18 +18,18 @@ import org.springframework.data.domain.Sort.Order;
 
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.TalkModel;
+import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
-import de.bitnoise.sonferenz.web.pages.proposal.action.CreateTalk;
-import de.bitnoise.sonferenz.web.pages.proposal.action.EditOrViewTalk;
+import de.bitnoise.sonferenz.web.pages.proposal.action.CreateProposal;
+import de.bitnoise.sonferenz.web.pages.proposal.action.EditOrViewProposal;
 import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
 import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
-public class ListTalksPanel extends Panel
+public class ListProposalPanel extends Panel
 {
   
 
@@ -39,7 +39,7 @@ public class ListTalksPanel extends Panel
   @SpringBean 
   UiFacade facade;
   
-  public ListTalksPanel(String id)
+  public ListProposalPanel(String id)
   {
     super(id);
     InjectorHolder.getInjector().inject(this);
@@ -49,9 +49,9 @@ public class ListTalksPanel extends Panel
   protected void onInitialize()
   {
     super.onInitialize();
-    final Set<ModelTalkList> selected = new HashSet<ModelTalkList>();
-    TableBuilder<ModelTalkList> builder = new TableBuilder<ModelTalkList>(
-        "talks")
+    final Set<ModelProposalList> selected = new HashSet<ModelProposalList>();
+    TableBuilder<ModelProposalList> builder = new TableBuilder<ModelProposalList>(
+        "proposals")
     {
       {
         addColumn(new Column()
@@ -60,7 +60,7 @@ public class ListTalksPanel extends Panel
             setTitle("Titel");
             setModelProperty("title");
             sortable();
-            action(new EditOrViewTalk());
+            action(new EditOrViewProposal());
           }
         });
 //        addColumn(new Column()
@@ -89,12 +89,12 @@ public class ListTalksPanel extends Panel
       }
     };
 
-    ISortableDataProvider<ModelTalkList> provider = new SortableServiceDataProvider<TalkModel, ModelTalkList>( )
+    ISortableDataProvider<ModelProposalList> provider = new SortableServiceDataProvider<ProposalModel, ModelProposalList>( )
     {
       @Override
-      protected ModelTalkList transferType(TalkModel dbObject)
+      protected ModelProposalList transferType(ProposalModel dbObject)
       {
-        ModelTalkList item = new ModelTalkList();
+        ModelProposalList item = new ModelProposalList();
         item.author = dbObject.getAuthor();
         item.title = dbObject.getTitle();
         item.owner = dbObject.getOwner().toString();
@@ -104,15 +104,15 @@ public class ListTalksPanel extends Panel
       }
 
       @Override
-      protected Page<TalkModel> getAllItems(PageRequest request)
+      protected Page<ProposalModel> getAllItems(PageRequest request)
       {
-        return facade.getTalks(request);
+        return facade.getProposals(request);
       }
 
       @Override
       public int size()
       {
-        return facade.getAllTalksCount();
+        return facade.getAllProposalsCount();
       }
 
       @Override
@@ -122,15 +122,15 @@ public class ListTalksPanel extends Panel
       }
 
     };
-    String text=content2.text("page.talkHeader","");
+    String text=content2.text("page.proposalsHeader","");
     add(new Label("headerText",text).setEscapeModelStrings(false));
-    DefaultDataTable<ModelTalkList> table = new DefaultDataTable<ModelTalkList>(
+    DefaultDataTable<ModelProposalList> table = new DefaultDataTable<ModelProposalList>(
         "talkTable", builder.getColumns(), provider, 100);
     
-    add(new AjaxLink("above","table.talks.create") {
+    add(new AjaxLink("above","table.proposals.create") {
 		@Override
 		protected void onClickLink(AjaxRequestTarget target) {
-			TalksOverviewPage page = new TalksOverviewPage();
+			ProposalOverviewPage page = new ProposalOverviewPage();
 		    page.createNew();
 			setResponsePage(page );
 		}
@@ -142,7 +142,7 @@ public class ListTalksPanel extends Panel
     add(table);
   }
 
-  private String createShortDescription(TalkModel dbObject)
+  private String createShortDescription(ProposalModel dbObject)
   {
     String desc = dbObject.getDescription();
 

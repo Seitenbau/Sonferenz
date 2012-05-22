@@ -28,7 +28,7 @@ import de.bitnoise.sonferenz.web.pages.config.EditConfigurationPage;
 import de.bitnoise.sonferenz.web.pages.config.EditTextePage;
 import de.bitnoise.sonferenz.web.pages.config.EditUserRolesPage;
 import de.bitnoise.sonferenz.web.pages.profile.MyProfilePage;
-import de.bitnoise.sonferenz.web.pages.proposal.TalksOverviewPage;
+import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
 import de.bitnoise.sonferenz.web.pages.schedule.SchedulePage;
 import de.bitnoise.sonferenz.web.pages.settings.SettingsPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
