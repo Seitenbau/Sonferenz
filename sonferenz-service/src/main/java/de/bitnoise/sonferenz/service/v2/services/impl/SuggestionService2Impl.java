@@ -128,7 +128,7 @@ public class SuggestionService2Impl implements SuggestionService
   @Transactional(readOnly = true)
   public Page<SuggestionModel> getMySuggestions(PageRequest request) {
 	  UserModel current = authService.getCurrentUserOrFail();
-	  Page<SuggestionModel> result = whishRepo.findAllByOwner(current);
+	  Page<SuggestionModel> result = whishRepo.findAllByOwner(current,request);
 	  return result;
   }
 

@@ -28,7 +28,7 @@ public class TalkServiceImpl implements TalkService
   public Page<TalkModel> getMyTalks(AppContext context, PageRequest request)
   {
     UserModel current = authService.getCurrentUserOrFail();
-    return talkRepo.findByOwner(current);
+    return talkRepo.findByOwner(current,request);
   }
 
   @Override

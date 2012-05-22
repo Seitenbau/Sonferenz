@@ -40,8 +40,10 @@ public class DbTestBase
   @After
   public void shutdownSpring()
   {
-    tm.rollback(s);
-    ctx.close();
+    if(tm!=null) {
+      tm.rollback(s);
+      ctx.close();
+    }
   }
 
  

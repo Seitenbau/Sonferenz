@@ -15,7 +15,7 @@ import de.bitnoise.sonferenz.repo.testutil.tables.User2UserRoleTable;
 import de.bitnoise.sonferenz.repo.testutil.tables.UserRoleTable;
 import de.bitnoise.sonferenz.repo.testutil.tables.UserTable;
 import de.bitnoise.sonferenz.repo.testutil.tables.VoteModelTable;
-import de.bitnoise.sonferenz.repo.testutil.tables.WhishModelTable;
+import de.bitnoise.sonferenz.repo.testutil.tables.SuggestionModelTable;
 
 public class BasicDataSet
 {
@@ -35,7 +35,7 @@ public class BasicDataSet
 
   public LocalUserModelTable localUserModeltable;
 
-  public WhishModelTable whishModelTable;
+  public SuggestionModelTable whishModelTable;
 
   public VoteModelTable voteModelTable;
   
@@ -52,7 +52,7 @@ public class BasicDataSet
     user2UserRoleTable = new User2UserRoleTable();
     userRoleTable = new UserRoleTable();
     voteModelTable = new VoteModelTable();
-    whishModelTable = new WhishModelTable();
+    whishModelTable = new SuggestionModelTable();
     staticContentModelTable=new StaticContentTable();
   }
 

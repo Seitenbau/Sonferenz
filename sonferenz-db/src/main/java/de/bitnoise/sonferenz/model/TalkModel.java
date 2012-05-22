@@ -49,8 +49,11 @@ public class TalkModel extends ModelBase implements DoInterface<Integer>
 
   @OneToOne(fetch = FetchType.EAGER)
   ConferenceModel conference;
+  
+  @Column(nullable=true)
+  Integer proposalId;
 
-  @OneToMany(targetEntity=VoteModel.class,mappedBy="talk",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
-  Set<VoteModel> votes;
+//  @OneToMany(targetEntity=VoteModel.class,mappedBy="talk",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
+//  Set<VoteModel> votes;
 
 }

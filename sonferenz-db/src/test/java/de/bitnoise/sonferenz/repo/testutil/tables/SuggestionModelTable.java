@@ -5,7 +5,7 @@ import org.dbunit.dataset.datatype.DataType;
 import de.bitnoise.sonferenz.repo.testutil.builder.BaseDBTable;
 import de.bitnoise.sonferenz.repo.testutil.builder.ValueBuilder;
 
-public class WhishModelTable extends BaseDBTable
+public class SuggestionModelTable extends BaseDBTable
 {
   public ValueBuilder<Integer> id;
   public ValueBuilder<String> title;
@@ -13,9 +13,9 @@ public class WhishModelTable extends BaseDBTable
   public ValueBuilder<Integer> likes;
   public ValueBuilder<String> description;
 
-  public WhishModelTable()
+  public SuggestionModelTable()
   {
-    super("whishmodel");
+    super("suggestionmodel");
     id = addColumn("id", DataType.BIGINT, true);
     title = addColumn("title", DataType.VARCHAR);
     ownerId = addColumn("owner_id", DataType.BIGINT);

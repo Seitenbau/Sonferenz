@@ -49,6 +49,9 @@ public class ProposalModel extends ModelBase implements DoInterface<Integer>
 
   @OneToOne(fetch = FetchType.EAGER)
   ConferenceModel conference;
+  
+  @Column
+  Boolean transformed;
 
   @OneToMany(targetEntity=VoteModel.class,mappedBy="talk",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
   Set<VoteModel> votes;

@@ -24,5 +24,8 @@ public interface ProposalRepository extends JpaRepository<ProposalModel, Integer
   @Query("select count(t) from ProposalModel t where t.conference is not null")
   Long countAllVotable();
 
-  Page<ProposalModel> findByOwner(UserModel owner);
+//  Page<ProposalModel> findByOwner(UserModel owner);
+
+  @Query("SELECT t FROM ProposalModel t WHERE t.owner = ?1 AND ( t.transformed is null OR t.transformed = false )")
+  Page<ProposalModel> findByOwnerAndTransformedFalseOrTransformedIsNull(UserModel current, Pageable page);
 }

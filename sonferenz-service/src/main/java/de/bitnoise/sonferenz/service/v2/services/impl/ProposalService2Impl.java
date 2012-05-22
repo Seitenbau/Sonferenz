@@ -85,7 +85,7 @@ public class ProposalService2Impl implements ProposalService
   @Override
   public Page<ProposalModel> getMyProposals(PageRequest request) {
 	  UserModel current = authService.getCurrentUserOrFail();
-	  return proposalRepo.findByOwner(current);
+	  return proposalRepo.findByOwnerAndTransformedFalseOrTransformedIsNull(current, new PageRequest(0, 9999));
   }
 
 }
