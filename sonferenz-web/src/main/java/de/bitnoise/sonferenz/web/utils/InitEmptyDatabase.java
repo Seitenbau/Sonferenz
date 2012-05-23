@@ -69,6 +69,10 @@ public class InitEmptyDatabase
 			{
 			  updateTo_v0_3_3();
 			}
+			if (isDatabaseOlderThanVersion(5))
+			{
+			  updateTo_v0_3_4();
+			}
 		} finally
 		{
 			eventing.activateEventing();
@@ -76,6 +80,16 @@ public class InitEmptyDatabase
 		}
 	}
 
+	void updateTo_v0_3_4() {
+	  logger .warn("# DATABASE update to version 5 #");
+	  config.saveIntegerValue(INIT_MARKER_KEY, 5);
+	  // since 0.3.2
+	  texte.storeText("table.proposals.create", "Neuer Vorschlag");
+	  texte.storeText("table.proposals.column.Titel",   "Title");
+	  texte.storeText("table.proposals.column.Author", "Author");
+	  texte.storeText("table.mySuggestions.column.Titel", "Meine Einreichungen");
+	}
+	
 	void updateTo_v0_3_3() {
 	  logger .warn("# DATABASE update to version 4 #");
 	  config.saveIntegerValue(INIT_MARKER_KEY, 4);
@@ -130,14 +144,11 @@ public class InitEmptyDatabase
 		        .warn("#################################################################");
 		logger
 		        .warn("# DATABASE SEEMS TO BE EMPTY ... initializing with default Data #");
-		logger.warn("# ");
 		config.initValue(INIT_MARKER_KEY, 1);
 		config.initValue("smtp.host", "localhost");
 		config.initValue("mail.create.from", "sonferenz");
 		config.initValue("mail.create.replyTo", "sonferenz@localhost");
 		config.initValue("baseUrl", "http://localhost:8080/sonferenz-web");
-
-		logger.warn("config created");
 
 		texte.storeText("menu.MyProfile", "Profile");
 		texte.storeText("menu.Talks", "Vorträge");
@@ -257,13 +268,9 @@ public class InitEmptyDatabase
 		texte.storeText("action.verify.mail.subject", "Details for your new user account");
 		texte.storeText("action.verify.mail.body", "Please confirm your email by open the folling link in your browser: {link}");
 
-		logger.warn("texts created");
-
 		createRole(1, "ADMIN");
 		createRole(2, "USER");
 		createRole(3, "MANAGER");
-
-		logger.warn("roles created");
 
 		Collection<UserRoles> newRoles = new ArrayList<UserRoles>();
 		newRoles.add(UserRoles.USER);
@@ -271,9 +278,6 @@ public class InitEmptyDatabase
 		newRoles.add(UserRoles.ADMIN);
 		user.createIdentity(LocalIdp.IDP_NAME, "admin", "admin", "admin",
 		        "admin@localhost", newRoles);
-		logger.warn("users created");
-		logger
-		        .warn("#################################################################");
 	}
 
 	public void createRole(int id, String name)

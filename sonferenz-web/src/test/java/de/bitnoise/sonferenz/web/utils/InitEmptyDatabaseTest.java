@@ -46,7 +46,7 @@ public class InitEmptyDatabaseTest extends TestBase {
 		sut.initAemptyDatabase();
 
 		// verify
-	    verify(config,times(4)).getIntegerValue(-1, "intern.database-is-initialized");
+	    verify(config,times(5)).getIntegerValue(-1, "intern.database-is-initialized");
 		verify(config).initValue("intern.database-is-initialized", 1);
 		verify(config).saveIntegerValue("intern.database-is-initialized", 2);
 		
