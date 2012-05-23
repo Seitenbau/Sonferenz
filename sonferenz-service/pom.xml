@@ -3,7 +3,7 @@
   <parent>
     <groupId>de.bitnoise.sonferenz</groupId>
     <artifactId>sonferenz-parent</artifactId>
-    <version>0.3.4</version>
+    <version>0.3.5-SNAPSHOT</version>
   </parent>
   <groupId>de.bitnoise.sonferenz</groupId>
   <artifactId>sonferenz-service</artifactId>
