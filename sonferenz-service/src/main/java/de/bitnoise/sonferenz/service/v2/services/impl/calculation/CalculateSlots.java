@@ -22,15 +22,7 @@ public class CalculateSlots {
 
     ConferenceSlots days = _config.getSlotConfig();
 
-    SlotReference day1 = new SlotReference();
-    days.addParallel("Fr 15:30", 2);
-    days.addParallel("Fr 17:00", 2);
-
-    days.addParallel("Fr 10:00", 2);
-    days.addParallel("Fr 11:30", 2);
-    days.addParallel("Fr 13:00", 2);
-    days.addParallel("Fr 14:30", 2);
-
+    days.getAllSlots().size();
     return null;
   }
 
