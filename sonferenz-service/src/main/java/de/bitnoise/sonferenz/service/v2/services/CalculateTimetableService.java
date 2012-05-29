@@ -1,6 +1,10 @@
 package de.bitnoise.sonferenz.service.v2.services;
 
+import java.util.List;
+
+import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.CalcUser;
 import de.bitnoise.sonferenz.service.v2.services.impl.calculation.CalculationTalkImpl;
+import de.bitnoise.sonferenz.service.v2.services.impl.calculation.ConstraintEvent;
 import de.bitnoise.sonferenz.service.v2.services.impl.calculation.SlotReference;
 
 public interface CalculateTimetableService {
@@ -28,7 +32,8 @@ public interface CalculateTimetableService {
   }
 
   public interface SlotOrdern {
-
+    List<SlotReference> getResult();
+    Integer getQuality();
   }
 
   public interface RoomAtPointInTime {
@@ -38,7 +43,9 @@ public interface CalculateTimetableService {
   public interface CalcTalk {
     Object getId();
 
-    void addConstraint(ConstraintFunction func, CalcUser user);
+    void addVisit(int weight,CalcUser user);
+
+    void addSpeaker(CalcUser speaker);
   }
 
   public interface CalcUser {
@@ -47,7 +54,7 @@ public interface CalculateTimetableService {
 
   public interface ConstraintFunction {
 
-    Integer calculate(CalculationTalkImpl talkB, CalcUser _user);
+    ConstraintEvent calculate(CalculationTalkImpl talkB, CalcUser _user);
 
   }
 
@@ -66,6 +73,8 @@ public interface CalculateTimetableService {
     boolean isPossible();
 
     int getStrength();
+    
+    List<ConstraintEvent> getConstrainingEvents();
 
   }
 

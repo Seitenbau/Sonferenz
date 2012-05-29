@@ -73,6 +73,10 @@ public class InitEmptyDatabase
 			{
 			  updateTo_v0_3_4();
 			}
+			if (isDatabaseOlderThanVersion(6))
+			{
+			  updateTo_v0_3_5();
+			}
 		} finally
 		{
 			eventing.activateEventing();
@@ -80,6 +84,13 @@ public class InitEmptyDatabase
 		}
 	}
 
+	void updateTo_v0_3_5() {
+	  logger .warn("# DATABASE update to version 6 #");
+	  config.saveIntegerValue(INIT_MARKER_KEY, 6);
+	  
+	  texte.storeText("admin.tab.nextaction", "Aktionen");
+	}
+	
 	void updateTo_v0_3_4() {
 	  logger .warn("# DATABASE update to version 5 #");
 	  config.saveIntegerValue(INIT_MARKER_KEY, 5);

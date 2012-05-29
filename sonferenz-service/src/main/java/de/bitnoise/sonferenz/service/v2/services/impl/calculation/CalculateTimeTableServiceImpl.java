@@ -2,9 +2,12 @@ package de.bitnoise.sonferenz.service.v2.services.impl.calculation;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService;
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.CalculationConfiguration;
 
+@Service
 public class CalculateTimeTableServiceImpl implements CalculateTimetableService {
 
   @Override
@@ -38,9 +41,12 @@ public class CalculateTimeTableServiceImpl implements CalculateTimetableService 
     }
     CalculationConfigurationImpl theConfig = (CalculationConfigurationImpl) config;
 
-    List<SlotItem> slots = theConfig.getSlotConfig().getAllSlots();
-
-    if (slots.size() != theConfig.getTalks().size()) {
+    List<SlotReference> slots = theConfig.getSlotConfig().getAllSlots();
+    int count = 0;
+    for(SlotReference slot : slots) {
+      count+=slot.getAll().size();
+    }
+    if ( count != theConfig.getTalks().size()) {
       throw new IllegalStateException("The count of slots is not the same as the talks count");
     }
 

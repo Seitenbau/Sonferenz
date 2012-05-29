@@ -23,8 +23,8 @@ public class ConferenceSlotsTest {
     SlotReference ref2 = sut.addParallel("Fr 17:00", 3);
 
     // verify counts
-    List<SlotItem> allSlots = sut.getAllSlots();
-    assertThat(allSlots).hasSize(5);
+    List<SlotReference> allSlots = sut.getAllSlots();
+    assertThat(allSlots).hasSize(2);
     assertThat(ref1.getAll()).hasSize(2);
     assertThat(ref2.getAll()).hasSize(3);
 
@@ -34,11 +34,11 @@ public class ConferenceSlotsTest {
     SlotItem s2t2 = ref2.getAll().get(1);
     SlotItem s2t3 = ref2.getAll().get(2);
 
-    assertThat(allSlots.get(0)).isSameAs(s1t1);
-    assertThat(allSlots.get(1)).isSameAs(s1t2);
-    assertThat(allSlots.get(2)).isSameAs(s2t1);
-    assertThat(allSlots.get(3)).isSameAs(s2t2);
-    assertThat(allSlots.get(4)).isSameAs(s2t3);
+    assertThat(allSlots.get(0).get(0)).isSameAs(s1t1);
+    assertThat(allSlots.get(0).get(1)).isSameAs(s1t2);
+    assertThat(allSlots.get(1).get(0)).isSameAs(s2t1);
+    assertThat(allSlots.get(1).get(1)).isSameAs(s2t2);
+    assertThat(allSlots.get(1).get(2)).isSameAs(s2t3);
   }
   
   @Test
@@ -48,8 +48,8 @@ public class ConferenceSlotsTest {
     SlotReference ref2 = sut.addParallel("Fr 17:00", 3);
     
     // verify counts
-    List<SlotItem> allSlots = sut.getAllSlots();
-    assertThat(allSlots).hasSize(5);
+    List<SlotReference> allSlots = sut.getAllSlots();
+    assertThat(allSlots).hasSize(2);
     assertThat(ref1.getAll()).hasSize(2);
     assertThat(ref2.getAll()).hasSize(3);
     
@@ -59,11 +59,11 @@ public class ConferenceSlotsTest {
     SlotItem s2t2 = ref2.getAll().get(1);
     SlotItem s2t3 = ref2.getAll().get(2);
     
-    assertThat(allSlots.get(0)).isSameAs(s1t1);
-    assertThat(allSlots.get(1)).isSameAs(s1t2);
-    assertThat(allSlots.get(2)).isSameAs(s2t1);
-    assertThat(allSlots.get(3)).isSameAs(s2t2);
-    assertThat(allSlots.get(4)).isSameAs(s2t3);
+    assertThat(allSlots.get(0).get(0)).isSameAs(s1t1);
+    assertThat(allSlots.get(0).get(1)).isSameAs(s1t2);
+    assertThat(allSlots.get(1).get(0)).isSameAs(s2t1);
+    assertThat(allSlots.get(1).get(1)).isSameAs(s2t2);
+    assertThat(allSlots.get(1).get(2)).isSameAs(s2t3);
   }
 
 }

@@ -1,8 +1,11 @@
 package de.bitnoise.sonferenz.service.v2.services.impl.calculation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.Maps;
@@ -44,17 +47,20 @@ public class CalculatorLogic {
   private Collisions calcCollision(CalculationTalkImpl talkA, CalculationTalkImpl talkB) {
     List<Constraint> constraints = talkA.getConstraints();
     int weight = 0;
+    List<ConstraintEvent> events = new ArrayList<ConstraintEvent>();
     for (Constraint c : constraints) {
-      Integer val = c.calc(_cfg, talkB);
+      ConstraintEvent val = c.calc(_cfg, talkB);
       if (val == null) {
         continue;
       }
-      if (val <= -1) {
-        return new CollisionsStat(-1);
+      events.add(val);
+      if (val.getWeight() <= -1) {
+        return new CollisionsStat(-1,events);
       }
-      weight += val;
+      weight += val.getWeight();
+      
     }
-    return new CollisionsStat(weight);
+    return new CollisionsStat(weight,events);
   }
 
   public class CollistionResultImpl implements CollisionResult {
@@ -95,7 +101,8 @@ public class CalculatorLogic {
       Set<CalcTalk> cols = _table.columnKeySet();
       sb.append("  \t| ");
       for (CalcTalk col : cols) {
-        sb.append(col);
+        String colPadded = StringUtils.leftPad(col.toString(), 5);
+        sb.append(colPadded);
         sb.append("\t| ");
       }
       sb.append("\r\n");
@@ -104,7 +111,9 @@ public class CalculatorLogic {
         sb.append(row);
         sb.append("\t| ");
         for (CalcTalk col : cols) {
-          sb.append(_table.get(row, col));
+          Collisions value = _table.get(row, col);
+          String valuePadded = StringUtils.leftPad(value.toString(), 5);
+          sb.append(valuePadded);
           sb.append("\t| ");
         }
         sb.append("\r\n");

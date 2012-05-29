@@ -22,4 +22,6 @@ public interface VoteService
 
   List<UserModel> getAllUsersNotVoted(ConferenceModel conference);
 
+  List<VoteModel> getVotesFor(UserModel user);
+
 }

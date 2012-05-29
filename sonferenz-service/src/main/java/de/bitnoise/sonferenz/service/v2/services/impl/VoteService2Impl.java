@@ -34,7 +34,7 @@ public class VoteService2Impl implements VoteService
 
   @Autowired
   ConferenceService conf;
-  
+
   @Autowired
   UserService userService;
 
@@ -144,13 +144,7 @@ public class VoteService2Impl implements VoteService
   public List<VoteModel> getMyVotes()
   {
     UserModel user = auth.getCurrentUser();
-    if (user == null)
-    {
-      throw new IllegalStateException("No User logged in");
-    }
-    List<VoteModel> votes = voteRepo.findByUser(user);
-    Hibernate.initialize(votes);
-    return votes;
+    return getVotesFor(user);
   }
 
   @Override
@@ -170,22 +164,25 @@ public class VoteService2Impl implements VoteService
   public List<UserModel> getAllUsersNotVoted(ConferenceModel conference)
   {
     List<UserModel> allUsers = userService.getAllUsers();
-    List<UserModel> list=new ArrayList<UserModel>();
-    for(UserModel user :allUsers) {
+    List<UserModel> list = new ArrayList<UserModel>();
+    for (UserModel user : allUsers)
+    {
       // TODO : add conference checks + move logic into db select
       List<VoteModel> res = voteRepo.findByUser(user);
-      if(res==null || res.isEmpty()) {
+      if (res == null || res.isEmpty())
+      {
         list.add(user);
       }
     }
     return list;
   }
-  
+
   @Override
   @Transactional
   public List<VotedItem> getVoteLevel(ConferenceModel conference)
   {
-    List<ProposalModel> allProposals = conf.getAllProposalsForConference(conference);
+    List<ProposalModel> allProposals = conf
+        .getAllProposalsForConference(conference);
     List<VotedItem> list = new ArrayList<VotedItem>();
     for (ProposalModel proposal : allProposals)
     {
@@ -213,7 +210,8 @@ public class VoteService2Impl implements VoteService
       if (!rate.equals(Integer.MAX_VALUE))
       {
         rateing += rate;
-        if(!rate.equals(0)) {
+        if (!rate.equals(0))
+        {
           item.addUser(vote.getUser());
         }
       }
@@ -222,5 +220,16 @@ public class VoteService2Impl implements VoteService
     item.setVotes(rateing);
   }
 
- 
+  @Override
+  public List<VoteModel> getVotesFor(UserModel user)
+  {
+    if (user == null)
+    {
+      throw new IllegalStateException("No User logged in");
+    }
+    List<VoteModel> votes = voteRepo.findByUser(user);
+    Hibernate.initialize(votes);
+    return votes;
+  }
+
 }

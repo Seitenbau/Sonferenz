@@ -9,11 +9,15 @@ import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.CalcU
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.CollisionResult;
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.Collisions;
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.ConstraintFunction;
+import de.bitnoise.sonferenz.service.v2.services.impl.calculation.CalculatorLogicTest.ResultCheck.TalkCheck;
 
 public class CalculatorLogicTest {
 
   CalculationConfigurationImpl config = new CalculationConfigurationImpl();
   CalculatorLogic sut = new CalculatorLogic(config);
+  
+  ConstraintFunction speaker=ConstraintFuncs.speaker();
+  ConstraintFunction visit=ConstraintFuncs.visit(1);
 
   @Test
   public void afterInit() {
@@ -45,25 +49,6 @@ public class CalculatorLogicTest {
     check(result).talk(talk4, talk4).isImpossible();
   }
 
-  ConstraintFunction visit = new ConstraintFunction() {
-    @Override
-    public Integer calculate(CalculationTalkImpl talkB, CalcUser user) {
-      if (talkB.containsUser(user)) {
-        return 1;
-      }
-      return null;
-    }
-  };
-  ConstraintFunction speaker = new ConstraintFunction() {
-    @Override
-    public Integer calculate(CalculationTalkImpl talkB, CalcUser user) {
-      if (talkB.containsUser(user)) {
-        return -1;
-      }
-      return null;
-    }
-  };
-
   @Test
   public void withSpeakersConstraints() {
     // prepare
@@ -76,10 +61,10 @@ public class CalculatorLogicTest {
     CalcUser user2 = config.addUser("u2");
     CalcUser user3 = config.addUser("u3");
     CalcUser user4 = config.addUser("u4");
-    talk1.addConstraint(speaker, user1);
-    talk2.addConstraint(speaker, user2);
-    talk3.addConstraint(speaker, user3);
-    talk4.addConstraint(speaker, user4);
+    talk1.addSpeaker(  user1);
+    talk2.addSpeaker( user2);
+    talk3.addSpeaker( user3);
+    talk4.addSpeaker( user4);
 
     // execute
     CollisionResult result = sut.calculateCollisions();
@@ -115,11 +100,11 @@ public class CalculatorLogicTest {
     CalcUser user2 = config.addUser("u2");
     CalcUser user3 = config.addUser("u3");
     CalcUser user4 = config.addUser("u4");
-    talk1.addConstraint(speaker, user1);
-    talk1.addConstraint(speaker, user2);
-    talk2.addConstraint(speaker, user2);
-    talk3.addConstraint(speaker, user3);
-    talk4.addConstraint(speaker, user4);
+    talk1.addSpeaker( user1);
+    talk1.addSpeaker( user2);
+    talk2.addSpeaker( user2);
+    talk3.addSpeaker( user3);
+    talk4.addSpeaker( user4);
 
     // execute
     CollisionResult result = sut.calculateCollisions();
@@ -155,12 +140,12 @@ public class CalculatorLogicTest {
     CalcUser user2 = config.addUser("u2");
     CalcUser user3 = config.addUser("u3");
     CalcUser user4 = config.addUser("u4");
-    talk1.addConstraint(speaker, user1);
-    talk1.addConstraint(speaker, user3);
-    talk2.addConstraint(speaker, user2);
-    talk3.addConstraint(speaker, user3);
-    talk4.addConstraint(speaker, user4);
-    talk4.addConstraint(speaker, user1);
+    talk1.addSpeaker( user1);
+    talk1.addSpeaker( user3);
+    talk2.addSpeaker( user2);
+    talk3.addSpeaker( user3);
+    talk4.addSpeaker( user4);
+    talk4.addSpeaker( user1);
 
     // execute
     CollisionResult result = sut.calculateCollisions();
@@ -197,13 +182,13 @@ public class CalculatorLogicTest {
     CalcUser user3 = config.addUser("u3");
     CalcUser user4 = config.addUser("u4");
 
-    talk1.addConstraint(speaker, user1);
-    talk1.addConstraint(speaker, user3);
-    talk2.addConstraint(speaker, user2);
-    talk3.addConstraint(speaker, user3);
-    talk4.addConstraint(speaker, user4);
+    talk1.addSpeaker( user1);
+    talk1.addSpeaker( user3);
+    talk2.addSpeaker( user2);
+    talk3.addSpeaker( user3);
+    talk4.addSpeaker( user4);
 
-    talk4.addConstraint(visit, user1);
+    talk4.addVisit(1, user1);
 
     // execute
     CollisionResult result = sut.calculateCollisions();
@@ -212,7 +197,7 @@ public class CalculatorLogicTest {
     check(result).talk(talk1, talk1).isImpossible();
     check(result).talk(talk1, talk2).isPossible(0);
     check(result).talk(talk1, talk3).isImpossible();
-    check(result).talk(talk1, talk4).isPossible(1);
+    check(result).talk(talk1, talk4).print().isPossible(1);
     check(result).talk(talk2, talk1).isPossible(0);
     check(result).talk(talk2, talk2).isImpossible();
     check(result).talk(talk2, talk3).isPossible(0);
@@ -240,16 +225,16 @@ public class CalculatorLogicTest {
     CalcUser user3 = config.addUser("u3");
     CalcUser user4 = config.addUser("u4");
 
-    talk1.addConstraint(speaker, user1);
-    talk1.addConstraint(speaker, user3);
-    talk2.addConstraint(speaker, user2);
-    talk3.addConstraint(speaker, user3);
-    talk4.addConstraint(speaker, user4);
+    talk1.addSpeaker( user1);
+    talk1.addSpeaker( user3);
+    talk2.addSpeaker( user2);
+    talk3.addSpeaker( user3);
+    talk4.addSpeaker( user4);
 
-    talk4.addConstraint(visit, user1);
-    talk4.addConstraint(visit, user2);
-    talk4.addConstraint(visit, user3);
-    talk4.addConstraint(visit, user4);
+    talk4.addVisit(1, user1);
+    talk4.addVisit(1, user2);
+    talk4.addVisit(1, user3);
+    talk4.addVisit(1, user4);
 
     // execute
     CollisionResult result = sut.calculateCollisions();
@@ -286,16 +271,16 @@ public class CalculatorLogicTest {
     CalcUser user3 = config.addUser("u3");
     CalcUser user4 = config.addUser("u4");
 
-    talk1.addConstraint(speaker, user1);
-    talk1.addConstraint(speaker, user3);
-    talk2.addConstraint(speaker, user2);
-    talk3.addConstraint(speaker, user3);
-    talk4.addConstraint(speaker, user4);
+    talk1.addSpeaker( user1);
+    talk1.addSpeaker( user3);
+    talk2.addSpeaker( user2);
+    talk3.addSpeaker( user3);
+    talk4.addSpeaker( user4);
 
-    talk4.addConstraint(visit, user1);
-    talk4.addConstraint(visit, user2);
-    talk4.addConstraint(visit, user3);
-    talk4.addConstraint(visit, user4);
+    talk4.addVisit(1, user1);
+    talk4.addVisit(1, user2);
+    talk4.addVisit(1, user3);
+    talk4.addVisit(1, user4);
 
     { // execute 1st time
       CollisionResult result = sut.calculateCollisions();
@@ -340,7 +325,7 @@ public class CalculatorLogicTest {
       check(result).talk(talk4, talk4).isImpossible();
     }
     
-    talk3.addConstraint(visit, user2);
+    talk3.addVisit(1, user2);
     { // execute 3st time
       CollisionResult result = sut.calculateCollisions();
       
@@ -362,6 +347,94 @@ public class CalculatorLogicTest {
       check(result).talk(talk4, talk3).isPossible(2);
       check(result).talk(talk4, talk4).isImpossible();
     }
+  }
+  
+  @Test
+  public void visitWithDifferenWeight() {
+    // prepare
+    CalcTalk talk1 = config.addTalk("t1");
+    CalcTalk talk2 = config.addTalk("t2");
+    CalcTalk talk3 = config.addTalk("t3");
+    CalcTalk talk4 = config.addTalk("t4");
+
+    CalcUser user1 = config.addUser("u1");
+    CalcUser user2 = config.addUser("u2");
+    CalcUser user3 = config.addUser("u3");
+    CalcUser user4 = config.addUser("u4");
+
+    talk1.addSpeaker( user1);
+    talk1.addSpeaker( user3);
+    talk2.addSpeaker( user2);
+    talk3.addSpeaker( user3);
+    talk4.addSpeaker( user4);
+ 
+    talk4.addVisit(1, user1);
+    talk4.addVisit(2, user2);
+    talk4.addVisit(3, user3);
+    talk4.addVisit(4, user4);
+
+    // execute
+    CollisionResult result = sut.calculateCollisions();
+
+    // verify
+    check(result).talk(talk1, talk1).isImpossible();
+    check(result).talk(talk1, talk2).isPossible(0);
+    check(result).talk(talk1, talk3).isImpossible();
+    check(result).talk(talk1, talk4).isPossible(1+3);
+    check(result).talk(talk2, talk1).isPossible(0);
+    check(result).talk(talk2, talk2).isImpossible();
+    check(result).talk(talk2, talk3).isPossible(0);
+    check(result).talk(talk2, talk4).isPossible(2);
+    check(result).talk(talk3, talk1).isImpossible();
+    check(result).talk(talk3, talk2).isPossible(0);
+    check(result).talk(talk3, talk3).isImpossible();
+    check(result).talk(talk3, talk4).isPossible(3);
+    check(result).talk(talk4, talk1).isPossible(1+3);
+    check(result).talk(talk4, talk2).isPossible(2);
+    check(result).talk(talk4, talk3).isPossible(3);
+    check(result).talk(talk4, talk4).isImpossible();
+  }
+  
+  @Test
+  public void visitWithSameWeightsOndDiff() {
+    // prepare
+    CalcTalk talk1 = config.addTalk("t1");
+    CalcTalk talk2 = config.addTalk("t2");
+    CalcTalk talk3 = config.addTalk("t3");
+    CalcTalk talk4 = config.addTalk("t4");
+    
+    CalcUser user1 = config.addUser("u1");
+    CalcUser user2 = config.addUser("u2");
+    CalcUser user3 = config.addUser("u3");
+    CalcUser user4 = config.addUser("u4");
+    
+    talk1.addVisit(1 , user1);
+    talk2.addVisit(2, user1);
+    talk3.addVisit(1, user1);
+    talk4.addVisit(1, user1);
+    
+    // execute
+    CollisionResult result = sut.calculateCollisions();
+    System.out.println(result);
+    
+    // verify
+    check(result).talk(talk1, talk1).isImpossible();
+    check(result).talk(talk2, talk2).isImpossible();
+    check(result).talk(talk3, talk3).isImpossible();
+    check(result).talk(talk4, talk4).isImpossible();
+    
+    check(result).talk(talk1, talk2).isPossible(2);
+    check(result).talk(talk1, talk3).isPossible(1);
+    check(result).talk(talk1, talk4).isPossible(1);
+    check(result).talk(talk2, talk1).isPossible(2);
+    check(result).talk(talk2, talk3).isPossible(1);
+    check(result).talk(talk2, talk4).isPossible(1);
+    check(result).talk(talk3, talk1).isPossible(1);
+    check(result).talk(talk3, talk2).isPossible(1);
+    check(result).talk(talk3, talk4).isPossible(1);
+    check(result).talk(talk4, talk1).isPossible(1);
+    check(result).talk(talk4, talk2).isPossible(1);
+    check(result).talk(talk4, talk3).isPossible(1);
   }
 
   // ***************************************************************
@@ -391,6 +464,14 @@ public class CalculatorLogicTest {
 
       public TalkCheck(Collisions collisions) {
         _collision = collisions;
+      }
+
+      public TalkCheck print()
+      {
+        for(ConstraintEvent e : _collision.getConstrainingEvents()) {
+          System.out.println(e);
+        }
+        return this;
       }
 
       public void isPossible(int i) {
