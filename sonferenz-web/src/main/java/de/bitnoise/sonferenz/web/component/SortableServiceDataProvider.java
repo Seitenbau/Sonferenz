@@ -87,7 +87,10 @@ public abstract class SortableServiceDataProvider<TYPE_DB, TYPE_UI extends Seria
   
   protected abstract Page<TYPE_DB> getAllItems(PageRequest request);
 
-  public abstract int size();
+  public int size() {
+    Long s = getAllItems(new PageRequest(0, 1)).getTotalElements();
+    return s.intValue();
+  }
 
   public IModel<TYPE_UI> model(TYPE_UI object)
   {

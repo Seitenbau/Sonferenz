@@ -1,0 +1,21 @@
+<wicket:panel>
+  <div wicket:id="feedback"></div>
+  <form wicket:id="form" class="formLayout">
+    <fieldset class="editFieldset">
+      <legend>Speaker bearbeiten</legend>
+        <label class="formItemLeft" id="labelName" for="name">Name :</label> 
+        <input class="formItemRight formItemExpand" id="name" wicket:id="name" /> 
+      <br /> 
+        <label class="formItemLeft" id="labelUser" for="user">Kontakt :</label>
+        <select class="formItemRight formItemExpand" wicket:id="user"></select>
+      <br /> 
+        <label id="labelDescription" class="merged">Beschreibung :</label>
+        <textarea class="merged" wicket:id="description"></textarea>
+      <br />
+    </fieldset>
+    <div class="formButtons">
+      <input type="submit" wicket:id="submit" value="Speichern" /> 
+      <input type="submit" wicket:id="cancel" value="Abbrechen" />
+    </div>
+  </form>
+</wicket:panel>

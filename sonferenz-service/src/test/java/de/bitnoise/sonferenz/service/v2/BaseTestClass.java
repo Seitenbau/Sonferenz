@@ -44,4 +44,9 @@ public class BaseTestClass
       verifyNoMoreInteractions(mocks);
     }
   }
+  
+  protected void expectException(Class<? extends Throwable> clazz, String message) {
+    expectException.expect(clazz);
+    expectException.expectMessage(message);
+  }
 }
