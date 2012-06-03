@@ -12,6 +12,8 @@ import de.bitnoise.sonferenz.model.SpeakerModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.service.v2.services.SpeakerService;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
@@ -51,7 +53,11 @@ public class PageSpeaker extends KonferenzPage {
 
   @Override
   protected Panel getPageContent(String id) {
-    return new EditSpeakerPanel(id, _speaker);
+    if (KonferenzSession.hasRight(Right.Actions.ManageInviteUser)) {
+      return new EditSpeakerPanel(id, _speaker);
+    } else {
+      return new ViewSpeakerPanel(id, _speaker);
+    }
   }
 
 }

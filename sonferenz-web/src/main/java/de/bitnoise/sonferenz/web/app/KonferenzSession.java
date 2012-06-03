@@ -59,6 +59,7 @@ public class KonferenzSession extends WebSession
     InjectorHolder.getInjector().inject(this);
     managerRoles.add(Right.Actions.InviteUser);
     managerRoles.add(Right.Actions.ManageInviteUser);
+    managerRoles.add(Right.Actions.SpeakerEditAny);
     inviteRoles.add(Right.Actions.InviteUser);
     
     adminRoles.add(Right.User.List);
@@ -70,6 +71,7 @@ public class KonferenzSession extends WebSession
     adminRoles.add(Right.Admin.ViewCalculation);
     adminRoles.add(Right.Admin.StartCalculation);
     adminRoles.add(Right.Admin.Configure);
+    adminRoles.add(Right.Actions.SpeakerEditAny);
 
     userRoles.add(Right.Talk.List);
     userRoles.add(Right.Talk.Create);

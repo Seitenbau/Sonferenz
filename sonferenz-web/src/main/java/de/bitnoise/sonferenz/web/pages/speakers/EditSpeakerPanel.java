@@ -23,6 +23,8 @@ import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.services.SpeakerService;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
 import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
@@ -34,10 +36,10 @@ public class EditSpeakerPanel extends FormPanel {
   Model<UserModel> modelUser = new Model<UserModel>();
 
   SpeakerModel _speaker;
-  
+
   @SpringBean
   UserService userService;
-  
+
   @SpringBean
   SpeakerService speakerService;
 
@@ -47,6 +49,9 @@ public class EditSpeakerPanel extends FormPanel {
     _speaker = speaker;
     if (_speaker == null) {
       _speaker = new SpeakerModel();
+    }
+    if (!KonferenzSession.hasRight(Right.Actions.ManageInviteUser)) {
+      throw new IllegalStateException("You have to less rights");
     }
   }
 
@@ -118,6 +123,9 @@ public class EditSpeakerPanel extends FormPanel {
   }
 
   protected void clickedOnSave() {
+    if (!KonferenzSession.hasRight(Right.Actions.ManageInviteUser)) {
+      throw new IllegalStateException("You have to less rights");
+    }
     String valueName = modelName.getObject();
     String valueDescRaw = modelDesc.getObject();
     String valueDesc = HtmlSanitizer.sanitize(valueDescRaw);
