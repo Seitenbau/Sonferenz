@@ -269,34 +269,4 @@ public class CalculateTest
     return speakerSet;
   }
 
-  @Test
-  public void testCalculate_2012()
-  {
-    List<Vortrag> liste = new ArrayList<Vortrag>();
-    liste.add(vortrag("CF", "10 Luegen", "CF"));
-    liste.add(vortrag("IA", "Agile is not", "IA"));
-    liste.add(vortrag("SB", "Android Development"));
-    liste.add(vortrag("RW", "AOP"));
-    liste.add(vortrag("NH", "Selenium"));
-    liste.add(vortrag("TF", "CodeGen"));
-    liste.add(vortrag("AB", "Leiden"));
-    liste.add(vortrag("JS", "firebug"));
-    liste.add(vortrag("AH", "Javascript"));
-    liste.add(vortrag("PW", "Responsive"));
-    liste.add(vortrag("JH", "Design"));
-    liste.add(vortrag("AB", "TDD"));
-
-    // execute
-    List<VortragPair> result = sut.calculate(liste, 12);
-    // verify
-    for (VortragPair vp : result)
-    {
-      System.out.println(vp.getVortrag1() + " : " + vp.getVortrag2());
-    }
-    assertThat(result).hasSize(6);
-    // VortragPair p0 = result.get(0);
-    // assertThat(p0.getVortrag1().getId()).isEqualTo("id-0");
-    // assertThat(p0.getVortrag2().getId()).isEqualTo("id-1");
-  }
-
 }
