@@ -6,12 +6,16 @@
         <label class="formItemLeft" id="labelName" for="name">Name :</label> 
         <input class="formItemRight formItemExpand" id="name" wicket:id="name" /> 
       <br /> 
+        <label class="formItemLeft" id="labelImage" for="bild">Bild :</label>
+        <input class="formItemRight formItemExpand" wicket:id="bild" type="file"/>
+      <br /> 
         <label class="formItemLeft" id="labelUser" for="user">Kontakt :</label>
         <select class="formItemRight formItemExpand" wicket:id="user"></select>
       <br /> 
         <label id="labelDescription" class="merged">Beschreibung :</label>
         <textarea class="merged" wicket:id="description"></textarea>
       <br />
+      <wicket:container wicket:id="progressbar"></wicket:container>
     </fieldset>
     <div class="formButtons">
       <input type="submit" wicket:id="submit" value="Speichern" /> 

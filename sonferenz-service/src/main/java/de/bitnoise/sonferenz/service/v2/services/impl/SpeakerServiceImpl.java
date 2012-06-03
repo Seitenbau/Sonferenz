@@ -21,21 +21,21 @@ public class SpeakerServiceImpl implements SpeakerService {
 
   @Override
   public Page<SpeakerModel> getAllSpeakers(Pageable pageable) throws RepositoryException {
-    verify(pageable).as("pageable").notNull();
+    verify(pageable).as("pageable").isNotNull();
     Page<SpeakerModel> result = speakerRepo.findAll(pageable);
     return result;
   }
 
   @Override
   public SpeakerModel getSpeakerById(Long id) {
-    verify(id).as("id").notNull();
+    verify(id).as("id").isNotNull();
     SpeakerModel one = speakerRepo.findOne(id.intValue());
     return one;
   }
 
   @Override
   public void saveSpeaker(SpeakerModel speaker) {
-    verify(speaker).as("speaker").notNull();
+    verify(speaker).as("speaker").isNotNull();
     if (speaker.isNew()) {
       speaker.setCreatedAt(new Date());
     }

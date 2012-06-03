@@ -19,7 +19,7 @@ public class VerifyObject {
     _description.append(text);
   }
 
-  public void notNull() {
+  public void isNotNull() {
     if (_current == null) {
       error(" was null");
     }

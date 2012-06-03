@@ -89,6 +89,7 @@ public class InitEmptyDatabase
 	  config.saveIntegerValue(INIT_MARKER_KEY, 6);
 	  
 	  texte.storeText("admin.tab.nextaction", "Aktionen");
+	  texte.storeText("form.uploadTooLarge", "Profil Bild zu groß");
 	}
 	
 	void updateTo_v0_3_4() {

@@ -1,5 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.speakers;
 
+import org.apache.wicket.extensions.ajax.markup.html.form.upload.UploadProgressBar;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -7,10 +8,13 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.lang.Bytes;
 import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,11 +22,13 @@ import com.visural.common.web.HtmlSanitizer;
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
+import de.bitnoise.sonferenz.model.ResourceModel;
 import de.bitnoise.sonferenz.model.SpeakerModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.services.SpeakerService;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
+import de.bitnoise.sonferenz.service.v2.services.impl.ResourceService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
@@ -42,6 +48,9 @@ public class EditSpeakerPanel extends FormPanel {
 
   @SpringBean
   SpeakerService speakerService;
+
+  @SpringBean
+  ResourceService resources;
 
   public EditSpeakerPanel(String id, SpeakerModel speaker)
   {
@@ -67,12 +76,12 @@ public class EditSpeakerPanel extends FormPanel {
 
     // Bind Wicket Elements
     addFeedback(this, "feedback");
-
+    final FileUploadField fileupload = new FileUploadField("bild");
     Form<String> form = new Form<String>("form") {
       @Override
       protected void onSubmit()
       {
-        clickedOnSave();
+        clickedOnSave(fileupload);
       }
     };
 
@@ -82,7 +91,12 @@ public class EditSpeakerPanel extends FormPanel {
         setResponsePage(TalksOverviewPage.class);
       }
     };
+
     cancel.setDefaultFormProcessing(false);
+    form.setMultiPart(true);
+    form.setMaxSize(Bytes.kilobytes(124));
+    form.add(new UploadProgressBar("progressbar", form));
+    form.add(fileupload);
     form.add(cancel);
 
     FormComponent<String> titleField = new TextField<String>("name", modelName);
@@ -122,14 +136,26 @@ public class EditSpeakerPanel extends FormPanel {
     add(form);
   }
 
-  protected void clickedOnSave() {
+  protected void clickedOnSave(FileUploadField fileupload) {
     if (!KonferenzSession.hasRight(Right.Actions.ManageInviteUser)) {
       throw new IllegalStateException("You have to less rights");
     }
     String valueName = modelName.getObject();
     String valueDescRaw = modelDesc.getObject();
     String valueDesc = HtmlSanitizer.sanitize(valueDescRaw);
+    FileUpload fup = fileupload.getFileUpload();
+
+    if (fup != null) {
+      byte[] data = fup.getBytes();
+      String filename = fup.getClientFileName();
+      byte[] md5 = fup.getMD5();
+      Long size = fup.getSize();
+      ResourceModel model = resources.storeResource(filename, data, md5, size);
+      _speaker.setPicture(model);
+    }
+
     UserModel valueUser = modelUser.getObject();
+
     _speaker.setContact(valueUser);
     _speaker.setName(valueName);
     _speaker.setDescription(valueDesc);

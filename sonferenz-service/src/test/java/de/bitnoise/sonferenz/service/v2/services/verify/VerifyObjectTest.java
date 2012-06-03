@@ -13,7 +13,7 @@ public class VerifyObjectTest extends BaseTestClass {
     // verify
     expectException(IllegalArgumentException.class, "was null");
     // execute
-    sut.notNull();
+    sut.isNotNull();
   }
 
   @Test
@@ -21,7 +21,7 @@ public class VerifyObjectTest extends BaseTestClass {
     // prepare
     VerifyObject sut = new VerifyObject(new Object());
     // execute
-    sut.notNull();
+    sut.isNotNull();
     // verify : nothing = green
   }
   
@@ -33,7 +33,7 @@ public class VerifyObjectTest extends BaseTestClass {
     expectException(IllegalArgumentException.class, "parameter 1 was null");
     // execute
     sut.as("parameter 1");
-    sut.notNull();
+    sut.isNotNull();
   }
 
 }

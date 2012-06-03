@@ -1,26 +1,28 @@
 package de.bitnoise.sonferenz.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import org.hibernate.annotations.Type;
-
-
 @Entity
 @Data
-//@Table 
-@EqualsAndHashCode(of={"id"})
-public class SpeakerModel extends ModelBase implements DoInterface<Integer>
+// @Table
+@EqualsAndHashCode(of = { "id" })
+public class ResourceModel extends ModelBase implements DoInterface<Integer>
 {
   @Id
   @GeneratedValue
@@ -28,25 +30,29 @@ public class SpeakerModel extends ModelBase implements DoInterface<Integer>
 
   @Column
   String name;
-  
+
+  @Column
+  String originalName;
+
   @Column
   @Temporal(TemporalType.TIMESTAMP)
   Date createdAt;
-  
+
+  @Column
+  @Temporal(TemporalType.TIMESTAMP)
+  Date lastAccess;
+
   @OneToOne
-  UserModel contact;
-  
-  @OneToOne
-  ResourceModel picture;
+  UserModel owner;
+
+  @Column
+  String md5sum;
   
   @Column
-  @Type(type = "text")
-  String description;
+  Long size;
 
-  @Override
-  public String toString()
-  {
-    return getName();
-  }
+  @Column
+  @Lob
+  byte[] content;
 
 }
