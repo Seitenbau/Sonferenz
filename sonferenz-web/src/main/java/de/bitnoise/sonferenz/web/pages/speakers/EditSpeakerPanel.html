@@ -5,9 +5,12 @@
       <legend>Speaker bearbeiten</legend>
         <label class="formItemLeft" id="labelName" for="name">Name :</label> 
         <input class="formItemRight formItemExpand" id="name" wicket:id="name" /> 
-      <br /> 
+      <br />
         <label class="formItemLeft" id="labelImage" for="bild">Bild :</label>
-        <input class="formItemRight formItemExpand" wicket:id="bild" type="file"/>
+        <div  class="formItemRight formItemExpand">
+          <img class="profilePicture" src="#" wicket:id="profileImage"></img> 
+          <input class="formItemRight formItemExpand" wicket:id="bild" type="file"/>
+        </div>
       <br /> 
         <label class="formItemLeft" id="labelUser" for="user">Kontakt :</label>
         <select class="formItemRight formItemExpand" wicket:id="user"></select>

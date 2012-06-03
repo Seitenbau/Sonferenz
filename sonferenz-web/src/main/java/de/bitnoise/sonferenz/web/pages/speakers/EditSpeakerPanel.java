@@ -1,5 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.speakers;
 
+import org.apache.wicket.ResourceReference;
 import org.apache.wicket.extensions.ajax.markup.html.form.upload.UploadProgressBar;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;
@@ -10,6 +11,7 @@ import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
@@ -31,8 +33,10 @@ import de.bitnoise.sonferenz.service.v2.services.UserService;
 import de.bitnoise.sonferenz.service.v2.services.impl.ResourceService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.app.Right;
+import de.bitnoise.sonferenz.web.app.WicketApplication;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
 import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
+import de.bitnoise.sonferenz.web.pages.resources.PageImages;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
@@ -64,6 +68,8 @@ public class EditSpeakerPanel extends FormPanel {
     }
   }
 
+  final ResourceReference img0 = new ResourceReference(WicketApplication.class,"images/state-0.gif");
+
   @Override
   protected void onInitialize()
   {
@@ -73,7 +79,10 @@ public class EditSpeakerPanel extends FormPanel {
     modelName.setObject(_speaker.getName());
     modelDesc.setObject(_speaker.getDescription());
     modelUser.setObject(_speaker.getContact());
-
+    Image profileImage = new Image("profileImage", img0);
+    if( _speaker.getPicture() != null ) {
+      profileImage = new Image("profileImage", new PageImages(_speaker.getPicture()) );
+    }
     // Bind Wicket Elements
     addFeedback(this, "feedback");
     final FileUploadField fileupload = new FileUploadField("bild");
@@ -97,6 +106,7 @@ public class EditSpeakerPanel extends FormPanel {
     form.setMaxSize(Bytes.kilobytes(124));
     form.add(new UploadProgressBar("progressbar", form));
     form.add(fileupload);
+    form.add(profileImage);
     form.add(cancel);
 
     FormComponent<String> titleField = new TextField<String>("name", modelName);

@@ -90,6 +90,10 @@ public class InitEmptyDatabase
 	  
 	  texte.storeText("admin.tab.nextaction", "Aktionen");
 	  texte.storeText("form.uploadTooLarge", "Profil Bild zu groß");
+	  texte.storeText("admin.tab.speakers", "Speakers");
+	  texte.storeText("table.speakers.column.Name", "Name");
+	  texte.storeText("table.speakers.createLink ", "Neuer Speaker");
+
 	}
 	
 	void updateTo_v0_3_4() {

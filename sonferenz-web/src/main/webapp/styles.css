@@ -220,6 +220,16 @@ a.firstLevelMenuButton.whishes {
 	list-style-position: inside;
 }
 
+.speakerDescription ul li {
+	list-style-type: circle;
+	list-style-position: inside;
+}
+
+.speakerDescription ol li {
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+
 .contentArea h3 {
 	font-size: 150%;
 	margin-bottom: 10px;
@@ -404,6 +414,10 @@ div.tableBar {
 
 .formLayout select {
 	width: 50%;
+}
+
+div.formItemRight  {
+	float: left;
 }
 
 .formLayout br {
@@ -1520,4 +1534,17 @@ div.checkbox {
 input.checkbox {
 	width: 20%;
 }
+
+/* Speaker */
+img.profilePicture {
+	width: 100px;
 }
+
+div.speakerPicture {
+	 border: 1px solid;
+    float: right;
+}
+div.speakerName {
+	
+}
+
