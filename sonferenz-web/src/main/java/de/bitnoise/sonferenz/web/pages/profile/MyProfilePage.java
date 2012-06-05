@@ -16,6 +16,7 @@ import de.bitnoise.sonferenz.web.component.panels.MultiPanel;
 import de.bitnoise.sonferenz.web.component.tabs.TabPanel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.ListSpeakerPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
 
 @At(url = "/profile")
@@ -47,6 +48,14 @@ public class MyProfilePage extends KonferenzPage
 				    @Override
 				    public Panel getPanel(String panelId) {
 				      return new MyInvitesPanel(panelId);
+				    }
+				  });
+				}
+				if ( KonferenzSession.hasRight(Right.Actions.ManageInviteUser) ) {
+				  tabs.add(new AbstractTab(txt("profile.tab.speakers")) {
+				    @Override
+				    public Panel getPanel(String panelId) {
+				      return new ListSpeakerPanel(panelId);
 				    }
 				  });
 				}

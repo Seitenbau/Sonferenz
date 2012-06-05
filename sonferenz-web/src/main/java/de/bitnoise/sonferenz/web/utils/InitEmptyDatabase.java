@@ -94,6 +94,7 @@ public class InitEmptyDatabase
 	  texte.storeText("table.speakers.column.Name", "Name");
 	  texte.storeText("table.speakers.createLink ", "Neuer Speaker");
 	  texte.storeText("menu.1lvl.agenda", "Agenda");
+	  texte.storeText("profile.tab.speakers", "Speakers");
 
 	}
 	

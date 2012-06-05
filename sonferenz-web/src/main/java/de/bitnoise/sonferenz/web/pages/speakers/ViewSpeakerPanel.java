@@ -26,7 +26,7 @@ public class ViewSpeakerPanel extends FormPanel
     _speaker = talk;
   }
   
-  final ResourceReference noImage = new ResourceReference(WicketApplication.class,"images/state-0.gif");
+  final ResourceReference noImage = new ResourceReference(WicketApplication.class,"images/nopic.gif");
 
   @Override
   protected void onInitialize()

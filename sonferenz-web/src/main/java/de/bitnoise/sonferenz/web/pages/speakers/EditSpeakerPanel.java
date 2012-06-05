@@ -36,6 +36,7 @@ import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.app.WicketApplication;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
 import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
+import de.bitnoise.sonferenz.web.pages.profile.MyProfilePage;
 import de.bitnoise.sonferenz.web.pages.resources.PageImages;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
@@ -68,7 +69,7 @@ public class EditSpeakerPanel extends FormPanel {
     }
   }
 
-  final ResourceReference img0 = new ResourceReference(WicketApplication.class,"images/state-0.gif");
+  final ResourceReference img0 = new ResourceReference(WicketApplication.class,"images/nopic.gif");
 
   @Override
   protected void onInitialize()
@@ -170,7 +171,7 @@ public class EditSpeakerPanel extends FormPanel {
     _speaker.setName(valueName);
     _speaker.setDescription(valueDesc);
     speakerService.saveSpeaker(_speaker);
-    setResponsePage(AdminPage.class);
+    setResponsePage(MyProfilePage.class);
   }
 
 }

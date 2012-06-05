@@ -31,7 +31,7 @@ public class TalksOverviewPage extends KonferenzPage
   @Override
   protected Panel getPageContent(String id)
   {
-    if (!KonferenzSession.hasRight(Right.Talk.List) && !state.equals(State.VIEW))
+    if (KonferenzSession.noUserLoggedIn())
     {
       return new UnauthorizedPanel(id);
     }
