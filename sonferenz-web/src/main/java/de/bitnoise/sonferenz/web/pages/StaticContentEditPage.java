@@ -17,6 +17,8 @@ import wicket.contrib.tinymce.settings.TinyMCESettings.Location;
 import wicket.contrib.tinymce.settings.TinyMCESettings.Theme;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 
 @At(url = "/editnode", urlParameters = { "id" })
@@ -45,7 +47,7 @@ public class StaticContentEditPage extends KonferenzPage
   @Override
   protected Panel getPageContent(String id)
   {
-    if (_id != null)
+    if (_id != null && KonferenzSession.hasRight(Right.Actions.EditStaticPage))
     {
       String html = facade.getText(_id);
       if (html == null)
