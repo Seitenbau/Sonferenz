@@ -41,7 +41,7 @@ public class StaticContentPanel extends Panel
     parameters.add("id", _key);
     BookmarkablePageLink<String> editLink = new BookmarkablePageLink<String>(
         "editLink", StaticContentEditPage.class, parameters);
-    boolean vis = KonferenzSession.hasRight(Right.Conference.Edit);
+    boolean vis = KonferenzSession.hasRight(Right.Actions.EditStaticPage);
     editLink.setVisible(vis);
     add(editLink);
   }

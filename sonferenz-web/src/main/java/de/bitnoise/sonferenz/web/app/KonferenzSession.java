@@ -60,6 +60,7 @@ public class KonferenzSession extends WebSession
     managerRoles.add(Right.Actions.InviteUser);
     managerRoles.add(Right.Actions.ManageInviteUser);
     managerRoles.add(Right.Actions.SpeakerEditAny);
+    managerRoles.add(Right.Actions.EditStaticPage);
     inviteRoles.add(Right.Actions.InviteUser);
     
     adminRoles.add(Right.User.List);
@@ -72,6 +73,7 @@ public class KonferenzSession extends WebSession
     adminRoles.add(Right.Admin.StartCalculation);
     adminRoles.add(Right.Admin.Configure);
     adminRoles.add(Right.Actions.SpeakerEditAny);
+    adminRoles.add(Right.Actions.EditStaticPage);
 
     userRoles.add(Right.Talk.List);
     userRoles.add(Right.Talk.Create);

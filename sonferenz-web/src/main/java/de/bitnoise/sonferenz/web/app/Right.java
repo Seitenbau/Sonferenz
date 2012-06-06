@@ -21,6 +21,7 @@ public interface Right
     String ManageInviteUser = "action.invite.manage";
     String InviteUser = "action.invite.newUser";
     String SpeakerEditAny = "action.speaker.editany";
+    String EditStaticPage = "action.staticpage.editany";
   }
 
   interface Conference
