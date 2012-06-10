@@ -2,6 +2,7 @@ package de.bitnoise.sonferenz.model;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -55,7 +56,7 @@ public class TalkModel extends ModelBase implements DoInterface<Integer>
   @Column(nullable=true)
   Integer proposalId;
   
-  @OneToMany
-  Collection<SpeakerModel> speakers;
-
+  @OneToMany(fetch = FetchType.EAGER)
+  List<SpeakerModel> speakers;
+  
 }

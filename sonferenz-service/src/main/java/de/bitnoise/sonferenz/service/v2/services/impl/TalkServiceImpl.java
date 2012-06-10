@@ -1,5 +1,6 @@
 package de.bitnoise.sonferenz.service.v2.services.impl;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -52,12 +53,17 @@ public class TalkServiceImpl implements TalkService
   }
 
   @Override
+  @Transactional
   public TalkModel getTalkById(Long id)
   {
     if(id==null) {
       return null;
     }
-    return talkRepo.findOne(id.intValue());
+    TalkModel result = talkRepo.findOne(id.intValue());
+    if(result!= null) {
+      Hibernate.initialize(result.getSpeakers());
+    }
+    return result;
   }
 
 }

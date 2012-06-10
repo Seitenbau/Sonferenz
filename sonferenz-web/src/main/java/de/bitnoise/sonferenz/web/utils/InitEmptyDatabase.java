@@ -77,6 +77,10 @@ public class InitEmptyDatabase
 			{
 			  updateTo_v0_3_5();
 			}
+			if (isDatabaseOlderThanVersion(7))
+			{
+			  updateTo_v0_3_6();
+			}
 		} finally
 		{
 			eventing.activateEventing();
@@ -84,6 +88,15 @@ public class InitEmptyDatabase
 		}
 	}
 
+	void updateTo_v0_3_6() {
+	  logger .warn("# DATABASE update to version 7 #");
+	  config.saveIntegerValue(INIT_MARKER_KEY, 7);
+	  
+	  texte.storeText("palette.available", "verfügbar");
+	  texte.storeText("palette.selected", "ausgewählt");
+	  
+	}
+	
 	void updateTo_v0_3_5() {
 	  logger .warn("# DATABASE update to version 6 #");
 	  config.saveIntegerValue(INIT_MARKER_KEY, 6);

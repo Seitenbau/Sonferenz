@@ -1,5 +1,10 @@
 package de.bitnoise.sonferenz.web.pages.talks;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.wicket.ResourceReference;
+import org.apache.wicket.extensions.markup.html.form.palette.Palette;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -7,20 +12,23 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.util.CollectionModel;
+import org.apache.wicket.model.util.ListModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
+import org.springframework.data.domain.PageRequest;
 
 import com.visural.common.web.HtmlSanitizer;
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
-import com.visural.wicket.component.confirmer.ConfirmerLink;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
-import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.ProposalModel;
+import de.bitnoise.sonferenz.model.SpeakerModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
+import de.bitnoise.sonferenz.service.v2.services.SpeakerService;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
 import de.bitnoise.sonferenz.service.v2.services.UserService;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
@@ -35,12 +43,15 @@ public class EditTalkPanel extends FormPanel
 
   @SpringBean
   TalkService talkService;
-  
+
   @SpringBean
   UserService userService;
-
-
+  
+  @SpringBean
+  SpeakerService speakerService;
+  
   TalkModel _talk;
+  private ListModel<SpeakerModel> modelSpeakers;
 
   public EditTalkPanel(String id, TalkModel talk)
   {
@@ -87,7 +98,8 @@ public class EditTalkPanel extends FormPanel
     titleField.add(new InputHintBehavior(form, "Kurz und pr\u00e4gnant", "color: #aaa;"));
     authorfield.add(new MaximumLengthValidator(254));
     authorfield.add(new InputHintBehavior(form, "Der/Die Vortragende(en)", "color: #aaa;"));
-    
+    authorfield.setEnabled(false);
+
     // List<? extends UserModel> choices = userService.listAllUsers();
     LoadableDetachableModel choices = new LoadableDetachableModel() {
       @Override
@@ -111,30 +123,44 @@ public class EditTalkPanel extends FormPanel
         modelUser, choices, render);
     ddc.setRequired(true);
 
-//    ConfirmerLink  btnDel = new ConfirmerLink("delete") {
-//      
-//      public void onClick()
-//      {
-//        // talkService.deleteTalk(_talk);
-//        setResponsePage(TalksOverviewPage.class);
-//      }
-//    };
-//    if (_talk.isNew() || _talk.getConference()!=null)
-//    {
-//      btnDel.setVisible(false);
-//    }
-    
+    form.add(newSpeakerControl("speakers"));
+ 
     form.add(titleField);
     form.add(authorfield);
     form.add(new RichTextEditorFormBehavior());
     ReducedRichTextEditor rte = new ReducedRichTextEditor("description", modelDesc);
     form.add(rte);
     form.add(ddc);
-//    form.add(btnDel);
+    // form.add(btnDel);
     form.add(new Button("submit"));
     add(form);
   }
 
+  private Palette<SpeakerModel> newSpeakerControl(String id) {
+    List<SpeakerModel> allSpeakers = speakerService.getAllSpeakers(new PageRequest(0, 999)).getContent();
+    modelSpeakers= new ListModel<SpeakerModel>();
+    IModel<Collection<SpeakerModel>> choicesModel=new CollectionModel<SpeakerModel>(allSpeakers);
+    IChoiceRenderer<SpeakerModel> choiceRenderer=new IChoiceRenderer<SpeakerModel>() {
+      @Override
+      public Object getDisplayValue(SpeakerModel object) {
+        return ""+object.getName();
+      }
+
+      @Override
+      public String getIdValue(SpeakerModel object, int index) {
+        return ""+object.getId();
+      }
+    };
+    modelSpeakers.setObject(_talk.getSpeakers());
+    Palette<SpeakerModel> sc 
+      = new Palette<SpeakerModel>(id, modelSpeakers, choicesModel, choiceRenderer, 6, false){
+      @Override
+      protected ResourceReference getCSS() {
+        return null;
+      }
+    };
+    return sc;
+  }
 
   protected void clickedOnSave()
   {
@@ -143,12 +169,17 @@ public class EditTalkPanel extends FormPanel
     String valueDescRaw = modelDesc.getObject();
     String valueDesc = HtmlSanitizer.sanitize(valueDescRaw);
     UserModel valueUser = modelUser.getObject();
+    List<SpeakerModel> speakers = modelSpeakers.getObject();
+    _talk.setSpeakers(speakers);
     _talk.setOwner(valueUser);
     _talk.setTitle(valueTitle);
     _talk.setAuthor(valueAuthor);
     _talk.setDescription(valueDesc);
     talkService.saveTalk(_talk);
-    setResponsePage(TalksOverviewPage.class);
+    
+    TalksOverviewPage userOverviewPage = new TalksOverviewPage();
+    userOverviewPage.viewTalk(_talk);
+    setResponsePage(userOverviewPage);
   }
 
 }

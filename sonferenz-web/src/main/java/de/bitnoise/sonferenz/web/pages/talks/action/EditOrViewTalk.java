@@ -13,6 +13,7 @@ import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPage;
+import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
 import de.bitnoise.sonferenz.web.pages.talks.ModelTalkList;
 import de.bitnoise.sonferenz.web.pages.talks.RefToTalk;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
@@ -39,20 +40,16 @@ public class EditOrViewTalk extends WebAction<IModel<Object>>
     if (talk != null)
     {
       TalksOverviewPage userOverviewPage = new TalksOverviewPage();
-      if (KonferenzSession.noUserLoggedIn())
-      {
-        userOverviewPage.viewTalk(talk);
-//        return new LoginPage((IWebAction) this, model);
-      }
-      if (KonferenzSession.isUser(talk.getOwner())
-          || KonferenzSession.isAdmin())
-      {
-        userOverviewPage.editTalk(talk);
-      }
-      else
-      {
-        userOverviewPage.viewTalk(talk);
-      }
+      userOverviewPage.viewTalk(talk);
+//      if (KonferenzSession.isUser(talk.getOwner())
+//          || KonferenzSession.isAdmin())
+//      {
+//        userOverviewPage.viewTalk(talk);
+//      }
+//      else
+//      {
+//        userOverviewPage.viewTalk(talk);
+//      }
       return userOverviewPage;
     }
     return new TalksOverviewPage();

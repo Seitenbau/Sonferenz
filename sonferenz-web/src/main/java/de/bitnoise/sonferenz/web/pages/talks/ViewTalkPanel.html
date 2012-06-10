@@ -1,18 +1,27 @@
 <wicket:panel>
 <p>
-  <h3><span wicket:id="title"></span> </h3>
+  <h3><span wicket:id="title"></span> 
+  <div class="talkEdit">
+    <a href="#" class="button" wicket:id="editTalk">bearbeiten</a>
+  </div>
+  </h3>
   <div class="viewTalkDescription">
   <p> 
   	<span wicket:id="description"></span> <br/>
   </p>
   </div>
+ 
+  <div class="speakerList">
+    <div class="speakerHeading">Vortragende:</div>
+    <div wicket:id="items" class="speaker">
+      <span wicket:id="speaker"></span>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
   <div class="readOnlyViewFooter">
-	  <div class="viewTalkauthor">
-	  Vortragende(r) : <span wicket:id="author"></span>
-	  </div>
-	  <div class="viewTalkauthor">
-	  Ansprechpartner : <span wicket:id="owner"></span>
-	  </div>
+    <div class="viewTalkauthor">
+    Ansprechpartner : <span wicket:id="owner"></span>
+    </div>
   </div>
 </p>
 </wicket:panel>

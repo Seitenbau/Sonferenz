@@ -1548,3 +1548,88 @@ div.speakerName {
 	
 }
 
+div.talkEdit {
+	float: right;
+}
+div.speaker {
+	border: 1px solid;
+	margin-bottom: 10px;
+  padding: 5px;
+  min-height: 150px;
+}
+div.speakerHeading {
+	font-size: 100%;
+  font-weight: bold;
+	margin-bottom: 10px;
+}
+div.speakerList div.speakerName h3 {
+	font-size: 130%;
+	font-weight: bold;
+}
+/* copy of palette.css */
+
+
+table.palette {
+  border: 0;
+  width: 0;
+}
+
+table.palette td.header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 9pt;
+  background-color: #eef7ff;
+  padding: 2px;
+  border-top: 1px solid #729ac2;
+  border-bottom: 1px solid #729ac2;
+}
+
+table.palette td.pane {
+  width: 100px;
+  text-align: center;
+}
+
+table.palette td.pane select {
+  width: 200px;
+}
+
+table.palette td.buttons { 
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table.palette td.buttons button {
+  width: 40px;
+  height: 40px;
+}
+
+button.button.add div {
+  background: url("images/add.gif"); 
+  height: 15px; 
+  width: 15px;
+}
+
+button.button.remove div {
+  background: url("images/remove.gif"); 
+  height: 15px; 
+  width: 15px;
+}
+
+button.button.up div {
+  background: url("up.gif"); 
+  height: 15px; 
+  width: 15px;
+}
+
+button.button.down div {
+  background: url("down.gif"); 
+  height: 15px; 
+  width: 15px;
+}
+
+/* Fix a firefox (2.0.0.4) bug : https://bugzilla.mozilla.org/show_bug.cgi?id=382600 */
+select::-moz-dummy-option { 
+  visibility: hidden; 
+  content: ""; 
+}
