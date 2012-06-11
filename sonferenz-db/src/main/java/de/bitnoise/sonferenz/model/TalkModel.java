@@ -56,7 +56,7 @@ public class TalkModel extends ModelBase implements DoInterface<Integer>
   @Column(nullable=true)
   Integer proposalId;
   
-  @OneToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER)
   List<SpeakerModel> speakers;
   
 }
