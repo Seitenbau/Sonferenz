@@ -56,6 +56,10 @@ public class FirstLevelBar extends Panel
     else
     {
       items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class));
+      if (new OnState(ConferenceState.RUNNING).canBeDisplayed())
+      {
+        items.add(new MenuButton("agenda", items.newChildId(), SchedulePage.class));
+      }
       items.add(new MenuButton("register", items.newChildId(), RegisterPage.class));
     }
 
