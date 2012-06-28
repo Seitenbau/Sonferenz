@@ -37,7 +37,7 @@ public class SpeakerModel extends ModelBase implements DoInterface<Integer>
   UserModel contact;
   
   @OneToOne
-  ResourceModel picture;
+  FileResourceModel picture;
   
   @Column
   @Type(type = "text")

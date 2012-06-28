@@ -24,7 +24,7 @@ import com.visural.common.web.HtmlSanitizer;
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
-import de.bitnoise.sonferenz.model.ResourceModel;
+import de.bitnoise.sonferenz.model.FileResourceModel;
 import de.bitnoise.sonferenz.model.SpeakerModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
@@ -161,7 +161,7 @@ public class EditSpeakerPanel extends FormPanel {
       String filename = fup.getClientFileName();
       byte[] md5 = fup.getMD5();
       Long size = fup.getSize();
-      ResourceModel model = resources.storeResource(filename, data, md5, size);
+      FileResourceModel model = resources.storeResource(filename, data, md5, size);
       _speaker.setPicture(model);
     }
 

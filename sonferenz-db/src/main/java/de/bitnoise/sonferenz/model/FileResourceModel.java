@@ -22,18 +22,15 @@ import lombok.EqualsAndHashCode;
 @Data
 // @Table
 @EqualsAndHashCode(of = { "id" })
-public class ResourceModel extends ModelBase implements DoInterface<Integer>
+public class FileResourceModel extends ModelBase implements DoInterface<Integer>
 {
   @Id
   @GeneratedValue
   Integer id;
 
   @Column
-  String displayName;
+  String name;
   
-  @Column
-  String provider;
-
   @Column
   String originalName;
 
@@ -49,6 +46,13 @@ public class ResourceModel extends ModelBase implements DoInterface<Integer>
   UserModel owner;
 
   @Column
-  Long accessCount;
+  String md5sum;
+  
+  @Column
+  Long size;
+
+  @Column
+  @Lob
+  byte[] content;
 
 }

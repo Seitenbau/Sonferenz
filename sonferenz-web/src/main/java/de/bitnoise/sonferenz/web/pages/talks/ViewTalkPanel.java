@@ -3,10 +3,12 @@ package de.bitnoise.sonferenz.web.pages.talks;
 import java.util.List;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.PageParameters;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
@@ -15,6 +17,7 @@ import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.SpeakerModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.pages.play.PlayVideoPage;
 import de.bitnoise.sonferenz.web.pages.speakers.ViewSpeakerPanel;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 import de.bitnoise.sonferenz.web.pages.voting.ListVotesPanel2.NumberItem;
@@ -54,6 +57,12 @@ public class ViewTalkPanel extends FormPanel
     add(edit);
     Label desc = new Label("description", _talk.getDescription());
     desc.setEscapeModelStrings(false);
+    
+    PageParameters parameters=new PageParameters();
+    parameters.add("id", ""+_talk.getId());
+    BookmarkablePageLink<PlayVideoPage> play 
+      = new BookmarkablePageLink<PlayVideoPage>("playLink", PlayVideoPage.class, parameters);
+    add(play);
     
     add(newSpeakerList("items",_talk.getSpeakers()));
     add(desc);

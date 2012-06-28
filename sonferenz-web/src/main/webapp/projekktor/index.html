@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Projekktor - simply mighty video</title>
+    <style type="text/css">
+	body { background-color: #fdfdfd; padding: 0 20px; color:#000; font: 13px/18px monospace; width: 800px;}
+	a { color: #360; }
+	h3 { padding-top: 20px; }
+    </style>
+
+    <link rel="stylesheet" href="projekktor/theme/style.css" type="text/css" media="screen" />
+
+
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script src="projekktor/projekktor-1.0.22r82.min.js"></script>
+
+</head>
+<body>
+
+    <video id="videoplayer" class="projekktor" poster="media/02t1-responsive-webdesign.jpg" title="Responsive Webdesign" width="640" height="360" controls>
+        <source src="http://rukzukmodules/sdcVideo/media/02t1-responsive-webdesign.mp4" type="video/mp4" />
+    </video>
+
+    <script type="text/javascript">
+	$(document).ready(function() {
+	    projekktor('#videoplayer', {
+            playerFlashMP4: 'projekktor/jarisplayer.swf'
+        });
+	});
+    </script>
+
+</body>
+</html>

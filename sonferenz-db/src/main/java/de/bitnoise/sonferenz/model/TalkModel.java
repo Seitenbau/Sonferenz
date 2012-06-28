@@ -59,4 +59,6 @@ public class TalkModel extends ModelBase implements DoInterface<Integer>
   @ManyToMany(fetch = FetchType.EAGER)
   List<SpeakerModel> speakers;
   
+  @ManyToMany
+  List<ResourceModel> resources;
 }

@@ -62,6 +62,7 @@ public class TalkServiceImpl implements TalkService
     TalkModel result = talkRepo.findOne(id.intValue());
     if(result!= null) {
       Hibernate.initialize(result.getSpeakers());
+      Hibernate.initialize(result.getResources());
     }
     return result;
   }
