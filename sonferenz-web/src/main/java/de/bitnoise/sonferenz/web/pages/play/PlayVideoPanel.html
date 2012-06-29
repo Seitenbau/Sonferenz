@@ -1,24 +1,5 @@
-<wicket:head>
-     
-</wicket:head>
 <wicket:panel>
- file : <span wicket:id="videoFile"></span>
- <br/>
- thumb : <span wicket:id="videoThumb"></span>
- 
 
-    <video wicket:id="video" id="videoplayer" class="projekktor" 
-        poster="media/02t1-responsive-webdesign.jpg" 
-        title="Responsive Webdesign" width="640" height="360" controls>
-        <source src="/media/02t1-responsive-webdesign.mp4" type="video/mp4" />
-    </video>
+    <span wicket:id="video"></span>
 
-    <script type="text/javascript">
-	$(document).ready(function() {
-	    projekktor('#videoplayer', {
-            playerFlashMP4: 'projekktor/jarisplayer.swf'
-        });
-	});
-    </script>
- 
 </wicket:panel>

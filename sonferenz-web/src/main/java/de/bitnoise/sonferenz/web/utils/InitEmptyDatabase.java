@@ -81,6 +81,10 @@ public class InitEmptyDatabase
 			{
 			  updateTo_v0_3_6();
 			}
+			if (isDatabaseOlderThanVersion(8))
+			{
+			  updateTo_v0_3_7();
+			}
 		} finally
 		{
 			eventing.activateEventing();
@@ -88,6 +92,13 @@ public class InitEmptyDatabase
 		}
 	}
 
+	void updateTo_v0_3_7() {
+	  logger .warn("# DATABASE update to version 8 #");
+	  config.saveIntegerValue(INIT_MARKER_KEY, 8);
+	  
+	  texte.storeText("baseUrl.cdn", "https://sdcdownloads.seitenbau.com/sdc2012/");
+	}
+	
 	void updateTo_v0_3_6() {
 	  logger .warn("# DATABASE update to version 7 #");
 	  config.saveIntegerValue(INIT_MARKER_KEY, 7);
