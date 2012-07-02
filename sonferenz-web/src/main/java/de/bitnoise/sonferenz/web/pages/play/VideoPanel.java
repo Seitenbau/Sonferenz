@@ -3,9 +3,14 @@ package de.bitnoise.sonferenz.web.pages.play;
 import javax.servlet.ServletContext;
 
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
+import org.apache.wicket.ajax.IAjaxCallDecorator;
 import org.apache.wicket.behavior.StringHeaderContributor;
+import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.MarkupStream;
+import org.apache.wicket.markup.html.WebComponent;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -31,7 +36,7 @@ public class VideoPanel extends Panel
     super(id);
     
     ServletContext servletContext = WebApplication.get().getServletContext();
-    String contextPath = servletContext.getContextPath(); 
+    final String contextPath = servletContext.getContextPath(); 
     
     add(new StringHeaderContributor(
         "<script src=\"" + contextPath + "/projekktor/projekktor-1.0.22r82.min.js\"></script>"));
@@ -73,8 +78,48 @@ public class VideoPanel extends Panel
           stats.incrementHit(sid, ResourceEvent.ACTIVE_65MINUTES);
         }
       }
+      @Override
+      protected IAjaxCallDecorator getAjaxCallDecorator()
+      {
+        return super.getAjaxCallDecorator();
+      }
+      @Override
+      protected CharSequence getPreconditionScript()
+      {
+        StringBuilder sb = new StringBuilder();
+        sb.append("if (checkKeyPress('")
+          .append(getMarkupId())
+          .append("')) { return true } else { return false }");
+        return super.getPreconditionScript();
+//        return sb; 
+      }
     };
     add(timer);
+    
+    add(new MarkupContainer("script") {
+      @Override
+      protected void onComponentTagBody(MarkupStream markupStream,
+          ComponentTag openTag)
+      {
+        super.onComponentTagBody(markupStream, openTag);
+        
+        StringBuilder sb = new StringBuilder();
+//        sb.append("<script type=\"text/javascript\">\r\n");
+        sb.append(" $(document).ready(function() { \r\n");
+        sb.append("   projekktor('#videoplayer', { \r\n");
+        sb.append("     playerFlashMP4: '"+contextPath+"/projekktor/jarisplayer.swf'\r\n");
+        sb.append("   });\r\n");
+        sb.append(" });\r\n");
+//        sb.append("</script>\r\n");
+        getResponse().write(sb.toString());
+        
+      }
+      @Override
+      protected void onComponentTag(ComponentTag tag)
+      {
+        super.onComponentTag(tag);
+      }
+    });
     
     stats.incrementHit(sid, ResourceEvent.OPEN);
   }
