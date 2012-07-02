@@ -11,7 +11,10 @@ import com.visural.wicket.aturl.URLType;
 import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
+import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
+import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
 import de.bitnoise.sonferenz.web.pages.suggestion.action.EditOrViewWhish;
 
 @At(url = "/view/talk")
@@ -30,6 +33,10 @@ public class PlayVideoPage extends KonferenzPage
   @Override
   protected Panel getPageContent(String id)
   {
-    return new PlayVideoPanel(id,talkId);
+    if(KonferenzSession.noUserLoggedIn()) {
+      return new UnauthorizedPanel(id);
+    } else {
+      return new PlayVideoPanel(id,talkId);
+    }
   }
 }

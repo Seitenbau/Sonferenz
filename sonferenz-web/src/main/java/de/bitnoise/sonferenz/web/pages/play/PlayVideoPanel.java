@@ -48,9 +48,9 @@ public class PlayVideoPanel extends Panel
     if(video == null) {
       throw new RuntimeException("No Video found");
     }
-    ress.registerPlay(video);
-    final String name = video.getOriginalName();
 
+    ress.registerPlay(video);
+    String name = video.getOriginalName();
     add(new VideoPanel("video", name,talk.getTitle(),"talk/" + talkId));
   }
 }

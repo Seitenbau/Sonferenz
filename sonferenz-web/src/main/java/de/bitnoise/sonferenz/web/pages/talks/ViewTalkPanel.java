@@ -14,6 +14,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
 
 import de.bitnoise.sonferenz.model.ProposalModel;
+import de.bitnoise.sonferenz.model.ResourceModel;
 import de.bitnoise.sonferenz.model.SpeakerModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
@@ -63,6 +64,17 @@ public class ViewTalkPanel extends FormPanel
     BookmarkablePageLink<PlayVideoPage> play 
       = new BookmarkablePageLink<PlayVideoPage>("playLink", PlayVideoPage.class, parameters);
     add(play);
+    
+    List<ResourceModel> resources= _talk.getResources();
+    ResourceModel video = null;
+    for(ResourceModel res : resources) {
+      if( res.getProvider().equals("video") ) {
+        video = res;
+      }
+    }
+    if(video==null) {
+      play.setVisible(false);
+    }
     
     add(newSpeakerList("items",_talk.getSpeakers()));
     add(desc);

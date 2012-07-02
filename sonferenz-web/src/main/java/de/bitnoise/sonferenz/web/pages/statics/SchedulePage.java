@@ -4,14 +4,20 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.visural.wicket.aturl.At;
 
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.StaticContentPanel;
+import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 
 @At(url = "/schedule")
 public class SchedulePage extends KonferenzPage {
 	@Override
 	protected Panel getPageContent(String id) {
-		return new StaticContentPanel(id, "page.schedule");
+	  if(KonferenzSession.noUserLoggedIn()) {
+      return new UnauthorizedPanel(id);
+    } else {
+      return new StaticContentPanel(id, "page.schedule");
+    }
 	}
 
 }

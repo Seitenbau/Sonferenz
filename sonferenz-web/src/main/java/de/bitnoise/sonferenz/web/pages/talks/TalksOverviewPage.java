@@ -31,10 +31,10 @@ public class TalksOverviewPage extends KonferenzPage
   @Override
   protected Panel getPageContent(String id)
   {
-//    if (KonferenzSession.noUserLoggedIn())
-//    {
-//      return new UnauthorizedPanel(id);
-//    }
+    if (KonferenzSession.noUserLoggedIn())
+    {
+      return new UnauthorizedPanel(id);
+    }
     switch (state)
     {
     case LIST:

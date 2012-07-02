@@ -7,6 +7,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
 import org.apache.wicket.behavior.StringHeaderContributor;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -40,11 +41,15 @@ public class VideoPanel extends Panel
     String base = config.getStringValue("baseUrl.cdn");
     WebMarkupContainer v = new WebMarkupContainer("video");
     WebMarkupContainer s = new WebMarkupContainer("source");
-    v.add(new AttributeModifier("poster",Model.of(base + file+"jpg")));
+    String preview = base + file.replace(".mp4", ".jpg");
+    String movie = base + file;
+    v.add(new AttributeModifier("poster",Model.of(preview)));
     v.add(new AttributeModifier("title",Model.of(title)));
-    s.add(new AttributeModifier("src",Model.of(base + file)));
+    s.add(new AttributeModifier("src",Model.of(movie)));
     v.add(s);
     add(v);
+    
+    add(new Label("titel",title));
     
     AjaxSelfUpdatingTimerBehavior timer = new AjaxSelfUpdatingTimerBehavior(Duration.ONE_MINUTE){
       int running = 0;

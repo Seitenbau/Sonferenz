@@ -1395,7 +1395,7 @@ body.repaint {
 	-moz-box-sizing: border-box;
 }
 
-* Drag drop */
+/* Drag drop */
 
 .header {
 	padding-bottom: 10px;
@@ -1630,4 +1630,21 @@ button.button.down div {
 select::-moz-dummy-option { 
   visibility: hidden; 
   content: ""; 
+}
+
+.PlayVideo {
+  border : 1px;
+  float: left;
+}
+
+.PlayVideo a {
+	height: 20px;
+    width: 20px;
+}
+#playButton {
+	background: url("images/playit.png") repeat scroll 0 0 transparent;
+    float: left;
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
 }
