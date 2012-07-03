@@ -78,21 +78,6 @@ public class VideoPanel extends Panel
           stats.incrementHit(sid, ResourceEvent.ACTIVE_65MINUTES);
         }
       }
-      @Override
-      protected IAjaxCallDecorator getAjaxCallDecorator()
-      {
-        return super.getAjaxCallDecorator();
-      }
-      @Override
-      protected CharSequence getPreconditionScript()
-      {
-        StringBuilder sb = new StringBuilder();
-        sb.append("if (checkKeyPress('")
-          .append(getMarkupId())
-          .append("')) { return true } else { return false }");
-        return super.getPreconditionScript();
-//        return sb; 
-      }
     };
     add(timer);
     
@@ -104,20 +89,13 @@ public class VideoPanel extends Panel
         super.onComponentTagBody(markupStream, openTag);
         
         StringBuilder sb = new StringBuilder();
-//        sb.append("<script type=\"text/javascript\">\r\n");
         sb.append(" $(document).ready(function() { \r\n");
         sb.append("   projekktor('#videoplayer', { \r\n");
         sb.append("     playerFlashMP4: '"+contextPath+"/projekktor/jarisplayer.swf'\r\n");
         sb.append("   });\r\n");
         sb.append(" });\r\n");
-//        sb.append("</script>\r\n");
         getResponse().write(sb.toString());
         
-      }
-      @Override
-      protected void onComponentTag(ComponentTag tag)
-      {
-        super.onComponentTag(tag);
       }
     });
     
