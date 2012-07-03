@@ -79,9 +79,8 @@ public class VideoPanel extends Panel
         }
       }
     };
-    add(timer);
     
-    add(new MarkupContainer("script") {
+    MarkupContainer script = new MarkupContainer("script") {
       @Override
       protected void onComponentTagBody(MarkupStream markupStream,
           ComponentTag openTag)
@@ -97,7 +96,9 @@ public class VideoPanel extends Panel
         getResponse().write(sb.toString());
         
       }
-    });
+    };
+    add(script);
+    script.add(timer);
     
     stats.incrementHit(sid, ResourceEvent.OPEN);
   }
