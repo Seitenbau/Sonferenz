@@ -1,5 +1,7 @@
 # Sonferenz
 
+[![Build Status](https://buildhive.cloudbees.com/job/Seitenbau/job/Sonferenz/badge/icon)](https://buildhive.cloudbees.com/job/Seitenbau/job/Sonferenz/)
+
 A simple web based tool for management of conferences.
 The tool supports proposal of talks and voting for talks.
 
