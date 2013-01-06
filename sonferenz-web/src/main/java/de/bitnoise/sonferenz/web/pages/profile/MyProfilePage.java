@@ -5,19 +5,16 @@ import java.util.List;
 import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
 import org.apache.wicket.extensions.markup.html.tabs.ITab;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.repeater.RepeatingView;
 
 import com.visural.wicket.aturl.At;
 
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.app.Right;
-import de.bitnoise.sonferenz.web.component.panels.MultiPanel;
 import de.bitnoise.sonferenz.web.component.tabs.TabPanel;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListSpeakerPanel;
-import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
 
 @At(url = "/profile")
 public class MyProfilePage extends KonferenzPage

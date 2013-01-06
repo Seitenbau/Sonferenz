@@ -1,6 +1,5 @@
 package de.bitnoise.sonferenz.web.pages.admin.tabs;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -13,13 +12,11 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.VoteModel;
-import de.bitnoise.sonferenz.service.v2.services.CalcualtionService;
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService;
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.CalcTalk;
 import de.bitnoise.sonferenz.service.v2.services.CalculateTimetableService.CalcUser;

@@ -1,10 +1,10 @@
 package de.bitnoise.sonferenz.web.app;
 
-import org.apache.wicket.Request;
-import org.apache.wicket.Response;
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.SecurePackageResourceGuard;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -69,10 +69,10 @@ public class WicketApplication extends WebApplication
         de.bitnoise.sonferenz.web.pages.error.InternalError.class);
     getApplicationSettings().setPageExpiredErrorPage(UnauthorisedAccess.class);
 
-    getResourceSettings().addStringResourceLoader(0, new DatabaseResourceLoader());
+    getResourceSettings().getStringResourceLoaders().add( new DatabaseResourceLoader());
     // Remap URLSs
     try
-    {
+    { 
       AtAnnotation.mount(this, "de.bitnoise.sonferenz.web.pages");
     }
     catch (ClassNotFoundException e)
@@ -93,20 +93,22 @@ public class WicketApplication extends WebApplication
   {
     // Activate Spring
     injector = new SpringComponentInjector(this);
-    addComponentInstantiationListener(injector);
+//    addComponentInstantiationListener(injector);
+    getComponentInstantiationListeners().add(injector);
   }
 
   @Override
-  public Session newSession(Request request, Response response)
-  {
-    return new KonferenzSession(request);
+  public Session newSession(Request request, Response response) {
+	// TODO Auto-generated method stub
+	return new KonferenzSession(request);
   }
   
   @SuppressWarnings("unused") // only used by tests via reflection
   private void setInternalMockContext(ApplicationContext applicationContext) throws BeansException
   {
     injector = new SpringComponentInjector(this, applicationContext,true);
-    addComponentInstantiationListener(injector);
+//    addComponentInstantiationListener(injector);
+    getComponentInstantiationListeners().add(injector);
   }
   
 }

@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
-import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.HeadersToolbar;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.NavigationToolbar;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.NoRecordsToolbar;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
 
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
@@ -31,7 +30,7 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
   
   boolean _hideOnEmpty;
 
-  private DataTable<VIEW_MODEL> table;
+  private DataTable<VIEW_MODEL,SortParam<String>> table;
 
   private String _defaultSort;
 
@@ -41,12 +40,12 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
     TableBuilder<VIEW_MODEL> builder = new TableBuilder<VIEW_MODEL>(headingId);
     initColumns(builder);
     SortableServiceDataProvider<DB_MODEL, VIEW_MODEL> provider = createProvider();
-    List<IColumn<VIEW_MODEL>> columns = builder.getColumns();
+    List<IColumn<VIEW_MODEL,SortParam<String>>> columns = builder.getColumns();
     _defaultSort = builder.getDefaultSorting();
     Integer maxPageSize = config.getIntegerValue(100,
         "table." + headingId + ".paginationSize", 
         "table.paginationSize");
-    table =  new DataTable<VIEW_MODEL>("contentTable", columns.toArray(new IColumn[columns.size()]), provider, maxPageSize) ;
+    table =  new DataTable<VIEW_MODEL,SortParam<String>>("contentTable", columns , provider, maxPageSize) ;
     addToolbars(table,provider);
     add(table);
     add(createAbovePanel("above"));
@@ -76,7 +75,7 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
   }
 
 
-  protected void addToolbars(DataTable<VIEW_MODEL> table, SortableServiceDataProvider<DB_MODEL, VIEW_MODEL> provider)
+  protected void addToolbars(DataTable<VIEW_MODEL,SortParam<String>> table, SortableServiceDataProvider<DB_MODEL, VIEW_MODEL> provider)
   {
     table.addTopToolbar(new NavigationToolbar(table));
     table.addTopToolbar(new HeadersToolbar(table, provider));
@@ -94,7 +93,7 @@ public abstract class AbstractListPanel<VIEW_MODEL extends Serializable, DB_MODE
       }
 
       @Override
-      public int size()
+      public long size()
       {
         Long l = getTotalCount(new PageRequest(1, 1));
         return l.intValue();

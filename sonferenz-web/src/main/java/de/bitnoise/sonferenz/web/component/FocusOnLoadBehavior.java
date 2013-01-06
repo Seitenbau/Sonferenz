@@ -1,8 +1,8 @@
 package de.bitnoise.sonferenz.web.component;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.behavior.AbstractBehavior;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.markup.head.IHeaderResponse;
 
 /**
  * source :
@@ -11,7 +11,7 @@ import org.apache.wicket.markup.html.IHeaderResponse;
  * site : https://cwiki.apache.org/WICKET url :
  * /request-focus-on-a-specific-form-component.html
  */
-public class FocusOnLoadBehavior extends AbstractBehavior
+public class FocusOnLoadBehavior extends Behavior
 {
   private Component component;
 
@@ -20,13 +20,18 @@ public class FocusOnLoadBehavior extends AbstractBehavior
     this.component = component;
     component.setOutputMarkupId(true);
   }
-
-  public void renderHead(IHeaderResponse iHeaderResponse)
-  {
-    super.renderHead(iHeaderResponse);
-    iHeaderResponse.renderOnLoadJavascript("document.getElementById('"
-        + component.getMarkupId() + "').focus()");
-  }
+  
+  @Override
+	public void renderHead(Component component, IHeaderResponse response) {
+		super.renderHead(component, response);
+	}
+// ##RW## wicket 6
+//  public void renderHead(IHeaderResponse iHeaderResponse)
+//  {
+//    super.renderHead(iHeaderResponse);
+//    iHeaderResponse.renderOnLoadJavascript("document.getElementById('"
+//        + component.getMarkupId() + "').focus()");
+//  }
 
   public boolean isTemporary()
   {

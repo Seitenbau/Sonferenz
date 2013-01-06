@@ -3,6 +3,7 @@ package de.bitnoise.sonferenz.web.component.table;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -15,7 +16,7 @@ import de.bitnoise.sonferenz.web.action.ActionBookmark;
 import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.pages.AclControlled;
 
-public class ClickableTablePropertyColumn<T> extends AbstractColumn<T>
+public class ClickableTablePropertyColumn<T> extends AbstractColumn<T,SortParam<String>>
 {
 
   private static final long serialVersionUID = -1L;
@@ -37,14 +38,14 @@ public class ClickableTablePropertyColumn<T> extends AbstractColumn<T>
   public ClickableTablePropertyColumn(IModel<String> displayModel,
       String property, String sort)
   {
-    super(displayModel, sort);
+    super(displayModel, new SortParam(property, Boolean.valueOf(sort)));
     this.property = property;
   }
 
   public ClickableTablePropertyColumn(IModel<String> displayModel,
       String property, String sort, IWebAction action)
   {
-    super(displayModel, sort);
+    super(displayModel, new SortParam(property, Boolean.valueOf(sort)));
     this.property = property;
     _action = action;
   }

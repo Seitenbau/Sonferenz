@@ -1,12 +1,11 @@
 package de.bitnoise.sonferenz.web.pages;
 
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-
 
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;

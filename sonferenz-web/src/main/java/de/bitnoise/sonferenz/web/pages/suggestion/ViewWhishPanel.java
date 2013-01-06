@@ -3,7 +3,6 @@ package de.bitnoise.sonferenz.web.pages.suggestion;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
 
-
 import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 

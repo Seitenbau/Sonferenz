@@ -10,8 +10,8 @@ import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulato
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.IModel;
@@ -58,17 +58,17 @@ public class TableBuilder<S> implements Serializable
     return c;
   }
 
-  public void add(IColumn<S> colModel)
+  public void add(IColumn<S,SortParam<String>> colModel)
   {
     _columns.add(new Column(colModel));
   }
 
-  public List<IColumn<S>> getColumns()
+  public List<IColumn<S,SortParam<String>>> getColumns()
   {
-    List<IColumn<S>> result = new ArrayList<IColumn<S>>();
+    List<IColumn<S,SortParam<String>>> result = new ArrayList<IColumn<S,SortParam<String>>>();
     for (Column column : _columns)
     {
-      IColumn<S> newColumn;
+      IColumn<S,SortParam<String>> newColumn;
       Boolean escape = column._escaping;
       if (escape == null)
       {
@@ -112,7 +112,7 @@ public class TableBuilder<S> implements Serializable
     return result;
   }
 
-  protected static class PropertyColumn2<T> extends PropertyColumn<T>
+  protected static class PropertyColumn2<T> extends PropertyColumn<T,SortParam<String>>
   {
     private IModel<String> _hint;
 
@@ -127,7 +127,8 @@ public class TableBuilder<S> implements Serializable
     public PropertyColumn2(IModel<String> displayModel, String sortProperty,
         String propertyExpression, boolean escapen, IModel<String> hintText)
     {
-      super(displayModel, sortProperty, propertyExpression);
+    	super(displayModel, new SortParam(sortProperty, true), propertyExpression);
+//      super(displayModel, sortProperty, propertyExpression);
       escapeMarkup = escapen;
       _hint = hintText;
     }
@@ -179,7 +180,7 @@ public class TableBuilder<S> implements Serializable
 
     IWebAction<?> _action;
 
-    IColumn<S> _column;
+    IColumn<S,SortParam<String>> _column;
 
     Boolean _escaping;
 
@@ -189,7 +190,7 @@ public class TableBuilder<S> implements Serializable
     {
     }
 
-    public Column(IColumn<S> column)
+    public Column(IColumn<S,SortParam<String>> column)
     {
       _column = column;
     }
@@ -232,7 +233,7 @@ public class TableBuilder<S> implements Serializable
 
   public void addActions(String displayName, final ActionColumn<S>... actions)
   {
-    AbstractColumn<S> column = new AbstractColumn<S>(Model.of(displayName))
+    AbstractColumn<S,SortParam<String>> column = new AbstractColumn<S,SortParam<String>>(Model.of(displayName))
     {
       public void populateItem(Item<ICellPopulator<S>> cellItem,
           String componentId, final IModel<S> rowModel)

@@ -3,17 +3,18 @@ package de.bitnoise.sonferenz.web.pages.suggestion;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-public class LikeColumn<T> 
-extends AbstractColumn<T>
+public class LikeColumn<T > extends AbstractColumn<T,SortParam<String>>
 {
 
   public LikeColumn(IModel<String> displayModel)
   {
-    super(displayModel,"likes");
+//    super(displayModel,"likes");
+    super(displayModel, new SortParam("likes",true));
   }
 
   public void populateItem(Item<ICellPopulator<T>> cellItem,

@@ -6,12 +6,11 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
-import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import com.visural.common.web.HtmlSanitizer;
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
@@ -19,8 +18,8 @@ import com.visural.wicket.component.confirmer.ConfirmerLink;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.SuggestionModel;
+import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
@@ -76,7 +75,7 @@ public class EditWhishPanel extends FormPanel
     FormComponent<String> titleField = new TextField<String>("title", modelTitle);
     titleField
         .setRequired(true)
-        .add(new MaximumLengthValidator(254))
+        .add(StringValidator.maximumLength(254))
         .add(new InputHintBehavior(form, "Kurz und pr\u00e4gnant", "color: #aaa;"));
         ;
     
@@ -116,7 +115,7 @@ public class EditWhishPanel extends FormPanel
       btnDel.setVisible(false);
     }
     ReducedRichTextEditor rtf = new ReducedRichTextEditor("description", modelDesc);
-    rtf.add(new MaximumLengthValidator(1000 * 5));
+    rtf.add(StringValidator.maximumLength(1000 * 5));
     form.add(titleField);
     form.add(new RichTextEditorFormBehavior());
     form.add(rtf);

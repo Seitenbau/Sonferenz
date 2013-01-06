@@ -10,13 +10,10 @@ import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.validation.IErrorMessageSource;
 import org.apache.wicket.validation.IValidatable;
-import org.apache.wicket.validation.IValidationError;
-import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.AbstractValidator;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
-import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
 
@@ -101,7 +98,7 @@ public class InviteUserPanel extends FormPanel
         modelUsername);
     userField
         // .setRequired(true)
-        .add(new MaximumLengthValidator(15))
+        .add(StringValidator.maximumLength(15))
         .add(
             new InputHintBehavior(form, "optionaler Benutzernamenvorschlag", "color: #aaa;"));
     ;
@@ -109,7 +106,7 @@ public class InviteUserPanel extends FormPanel
         modelEMail);
     emailField
         .setRequired(true)
-        .add(new MaximumLengthValidator(128))
+        .add(StringValidator.maximumLength(128))
         .add(new InputHintBehavior(form, "eMail", "color: #aaa;"));
     ;
 
@@ -125,7 +122,7 @@ public class InviteUserPanel extends FormPanel
     FormComponent<String> providerField = new DropDownChoice<String>(
         "provider", modelProvider, providers);
     providerField.setEnabled(KonferenzSession.hasRight(Right.Admin.Configure));
-    subjectField.add(new MaximumLengthValidator(200));
+    subjectField.add(StringValidator.maximumLength(200));
     subjectField.setRequired(true);
     textField.add(new ContainsToken());
     userField.add(new UserUnique());

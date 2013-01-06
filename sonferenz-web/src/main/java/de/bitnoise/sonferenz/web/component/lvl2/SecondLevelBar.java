@@ -5,7 +5,6 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 import de.bitnoise.sonferenz.web.ConfigMainNavigation;
-import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.component.navigation.NavPanel;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPanel;

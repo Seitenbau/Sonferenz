@@ -2,7 +2,6 @@ package de.bitnoise.sonferenz.web.pages.voting;
 
 import java.io.Serializable;
 
-
 import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.VoteModel;
 import de.bitnoise.sonferenz.web.component.table.IMutiState;

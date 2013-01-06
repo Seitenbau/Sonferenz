@@ -4,7 +4,7 @@ import org.apache.wicket.model.IModel;
 
 import com.visural.wicket.component.nicedit.RichTextEditor;
 
-public class ReducedRichTextEditor extends RichTextEditor {
+public class ReducedRichTextEditor extends RichTextEditor<IModel> {
 	public ReducedRichTextEditor(String id, IModel model) {
 		super(id, model);
 	}
@@ -24,6 +24,5 @@ public class ReducedRichTextEditor extends RichTextEditor {
 			return false;
 		}
 	}
-	
-	
+
 }

@@ -3,10 +3,8 @@ package de.bitnoise.sonferenz.web.pages.log;
 import java.io.StringWriter;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +17,6 @@ import ch.qos.logback.core.read.CyclicBufferAppender;
 import com.visural.wicket.aturl.At;
 
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
-import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 
 @At(url = "/log")
 public class LoggingPage extends WebPage

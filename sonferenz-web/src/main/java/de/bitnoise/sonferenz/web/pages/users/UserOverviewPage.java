@@ -15,7 +15,6 @@ import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
 import de.bitnoise.sonferenz.web.pages.admin.model.UserListItem;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
 

@@ -1,20 +1,14 @@
 package de.bitnoise.sonferenz.web.pages;
 
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.visural.wicket.aturl.At;
-
-import wicket.contrib.tinymce.TinyMceBehavior;
-import wicket.contrib.tinymce.settings.TinyMCESettings;
-import wicket.contrib.tinymce.settings.TinyMCESettings.Align;
-import wicket.contrib.tinymce.settings.TinyMCESettings.Location;
-import wicket.contrib.tinymce.settings.TinyMCESettings.Theme;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
@@ -34,7 +28,7 @@ public class StaticContentEditPage extends KonferenzPage
     super();
     if (params != null)
     {
-    	_id = params.getString("id");
+    	_id = params.get("id").toString();
     }
   }
 

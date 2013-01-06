@@ -2,9 +2,7 @@ package de.bitnoise.sonferenz.web.pages.config;
 
 import java.io.Serializable;
 
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 

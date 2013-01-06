@@ -1,7 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.voting;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class VoteList extends ArrayList<VoteItem> {

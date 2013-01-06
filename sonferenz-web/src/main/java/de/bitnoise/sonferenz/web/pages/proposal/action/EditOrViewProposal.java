@@ -1,11 +1,10 @@
 package de.bitnoise.sonferenz.web.pages.proposal.action;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
-
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.web.action.ActionBookmark;
@@ -14,8 +13,8 @@ import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.auth.LoginPage;
 import de.bitnoise.sonferenz.web.pages.proposal.ModelProposalList;
-import de.bitnoise.sonferenz.web.pages.proposal.RefToProposal;
 import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
+import de.bitnoise.sonferenz.web.pages.proposal.RefToProposal;
 import de.bitnoise.sonferenz.web.pages.proposal.ViewProposalPage;
 import de.bitnoise.sonferenz.web.pages.voting.UserVoteItem;
 

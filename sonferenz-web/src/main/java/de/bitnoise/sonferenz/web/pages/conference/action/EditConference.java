@@ -3,12 +3,9 @@ package de.bitnoise.sonferenz.web.pages.conference.action;
 import org.apache.wicket.Page;
 import org.apache.wicket.model.IModel;
 
-import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.pages.conference.ConferenceOverviewPage;
 import de.bitnoise.sonferenz.web.pages.conference.table.ConferenceListItem;
-import de.bitnoise.sonferenz.web.pages.proposal.ModelProposalList;
-import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
 
 public class EditConference extends WebAction<IModel<ConferenceListItem>>
 {

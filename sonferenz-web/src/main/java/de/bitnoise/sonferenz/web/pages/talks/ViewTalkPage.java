@@ -1,13 +1,11 @@
 package de.bitnoise.sonferenz.web.pages.talks;
 
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.visural.wicket.aturl.At;
 
-import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
@@ -25,7 +23,7 @@ public class ViewTalkPage extends KonferenzPage
   public ViewTalkPage(PageParameters parameters)
   {
     super();
-    long id = parameters.getAsLong(PARAM_ID, -1L);
+    long id = parameters.get(PARAM_ID).toLong(-1L);
     if (id == -1L)
     {
       setResponsePage(UnauthorisedAccess.class);

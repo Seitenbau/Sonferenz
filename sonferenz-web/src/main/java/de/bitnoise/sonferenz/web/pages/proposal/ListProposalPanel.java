@@ -6,6 +6,7 @@ import java.util.Set;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -16,18 +17,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 
-
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
-import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
-import de.bitnoise.sonferenz.web.pages.proposal.action.CreateProposal;
 import de.bitnoise.sonferenz.web.pages.proposal.action.EditOrViewProposal;
-import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
-import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListProposalPanel extends Panel
 {
@@ -89,7 +85,7 @@ public class ListProposalPanel extends Panel
       }
     };
 
-    ISortableDataProvider<ModelProposalList> provider = new SortableServiceDataProvider<ProposalModel, ModelProposalList>( )
+    ISortableDataProvider<ModelProposalList,SortParam<String>> provider = new SortableServiceDataProvider<ProposalModel, ModelProposalList>( )
     {
       @Override
       protected ModelProposalList transferType(ProposalModel dbObject)
@@ -110,7 +106,7 @@ public class ListProposalPanel extends Panel
       }
 
       @Override
-      public int size()
+      public long size()
       {
         return facade.getAllProposalsCount();
       }
@@ -124,7 +120,7 @@ public class ListProposalPanel extends Panel
     };
     String text=content2.text("page.proposalsHeader","");
     add(new Label("headerText",text).setEscapeModelStrings(false));
-    DefaultDataTable<ModelProposalList> table = new DefaultDataTable<ModelProposalList>(
+    DefaultDataTable<ModelProposalList,SortParam<String>> table = new DefaultDataTable<ModelProposalList,SortParam<String>>(
         "talkTable", builder.getColumns(), provider, 100);
     
     add(new AjaxLink("above","table.proposals.create") {

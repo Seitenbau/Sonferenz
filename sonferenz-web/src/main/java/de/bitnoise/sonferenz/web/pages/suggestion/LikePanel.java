@@ -1,12 +1,13 @@
 package de.bitnoise.sonferenz.web.pages.suggestion;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 
 import de.bitnoise.sonferenz.web.app.WicketApplication;
 
@@ -31,10 +32,10 @@ public class LikePanel extends Panel {
 	protected void onInitialize() {
 		super.onInitialize();
 		setOutputMarkupId(true);
-		final ResourceReference refOn = new ResourceReference(
+		final ResourceReference refOn = new PackageResourceReference(
 		    WicketApplication.class,
 				"images/sun_on.gif");
-		final ResourceReference refOff = new ResourceReference(
+		final ResourceReference refOff = new PackageResourceReference(
 		    WicketApplication.class,
 				"images/sun_off.gif");
 		ResourceReference ref = refOn;
@@ -59,8 +60,8 @@ public class LikePanel extends Panel {
 				} else {
 					img.setImageResourceReference(refOff);
 				}
-				target.addComponent(img);
-				target.addComponent(count);
+				target.add(img);
+				target.add(count);
 			}
 		};
 		

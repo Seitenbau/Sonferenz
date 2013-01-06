@@ -3,19 +3,22 @@ package de.bitnoise.sonferenz.web.pages.play;
 import javax.servlet.ServletContext;
 
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.AjaxSelfUpdatingTimerBehavior;
-import org.apache.wicket.ajax.IAjaxCallDecorator;
-import org.apache.wicket.behavior.StringHeaderContributor;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.MarkupStream;
-import org.apache.wicket.markup.html.WebComponent;
+import org.apache.wicket.markup.head.HeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.PageHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.time.Duration;
 
@@ -25,7 +28,8 @@ import de.bitnoise.sonferenz.service.v2.services.StatisticService.ResourceEvent;
 
 public class VideoPanel extends Panel
 {
-  @SpringBean
+
+@SpringBean
   ConfigurationService config;
   
   @SpringBean
@@ -38,10 +42,17 @@ public class VideoPanel extends Panel
     ServletContext servletContext = WebApplication.get().getServletContext();
     final String contextPath = servletContext.getContextPath(); 
     
-    add(new StringHeaderContributor(
-        "<script src=\"" + contextPath + "/projekktor/projekktor-1.0.22r82.min.js\"></script>"));
-    add(new StringHeaderContributor(
-        "<link rel=\"stylesheet\" href=\"" + contextPath + "/projekktor/theme/style.css\" type=\"text/css\" media=\"screen\" />"));
+    add(new Behavior(){
+    	@Override
+    	public void renderHead(Component component, IHeaderResponse response) {
+			response.render(new PageHeaderItem("<script src=\"" + contextPath + "/projekktor/projekktor-1.0.22r82.min.js\"></script>"));
+			response.render(new PageHeaderItem("<link rel=\"stylesheet\" href=\"" + contextPath + "/projekktor/theme/style.css\" type=\"text/css\" media=\"screen\" />"));
+    	}
+    });
+//    add(new StringHeaderContributor(
+//        "<script src=\"" + contextPath + "/projekktor/projekktor-1.0.22r82.min.js\"></script>"));
+//    add(new StringHeaderContributor(
+//        "<link rel=\"stylesheet\" href=\"" + contextPath + "/projekktor/theme/style.css\" type=\"text/css\" media=\"screen\" />"));
     
     String base = config.getStringValue("baseUrl.cdn");
     WebMarkupContainer v = new WebMarkupContainer("video");
@@ -81,11 +92,16 @@ public class VideoPanel extends Panel
     };
     
     MarkupContainer script = new MarkupContainer("script") {
-      @Override
-      protected void onComponentTagBody(MarkupStream markupStream,
-          ComponentTag openTag)
-      {
-        super.onComponentTagBody(markupStream, openTag);
+    	@Override
+		protected void onComponentTag(ComponentTag tag) {
+//			// TODO Auto-generated method stub
+//			super.onComponentTag(tag);
+//		}
+//      @Override
+//      protected void onComponentTagBody(MarkupStream markupStream,
+//          ComponentTag openTag)
+//      {
+//        super.onComponentTagBody(markupStream, openTag);
         
         StringBuilder sb = new StringBuilder();
         sb.append(" $(document).ready(function() { \r\n");

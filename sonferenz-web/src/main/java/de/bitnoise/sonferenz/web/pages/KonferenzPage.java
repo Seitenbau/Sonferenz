@@ -3,27 +3,19 @@ package de.bitnoise.sonferenz.web.pages;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.StringResourceModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-import de.bitnoise.sonferenz.model.ConferenceModel;
-import de.bitnoise.sonferenz.web.ConfigMainNavigation;
-import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.confpan.CurrentConferencePanel;
 import de.bitnoise.sonferenz.web.component.footer.FooterPanel;
 import de.bitnoise.sonferenz.web.component.lvl1.FirstLevelBar;
 import de.bitnoise.sonferenz.web.component.lvl2.SecondLevelBar;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
-import de.bitnoise.sonferenz.web.component.navigation.NavPanel;
-import de.bitnoise.sonferenz.web.component.user.CurrentUserPanel;
 import de.bitnoise.sonferenz.web.forms.KonferenzForm;
-import de.bitnoise.sonferenz.web.pages.auth.LoginPanel;
 
 public abstract class KonferenzPage extends WebPage
 {

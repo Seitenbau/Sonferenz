@@ -75,7 +75,6 @@ public class LoginPanel extends FormPanel
 	protected void OnSuccessfullLogin()
 	{
 		setResponsePage(InfoPage.class);
-		setRedirect(true);
 	}
 
 }

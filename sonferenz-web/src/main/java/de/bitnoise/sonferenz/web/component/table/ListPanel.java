@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.wicket.Component;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
@@ -33,9 +34,9 @@ public abstract class ListPanel<T> extends Panel
   protected void onInitialize()
   {
     super.onInitialize();
-    SortableDataProvider<T> provider = createDataProviderProvider();
-    List<IColumn<T>> columns = createColumns();
-    DefaultDataTable<T> table = new DefaultDataTable<T>(
+    SortableDataProvider<T,SortParam<String>> provider = createDataProviderProvider();
+    List<IColumn<T,SortParam<String>>> columns = createColumns();
+    DefaultDataTable<T,SortParam<String>> table = new DefaultDataTable<T,SortParam<String>>(
         "contentTable", columns, provider, getMaxRowPerPage());
 
     add(createHeaderText("headerText"));
@@ -71,7 +72,7 @@ public abstract class ListPanel<T> extends Panel
     return _maxRowsPerPage;
   }
 
-  protected abstract List<IColumn<T>> createColumns();
+  protected abstract List<IColumn<T,SortParam<String>>> createColumns();
 
-  protected abstract SortableDataProvider<T> createDataProviderProvider();
+  protected abstract SortableDataProvider<T,SortParam<String>> createDataProviderProvider();
 }

@@ -3,6 +3,7 @@ package de.bitnoise.sonferenz.web.pages.suggestion;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -13,18 +14,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.model.SuggestionModel;
+import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.proposal.ListProposalPanel;
-import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
-import de.bitnoise.sonferenz.web.pages.suggestion.action.CreateWhish;
 import de.bitnoise.sonferenz.web.pages.suggestion.action.EditOrViewWhish;
-import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListWhishesPanel extends Panel
 {
@@ -76,7 +74,7 @@ public class ListWhishesPanel extends Panel
       }
     };
 
-    ISortableDataProvider<ModelWhishList> 
+    ISortableDataProvider<ModelWhishList,SortParam<String>> 
     provider = new SortableServiceDataProvider<SuggestionModel, ModelWhishList>( ) {
       @Override
       protected ModelWhishList transferType(SuggestionModel dbObject)
@@ -107,7 +105,7 @@ public class ListWhishesPanel extends Panel
       }
 
       @Override
-      public int size()
+      public long size()
       {
         return facade.getWhishesCount();
       }
@@ -122,7 +120,7 @@ public class ListWhishesPanel extends Panel
     String text=content2.text("page.whishHeader","");
     add(new Label("headerText",text).setEscapeModelStrings(false));
     
-    DefaultDataTable<ModelWhishList> table = new DefaultDataTable<ModelWhishList>(
+    DefaultDataTable<ModelWhishList,SortParam<String>> table = new DefaultDataTable<ModelWhishList,SortParam<String>>(
         "whishTable", builder.getColumns(), provider, 100);
     
     add(new AjaxLink("above","table.whish.create") {

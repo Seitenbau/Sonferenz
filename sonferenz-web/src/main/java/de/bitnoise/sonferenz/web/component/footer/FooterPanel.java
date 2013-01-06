@@ -1,6 +1,5 @@
 package de.bitnoise.sonferenz.web.component.footer;
 
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
 public class FooterPanel extends Panel

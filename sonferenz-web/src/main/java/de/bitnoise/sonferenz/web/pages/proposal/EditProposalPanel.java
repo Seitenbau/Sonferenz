@@ -10,7 +10,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import com.visural.common.web.HtmlSanitizer;
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
@@ -77,9 +77,9 @@ public class EditProposalPanel extends FormPanel
     FormComponent<String> titleField = new TextField<String>("title", modelTitle);
     TextField<String> authorfield = new TextField<String>("author", modelAuthor);
     titleField.setRequired(true);
-    titleField.add(new MaximumLengthValidator(254));
+    titleField.add(StringValidator.maximumLength(254));
     titleField.add(new InputHintBehavior(form, "Kurz und pr\u00e4gnant", "color: #aaa;"));
-    authorfield.add(new MaximumLengthValidator(254));
+    authorfield.add(StringValidator.maximumLength(254));
     authorfield.add(new InputHintBehavior(form, "Der/Die Vortragende(en)", "color: #aaa;"));
     
     // List<? extends UserModel> choices = userService.listAllUsers();

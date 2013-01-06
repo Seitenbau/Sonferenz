@@ -5,13 +5,14 @@ import java.io.Serializable;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.extensions.rating.RatingPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 
-public abstract class RatingBoxColumn<T> extends AbstractColumn<T>  
+public abstract class RatingBoxColumn<T> extends AbstractColumn<T,SortParam<String>>  
    
 {
   private int _nrOfStars;

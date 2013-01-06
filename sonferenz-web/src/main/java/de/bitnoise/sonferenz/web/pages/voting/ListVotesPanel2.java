@@ -12,28 +12,33 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
-import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.behavior.AttributeAppender;
-import org.apache.wicket.behavior.SimpleAttributeModifier;
-import org.apache.wicket.markup.html.CSSPackageResource;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.internal.HtmlHeaderContainer;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.CssPackageResource;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import wicketdnd.DragSource;
+import wicketdnd.DropTarget;
+import wicketdnd.Location;
+import wicketdnd.Operation;
+import wicketdnd.Reject;
+import wicketdnd.Transfer;
+import wicketdnd.theme.HumanTheme;
+import wicketdnd.theme.WindowsTheme;
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ProposalModel;
@@ -43,18 +48,8 @@ import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.text.StaticTextPanel;
-import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.proposal.ViewProposalPage;
-import de.bitnoise.sonferenz.web.pages.voting.ListVotesPanel2.NumberItem;
 import de.bitnoise.sonferenz.web.utils.WicketTools;
-
-import wicketdnd.DragSource;
-import wicketdnd.DropTarget;
-import wicketdnd.Location;
-import wicketdnd.Operation;
-import wicketdnd.Reject;
-import wicketdnd.Transfer;
-import wicketdnd.theme.WindowsTheme;
 
 public class ListVotesPanel2 extends Panel
 {
@@ -81,11 +76,16 @@ public class ListVotesPanel2 extends Panel
 	}
 
 	@Override
+	public void renderHead(HtmlHeaderContainer container) {
+		super.renderHead(container);
+	}
+	@Override
 	protected void onInitialize()
 	{
 		super.onInitialize();
 
-		add(CSSPackageResource.getHeaderContribution(new WindowsTheme()));
+		add(new HumanTheme());
+//		add(CssPackageResource. getHeaderContribution());
 		final WebMarkupContainer list = new WebMarkupContainer("voting");
 		currentVoteListe = buildVoteList();
 		List<NumberItem> numberListe = buildNumberList();
@@ -110,9 +110,15 @@ public class ListVotesPanel2 extends Panel
 		ListView<VoteItem> items = new ListView<VoteItem>("items", currentVoteListe)
 		{
 			@Override
-			protected ListItem<VoteItem> newItem(int index)
-			{
-				ListItem<VoteItem> item = super.newItem(index);
+			protected ListItem<VoteItem> newItem(int index,
+					IModel<VoteItem> itemModel) {
+//				// TODO Auto-generated method stub
+//				return super.newItem(index, itemModel);
+//			}
+//			@Override
+//			protected ListItem<VoteItem> newItem(int index)
+//			{
+				ListItem<VoteItem> item = super.newItem(index,itemModel);
 				item.setOutputMarkupId(true);
 				return item;
 			}
@@ -130,9 +136,9 @@ public class ListVotesPanel2 extends Panel
             Collection<? extends Component> components = target.getComponents();
 //            System.out.println(object.getTalk().getTitle());
             currentVoteListe.moveup(object);
-            save.add(new SimpleAttributeModifier("class", "button savevote active"));
-            target.addComponent(list);
-            target.addComponent(save);
+            save.add(AttributeModifier.replace("class", "button savevote active"));
+            target.add(list);
+            target.add(save);
         }});
 			  item.add(new AjaxFallbackLink<String>("movedown"){
 			    @Override
@@ -141,9 +147,9 @@ public class ListVotesPanel2 extends Panel
 			      Collection<? extends Component> components = target.getComponents();
 //            System.out.println(object.getTalk().getTitle());
 			      currentVoteListe.movedown(object);
-			      save.add(new SimpleAttributeModifier("class", "button savevote active"));
-			      target.addComponent(list);
-			      target.addComponent(save);
+			      save.add(AttributeModifier.replace("class", "button savevote active"));
+			      target.add(list);
+			      target.add(save);
 			    }});
 			  BookmarkablePageLink title = new BookmarkablePageLink("link", ViewProposalPage.class, param);
 				Label txt = new Label("text", Model.of(object.getTalk().getTitle()));
@@ -162,7 +168,7 @@ public class ListVotesPanel2 extends Panel
 			{
 				if (transfer.getOperation() == Operation.MOVE)
 				{
-					target.addComponent(list);
+					target.add(list);
 				}
 			}
 		}.drag("div.item").initiate("span.initiate"));
@@ -173,7 +179,7 @@ public class ListVotesPanel2 extends Panel
 			public void onDrop(AjaxRequestTarget target, Transfer transfer,
 			        Location location) throws Reject
 			{
-			  save.add(new SimpleAttributeModifier("class", "button savevote active"));
+			  save.add(AttributeModifier.replace("class", "button savevote active"));
 				VoteItem x = transfer.getData();
 				if (location==null || location.getComponent() == list)
 				{
@@ -196,8 +202,8 @@ public class ListVotesPanel2 extends Panel
 						transfer.reject();
 					}
 
-					target.addComponent(list);
-					target.addComponent(save);
+					target.add(list);
+					target.add(save);
 				}
 			}
 		}.dropTopAndBottom("div.item");
@@ -218,7 +224,7 @@ public class ListVotesPanel2 extends Panel
 		add(new StaticTextPanel("description","page.vote.header"));
 		
 		add(new Label("headerText",content2.text("page.vote.table.header", "Wunschreihenfolge :")));
-		save.add(new SimpleAttributeModifier("class", "button savevote inactive"));
+		save.add(AttributeModifier.replace("class", "button savevote inactive"));
 		add(save);
 		save.setOutputMarkupId(true);
 	}
@@ -326,7 +332,7 @@ public class ListVotesPanel2 extends Panel
 			neueVotes.add(vote);
 		}
 		votes.saveMyVotes(neueVotes);
-		save.add(new SimpleAttributeModifier("class", "button savevote inactive"));
-		target.addComponent(save);
+		save.add( AttributeModifier.replace("class", "button savevote inactive"));
+		target.add(save);
 	}
 }

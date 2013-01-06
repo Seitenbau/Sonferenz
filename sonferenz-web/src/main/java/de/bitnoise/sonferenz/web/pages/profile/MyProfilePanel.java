@@ -13,7 +13,6 @@ import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.app.KonferenzDefines;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
-import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 

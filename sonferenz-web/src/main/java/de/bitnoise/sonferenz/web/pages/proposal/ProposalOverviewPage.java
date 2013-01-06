@@ -15,7 +15,6 @@ import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.proposal.action.CreateProposal;
 
 @At(url = "/proposals")
 public class ProposalOverviewPage extends KonferenzPage

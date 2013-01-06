@@ -1,7 +1,7 @@
 package de.bitnoise.sonferenz.web.pages.statics;
 
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.visural.wicket.aturl.At;
 

@@ -2,10 +2,10 @@ package de.bitnoise.sonferenz.web.pages.suggestion.action;
 
 
 import org.apache.wicket.Page;
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.web.action.ActionBookmark;

@@ -1,8 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.speakers;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.extensions.ajax.markup.html.form.upload.UploadProgressBar;
-import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -12,13 +10,13 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.Bytes;
-import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import com.visural.common.web.HtmlSanitizer;
 import com.visural.wicket.behavior.inputhint.InputHintBehavior;
@@ -26,7 +24,6 @@ import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
 import de.bitnoise.sonferenz.model.FileResourceModel;
 import de.bitnoise.sonferenz.model.SpeakerModel;
-import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.services.ResourceService;
 import de.bitnoise.sonferenz.service.v2.services.SpeakerService;
@@ -35,7 +32,6 @@ import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.app.WicketApplication;
 import de.bitnoise.sonferenz.web.component.rte.ReducedRichTextEditor;
-import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
 import de.bitnoise.sonferenz.web.pages.profile.MyProfilePage;
 import de.bitnoise.sonferenz.web.pages.resources.PageImages;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
@@ -69,7 +65,7 @@ public class EditSpeakerPanel extends FormPanel {
     }
   }
 
-  final ResourceReference img0 = new ResourceReference(WicketApplication.class,"images/nopic.gif");
+  final ResourceReference img0 = new PackageResourceReference(WicketApplication.class,"images/nopic.gif");
 
   @Override
   protected void onInitialize()
@@ -112,7 +108,7 @@ public class EditSpeakerPanel extends FormPanel {
 
     FormComponent<String> titleField = new TextField<String>("name", modelName);
     titleField.setRequired(true);
-    titleField.add(new MaximumLengthValidator(254));
+    titleField.add(StringValidator.maximumLength(254));
     titleField.add(new InputHintBehavior(form, "Kurz und pr\u00e4gnant", "color: #aaa;"));
 
     // List<? extends UserModel> choices = userService.listAllUsers();

@@ -1,10 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.resources;
 
-import java.sql.Blob;
-
-import org.apache.wicket.markup.html.DynamicWebResource;
-import org.apache.wicket.markup.html.image.resource.BlobImageResource;
-import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
+import org.apache.wicket.request.resource.DynamicImageResource;
 
 import de.bitnoise.sonferenz.model.FileResourceModel;
 
@@ -17,9 +13,8 @@ public class PageImages extends DynamicImageResource {
   }
 
   @Override
-  protected byte[] getImageData() {
-    return data;
+  protected byte[] getImageData(Attributes attributes) {
+	return data;
   }
-
   
 }

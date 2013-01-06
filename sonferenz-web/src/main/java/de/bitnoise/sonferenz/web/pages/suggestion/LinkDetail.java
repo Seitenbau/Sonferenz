@@ -3,11 +3,11 @@ package de.bitnoise.sonferenz.web.pages.suggestion;
 import java.io.Serializable;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 import com.visural.wicket.behavior.beautytips.BeautyTipBehavior;
 import com.visural.wicket.behavior.beautytips.TipPosition;

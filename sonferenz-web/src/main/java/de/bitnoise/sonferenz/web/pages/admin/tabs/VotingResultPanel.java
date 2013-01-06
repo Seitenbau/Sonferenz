@@ -4,65 +4,36 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import lombok.Data;
-import static de.bitnoise.sonferenz.web.pages.KonferenzPage.txt;
 
-import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
-import org.apache.wicket.extensions.markup.html.form.select.Select;
-import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
-import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.repeater.AbstractRepeater;
 import org.apache.wicket.model.ComponentPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 
-import com.google.common.base.Objects;
-
-import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.AuthMapping;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ConferenceState;
 import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.model.UserRole;
-import de.bitnoise.sonferenz.service.v2.monitor.IMonitorState;
 import de.bitnoise.sonferenz.service.v2.services.ConferenceService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
 import de.bitnoise.sonferenz.service.v2.services.VotedItem;
-import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
-import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.drop.DropDownEnumChoice;
-import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.component.panels.KonferenzTabPanel;
 import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
-import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
-import de.bitnoise.sonferenz.web.pages.admin.actions.EditUser;
-import de.bitnoise.sonferenz.web.pages.admin.model.UserListItem;
-import de.bitnoise.sonferenz.web.pages.admin.tabs.VotingResultPanel.CalculateState;
-import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class VotingResultPanel extends KonferenzTabPanel
 {

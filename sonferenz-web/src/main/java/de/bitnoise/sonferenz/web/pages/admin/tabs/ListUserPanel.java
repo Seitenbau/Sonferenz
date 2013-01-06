@@ -1,19 +1,16 @@
 package de.bitnoise.sonferenz.web.pages.admin.tabs;
 
 import java.util.Set;
-import static de.bitnoise.sonferenz.web.pages.KonferenzPage.txt;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.injection.web.InjectorHolder;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.AuthMapping;
@@ -23,11 +20,9 @@ import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.component.panels.KonferenzTabPanel;
-import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
 import de.bitnoise.sonferenz.web.pages.admin.actions.EditUser;
 import de.bitnoise.sonferenz.web.pages.admin.model.UserListItem;
 import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
-import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListUserPanel extends KonferenzTabPanel
 {
@@ -84,7 +79,7 @@ public class ListUserPanel extends KonferenzTabPanel
     };
 
     SortableServiceDataProvider<UserModel, UserListItem> provider = createProvider();
-    DefaultDataTable<UserListItem> table = new DefaultDataTable<UserListItem>(
+    DefaultDataTable<UserListItem,SortParam<String>> table = new DefaultDataTable<UserListItem,SortParam<String>>(
         "userTable", builder.getColumns(), provider, 100);
 
     add(new AjaxLink("above","table.user.createLink") {
@@ -145,7 +140,7 @@ public class ListUserPanel extends KonferenzTabPanel
       }
 
       @Override
-      public int size()
+      public long size()
       {
         return facade.getUserCount();
       }

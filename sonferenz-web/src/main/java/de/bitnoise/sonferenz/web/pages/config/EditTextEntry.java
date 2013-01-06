@@ -1,15 +1,11 @@
 package de.bitnoise.sonferenz.web.pages.config;
 
-import javax.security.auth.callback.TextInputCallback;
-
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import com.visural.common.web.HtmlSanitizer;
 import com.visural.wicket.component.nicedit.RichTextEditorFormBehavior;
 
 import de.bitnoise.sonferenz.facade.UiFacade;

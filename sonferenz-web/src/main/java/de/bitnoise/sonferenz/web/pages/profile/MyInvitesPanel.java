@@ -1,20 +1,14 @@
 package de.bitnoise.sonferenz.web.pages.profile;
 
-import javax.persistence.Column;
-
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
-import org.joda.time.Period;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
-import ch.qos.logback.core.rolling.helper.PeriodicityType;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ActionModel;
@@ -25,7 +19,6 @@ import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;
-import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 
 public class MyInvitesPanel extends AbstractListPanel<TokenListItem, ActionModel>
 {

@@ -16,7 +16,6 @@ public class UnauthorisedAccess extends KonferenzPage
   protected void onInitialize()
   {
     super.onInitialize();
-    setRedirect(true);
     setResponsePage(LoginPage.class);
   }
 

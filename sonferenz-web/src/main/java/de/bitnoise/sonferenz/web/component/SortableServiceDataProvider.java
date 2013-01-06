@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -15,34 +16,35 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.ListSpeakerPanel.SpeakerListItem;
 
 public abstract class SortableServiceDataProvider<TYPE_DB, TYPE_UI extends Serializable>
-    extends SortableDataProvider<TYPE_UI>
+    extends SortableDataProvider<TYPE_UI,SortParam<String>>
 {
   public SortableServiceDataProvider(String columToSort)
   {
     super();
-    setSort(columToSort, true);
+    setSort(new SortParam(columToSort, true));
   }
   public SortableServiceDataProvider( )
   {
     super();
   }
 
-  public Iterator<? extends TYPE_UI> iterator(int first, int count)
-  {
+  @Override
+  public Iterator<? extends TYPE_UI> iterator(long first, long count) {
     boolean ascending = true;
     String prop = null;
     if (getSort() != null)
     {
       ascending = getSort().isAscending();
-      prop = getSort().getProperty();
+      prop = getSort().getProperty().getProperty();
     }
     List<TYPE_UI> daten = loadListFromBackend(first, count, ascending, prop);
     return daten.iterator();
   }
 
-  protected List<TYPE_UI> loadListFromBackend(int first, int count,
+  protected List<TYPE_UI> loadListFromBackend(long first, long count,
       boolean ascending, String propertyToSort)
       throws GeneralConferenceException
   {
@@ -60,9 +62,10 @@ public abstract class SortableServiceDataProvider<TYPE_DB, TYPE_UI extends Seria
     return result;
   }
 
-  protected List<TYPE_DB> getAllItemList(int first, int count, String propertyToSort, boolean ascending)
+  protected List<TYPE_DB> getAllItemList(long first, long c, String propertyToSort, boolean ascending)
   {
-    int f = first/count;
+	  int f = (int) (first/c);
+	  int count = (int) c;
     PageRequest request;
     if(propertyToSort!=null) {
       Direction direction=Direction.DESC;
@@ -87,7 +90,7 @@ public abstract class SortableServiceDataProvider<TYPE_DB, TYPE_UI extends Seria
   
   protected abstract Page<TYPE_DB> getAllItems(PageRequest request);
 
-  public int size() {
+  public long size() {
     Long s = getAllItems(new PageRequest(0, 1)).getTotalElements();
     return s.intValue();
   }

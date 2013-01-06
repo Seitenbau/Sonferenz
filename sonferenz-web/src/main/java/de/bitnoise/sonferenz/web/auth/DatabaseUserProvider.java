@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import de.bitnoise.sonferenz.model.LocalUserModel;
 import de.bitnoise.sonferenz.repo.LocalUserRepository;
 import de.bitnoise.sonferenz.service.v2.exceptions.RepositoryException;

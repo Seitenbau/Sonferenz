@@ -1,24 +1,18 @@
 package de.bitnoise.sonferenz.web.pages.talks.action;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
-
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.action.ActionBookmark;
-import de.bitnoise.sonferenz.web.action.IWebAction;
 import de.bitnoise.sonferenz.web.action.WebAction;
-import de.bitnoise.sonferenz.web.app.KonferenzSession;
-import de.bitnoise.sonferenz.web.pages.auth.LoginPage;
-import de.bitnoise.sonferenz.web.pages.error.UnauthorisedAccess;
 import de.bitnoise.sonferenz.web.pages.talks.ModelTalkList;
 import de.bitnoise.sonferenz.web.pages.talks.RefToTalk;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.talks.ViewTalkPage;
-import de.bitnoise.sonferenz.web.pages.voting.UserVoteItem;
 
 public class EditOrViewTalk extends WebAction<IModel<Object>>
 // implements AclControlled

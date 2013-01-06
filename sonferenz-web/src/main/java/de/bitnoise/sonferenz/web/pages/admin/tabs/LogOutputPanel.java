@@ -1,49 +1,24 @@
 package de.bitnoise.sonferenz.web.pages.admin.tabs;
 
-import java.io.StringWriter;
-import java.util.Set;
+import static ch.qos.logback.core.CoreConstants.LINE_SEPARATOR;
 
-import static ch.qos.logback.core.CoreConstants.*;
-import static de.bitnoise.sonferenz.web.pages.KonferenzPage.txt;
+import java.io.StringWriter;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
-import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
-import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 
 import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.html.DefaultCssBuilder;
 import ch.qos.logback.classic.html.HTMLLayout;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.CoreConstants;
 import ch.qos.logback.core.html.CssBuilder;
 import ch.qos.logback.core.read.CyclicBufferAppender;
-
-import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.AuthMapping;
-import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
-import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
-import de.bitnoise.sonferenz.web.component.TableBuilder;
-import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.component.panels.KonferenzTabPanel;
-import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
-import de.bitnoise.sonferenz.web.pages.admin.actions.EditUser;
-import de.bitnoise.sonferenz.web.pages.admin.model.UserListItem;
 import de.bitnoise.sonferenz.web.pages.log.LoggingPage;
-import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class LogOutputPanel extends KonferenzTabPanel
 {

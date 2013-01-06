@@ -1,7 +1,7 @@
 package de.bitnoise.sonferenz.web.pages.proposal;
 
-import org.apache.wicket.PageParameters;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.visural.wicket.aturl.At;
@@ -22,7 +22,7 @@ public class ViewProposalPage extends KonferenzPage
   public ViewProposalPage(PageParameters parameters)
   {
     super();
-    int id = parameters.getInt(PARAM_ID);
+    int id = parameters.get(PARAM_ID).toInt();
     ProposalModel talk = facade.getProposalById(id);
     Model model = new Model(talk);
     setResponsePage(new EditOrViewProposal().doAction(model));

@@ -13,7 +13,6 @@ import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.component.navigation.NavCallbackInterface;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.conference.action.AddConference;
 import de.bitnoise.sonferenz.web.pages.conference.table.ConferenceListItem;
 
 @At(url = "/conferences")

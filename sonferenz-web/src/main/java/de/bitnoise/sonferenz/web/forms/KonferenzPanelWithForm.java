@@ -7,8 +7,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
-import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
-
 public abstract class KonferenzPanelWithForm extends Panel
 {
   Form<String> _form;

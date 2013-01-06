@@ -1,17 +1,19 @@
 package de.bitnoise.sonferenz.web.component.table;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 
 import com.visural.wicket.behavior.beautytips.BeautyTipBehavior;
 import com.visural.wicket.behavior.beautytips.TipPosition;
@@ -19,7 +21,7 @@ import com.visural.wicket.behavior.beautytips.TipPosition;
 import de.bitnoise.sonferenz.web.app.WicketApplication;
 
 public abstract class VoteMultiStateColumn<T extends IMutiState> extends
-    AbstractColumn<T>
+    AbstractColumn<T,SortParam<String>>
 {
   public VoteMultiStateColumn(IModel<String> displayModel)
   {
@@ -66,9 +68,9 @@ public abstract class VoteMultiStateColumn<T extends IMutiState> extends
   protected abstract <T extends IMutiState> boolean onChange(
       AjaxRequestTarget target, IModel<T> model, int next);
 
-  final ResourceReference img0 = new ResourceReference(WicketApplication.class,"images/state-0.gif");
-  final ResourceReference img1 = new ResourceReference(WicketApplication.class,"images/state-1.gif");
-  final ResourceReference img2 = new ResourceReference(WicketApplication.class,"images/state-2.gif");
+  final ResourceReference img0 = new PackageResourceReference(WicketApplication.class,"images/state-0.gif");
+  final ResourceReference img1 = new PackageResourceReference(WicketApplication.class,"images/state-1.gif");
+  final ResourceReference img2 = new PackageResourceReference(WicketApplication.class,"images/state-2.gif");
 
   public class MultiStatePanel<T extends IMutiState> extends Panel
   {
@@ -94,7 +96,7 @@ public abstract class VoteMultiStateColumn<T extends IMutiState> extends
             model.getObject().setMutiStateValue(next);
             ResourceReference ref = getRef(model);
             img.setImageResourceReference(ref);
-            target.addComponent(img);
+            target.add(img);
           }
           else if (next == 2)
           {
@@ -102,7 +104,7 @@ public abstract class VoteMultiStateColumn<T extends IMutiState> extends
             model.getObject().setMutiStateValue(next);
             ResourceReference ref = getRef(model);
             img.setImageResourceReference(ref);
-            target.addComponent(img);
+            target.add(img);
             onChange(target, model, next);
           }
         }

@@ -3,12 +3,13 @@ package de.bitnoise.sonferenz.web.component.table;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
 
 import de.bitnoise.sonferenz.web.pages.voting.UserVoteItem;
 
-public abstract class VoteColumn extends AbstractColumn<UserVoteItem>
+public abstract class VoteColumn extends AbstractColumn<UserVoteItem,SortParam<String>>
 {
   
   public VoteColumn(IModel<String> displayModel)

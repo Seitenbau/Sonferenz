@@ -3,7 +3,6 @@ package de.bitnoise.sonferenz.web.pages.talks;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.extensions.markup.html.form.palette.Palette;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.form.Button;
@@ -17,8 +16,9 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.CollectionModel;
 import org.apache.wicket.model.util.ListModel;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 import org.springframework.data.domain.PageRequest;
 
 import com.visural.common.web.HtmlSanitizer;
@@ -94,9 +94,9 @@ public class EditTalkPanel extends FormPanel
     FormComponent<String> titleField = new TextField<String>("title", modelTitle);
     TextField<String> authorfield = new TextField<String>("author", modelAuthor);
     titleField.setRequired(true);
-    titleField.add(new MaximumLengthValidator(254));
+    titleField.add( StringValidator.maximumLength(254));
     titleField.add(new InputHintBehavior(form, "Kurz und pr\u00e4gnant", "color: #aaa;"));
-    authorfield.add(new MaximumLengthValidator(254));
+    authorfield.add(StringValidator.maximumLength(254));
     authorfield.add(new InputHintBehavior(form, "Der/Die Vortragende(en)", "color: #aaa;"));
     authorfield.setEnabled(false);
 

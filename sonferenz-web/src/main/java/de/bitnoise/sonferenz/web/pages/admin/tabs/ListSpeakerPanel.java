@@ -1,14 +1,12 @@
 package de.bitnoise.sonferenz.web.pages.admin.tabs;
 
 import java.io.Serializable;
-import java.util.Set;
-import static de.bitnoise.sonferenz.web.pages.KonferenzPage.txt;
+import java.util.Iterator;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.injection.web.InjectorHolder;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
@@ -16,24 +14,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 
-import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.AuthMapping;
 import de.bitnoise.sonferenz.model.SpeakerModel;
-import de.bitnoise.sonferenz.model.UserModel;
-import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.service.v2.services.SpeakerService;
 import de.bitnoise.sonferenz.web.action.WebAction;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.link.AjaxLink;
 import de.bitnoise.sonferenz.web.component.panels.KonferenzTabPanel;
-import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
-import de.bitnoise.sonferenz.web.pages.admin.actions.EditUser;
-import de.bitnoise.sonferenz.web.pages.admin.model.UserListItem;
 import de.bitnoise.sonferenz.web.pages.speakers.PageSpeaker;
-import de.bitnoise.sonferenz.web.pages.speakers.PageSpeakers;
-import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
-import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListSpeakerPanel extends KonferenzTabPanel
 {
@@ -68,7 +56,7 @@ public class ListSpeakerPanel extends KonferenzTabPanel
     };
 
     SortableServiceDataProvider<SpeakerModel, SpeakerListItem> provider = createProvider();
-    DefaultDataTable<SpeakerListItem> table = new DefaultDataTable<SpeakerListItem>(
+    DefaultDataTable<SpeakerListItem,SortParam<String>> table = new DefaultDataTable<SpeakerListItem,SortParam<String>>(
         "speakerTable", builder.getColumns(), provider, 100);
 
     add(new AjaxLink("above", "table.speakers.createLink") {

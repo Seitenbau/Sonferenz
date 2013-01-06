@@ -1,25 +1,16 @@
 package de.bitnoise.sonferenz.web.pages.action;
 
-import java.util.Map;
-
-import org.apache.wicket.PageParameters;
-import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.visural.wicket.aturl.At;
 import com.visural.wicket.aturl.URLType;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.ConferenceModel;
-import de.bitnoise.sonferenz.service.v2.actions.ActionState;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
-import de.bitnoise.sonferenz.web.app.KonferenzSession;
-import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
-import de.bitnoise.sonferenz.web.pages.conference.EditConferenceWizard;
-import de.bitnoise.sonferenz.web.pages.conference.ListConferencesPanel;
 
 @At(url = "/action", type = URLType.IndexedStateInURL, urlParameters = "token")
 public class ActionPage extends KonferenzPage
@@ -34,12 +25,12 @@ public class ActionPage extends KonferenzPage
   public ActionPage(PageParameters params)
   {
     super(params);
-    if (params.size() == 3)
+    if (params.getNamedKeys().size() == 3)
     {
-      if ("token".equalsIgnoreCase(params.getString("1", null)))
+      if ("token".equalsIgnoreCase(params.get("1").toString(null)))
       {
-        action = params.getString("0", null);
-        token = params.getString("2", null);
+        action = params.get("0").toString(null);
+        token = params.get("2").toString(null);
       }
     }
   }

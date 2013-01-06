@@ -19,19 +19,30 @@ public class DatabaseResourceLoader implements IStringResourceLoader
 
   @SpringBean
   StaticContentService content2;
-
+  
+  @Override
   public String loadStringResource(Class<?> clazz, String key, Locale locale,
-      String style)
-  {
-    // String result = content2.text("res." + key);
-    // return result;
-    return readKey(key);
+  		String style, String variation) {
+	  return readKey(key);
   }
 
-  public String loadStringResource(Component component, String key)
-  {
-    return readKey(key);
+  @Override
+  public String loadStringResource(Component component, String key,
+  		Locale locale, String style, String variation) {
+	  return readKey(key);
   }
+
+//  public String loadStringResource(Class<?> clazz, String key, Locale locale,  String style)
+//  {
+//    // String result = content2.text("res." + key);
+//    // return result;
+//    return readKey(key);
+//  }
+//
+//  public String loadStringResource(Component component, String key)
+//  {
+//    return readKey(key);
+//  }
 
   protected String readKey(String key)
   {

@@ -4,7 +4,6 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.form.validation.EqualInputValidator;
 import org.apache.wicket.markup.html.form.validation.EqualPasswordInputValidator;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -18,7 +17,6 @@ import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
 import de.bitnoise.sonferenz.service.v2.exceptions.UserExistsException;
 import de.bitnoise.sonferenz.service.v2.exceptions.ValidationException;
-import de.bitnoise.sonferenz.service.v2.services.idp.provider.crowd.CrowdIdp;
 import de.bitnoise.sonferenz.web.app.KonferenzDefines;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
@@ -67,15 +65,15 @@ public class SubscribeActionPanel extends FormPanel
     /* in case of an invite, the email & username already exist.*/
     if (_data.getEMail() != null)
     {
-    	email1.setModelValue(_data.getEMail());
+    	email1.setModelValue(new String[]{_data.getEMail()});
     	email1.setEnabled(false);
 //    	email2.setModelValue(_data.getEMail());
 //    	email2.setEnabled(false);
     }
     if (_data.getLoginName() != null)
     {
-    	display.setModelValue(_data.getLoginName());
-    	login.setModelValue(_data.getLoginName());
+    	display.setModelValue(new String[]{_data.getLoginName()});
+    	login.setModelValue(new String[]{_data.getLoginName()});
     }
     //login.setEnabled(true);
     

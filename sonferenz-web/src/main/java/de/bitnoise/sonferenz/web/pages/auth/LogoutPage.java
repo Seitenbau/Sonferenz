@@ -12,7 +12,6 @@ public class LogoutPage extends WebPage
   public LogoutPage()
   {
     getSession().invalidate();
-    setRedirect(true);
     setResponsePage(ConferencePage.class);
   }
 }

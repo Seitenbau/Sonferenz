@@ -4,7 +4,6 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.visural.wicket.aturl.At;
 
-import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.app.Right;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;

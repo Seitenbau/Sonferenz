@@ -3,11 +3,9 @@ package de.bitnoise.sonferenz.web.forms;
 import java.io.Serializable;
 
 import org.apache.wicket.injection.web.InjectorHolder;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import de.bitnoise.sonferenz.web.forms.fields.StringInput;
-import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
 public abstract class KonferenzForm implements Serializable, FormCallback
 {

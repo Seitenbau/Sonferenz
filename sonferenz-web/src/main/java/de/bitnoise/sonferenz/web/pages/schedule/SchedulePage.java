@@ -2,8 +2,6 @@ package de.bitnoise.sonferenz.web.pages.schedule;
 
 import org.apache.wicket.markup.html.panel.Panel;
 
-import com.visural.wicket.aturl.At;
-
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;

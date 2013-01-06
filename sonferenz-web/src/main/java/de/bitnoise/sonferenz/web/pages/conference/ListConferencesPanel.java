@@ -2,6 +2,7 @@ package de.bitnoise.sonferenz.web.pages.conference;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -61,7 +62,7 @@ public class ListConferencesPanel extends Panel
       }
     };
 
-    ISortableDataProvider<ConferenceListItem> provider = 
+    ISortableDataProvider<ConferenceListItem,SortParam<String>> provider = 
         new SortableServiceDataProvider<ConferenceModel, ConferenceListItem>() {
       @Override
       protected ConferenceListItem transferType(ConferenceModel dbObject)
@@ -81,7 +82,7 @@ public class ListConferencesPanel extends Panel
       }
 
       @Override
-      public int size()
+      public long size()
       {
         return facade.getAllConferencesCount();
       }
@@ -92,7 +93,7 @@ public class ListConferencesPanel extends Panel
         return new Sort(new Order(Direction.ASC, "shortName"));
       }
     };
-    DefaultDataTable<ConferenceListItem> table = new DefaultDataTable<ConferenceListItem>(
+    DefaultDataTable<ConferenceListItem,SortParam<String>> table = new DefaultDataTable<ConferenceListItem,SortParam<String>>(
         "conferenceTable", builder.getColumns(), provider, 20);
     
 	AddToolbarWithButton toolbar = new AddToolbarWithButton(

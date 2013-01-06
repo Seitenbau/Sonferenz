@@ -1,6 +1,6 @@
 //package de.bitnoise.sonferenz.web.pages.action;
 //
-//import org.apache.wicket.PageParameters;
+//import org.apache.wicket.request.mapper.parameter.PageParameters;
 //import org.apache.wicket.util.tester.WicketTester;
 //import org.junit.Test;
 //

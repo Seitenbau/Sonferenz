@@ -1,7 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.profile;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -9,20 +8,17 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import de.bitnoise.sonferenz.model.ActionModel;
 import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.model.TalkModel;
-import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.ProposalService;
+import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.SuggestionService;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.component.TableBuilder.Column;
 import de.bitnoise.sonferenz.web.pages.base.AbstractListPanel;
-import de.bitnoise.sonferenz.web.pages.profile.MyOverviewPanel.TalkListItem;
-import de.bitnoise.sonferenz.web.pages.proposal.EditProposalPanel;
 import de.bitnoise.sonferenz.web.pages.proposal.RefToProposal;
 import de.bitnoise.sonferenz.web.pages.proposal.action.EditOrViewProposal;
 import de.bitnoise.sonferenz.web.pages.suggestion.ReftoWhish;

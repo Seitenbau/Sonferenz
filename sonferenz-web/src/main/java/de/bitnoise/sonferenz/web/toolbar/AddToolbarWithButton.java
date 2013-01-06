@@ -15,7 +15,7 @@ public class AddToolbarWithButton extends AbstractToolbar
 
   private IWebAction _action;
 
-  public AddToolbarWithButton(String text, final DataTable<?> table,
+  public AddToolbarWithButton(String text, final DataTable<?,?> table,
       IWebAction action)
   {
     super(table);
@@ -24,7 +24,7 @@ public class AddToolbarWithButton extends AbstractToolbar
       @Override
       protected void onComponentTag(ComponentTag tag)
       {
-        tag.put("colspan", table.getColumns().length);
+        tag.put("colspan", table.getColumns().size());
       }
     };
     AjaxFallbackLink link = new AjaxFallbackLink("link") {

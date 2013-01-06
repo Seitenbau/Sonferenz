@@ -3,9 +3,9 @@ package de.bitnoise.sonferenz.web.pages.talks;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -16,19 +16,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 
-
-import de.bitnoise.sonferenz.facade.UiFacade;
-import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
-import de.bitnoise.sonferenz.web.component.link.AjaxLink;
-import de.bitnoise.sonferenz.web.pages.admin.actions.CreateNewUser;
 import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
-import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
-import de.bitnoise.sonferenz.web.toolbar.AddToolbarWithButton;
 
 public class ListTalksPanel extends Panel
 {
@@ -89,7 +82,7 @@ public class ListTalksPanel extends Panel
       }
     };
 
-    ISortableDataProvider<ModelTalkList> provider = new SortableServiceDataProvider<TalkModel, ModelTalkList>( )
+    ISortableDataProvider<ModelTalkList,SortParam<String>> provider = new SortableServiceDataProvider<TalkModel, ModelTalkList>( )
     {
       @Override
       protected ModelTalkList transferType(TalkModel dbObject)
@@ -110,7 +103,7 @@ public class ListTalksPanel extends Panel
       }
 
       @Override
-      public int size()
+      public long size()
       {
         return (int) talks.getAllTalksCount();
       }
@@ -124,7 +117,7 @@ public class ListTalksPanel extends Panel
     };
     String text=content2.text("page.talkHeader","");
     add(new Label("headerText",text).setEscapeModelStrings(false));
-    DefaultDataTable<ModelTalkList> table = new DefaultDataTable<ModelTalkList>(
+    DefaultDataTable<ModelTalkList,SortParam<String>> table = new DefaultDataTable<ModelTalkList,SortParam<String>>(
         "talkTable", builder.getColumns(), provider, 100);
     
     add(table);

@@ -1,10 +1,11 @@
 package de.bitnoise.sonferenz.web.pages.base;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 
 import de.bitnoise.sonferenz.web.app.WicketApplication;
 
@@ -15,10 +16,10 @@ public abstract class IconPanel extends Panel
     EDIT, DELETE
   }
 
-  final static ResourceReference refEdit = new ResourceReference(WicketApplication.class,
+  final static ResourceReference refEdit = new PackageResourceReference(WicketApplication.class,
       "images/edit.png");
 
-  final static ResourceReference refDelete = new ResourceReference(WicketApplication.class,
+  final static ResourceReference refDelete = new PackageResourceReference(WicketApplication.class,
       "images/trash.png");
   
   public IconPanel(String id, Type type)

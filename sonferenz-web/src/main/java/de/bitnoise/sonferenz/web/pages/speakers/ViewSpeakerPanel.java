@@ -1,16 +1,12 @@
 package de.bitnoise.sonferenz.web.pages.speakers;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 
-
-import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.SpeakerModel;
-import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.web.app.WicketApplication;
 import de.bitnoise.sonferenz.web.pages.resources.PageImages;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
@@ -26,7 +22,7 @@ public class ViewSpeakerPanel extends FormPanel
     _speaker = talk;
   }
   
-  final ResourceReference noImage = new ResourceReference(WicketApplication.class,"images/nopic.gif");
+  final ResourceReference noImage = new PackageResourceReference(WicketApplication.class,"images/nopic.gif");
 
   @Override
   protected void onInitialize()

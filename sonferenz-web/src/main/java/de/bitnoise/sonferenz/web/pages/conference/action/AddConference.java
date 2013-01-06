@@ -5,8 +5,6 @@ import org.apache.wicket.model.IModel;
 
 import de.bitnoise.sonferenz.web.action.WebMenuAction;
 import de.bitnoise.sonferenz.web.pages.conference.ConferenceOverviewPage;
-import de.bitnoise.sonferenz.web.pages.conference.table.ConferenceListItem;
-import de.bitnoise.sonferenz.web.pages.users.UserOverviewPage;
 
 public class AddConference extends WebMenuAction<IModel<Object>>
 {
