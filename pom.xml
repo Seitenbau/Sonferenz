@@ -12,6 +12,7 @@
   </properties>
 
   <repositories>
+  
     <repository>
       <id>projectlombok.org</id>
       <url>http://projectlombok.org/mavenrepo</url>
