@@ -21,6 +21,11 @@
       <id>bitnoise.de</id>
       <url>http://repo.bitnoise.de/artifacts/release/</url>
     </repository>
+    <repository>
+        <id>visural-common</id>
+        <name>visural-common</name>
+        <url>http://visural-common.googlecode.com/svn/trunk/visural-common/maven/</url>
+    </repository>
   </repositories>
   <build>
     <plugins>
@@ -280,7 +285,7 @@ encoding/<project>=UTF-8]]>
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>0.10.1</version>
+        <version>0.11.6</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
