@@ -473,7 +473,7 @@ a.button {
 
 #MUNIT-3a396941-be4a-40e1-865b-1ae226899e25-MUNIT,.MUNIT-3a396941-be4a-40e1-865b-1ae226899e25-MUNIT,.MUNIT-54079ac0-7f1d-42e9-93d6-ce68b56f5b6e-MUNIT,.MUNIT-54079ac0-7f1d-42e9-93d6-ce68b56f5b6e-MUNIT-hover:hover,.MUNIT-54079ac0-7f1d-42e9-93d6-ce68b56f5b6e-MUNIT-link a,.MUNIT-54079ac0-7f1d-42e9-93d6-ce68b56f5b6e-MUNIT-link-hover a:hover,.MUNIT-54079ac0-7f1d-42e9-93d6-ce68b56f5b6e-MUNIT-list li
 	{
-	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
 }
 
 @media screen and (max-width: 388px) {
