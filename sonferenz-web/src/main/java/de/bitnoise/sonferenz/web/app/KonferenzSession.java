@@ -119,7 +119,7 @@ public class KonferenzSession extends WebSession
     catch (BadCredentialsException e)
     {
       logger.debug("BadCredentialsException error.", e);
-      return "Bad credentials";
+      return "Deine Benutzerdaten sind fehlerhaft. Wende dich bitte einfach per Mail an sdc@seitenbau.com, wenn du deinen Benutzernamen oder Passwort vergessen hast!";
     }
     catch (AuthenticationException e)
     {
