@@ -84,6 +84,7 @@ public class CrowdIdp implements Idp ,IMonitorable
       client.getState().setCredentials(AuthScope.ANY, credentials);
       CommonsClientHttpRequestFactory commons = new CommonsClientHttpRequestFactory(client);
       restTemplate = new RestTemplate(commons);
+      restTemplate.setErrorHandler(new CustomErrorHandler());
       _state = MonitorStateEnum.OK;
     }
   }

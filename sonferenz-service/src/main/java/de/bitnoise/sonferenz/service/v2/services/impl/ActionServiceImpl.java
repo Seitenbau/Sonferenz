@@ -32,6 +32,7 @@ import de.bitnoise.sonferenz.service.v2.actions.ActionResult;
 import de.bitnoise.sonferenz.service.v2.actions.ActionState;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
 import de.bitnoise.sonferenz.service.v2.actions.ContentReplacement;
+import de.bitnoise.sonferenz.service.v2.actions.DeleteOnSuccess;
 import de.bitnoise.sonferenz.service.v2.actions.IncrementUseageCount;
 import de.bitnoise.sonferenz.service.v2.actions.InvalidateOnSuccess;
 import de.bitnoise.sonferenz.service.v2.actions.KonferenzAction;
@@ -174,6 +175,12 @@ public class ActionServiceImpl implements ActionService
           .getTokensToInvalidate();
       invalidateToken(tokens);
     }
+    if (data instanceof DeleteOnSuccess)
+    {
+    	List<Integer> tokens = ((DeleteOnSuccess) data)
+    			.getTokensToDelete();
+    	deleteTokens(tokens);
+    }
   }
 
   protected void invalidateToken(List<Integer> tokens)
@@ -187,6 +194,17 @@ public class ActionServiceImpl implements ActionService
         repo.save(token);
       }
     }
+  }
+  
+  protected void deleteTokens(List<Integer> tokens)
+  {
+	  if (tokens != null)
+	  {
+		  for (Integer id : tokens)
+		  {
+			  repo.delete(id);
+		  }
+	  }
   }
 
   protected void incrementUsage(List<Integer> tokens)

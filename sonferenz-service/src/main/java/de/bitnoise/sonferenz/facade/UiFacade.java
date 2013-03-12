@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import de.bitnoise.sonferenz.model.ActionModel;
+import de.bitnoise.sonferenz.model.AuthMapping;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ConfigurationModel;
 import de.bitnoise.sonferenz.model.StaticContentModel;
@@ -17,6 +18,8 @@ import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
 import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
+import de.bitnoise.sonferenz.service.v2.actions.impl.ChangePasswordActionImpl;
+import de.bitnoise.sonferenz.service.v2.actions.impl.ChangePasswordActionImpl.ChangePasswordOfUser;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
 
 public interface UiFacade
@@ -35,6 +38,8 @@ public interface UiFacade
   void deleteSuggestion(SuggestionModel talk);
 
   void executeAction(ActionCreateUser data);
+  
+  void executeAction(ChangePasswordOfUser data);
 
   ConferenceModel getActiveConference();
 
@@ -120,5 +125,7 @@ public interface UiFacade
 
   void addProposalToConference(ConferenceModel conference,
       List<ProposalModel> asTalks);
+
+  void requestPasswordChange(AuthMapping provider, String newPassword);
 
 }

@@ -84,6 +84,10 @@ public class InitEmptyDatabase
 			{
 			  updateTo_v0_3_7();
 			}
+			if (isDatabaseOlderThanVersion(9))
+			{
+				updateTo_v0_3_8();
+			}
 		} finally
 		{
 			eventing.activateEventing();
@@ -96,6 +100,17 @@ public class InitEmptyDatabase
 	  config.saveIntegerValue(INIT_MARKER_KEY, 8);
 	  
 	  texte.storeText("baseUrl.cdn", "https://sdcdownloads.seitenbau.com/sdc2012/");
+	}
+	
+	void updateTo_v0_3_8() {
+		logger .warn("# DATABASE update to version 9 #");
+		config.saveIntegerValue(INIT_MARKER_KEY, 9);
+		
+		texte.storeText("action.changepassword.mail.subject", "Password change request for SDC website");
+		texte.storeText("action.changepassword.mail.body", "To actually change your password please confirm : ${url.action}");
+		
+		texte.storeText("action.changepassword.mail.subject.success", "Password for SDC website was changed");
+		texte.storeText("action.changepassword.mail.body.success", "Your password has been changed");
 	}
 	
 	void updateTo_v0_3_6() {

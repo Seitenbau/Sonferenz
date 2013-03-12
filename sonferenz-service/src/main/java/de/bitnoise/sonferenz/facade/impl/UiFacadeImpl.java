@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ActionModel;
+import de.bitnoise.sonferenz.model.AuthMapping;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ConfigurationModel;
 import de.bitnoise.sonferenz.model.StaticContentModel;
@@ -20,6 +21,8 @@ import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
 import de.bitnoise.sonferenz.model.SuggestionModel;
 import de.bitnoise.sonferenz.service.v2.actions.Aktion;
+import de.bitnoise.sonferenz.service.v2.actions.impl.ChangePasswordActionImpl;
+import de.bitnoise.sonferenz.service.v2.actions.impl.ChangePasswordActionImpl.ChangePasswordOfUser;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl;
 import de.bitnoise.sonferenz.service.v2.actions.impl.SubscribeActionImpl.ActionCreateUser;
 import de.bitnoise.sonferenz.service.v2.services.ActionService;
@@ -306,6 +309,11 @@ public class UiFacadeImpl implements UiFacade
   {
     _actions.execute(data);
   }
+  
+	@Override
+	public void executeAction(ChangePasswordOfUser data) {
+		_actions.execute(data);	
+	}
 
   @Override
   public boolean checkMailNotExists(String mail)
@@ -340,10 +348,19 @@ public class UiFacadeImpl implements UiFacade
   @Autowired
   SubscribeActionImpl _actionSubscribe;
   
+  @Autowired
+  ChangePasswordActionImpl _actionChangePassword;
+  
   @Override
   public void createToken(String user, String mail,String body,String subject, String provider)
   {
     _actionSubscribe.createNewUserToken(user, mail, body,subject,provider);
+  }
+  
+  @Override
+  public void requestPasswordChange(AuthMapping provider, String newPassword)
+  {
+	  _actionChangePassword.createNewUserToken(provider, newPassword);
   }
 
   @Override
@@ -362,4 +379,6 @@ public class UiFacadeImpl implements UiFacade
   public Page<ActionModel> getAllUserActions(PageRequest request, UserModel user) {
 	  return _actions.getAllUserActions(request, user);
   }
+
+
 }

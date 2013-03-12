@@ -45,9 +45,6 @@ public class SubscribeActionImpl implements KonferenzAction
   AuthenticationService authService;
 
   @Autowired
-  VerifyMailActionImpl actionVerify;
-
-  @Autowired
   ConfigurationService config;
 
   @Override
@@ -319,5 +316,6 @@ public class SubscribeActionImpl implements KonferenzAction
     }
 
   }
+
 
 }
