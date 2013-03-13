@@ -111,6 +111,11 @@ public class InitEmptyDatabase
 		
 		texte.storeText("action.changepassword.mail.subject.success", "Password for SDC website was changed");
 		texte.storeText("action.changepassword.mail.body.success", "Your password has been changed");
+		
+		texte.storeText("action.query.username.subject", "Query for username on SDC website");
+		texte.storeText("action.query.username.body", "Your username is '${username}'.");
+		
+		texte.storeText("action.general.success", "Action completed sucessfully");
 	}
 	
 	void updateTo_v0_3_6() {

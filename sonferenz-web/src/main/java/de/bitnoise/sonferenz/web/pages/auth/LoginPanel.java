@@ -10,6 +10,7 @@ import org.apache.wicket.model.Model;
 
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.FocusOnLoadBehavior;
+import de.bitnoise.sonferenz.web.pages.reset.QueryUser;
 import de.bitnoise.sonferenz.web.pages.statics.InfoPage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
@@ -44,6 +45,7 @@ public class LoginPanel extends FormPanel
 		form.add(new Button("submit"));
 
 		feedback = new FeedbackPanel("feedback");
+		feedback.setEscapeModelStrings(false);
 		feedback.setFilter(new ContainerFeedbackMessageFilter(this));
 		add(feedback.setOutputMarkupId(true));
 		add(form);
@@ -60,21 +62,24 @@ public class LoginPanel extends FormPanel
 	{
 		String username = modelUsername.getObject();
 		String password = modelPassword.getObject();
-		String errorMessage = KonferenzSession.get().authenticate(username,
-		        password);
+		String errorMessage = KonferenzSession.get().authenticate(username,password);
 		if (errorMessage == null)
 		{
 			OnSuccessfullLogin();
 		}
 		else
 		{
-			feedback.error("Login failed : " + errorMessage);
+			KonferenzSession.get().loginError();
+			String msg = errorMessage;
+			 CharSequence url = urlFor(QueryUser.class, null);
+			msg = msg. replace("${queryUsernameUrl}", url);
+			feedback.error("Login failed : " + msg);
 		}
 	}
 
 	protected void OnSuccessfullLogin()
 	{
-		setResponsePage(InfoPage.class);
+	    setResponsePage(InfoPage.class);
 	}
 
 }

@@ -380,5 +380,10 @@ public class UiFacadeImpl implements UiFacade
 	  return _actions.getAllUserActions(request, user);
   }
 
+  @Override
+  public void queryUsername(String usernameOrEmail) {
+    authService.queryUser(usernameOrEmail);
+  }
+
 
 }

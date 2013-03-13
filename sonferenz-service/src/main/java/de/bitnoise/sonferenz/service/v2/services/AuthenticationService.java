@@ -9,4 +9,6 @@ public interface AuthenticationService
   UserModel getCurrentUser() throws GeneralConferenceException;
 
   UserModel getCurrentUserOrFail();
+
+  void queryUser(String usernameOrEmail);
 }

@@ -128,4 +128,6 @@ public interface UiFacade
 
   void requestPasswordChange(AuthMapping provider, String newPassword);
 
+  void queryUsername(String usernameOrEmail);
+
 }

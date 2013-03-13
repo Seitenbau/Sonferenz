@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -28,6 +29,8 @@ import de.bitnoise.sonferenz.service.v2.exceptions.NoRightsExcpetion;
 import de.bitnoise.sonferenz.service.v2.security.ProviderType;
 import de.bitnoise.sonferenz.service.v2.security.ProvidesEmail;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
+import de.bitnoise.sonferenz.service.v2.services.MailService;
+import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService, ApplicationListener<ApplicationEvent>
@@ -198,5 +201,45 @@ public class AuthenticationServiceImpl implements AuthenticationService, Applica
 	    }
 	    benutzer.setLastLogin(new Date());
 	    userRepo.save(benutzer);
+  }
+
+  @Override
+  public void queryUser(String usernameOrEmail) {
+    if(usernameOrEmail == null || usernameOrEmail.isEmpty()) {
+    	return;
+    }
+    UserModel found = null;
+	if(usernameOrEmail.contains("@")) {
+      found = userRepo.findByEmail(usernameOrEmail);
+    } else {
+      found = userRepo.findByName(usernameOrEmail);
+    }
+	if(found!=null) 
+	{
+	  sendInfoMailTo(found);	
+	}
+  }
+
+  @Autowired
+  StaticContentService texte;
+  
+  @Autowired
+  MailService mailer;
+  
+  void sendInfoMailTo(UserModel found) 
+  {
+	  String mail = found.getEmail();
+	  if(mail==null || !mail.contains("@")) {
+		  return;
+	  }
+	  SimpleMailMessage template;
+	  template = new SimpleMailMessage();
+	  template.setSubject(texte.text("action.query.username.subject"));
+	  String body = texte.text("action.query.username.body");
+	  body=body.replace("${username}", found.getName());
+	  template.setText(body);
+	  template.setTo(mail);
+	  SimpleMailMessage message = new SimpleMailMessage(template);
+	  mailer.sendMessage(message);
   }
 }

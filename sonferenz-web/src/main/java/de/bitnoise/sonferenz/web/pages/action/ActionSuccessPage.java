@@ -12,7 +12,7 @@ public class ActionSuccessPage extends KonferenzPage
   @Override
   protected Panel getPageContent(String id)
   {
-    return new StaticContentPanel(id, "action.success");
+    return new StaticContentPanel(id, "action.general.success");
   }
 
 }

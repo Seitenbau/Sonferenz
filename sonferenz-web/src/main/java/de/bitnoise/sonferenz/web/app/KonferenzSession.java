@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.apache.wicket.Session;
 import org.apache.wicket.injection.web.InjectorHolder;
+import org.apache.wicket.protocol.http.RequestUtils;
 import org.apache.wicket.protocol.http.WebSession;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -27,6 +28,7 @@ import de.bitnoise.sonferenz.model.UserRole;
 import de.bitnoise.sonferenz.model.UserRoles;
 import de.bitnoise.sonferenz.service.v2.model.AppContext;
 import de.bitnoise.sonferenz.service.v2.services.AuthenticationService;
+import de.bitnoise.sonferenz.web.pages.reset.QueryUser;
 
 public class KonferenzSession extends WebSession
 {
@@ -52,6 +54,8 @@ public class KonferenzSession extends WebSession
   AuthenticationManager authenticationManager;
 
   private ConferenceModel _currentConference;
+
+  private int loginError;
 
   public KonferenzSession(Request request)
   {
@@ -119,7 +123,8 @@ public class KonferenzSession extends WebSession
     catch (BadCredentialsException e)
     {
       logger.debug("BadCredentialsException error.", e);
-      return "Deine Benutzerdaten sind fehlerhaft. Wende dich bitte einfach per Mail an sdc@seitenbau.com, wenn du deinen Benutzernamen oder Passwort vergessen hast!";
+      return "Deine Benutzerdaten sind fehlerhaft. Benutzernamen " +
+      		 "<a href=\"${queryUsernameUrl}\">vergessen?</a> Oder wende dich einfach an sdc@seitenbau.com";
     }
     catch (AuthenticationException e)
     {
@@ -266,5 +271,9 @@ public class KonferenzSession extends WebSession
     return new AppContext()
     {
     };
+  }
+
+  public int loginError() {
+    return loginError++;	
   }
 }

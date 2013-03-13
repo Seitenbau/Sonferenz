@@ -8,6 +8,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <!-- <security:intercept-url pattern="/users" access=RIGHT_SDC_ADMIN /> -->
     <!-- Allow to all other anonymous access <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
     <security:intercept-url pattern="/logout" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+    <security:intercept-url pattern="/forgotten/username" access="IS_AUTHENTICATED_ANONYMOUSLY" />
     <!-- <security:intercept-url pattern="/login" access="ROLE_USER" /> -->
     <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
     <!-- Other configs <security:form-login login-page="/login" /> -->
