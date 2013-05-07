@@ -6,18 +6,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import lombok.Data;
 
-import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.ComponentPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -80,7 +77,7 @@ public class VotingResultPanel extends KonferenzTabPanel
       protected void populateItem(ListItem<VotedItem> item) {
         VotedItem object = item.getModel().getObject();
         item.add(new Label("talkName", object.getTitle()));
-        item.add(new UsersList("talkUsers", "fragment1", item, object.getUsers()));
+        item.add(new UsersList("talkUsers", object.getUsers()));
         item.add(new Label("talkVotes", Integer.valueOf(object.getVotes()).toString()));
       }
     };
@@ -250,33 +247,6 @@ public class VotingResultPanel extends KonferenzTabPanel
       super.onSubmit();
       getModelObject().setCount(_topCount.getObject());
       getModelObject().setType(_choice.getObject());
-    }
-
-  }
-
-  class UsersList extends Fragment {
-
-    List<String> users;
-
-    public UsersList(String id, String markupId, MarkupContainer markupProvider, Set<String> users) {
-      super(id, markupId, markupProvider);
-      ArrayList<String> l = new ArrayList<String>(users);
-      this.users = l;
-    }
-
-    @Override
-    protected void onInitialize() {
-      super.onInitialize();
-
-      ListView<String> liste = new ListView<String>("userList", users) {
-        @Override
-        protected void populateItem(ListItem<String> item) {
-          String object = item.getModel().getObject();
-          item.add(new Label("name", object));
-        }
-      };
-      add(new Label("userCount", Model.of(users.size())));
-      add(liste);
     }
 
   }
