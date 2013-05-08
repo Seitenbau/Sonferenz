@@ -12,8 +12,6 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.validator.AbstractValidator;
 import org.apache.wicket.validation.validator.PatternValidator;
 
-import com.sun.java.swing.plaf.nimbus.PasswordFieldPainter;
-
 import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.web.app.KonferenzDefines;
