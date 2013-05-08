@@ -68,7 +68,7 @@ public class ListVotesPanel2 extends Panel
 	StaticContentService content2;
 
 	// FIXME: MAX
-	int max = 10;
+	int max = 12;
 
 	public ListVotesPanel2(String id)
 	{
