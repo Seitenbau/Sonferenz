@@ -11,15 +11,11 @@ import de.bitnoise.sonferenz.web.pages.StaticContentPanel;
 
 @At(url = "/home")
 public class ConferencePage extends KonferenzPage {
+	
 	@Override
 	protected Panel getPageContent(String id) {
 		return new StaticContentPanel(id, "page.home");
 	}
 
-	public static PageParameters createParameters(ConferenceModel iModel) {
-		PageParameters pp = new PageParameters();
-		pp.add("conference", String.valueOf(iModel.getId()));
-		return pp;
-	}
 
 }

@@ -20,7 +20,7 @@ import de.bitnoise.sonferenz.web.forms.KonferenzForm;
 public abstract class KonferenzPage extends WebPage
 {
   private KonferenzForm _form;
-
+ 
   public KonferenzPage()
   {
     super();

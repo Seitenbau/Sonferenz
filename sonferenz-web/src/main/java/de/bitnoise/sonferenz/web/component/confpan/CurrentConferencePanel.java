@@ -9,6 +9,7 @@ package de.bitnoise.sonferenz.web.component.confpan;
 
 import java.util.List;
 
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -25,6 +26,7 @@ import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.pages.KonferenzPage;
+import de.bitnoise.sonferenz.web.pages.SwitchConferencePage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.utils.WicketTools;
 
@@ -59,18 +61,25 @@ public class CurrentConferencePanel extends Panel
       @Override
       protected void populateItem(ListItem<ConferenceModel> item)
       {
-        ConferenceModel iModel = item.getModelObject();
+        final ConferenceModel iModel = item.getModelObject();
         BookmarkablePageLink<WebPage> link = new BookmarkablePageLink<WebPage>(
-            "link", KonferenzPage.class , ConferencePage.createParameters(iModel));
+            "link", SwitchConferencePage.class , SwitchConferencePage.createParameters(iModel));
         item.add(link);
-        Label label = new Label("name", Model.of(iModel.getShortName()));
+        Label label = new Label("name", Model.of(iModel.getShortName())){
+          @Override
+          protected void onConfigure() {
+            if ( KonferenzSession.get().getCurrentConference().equals(iModel)) {
+               add(new AttributeAppender("class", Model.of("activeConference"), " "));
+            }
+          }
+        };
         link.add(label);
-        if ( iModel.getActive() ) {
-          WicketTools.addCssClass( link , "active");
-        }
-        if(current!=null && current.getId().equals(iModel.getId())) {
-          WicketTools.addCssClass( link , "current");
-        }
+//        if ( iModel.getActive() ) {
+//          WicketTools.addCssClass( link , "active");
+//        }
+//        if(current!=null && current.getId().equals(iModel.getId())) {
+//          WicketTools.addCssClass( link , "current");
+//        }
       }
     });
 

@@ -13,11 +13,7 @@ import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 public class SchedulePage extends KonferenzPage {
 	@Override
 	protected Panel getPageContent(String id) {
-	  if(KonferenzSession.noUserLoggedIn()) {
-      return new UnauthorizedPanel(id);
-    } else {
       return new StaticContentPanel(id, "page.schedule");
     }
-	}
 
 }

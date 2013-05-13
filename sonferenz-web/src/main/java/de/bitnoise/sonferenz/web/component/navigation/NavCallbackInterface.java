@@ -7,11 +7,12 @@ Autor: Michael Mosmann
  *****************************************/
 package de.bitnoise.sonferenz.web.component.navigation;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.wicket.Page;
 
-public interface NavCallbackInterface
+public interface NavCallbackInterface extends Serializable
 {
   public String getName();
 

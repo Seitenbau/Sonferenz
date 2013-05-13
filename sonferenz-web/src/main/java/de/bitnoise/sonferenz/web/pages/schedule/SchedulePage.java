@@ -11,11 +11,11 @@ public class SchedulePage extends KonferenzPage
   @Override
   protected Panel getPageContent(String id)
   {
-    if(KonferenzSession.noUserLoggedIn()) {
-      return new UnauthorizedPanel(id);
-    } else {
+//    if(KonferenzSession.noUserLoggedIn()) {
+//      return new UnauthorizedPanel(id);
+//    } else {
       return new SchedulePanel(id);
-    }
+//    }
   }
   
 }

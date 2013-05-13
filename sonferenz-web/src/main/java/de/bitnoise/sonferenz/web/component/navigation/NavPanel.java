@@ -26,7 +26,7 @@ public class NavPanel extends Panel
 
   public NavPanel(String id, IModel<NavCallbackInterface> callbackModel)
   {
-    super(id);
+    super(id,callbackModel);
 
     initPanel(callbackModel);
   }
@@ -34,8 +34,7 @@ public class NavPanel extends Panel
   public NavPanel(String id, IModel<NavCallbackInterface> callbackModel,
       int level)
   {
-    super(id);
-
+    super(id,callbackModel);
     _level = level;
 
     initPanel(callbackModel);
@@ -99,9 +98,15 @@ public class NavPanel extends Panel
       @Override
       protected void populateItem(ListItem<NavCallbackInterface> item)
       {
-        NavPanel panel = new NavPanel("child", item.getModel(), _level + 1);
+        final NavCallbackInterface nav = item.getModel().getObject();
+        NavPanel panel = new NavPanel("child", item.getModel(), _level + 1){
+          @Override
+          protected void onConfigure() {
+            Object m = NavPanel.this.getDefaultModel().getObject();
+            setVisible( nav.isVisible() );
+          }
+        };
         item.add(panel);
-        item.setVisible(item.getModel().getObject().isVisible());
       }
     });
   }

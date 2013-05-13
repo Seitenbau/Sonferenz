@@ -1,6 +1,8 @@
 package de.bitnoise.sonferenz.web.component.navigation;
 
-public interface VisibleChoice
+import java.io.Serializable;
+
+public interface VisibleChoice extends Serializable
 {
 
   boolean canBeDisplayed();
