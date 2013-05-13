@@ -13,7 +13,7 @@ import de.bitnoise.sonferenz.service.v2.exceptions.GeneralConferenceException;
 
 public interface ConferenceService
 {
-  public ConferenceModel getActiveConference()
+  public ConferenceModel getActiveConference2()
       throws GeneralConferenceException;
 
   public void updateConference(ConferenceModel conference)

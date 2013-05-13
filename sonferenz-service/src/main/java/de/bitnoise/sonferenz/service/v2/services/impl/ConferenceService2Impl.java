@@ -32,7 +32,7 @@ public class ConferenceService2Impl implements ConferenceService
   TalkRepository talkRepo;
 
   @Override
-  public ConferenceModel getActiveConference()
+  public ConferenceModel getActiveConference2()
   {
     try
     {

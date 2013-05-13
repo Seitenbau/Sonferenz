@@ -231,7 +231,7 @@ public class ListVotesPanel2 extends Panel
 
 	List<NumberItem> buildNumberList() {
 		List<NumberItem> result = new ArrayList<ListVotesPanel2.NumberItem>();
-		ConferenceModel conf = facade.getActiveConference();
+		ConferenceModel conf = KonferenzSession.get().getCurrentConference();
 		if (conf != null) {
 			Integer number = 1;
 			for (int i = 0; i < conf.getVotesPerUser(); i++) {

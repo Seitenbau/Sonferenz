@@ -70,9 +70,9 @@ public class UiFacadeImpl implements UiFacade
   IdpService idpService;
 
   @Override
-  public ConferenceModel getActiveConference()
+  public ConferenceModel getActiveConference2()
   {
-    return _conference.getActiveConference();
+    return _conference.getActiveConference2();
   }
 
   @Override

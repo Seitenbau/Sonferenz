@@ -34,7 +34,7 @@ public class ConferenceFacadeImplTest extends BaseTestClass
     when(conferenceRepoMock.findByActive(anyBoolean())).thenReturn(_current);
 
     // execute
-    ConferenceModel active = sut.getActiveConference();
+    ConferenceModel active = sut.getActiveConference2();
 
     // verify
     assertThat(active).isEqualTo(_current);
@@ -47,7 +47,7 @@ public class ConferenceFacadeImplTest extends BaseTestClass
     when(conferenceRepoMock.findByActive(anyBoolean())).thenReturn(null);
 
     // execute
-    ConferenceModel active = sut.getActiveConference();
+    ConferenceModel active = sut.getActiveConference2();
 
     // verify
     assertThat(active).isNull();
@@ -65,7 +65,7 @@ public class ConferenceFacadeImplTest extends BaseTestClass
     expectException.expect(GeneralConferenceException.class);
 
     // execute
-    sut.getActiveConference();
+    sut.getActiveConference2();
   }
 
 }

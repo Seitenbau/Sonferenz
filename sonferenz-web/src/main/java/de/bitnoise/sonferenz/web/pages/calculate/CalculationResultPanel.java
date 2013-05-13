@@ -13,6 +13,7 @@ import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.service.v2.extend.ports.TimeTable;
 import de.bitnoise.sonferenz.service.v2.extend.ports.TimeTable.TalkDetails;
 import de.bitnoise.sonferenz.service.v2.services.CalcualtionService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 
 public class CalculationResultPanel extends Panel
 {
@@ -34,7 +35,7 @@ public class CalculationResultPanel extends Panel
 
     String data = "-";
 
-    ConferenceModel conference = facade.getActiveConference();
+    ConferenceModel conference = KonferenzSession.get().getCurrentConference();
     if (conference != null)
     {
       TimeTable liste = calc.getCurrentList(conference);

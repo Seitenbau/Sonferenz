@@ -28,6 +28,7 @@ import de.bitnoise.sonferenz.model.UserModel;
 import de.bitnoise.sonferenz.service.v2.services.ConferenceService;
 import de.bitnoise.sonferenz.service.v2.services.VoteService;
 import de.bitnoise.sonferenz.service.v2.services.VotedItem;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.drop.DropDownEnumChoice;
 import de.bitnoise.sonferenz.web.component.panels.KonferenzTabPanel;
 import de.bitnoise.sonferenz.web.pages.admin.AdminPage;
@@ -50,7 +51,7 @@ public class VotingResultPanel extends KonferenzTabPanel
   {
     super.onInitialize();
 
-    ConferenceModel conference = cservice.getActiveConference();
+    ConferenceModel conference = getActiveConference();
 
     List<VotedItem> state = vservice.getVoteLevel(conference);
     Collections.sort(state, new Comparator<VotedItem>()
@@ -87,6 +88,10 @@ public class VotingResultPanel extends KonferenzTabPanel
     Model<CalculateState> cm = Model.of(calcModel);
     add(new CalculateForm("form", cm));
     add(new VotingResult("result", cm));
+  }
+
+  private ConferenceModel getActiveConference() {
+    return KonferenzSession.get().getCurrentConference();
   }
 
   class VotingResult extends Panel {
@@ -128,7 +133,7 @@ public class VotingResultPanel extends KonferenzTabPanel
     
     protected void doSubmit() {
        List< VotedItem> items = (List<VotedItem>) _state.getObject();
-       ConferenceModel conference = cservice.getActiveConference();
+       ConferenceModel conference = getActiveConference();
        if(! conference.getState().equals(ConferenceState.VOTING) ) {
          error("Conference not in voting state");
          return;
@@ -152,7 +157,7 @@ public class VotingResultPanel extends KonferenzTabPanel
     }
 
     private List<VotedItem> createModel() {
-      ConferenceModel conference = cservice.getActiveConference();
+      ConferenceModel conference = getActiveConference();
       List<VotedItem> state = vservice.getVoteLevel(conference);
 
       CalculateState cs = (CalculateState) getDefaultModelObject();

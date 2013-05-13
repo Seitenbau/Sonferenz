@@ -241,7 +241,7 @@ public class KonferenzSession extends WebSession
   {
     if (_currentConference == null)
     {
-      return facade.getActiveConference();
+      return facade.getActiveConference2();
     }
     return _currentConference;
   }
@@ -252,7 +252,7 @@ public class KonferenzSession extends WebSession
     {
       return true;
     }
-    ConferenceModel active = facade.getActiveConference();
+    ConferenceModel active = facade.getActiveConference2();
     if (active == null)
     {
       return false;

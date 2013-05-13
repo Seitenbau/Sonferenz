@@ -4,34 +4,26 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.wicket.injection.web.InjectorHolder;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import de.bitnoise.sonferenz.facade.UiFacade;
 import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ConferenceState;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.navigation.VisibleChoice;
 
-public class OnState implements VisibleChoice
-{
+public class OnState implements VisibleChoice {
 
-  @SpringBean
-  transient UiFacade facade;
-  
-  List<ConferenceState> _any;
-  
-  public OnState(ConferenceState ... anyOf) {
-    _any = Arrays.asList(anyOf);
-  }
+	List<ConferenceState> _any;
 
-  public boolean canBeDisplayed()
-  {
-    InjectorHolder.getInjector().inject(this);
-    ConferenceModel active = facade.getActiveConference();
-    if (active == null)
-    {
-      return false;
-    }
-    return _any.contains( active.getState() );
-  }
+	public OnState(ConferenceState... anyOf) {
+		_any = Arrays.asList(anyOf);
+	}
+
+	public boolean canBeDisplayed() {
+		ConferenceModel active = KonferenzSession.get().getCurrentConference();
+		if (active == null) {
+			return false;
+		}
+		return _any.contains(active.getState());
+	}
 
 }

@@ -41,7 +41,7 @@ public interface UiFacade
   
   void executeAction(ChangePasswordOfUser data);
 
-  ConferenceModel getActiveConference();
+  ConferenceModel getActiveConference2();
 
   Page<ConferenceModel> getAllConferences(Pageable pageable);
 
