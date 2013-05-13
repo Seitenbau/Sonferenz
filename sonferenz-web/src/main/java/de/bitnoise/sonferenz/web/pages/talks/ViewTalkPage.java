@@ -26,6 +26,13 @@ public class ViewTalkPage extends KonferenzPage
     long id = parameters.get(PARAM_ID).toLong(-1L);
     if (id == -1L)
     {
+      if(parameters.getIndexedCount() == 2 && "id".equals(parameters.get(0).toString())) 
+      {
+        id = parameters.get(1).toLong(-1) ; 
+      }
+    }
+    if (id == -1L) 
+    {
       setResponsePage(UnauthorisedAccess.class);
     }
     else
