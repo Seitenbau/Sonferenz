@@ -11,6 +11,7 @@ import de.bitnoise.sonferenz.web.component.state.OnState;
 import de.bitnoise.sonferenz.web.component.state.OnStateCallForPapers;
 import de.bitnoise.sonferenz.web.component.state.OnStateVoting;
 import de.bitnoise.sonferenz.web.pages.proposal.ProposalOverviewPage;
+import de.bitnoise.sonferenz.web.pages.schedule.NewSchedulePage;
 import de.bitnoise.sonferenz.web.pages.statics.ConferencePage;
 import de.bitnoise.sonferenz.web.pages.statics.ContactPage;
 import de.bitnoise.sonferenz.web.pages.statics.InfoPage;
@@ -39,7 +40,7 @@ public class FirstLevelBar extends Panel
     items.add(new MenuButton("talks", items.newChildId(), ProposalOverviewPage.class  ,new IsLoggedIn() ,new OnStateCallForPapers()  ));
     items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class   ,new IsNotLoggedIn() ));
     items.add(new MenuButton("register", items.newChildId(), RegisterPage.class       ,new IsNotLoggedIn() ));
-    items.add(new MenuButton("agenda", items.newChildId(), SchedulePage.class         ,new OnState(ConferenceState.PLANNED, ConferenceState.RUNNING,ConferenceState.FINISHED) ));
+    items.add(new MenuButton("agenda", items.newChildId(), NewSchedulePage.class         ,new OnState(ConferenceState.PLANNED, ConferenceState.RUNNING,ConferenceState.FINISHED) ));
     items.add(new MenuButton("contact", items.newChildId(), ContactPage.class));
 
 //    if (!KonferenzSession.noUserLoggedIn())
