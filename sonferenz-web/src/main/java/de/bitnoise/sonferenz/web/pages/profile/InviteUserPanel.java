@@ -2,6 +2,7 @@ package de.bitnoise.sonferenz.web.pages.profile;
 
 import java.util.List;
 
+import org.apache.wicket.extensions.validation.validator.RfcCompliantEmailAddressValidator;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -127,7 +128,7 @@ public class InviteUserPanel extends FormPanel
     textField.add(new ContainsToken());
     userField.add(new UserUnique());
     emailField.add(new EMailNotUsed());
-    emailField.add(EmailAddressValidator.getInstance());
+    emailField.add(RfcCompliantEmailAddressValidator.getInstance());
 
     form.add(userField);
     form.add(emailField);

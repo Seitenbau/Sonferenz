@@ -1,5 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.action;
 
+import org.apache.wicket.extensions.validation.validator.RfcCompliantEmailAddressValidator;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -104,7 +105,7 @@ public class SubscribeActionPanel extends FormPanel
     display.setRequired(true);
     display.add(new PatternValidator(KonferenzDefines.REGEX_USER_DISPLAY));
     password1.add(new PatternValidator(KonferenzDefines.PASSWORD_REGEX));
-    email1.add(EmailAddressValidator.getInstance());
+    email1.add(RfcCompliantEmailAddressValidator.getInstance());
     email1.add(new EMailNotUsed());
     form.add(new EqualPasswordInputValidator(password1, password2));
 //    form.add(new EqualInputValidator(email1, email2));
