@@ -147,7 +147,7 @@ public class SubListTalksPanel extends Panel
               + vote.getTalk().getId() + "='" + vote.getTalk().getTitle()
               + "'";
           output.println(msg);
-          System.out.println(msg);
+//          System.out.println(msg);
         }
       }
     }
@@ -162,7 +162,7 @@ public class SubListTalksPanel extends Panel
       String msg = "add speaker " + talk.getOwner().getId() + ":"
           + talk.getOwner().getName() + " at " + to;
       output.println(msg);
-      System.out.println(msg);
+//      System.out.println(msg);
     }
 
     output.println("Calculation collisions ...");
