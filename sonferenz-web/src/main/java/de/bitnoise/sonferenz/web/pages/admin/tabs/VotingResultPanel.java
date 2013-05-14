@@ -15,6 +15,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.ComponentPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -114,6 +115,7 @@ public class VotingResultPanel extends KonferenzTabPanel
         }
       };
       add(form);
+      form.add(new FeedbackPanel("feedback"));
       _state=Model.ofList( createModel() );
       ListView<VotedItem> liste = new ListView<VotedItem>("talkList", _state) {
         @Override
@@ -129,6 +131,10 @@ public class VotingResultPanel extends KonferenzTabPanel
         }
       };
       form.add(liste);
+      ConferenceModel conference = getActiveConference();
+      if(! conference.getState().equals(ConferenceState.VOTING) ) {
+        form.setVisibilityAllowed(false);
+      }
     }
     
     protected void doSubmit() {
@@ -245,6 +251,11 @@ public class VotingResultPanel extends KonferenzTabPanel
       };
       add(dropState);
       add(new TextField<Integer>("topcount", _topCount, Integer.class));
+      add(new FeedbackPanel("feedback"));
+      ConferenceModel conference = getActiveConference();
+      if(! conference.getState().equals(ConferenceState.VOTING) ) {
+        error("Conference not in voting state");
+      }
     }
 
     @Override

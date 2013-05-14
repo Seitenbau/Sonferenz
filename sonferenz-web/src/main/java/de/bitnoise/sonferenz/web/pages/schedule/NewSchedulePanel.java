@@ -23,7 +23,7 @@ public class NewSchedulePanel extends Panel
 	  super.onInitialize();
 	  
 	  Timetable table =  Init2013.get();
-	  
+	  // FIXME
 //	  RepeatingView days = new RepeatingView("days");
   }
 
