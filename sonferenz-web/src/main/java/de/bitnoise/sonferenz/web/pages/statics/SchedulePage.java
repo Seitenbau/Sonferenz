@@ -10,10 +10,16 @@ import de.bitnoise.sonferenz.web.pages.StaticContentPanel;
 import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 
 @At(url = "/schedule")
-public class SchedulePage extends KonferenzPage {
-	@Override
-	protected Panel getPageContent(String id) {
-      return new StaticContentPanel(id, "page.schedule");
+public class SchedulePage extends KonferenzPage
+{
+  @Override
+  protected Panel getPageContent(String id)
+  {
+    Integer cid = KonferenzSession.get().getCurrentConference().getId();
+    if(cid!=1) {
+      return new StaticContentPanel(id, "page.schedule." + cid);
     }
+    return new StaticContentPanel(id, "page.schedule");
+  }
 
 }
