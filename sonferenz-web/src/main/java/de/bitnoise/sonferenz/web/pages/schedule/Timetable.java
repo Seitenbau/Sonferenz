@@ -5,5 +5,5 @@ import java.util.List;
 
 public class Timetable {
 	List<Day> days = new ArrayList<Day>();
-	List<Room> rooms= new ArrayList<>();
+	List<Room> rooms= new ArrayList<Room>();
 }
