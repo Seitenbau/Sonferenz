@@ -47,7 +47,7 @@ public class CalculateTimeTableServiceImpl implements CalculateTimetableService 
       count+=slot.getAll().size();
     }
     if ( count != theConfig.getTalks().size()) {
-      throw new IllegalStateException("The count of slots is not the same as the talks count");
+      throw new IllegalStateException("The count of slots ("+count+") is not the same as the talks count" + theConfig.getTalks().size());
     }
 
     return theConfig;

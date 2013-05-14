@@ -124,9 +124,9 @@ public class InitEmptyDatabase
 	
 	void updateTo_v0_3_9() {
 		logger .warn("# DATABASE update to version 10 #");
-//		config.saveIntegerValue(INIT_MARKER_KEY, 10);
-//		
-//		texte.storeText("admin.tab.talks", "Talks");
+		config.saveIntegerValue(INIT_MARKER_KEY, 10);
+		
+		texte.storeText("admin.tab.talks", "Talks");
 	}
 	
 	void updateTo_v0_3_6() {

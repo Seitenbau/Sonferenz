@@ -32,7 +32,7 @@ public class CalculationTalkImpl implements CalcTalk
   @Override
   public String toString()
   {
-    return _externalRefernece.toString();
+    return (_externalRefernece==null?null:_externalRefernece.toString());
   }
 
   @Override
@@ -90,6 +90,12 @@ public class CalculationTalkImpl implements CalcTalk
       return "[func=" + _func.toString() + ", user=" + _user + "]";
     }
 
+  }
+
+
+  public Object getExtRef()
+  {
+    return _externalRefernece;
   }
 
 }

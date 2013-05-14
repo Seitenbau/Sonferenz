@@ -41,12 +41,6 @@ public class AdminPage extends KonferenzPage {
 							return new ListSpeakerPanel(panelId);
 						}
 					});
-					tabs.add(new AbstractTab(txt("admin.tab.talks")) {
-						@Override
-						public Panel getPanel(String panelId) {
-							return new ListTalksPanel(panelId);
-						}
-					});
 					tabs.add(new AbstractTab(txt("admin.tab.users")) {
 						@Override
 						public Panel getPanel(String panelId) {

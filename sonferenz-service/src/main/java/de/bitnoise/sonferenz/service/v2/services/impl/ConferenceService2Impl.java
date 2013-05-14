@@ -125,6 +125,7 @@ public class ConferenceService2Impl implements ConferenceService
     talk.setOwner(proposal.getOwner());
     talk.setTitle(proposal.getTitle());
     talk.setAuthor(proposal.getAuthor());
+    talk.setProposalId(proposalId);
     proposal.setTransformed(true);
     
     talkRepo.save(talk);

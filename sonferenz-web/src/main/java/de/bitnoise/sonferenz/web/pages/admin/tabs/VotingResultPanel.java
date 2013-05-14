@@ -229,7 +229,7 @@ public class VotingResultPanel extends KonferenzTabPanel
   }
 
   class CalculateForm extends Form<CalculateState> {
-    IModel<Integer> _topCount = Model.of(12);
+    IModel<Integer> _topCount = Model.of(14);
     IModel<CalcType> _choice = Model.of(CalcType.ByAbsolute);
 
     public CalculateForm(String id, IModel<CalculateState> calculateModel) {

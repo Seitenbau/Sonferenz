@@ -33,9 +33,11 @@ public class CalculateSlots
     List<SlotReference> slots = slotconfig.getAllSlots();
     List<CalculationTalkImpl> talks = _config.getTalks();
 
+    int max = talks.size() * talks.size();
     List<SlotReference> result = createPair(collisions,slots,talks);
     Integer count = countCollisions(collisions, result);
     System.out.println("final collision count = " + count);
+    System.out.println(max);
     return new SlotOrdernImpl(result,count);
   }
 
@@ -64,8 +66,7 @@ public class CalculateSlots
         Collection<CalculationTalkImpl> remaining = new ArrayList<CalculationTalkImpl>(talks);
         remaining.remove(vortrag1);
         remaining.remove(vortrag2);
-        List<SlotReference> pairings = createPair(collisions, remainingSlots,
-            remaining);
+        List<SlotReference> pairings = createPair(collisions, remainingSlots,remaining);
         if (pairings == null)
         {
           continue;
