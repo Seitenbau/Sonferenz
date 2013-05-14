@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.ProposalModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.model.UserModel;
@@ -37,6 +38,13 @@ public class TalkServiceImpl implements TalkService
   public Page<TalkModel> getTalks(PageRequest request)
   {
     return talkRepo.findAll(request);
+  }
+  
+  @Override
+  @Transactional(readOnly = true)
+  public Page<TalkModel> getTalks(ConferenceModel conference,PageRequest request)
+  {
+    return talkRepo.findByConference(conference,request);
   }
 
   @Override

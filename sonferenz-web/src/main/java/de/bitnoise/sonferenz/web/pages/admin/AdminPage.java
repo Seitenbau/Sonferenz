@@ -16,6 +16,7 @@ import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ActionsPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.AppStatePanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListSpeakerPanel;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.ListTalksPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.LogOutputPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.VotingResultPanel;
@@ -34,12 +35,18 @@ public class AdminPage extends KonferenzPage {
 			return new TabPanel(id) {
 				@Override
 				protected void createTabs(List<ITab> tabs) {
-				  tabs.add(new AbstractTab(txt("admin.tab.speakers")) {
-				    @Override
-				    public Panel getPanel(String panelId) {
-				      return new ListSpeakerPanel(panelId);
-				    }
-				  });
+					tabs.add(new AbstractTab(txt("admin.tab.speakers")) {
+						@Override
+						public Panel getPanel(String panelId) {
+							return new ListSpeakerPanel(panelId);
+						}
+					});
+					tabs.add(new AbstractTab(txt("admin.tab.talks")) {
+						@Override
+						public Panel getPanel(String panelId) {
+							return new ListTalksPanel(panelId);
+						}
+					});
 					tabs.add(new AbstractTab(txt("admin.tab.users")) {
 						@Override
 						public Panel getPanel(String panelId) {

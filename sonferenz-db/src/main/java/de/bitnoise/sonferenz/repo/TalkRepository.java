@@ -17,4 +17,6 @@ import de.bitnoise.sonferenz.model.UserModel;
 public interface TalkRepository extends JpaRepository<TalkModel, Integer>
 {
   Page<TalkModel> findByOwner(UserModel owner, Pageable page);
+
+  Page<TalkModel> findByConference(ConferenceModel conference, Pageable page);
 }

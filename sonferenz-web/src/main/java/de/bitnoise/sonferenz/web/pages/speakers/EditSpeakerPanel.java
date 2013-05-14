@@ -1,5 +1,10 @@
 package de.bitnoise.sonferenz.web.pages.speakers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.apache.wicket.extensions.ajax.markup.html.form.upload.UploadProgressBar;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -37,7 +42,8 @@ import de.bitnoise.sonferenz.web.pages.resources.PageImages;
 import de.bitnoise.sonferenz.web.pages.talks.TalksOverviewPage;
 import de.bitnoise.sonferenz.web.pages.users.FormPanel;
 
-public class EditSpeakerPanel extends FormPanel {
+public class EditSpeakerPanel extends FormPanel
+{
   final Model<String> modelName = new Model<String>();
   Model<String> modelDesc = new Model<String>();
   Model<UserModel> modelUser = new Model<UserModel>();
@@ -57,15 +63,17 @@ public class EditSpeakerPanel extends FormPanel {
   {
     super(id);
     _speaker = speaker;
-    if (_speaker == null) {
+    if (_speaker == null)
+    {
       _speaker = new SpeakerModel();
     }
-    if (!KonferenzSession.hasRight(Right.Actions.ManageInviteUser)) {
+    if (!KonferenzSession.hasRight(Right.Actions.ManageInviteUser))
+    {
       throw new IllegalStateException("You have to less rights");
     }
   }
 
-  final ResourceReference img0 = new PackageResourceReference(WicketApplication.class,"images/nopic.gif");
+  final ResourceReference img0 = new PackageResourceReference(WicketApplication.class, "images/nopic.gif");
 
   @Override
   protected void onInitialize()
@@ -77,8 +85,9 @@ public class EditSpeakerPanel extends FormPanel {
     modelDesc.setObject(_speaker.getDescription());
     modelUser.setObject(_speaker.getContact());
     Image profileImage = new Image("profileImage", img0);
-    if( _speaker.getPicture() != null ) {
-      profileImage = new Image("profileImage", new PageImages(_speaker.getPicture()) );
+    if (_speaker.getPicture() != null)
+    {
+      profileImage = new Image("profileImage", new PageImages(_speaker.getPicture()));
     }
     // Bind Wicket Elements
     addFeedback(this, "feedback");
@@ -116,7 +125,16 @@ public class EditSpeakerPanel extends FormPanel {
       @Override
       protected Object load()
       {
-        return userService.getAllUsers();
+        List<UserModel> list = new ArrayList<UserModel>();
+        list.addAll(userService.getAllUsers());
+        Collections.sort(list, new Comparator<UserModel>() {
+          @Override
+          public int compare(UserModel o1, UserModel o2)
+          {
+            return o1.getName().compareTo(o2.getName());
+          }
+        });
+        return list;
       }
     };
     IChoiceRenderer<UserModel> render = new IChoiceRenderer<UserModel>() {
@@ -143,8 +161,10 @@ public class EditSpeakerPanel extends FormPanel {
     add(form);
   }
 
-  protected void clickedOnSave(FileUploadField fileupload) {
-    if (!KonferenzSession.hasRight(Right.Actions.ManageInviteUser)) {
+  protected void clickedOnSave(FileUploadField fileupload)
+  {
+    if (!KonferenzSession.hasRight(Right.Actions.ManageInviteUser))
+    {
       throw new IllegalStateException("You have to less rights");
     }
     String valueName = modelName.getObject();
@@ -152,7 +172,8 @@ public class EditSpeakerPanel extends FormPanel {
     String valueDesc = HtmlSanitizer.sanitize(valueDescRaw);
     FileUpload fup = fileupload.getFileUpload();
 
-    if (fup != null) {
+    if (fup != null)
+    {
       byte[] data = fup.getBytes();
       String filename = fup.getClientFileName();
       byte[] md5 = fup.getMD5();

@@ -88,6 +88,10 @@ public class InitEmptyDatabase
 			{
 				updateTo_v0_3_8();
 			}
+			if (isDatabaseOlderThanVersion(10))
+			{
+				updateTo_v0_3_9();
+			}
 		} finally
 		{
 			eventing.activateEventing();
@@ -116,6 +120,13 @@ public class InitEmptyDatabase
 		texte.storeText("action.query.username.body", "Your username is '${username}'.");
 		
 		texte.storeText("action.general.success", "Action completed sucessfully");
+	}
+	
+	void updateTo_v0_3_9() {
+		logger .warn("# DATABASE update to version 10 #");
+//		config.saveIntegerValue(INIT_MARKER_KEY, 10);
+//		
+//		texte.storeText("admin.tab.talks", "Talks");
 	}
 	
 	void updateTo_v0_3_6() {

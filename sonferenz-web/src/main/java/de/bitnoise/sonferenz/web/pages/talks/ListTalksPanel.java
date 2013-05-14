@@ -16,9 +16,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 
+import de.bitnoise.sonferenz.model.ConferenceModel;
 import de.bitnoise.sonferenz.model.TalkModel;
 import de.bitnoise.sonferenz.service.v2.services.StaticContentService;
 import de.bitnoise.sonferenz.service.v2.services.TalkService;
+import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.SortableServiceDataProvider;
 import de.bitnoise.sonferenz.web.component.TableBuilder;
 import de.bitnoise.sonferenz.web.pages.talks.action.EditOrViewTalk;
@@ -99,14 +101,15 @@ public class ListTalksPanel extends Panel
       @Override
       protected Page<TalkModel> getAllItems(PageRequest request)
       {
-        return talks.getTalks(request);
+        ConferenceModel conf = KonferenzSession.get().getCurrentConference();
+        return talks.getTalks(conf,request);
       }
 
-      @Override
-      public long size()
-      {
-        return (int) talks.getAllTalksCount();
-      }
+//      @Override
+//      public long size()
+//      {
+//        return (int) talks.getAllTalksCount();
+//      }
 
       @Override
       protected Sort createDefaultSorting()

@@ -1,5 +1,6 @@
 package de.bitnoise.sonferenz.web.pages.talks;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class EditTalkPanel extends FormPanel
   SpeakerService speakerService;
   
   TalkModel _talk;
+  
   private ListModel<SpeakerModel> modelSpeakers;
 
   public EditTalkPanel(String id, TalkModel talk)
@@ -151,14 +153,12 @@ public class EditTalkPanel extends FormPanel
         return ""+object.getId();
       }
     };
-    modelSpeakers.setObject(_talk.getSpeakers());
-    Palette<SpeakerModel> sc 
-      = new Palette<SpeakerModel>(id, modelSpeakers, choicesModel, choiceRenderer, 6, false){
-      @Override
-      protected ResourceReference getCSS() {
-        return null;
-      }
-    };
+    List<SpeakerModel> current = _talk.getSpeakers();
+    if(current == null ) {
+      current = new ArrayList<SpeakerModel>();
+    }
+    modelSpeakers.setObject(current);
+    Palette<SpeakerModel> sc = new Palette<SpeakerModel>(id, modelSpeakers, choicesModel, choiceRenderer, 6, false);
     return sc;
   }
 
