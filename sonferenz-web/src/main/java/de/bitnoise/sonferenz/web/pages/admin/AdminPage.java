@@ -16,7 +16,6 @@ import de.bitnoise.sonferenz.web.pages.UnauthorizedPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ActionsPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.AppStatePanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListSpeakerPanel;
-import de.bitnoise.sonferenz.web.pages.admin.tabs.ListTalksPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.LogOutputPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.VotingResultPanel;
@@ -24,6 +23,7 @@ import de.bitnoise.sonferenz.web.pages.conference.ListConferencesPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListConfigPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListRolesPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListTextePanel;
+import de.bitnoise.sonferenz.web.pages.talks.ListTalksPanel;
 
 @At(url = "/admin")
 public class AdminPage extends KonferenzPage {
