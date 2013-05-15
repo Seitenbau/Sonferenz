@@ -2,8 +2,6 @@ package de.bitnoise.sonferenz.web.app;
 
 import java.io.FileInputStream;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
@@ -12,11 +10,13 @@ import javax.net.ssl.SSLEngine;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.SecurePackageResourceGuard;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
+import org.apache.wicket.settings.IRequestLoggerSettings;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.file.File;
 import org.springframework.beans.BeansException;
@@ -100,6 +100,17 @@ public class WicketApplication extends WebApplication {
 		guard.addPattern("+*.css");
 		guard.addPattern("+*.cur");
 		getResourceSettings().setPackageResourceGuard(guard);
+		
+		 IRequestLoggerSettings reqLogger = Application.get().getRequestLoggerSettings();
+		  //Enable the logger
+		  reqLogger.setRequestLoggerEnabled(true);
+		 
+		  /**
+		  * Set the window of all the requests that is kept in memory for viewing. Default is 2000, You
+		  * can set this to 0 then only Sessions data is recorded (number of request, total time, latest
+		  * size)
+		  */
+		  reqLogger.setRequestsWindowSize(0);
 	}
 
 	protected void prepareSSL() throws Exception {
