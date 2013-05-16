@@ -16,7 +16,7 @@ public class VersionPanel extends Panel
   protected void onInitialize()
   {
     super.onInitialize();
-    add(new Label("versionText", de.bitnoise.sonferenz.Version.VERSION));
+    add(new Label("versionText", de.bitnoise.sonferenz.web.Version.VERSION));
   }
 
 }
