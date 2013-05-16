@@ -1,0 +1,20 @@
+<wicket:panel>
+  
+  <form wicket:id="form" class="formLayout">
+    <span wicket:id="feedback"></span>
+    <fieldset>
+        <legend>Endergebnis festlegen</legend>
+        <div wicket:id="toList" class="talkList"> 
+          <div class="checkbox">
+            <input wicket:id="checked" class="checkbox" type="checkbox" value="talk_1">
+               <span wicket:id="talkName" class="talkName"></span>  
+            </input>
+          </div>
+        </div>
+      <br/>
+    </fieldset>
+    <div  class="formButtons">
+      <input type="submit"  value="Speichern"/>
+    </div>
+  </form>
+</wicket:panel>

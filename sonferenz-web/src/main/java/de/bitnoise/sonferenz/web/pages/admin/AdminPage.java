@@ -18,6 +18,7 @@ import de.bitnoise.sonferenz.web.pages.admin.tabs.AppStatePanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListSpeakerPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.ListUserPanel;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.LogOutputPanel;
+import de.bitnoise.sonferenz.web.pages.admin.tabs.MailTab;
 import de.bitnoise.sonferenz.web.pages.admin.tabs.VotingResultPanel;
 import de.bitnoise.sonferenz.web.pages.conference.ListConferencesPanel;
 import de.bitnoise.sonferenz.web.pages.config.ListConfigPanel;
@@ -87,6 +88,12 @@ public class AdminPage extends KonferenzPage {
 					  @Override
 					  public Panel getPanel(String panelId) {
 					    return new ActionsPanel(panelId);
+					  }
+					});
+					tabs.add(new AbstractTab(txt("admin.tab.mailings")) {
+					  @Override
+					  public Panel getPanel(String panelId) {
+					    return new MailTab(panelId);
 					  }
 					});
 					tabs.add(new AbstractTab(txt("admin.tab.appstate")) {
