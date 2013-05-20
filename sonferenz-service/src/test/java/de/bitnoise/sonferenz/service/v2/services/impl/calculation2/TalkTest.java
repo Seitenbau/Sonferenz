@@ -64,12 +64,17 @@ public class TalkTest extends UnitTestBase
     String id = "t1";
     // execute
     Talk sut = new Talk(id);
-    sut.addVisitor(p1);
+    sut.addVisitor(v(p1, 1));
 
     // verify
     assertThat(sut.getId()).isSameAs(id);
     assertThat(sut.getSpeakers()).isEmpty();
     assertThat(sut.getVisitors()).containsExactly(p1);
+  }
+
+  Visit v(Person person, int weight)
+  {
+    return new Visit(person, weight);
   }
 
   @Test
@@ -80,8 +85,8 @@ public class TalkTest extends UnitTestBase
     // execute
     Talk sut = new Talk(id);
     sut.addSpeaker(p2, p3);
-    sut.addVisitor(p1, p2, p4);
-    sut.addVisitor(p2, p3);
+    sut.addVisitor(v(p1,1), v(p2,1), v(p4,1));
+    sut.addVisitor(v(p2,1), v(p3,1));
 
     // verify
     assertThat(sut.getId()).isSameAs(id);
@@ -98,13 +103,13 @@ public class TalkTest extends UnitTestBase
     // execute part 1
     Talk sut = new Talk(id);
     sut.addSpeaker(p2, p3);
-    sut.addVisitor(p1, p2, p4);
+    sut.addVisitor(v(p1,1),v( p2,1), v(p4,1));
 
     // verify
     expectedException(IllegalStateException.class, "This talk allready contains that person. talk=t1 person=p4");
 
     // adding p4 will fail
-    sut.addVisitor(p2, p3, p4);
+    sut.addVisitor(v(p2,1), v(p3,1), v(p4,1));
 
   }
 

@@ -1,12 +1,15 @@
 package de.bitnoise.sonferenz.service.v2.services.impl.calculation2;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Collisions
 {
   Map<Talk, Map<Talk, TalkCollision>> collisions = new HashMap<Talk, Map<Talk, TalkCollision>>();
+  List<TalkCollision> all= new ArrayList<TalkCollision>();
 
   public TalkCollision collision(Talk t1, Talk t2)
   {
@@ -27,6 +30,12 @@ public class Collisions
   {
     findMapFor(col.getTalkA()).put(col.getTalkB(), col);
     findMapFor(col.getTalkB()).put(col.getTalkA(), col);
+    all .add(col);
+  }
+  
+  public List<TalkCollision> getAll()
+  {
+    return all;
   }
 
   Map<Talk, TalkCollision> findMapFor(Talk talk)
@@ -39,5 +48,6 @@ public class Collisions
     }
     return mapped;
   }
+
 
 }

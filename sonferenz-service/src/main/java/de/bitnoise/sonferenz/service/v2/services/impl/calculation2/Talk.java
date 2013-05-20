@@ -9,7 +9,8 @@ public class Talk
   Object id;
   List<Person> speakers = new ArrayList<Person>();
 
-  List<Person> visitors = new ArrayList<Person>();
+  List<Person> visitorPersons = new ArrayList<Person>();
+  List<Visit> visitors = new ArrayList<Visit>();
 
   public Talk(String name)
   {
@@ -34,16 +35,21 @@ public class Talk
     return this;
   }
 
-  public Talk addVisitor(Person... visit)
+  public Talk addVisitor(Visit... visit)
   {
-    for (Person v : visit)
+    for (Visit v : visit)
     {
-      if (!speakers.contains(v))
+      Person person = v.getPerson();
+      if (!speakers.contains(person))
       {
-        if (visitors.contains(v))
+        if (visitorPersons.contains(person))
         {
-          throw new IllegalStateException("This talk allready contains that person. talk=" + this + " person=" + v);
+          throw new IllegalStateException(
+              "This talk allready contains that person." +
+                  " talk=" + this +
+                  " person=" + v.getPerson());
         }
+        visitorPersons.add(person);
         visitors.add(v);
       }
     }
@@ -60,8 +66,13 @@ public class Talk
     return speakers;
   }
 
-  public List<Person> getVisitors()
+  public List<Visit> getVisits()
   {
     return visitors;
+  }
+  
+  public List<Person> getVisitors()
+  {
+    return visitorPersons;
   }
 }
