@@ -11,7 +11,7 @@ public class VerifyObjectTest extends BaseTestClass {
     // prepare
     VerifyObject sut = new VerifyObject(null);
     // verify
-    expectException(IllegalArgumentException.class, "was null");
+    expectedException(IllegalArgumentException.class, "was null");
     // execute
     sut.isNotNull();
   }
@@ -30,7 +30,7 @@ public class VerifyObjectTest extends BaseTestClass {
     // prepare
     VerifyObject sut = new VerifyObject(null);
     // verify
-    expectException(IllegalArgumentException.class, "parameter 1 was null");
+    expectedException(IllegalArgumentException.class, "parameter 1 was null");
     // execute
     sut.as("parameter 1");
     sut.isNotNull();

@@ -29,7 +29,7 @@ public class SpeakerServiceImplTest extends BaseTestClass {
   @Test
   public void getAllSpeakers_invalidParameter() {
     // verify
-    expectException(IllegalArgumentException.class, "pageable was null");
+    expectedException(IllegalArgumentException.class, "pageable was null");
 
     // execute
     sut.getAllSpeakers(null);
@@ -51,7 +51,7 @@ public class SpeakerServiceImplTest extends BaseTestClass {
   @Test
   public void getSpeakerById_invalidParameter() {
     // verify
-    expectException(IllegalArgumentException.class, "id was null");
+    expectedException(IllegalArgumentException.class, "id was null");
 
     // execute
     sut.getSpeakerById(null);
@@ -85,7 +85,7 @@ public class SpeakerServiceImplTest extends BaseTestClass {
   @Test
   public void saveSpeaker_invalidParameter() {
     // verify
-    expectException(IllegalArgumentException.class, "speaker was null");
+    expectedException(IllegalArgumentException.class, "speaker was null");
 
     // execute
     sut.saveSpeaker(null);

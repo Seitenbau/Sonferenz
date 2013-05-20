@@ -13,6 +13,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.upload.ProgressListener;
 import org.springframework.data.domain.PageRequest;
 
 import de.bitnoise.sonferenz.model.ConferenceModel;
@@ -58,7 +59,7 @@ public class SubListTalksPanel extends Panel
   protected void onInitialize()
   {
     super.onInitialize();
-
+    
     AjaxFallbackLink<String> button = new AjaxFallbackLink<String>(
         "calulateTalks")
     {

@@ -7,19 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.LocalDateTime;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
-import de.bitnoise.testing.mockito.MockitoRule;
 
-public class BaseTestClass
+public class BaseTestClass extends UnitTestBase
 {
-  @Rule
-  public ExpectedException expectException = ExpectedException.none();
-
-  @Rule
-  public MockitoRule mockito = new MockitoRule();
-
   protected LocalDateTime jetzt = LocalDateTime.now();
 
   protected LocalDateTime in5Minuten = LocalDateTime.now().plusMinutes(5);
@@ -43,10 +34,5 @@ public class BaseTestClass
     {
       verifyNoMoreInteractions(mocks);
     }
-  }
-  
-  protected void expectException(Class<? extends Throwable> clazz, String message) {
-    expectException.expect(clazz);
-    expectException.expectMessage(message);
   }
 }
