@@ -44,13 +44,18 @@ public class MailTab extends KonferenzTabPanel
   }
   class ToItem implements Serializable {
     boolean checked;
+    private String title;
+    public ToItem(String t)
+    {
+      title = t;
+    }
     public boolean isChecked()
     {
       return checked;
     }
     public String getTitle()
     {
-      return "rw";
+      return title;
     }}
   IModel<List<? extends ToItem>> _state;
   @Override
@@ -87,8 +92,8 @@ public class MailTab extends KonferenzTabPanel
   private List<? extends ToItem> createModel()
   {
     ArrayList<ToItem> result = new ArrayList<ToItem>();
-    ToItem one=new ToItem();
-    result.add(one);
+    result.add(new ToItem("Alle Benutzer"));
+    result.add(new ToItem("Alle Benutzer"));
     return result;
   }
 

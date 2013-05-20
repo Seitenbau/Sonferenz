@@ -90,12 +90,12 @@ public class AdminPage extends KonferenzPage {
 					    return new ActionsPanel(panelId);
 					  }
 					});
-					tabs.add(new AbstractTab(txt("admin.tab.mailings")) {
-					  @Override
-					  public Panel getPanel(String panelId) {
-					    return new MailTab(panelId);
-					  }
-					});
+//					tabs.add(new AbstractTab(txt("admin.tab.mailings")) {
+//					  @Override
+//					  public Panel getPanel(String panelId) {
+//					    return new MailTab(panelId);
+//					  }
+//					});
 					tabs.add(new AbstractTab(txt("admin.tab.appstate")) {
 						@Override
 						public Panel getPanel(String panelId) {
