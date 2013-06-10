@@ -94,21 +94,14 @@ public class VideoPanel extends Panel
     MarkupContainer script = new MarkupContainer("script") {
     	@Override
 		protected void onComponentTag(ComponentTag tag) {
-//			// TODO Auto-generated method stub
-//			super.onComponentTag(tag);
-//		}
-//      @Override
-//      protected void onComponentTagBody(MarkupStream markupStream,
-//          ComponentTag openTag)
-//      {
-//        super.onComponentTagBody(markupStream, openTag);
-        
         StringBuilder sb = new StringBuilder();
-        sb.append(" $(document).ready(function() { \r\n");
+        sb.append("<script wicket:id='script' type='text/javascript'>\r\n");
+        sb.append(" $( document ).ready(function() { \r\n");
         sb.append("   projekktor('#videoplayer', { \r\n");
         sb.append("     playerFlashMP4: '"+contextPath+"/projekktor/jarisplayer.swf'\r\n");
         sb.append("   });\r\n");
         sb.append(" });\r\n");
+        sb.append("</script>\r\n");
         getResponse().write(sb.toString());
         
       }
