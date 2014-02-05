@@ -1,10 +1,14 @@
 package de.bitnoise.sonferenz.web.component.lvl1;
 
+import javax.inject.Inject;
+
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
 import de.bitnoise.sonferenz.model.ConferenceState;
+import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
+import de.bitnoise.sonferenz.web.component.navigation.VisibleChoice;
 import de.bitnoise.sonferenz.web.component.state.IsLoggedIn;
 import de.bitnoise.sonferenz.web.component.state.IsNotLoggedIn;
 import de.bitnoise.sonferenz.web.component.state.OnState;
@@ -28,53 +32,104 @@ public class FirstLevelBar extends Panel
     super(id);
   }
 
+  @Inject
+  ConfigurationService cfg;
+
+  class OnConfigEnabled implements VisibleChoice
+  {
+
+    String _cfgKey;
+
+    public OnConfigEnabled(String cfgKey)
+    {
+      _cfgKey = cfgKey;
+    }
+
+    @Override
+    public boolean canBeDisplayed()
+    {
+      if (_cfgKey == null)
+      {
+        return false;
+      }
+      String value = cfg.getStringValueOr(null, _cfgKey);
+      if (value == null || value.isEmpty())
+      {
+        return false;
+      }
+      if (value.equalsIgnoreCase("true"))
+      {
+        return true;
+      }
+      return false;
+    }
+
+  }
+
   @Override
   protected void onInitialize()
   {
     super.onInitialize();
     RepeatingView items = new RepeatingView("repeater");
-    
-    items.add(new MenuButton("info", items.newChildId(), InfoPage.class               ,new IsLoggedIn()  ));
-    items.add(new MenuButton("voting",  items.newChildId(), VotingOverviewPage.class  ,new IsLoggedIn() ,new OnStateVoting() ));
-    items.add(new MenuButton("whishes", items.newChildId(), WhishOverviewPage.class   ,new IsLoggedIn() ,new OnStateCallForPapers()  ));
-    items.add(new MenuButton("talks", items.newChildId(), ProposalOverviewPage.class  ,new IsLoggedIn() ,new OnStateCallForPapers()  ));
-    items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class   ,new IsNotLoggedIn() ));
-    items.add(new MenuButton("register", items.newChildId(), RegisterPage.class       ,new IsNotLoggedIn() ));
-    items.add(new MenuButton("agenda", items.newChildId(), SchedulePage.class         ,new OnState(ConferenceState.PLANNED, ConferenceState.RUNNING,ConferenceState.FINISHED) ));
+
+    items.add(new MenuButton("info", items.newChildId(), InfoPage.class, new IsLoggedIn()));
+    items.add(new MenuButton("voting", items.newChildId(), VotingOverviewPage.class, new IsLoggedIn(),
+        new OnStateVoting()));
+    items.add(new MenuButton("whishes", items.newChildId(), WhishOverviewPage.class, new IsLoggedIn(),
+        new OnStateCallForPapers(), new OnConfigEnabled("menu.suggestions")));
+    items.add(new MenuButton("talks", items.newChildId(), ProposalOverviewPage.class, new IsLoggedIn(),
+        new OnStateCallForPapers(), new OnConfigEnabled("menu.proposals")));
+    items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class, new IsNotLoggedIn()));
+    items.add(new MenuButton("register", items.newChildId(), RegisterPage.class, new IsNotLoggedIn()));
+    items.add(new MenuButton("agenda", items.newChildId(), SchedulePage.class, new OnState(
+        ConferenceState.PLANNED, ConferenceState.RUNNING, ConferenceState.FINISHED)));
     items.add(new MenuButton("contact", items.newChildId(), ContactPage.class));
 
-//    if (!KonferenzSession.noUserLoggedIn())
-//    {
-//      items.add(new MenuButton("info", items.newChildId(), InfoPage.class));
-//      if (new OnStateVoting().canBeDisplayed())
-//      {
-//        items.add(new MenuButton("voting", items.newChildId(), VotingOverviewPage.class));
-//      }
-//      if (new OnState(ConferenceState.PLANNED, ConferenceState.RUNNING).canBeDisplayed())
-//      {
-//        items.add(new MenuButton("agenda", items.newChildId(), SchedulePage.class));
-//      }
-//      if (new OnStateCallForPapers().canBeDisplayed())
-//      {
-//        items.add(new MenuButton("whishes", items.newChildId(), WhishOverviewPage.class));
-//        items.add(new MenuButton("talks", items.newChildId(), ProposalOverviewPage.class));
-//      }
-//      /*
-//       * items.add(new MenuButton("archive", items.newChildId(), ReviewPage.class)); items.add(new MenuButton("program", items.newChildId(),
-//       * ConferencePage.class)); items.add(new MenuButton("agenda", items.newChildId(), AgendaPage.class));
-//       */
-//    }
-//    else
-//    {
-//      items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class));
-//      if (new OnState(ConferenceState.RUNNING).canBeDisplayed())
-//      {
-//        items.add(new MenuButton("agenda", items.newChildId(), SchedulePage.class));
-//      }
-//      items.add(new MenuButton("register", items.newChildId(), RegisterPage.class));
-//    }
-//
-//    items.add(new MenuButton("contact", items.newChildId(), ContactPage.class));
+    // if (!KonferenzSession.noUserLoggedIn())
+    // {
+    // items.add(new MenuButton("info", items.newChildId(),
+    // InfoPage.class));
+    // if (new OnStateVoting().canBeDisplayed())
+    // {
+    // items.add(new MenuButton("voting", items.newChildId(),
+    // VotingOverviewPage.class));
+    // }
+    // if (new OnState(ConferenceState.PLANNED,
+    // ConferenceState.RUNNING).canBeDisplayed())
+    // {
+    // items.add(new MenuButton("agenda", items.newChildId(),
+    // SchedulePage.class));
+    // }
+    // if (new OnStateCallForPapers().canBeDisplayed())
+    // {
+    // items.add(new MenuButton("whishes", items.newChildId(),
+    // WhishOverviewPage.class));
+    // items.add(new MenuButton("talks", items.newChildId(),
+    // ProposalOverviewPage.class));
+    // }
+    // /*
+    // * items.add(new MenuButton("archive", items.newChildId(),
+    // ReviewPage.class)); items.add(new MenuButton("program",
+    // items.newChildId(),
+    // * ConferencePage.class)); items.add(new MenuButton("agenda",
+    // items.newChildId(), AgendaPage.class));
+    // */
+    // }
+    // else
+    // {
+    // items.add(new MenuButton("conference", items.newChildId(),
+    // ConferencePage.class));
+    // if (new OnState(ConferenceState.RUNNING).canBeDisplayed())
+    // {
+    // items.add(new MenuButton("agenda", items.newChildId(),
+    // SchedulePage.class));
+    // }
+    // items.add(new MenuButton("register", items.newChildId(),
+    // RegisterPage.class));
+    // }
+    //
+    // items.add(new MenuButton("contact", items.newChildId(),
+    // ContactPage.class));
     add(items);
   }
 }
