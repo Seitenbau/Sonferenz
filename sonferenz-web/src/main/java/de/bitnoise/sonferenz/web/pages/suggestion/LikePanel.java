@@ -1,5 +1,7 @@
 package de.bitnoise.sonferenz.web.pages.suggestion;
 
+import javax.inject.Inject;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.basic.Label;
@@ -9,6 +11,8 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 
+import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
+import de.bitnoise.sonferenz.web.ConfigConst;
 import de.bitnoise.sonferenz.web.app.WicketApplication;
 
 public class LikePanel extends Panel {
@@ -47,6 +51,7 @@ public class LikePanel extends Panel {
 		final Image img = new Image("image", ref);
 		img.setOutputMarkupId(true);
 		final Label count=new Label("count",_globalCount);
+		count.setVisibilityAllowed(canBeDisplayed(cfg,ConfigConst.SHOW_SUGGESTION_COUNT));
 		count.setOutputMarkupId(true);
 		AjaxFallbackLink<String> link = new AjaxFallbackLink<String>("link") {
 			@Override
@@ -70,7 +75,29 @@ public class LikePanel extends Panel {
 		link.add(img);
 	}
 
-	protected void onChange(AjaxRequestTarget target, Model<Boolean> newValue) {
+	@Inject
+  ConfigurationService cfg;
+
+	static public boolean canBeDisplayed(ConfigurationService cfg,String cfgKey)
+  {
+	  // TODO: add check so Admin role can see allways?
+    if (cfgKey == null)
+    {
+      return false;
+    }
+    String value = cfg.getStringValueOr(null, cfgKey);
+    if (value == null || value.isEmpty())
+    {
+      return false;
+    }
+    if (value.equalsIgnoreCase("true"))
+    {
+      return true;
+    }
+    return false;
+  }
+
+  protected void onChange(AjaxRequestTarget target, Model<Boolean> newValue) {
 		
 	}
 

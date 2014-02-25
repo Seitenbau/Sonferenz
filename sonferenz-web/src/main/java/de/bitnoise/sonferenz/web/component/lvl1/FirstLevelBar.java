@@ -7,6 +7,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 
 import de.bitnoise.sonferenz.model.ConferenceState;
 import de.bitnoise.sonferenz.service.v2.services.ConfigurationService;
+import de.bitnoise.sonferenz.web.ConfigConst;
 import de.bitnoise.sonferenz.web.app.KonferenzSession;
 import de.bitnoise.sonferenz.web.component.navigation.VisibleChoice;
 import de.bitnoise.sonferenz.web.component.state.IsLoggedIn;
@@ -76,9 +77,9 @@ public class FirstLevelBar extends Panel
     items.add(new MenuButton("voting", items.newChildId(), VotingOverviewPage.class, new IsLoggedIn(),
         new OnStateVoting()));
     items.add(new MenuButton("whishes", items.newChildId(), WhishOverviewPage.class, new IsLoggedIn(),
-        new OnStateCallForPapers(), new OnConfigEnabled("menu.suggestions")));
+        new OnStateCallForPapers(), new OnConfigEnabled(ConfigConst.SHOW_MENU_SUGGESTION )));
     items.add(new MenuButton("talks", items.newChildId(), ProposalOverviewPage.class, new IsLoggedIn(),
-        new OnStateCallForPapers(), new OnConfigEnabled("menu.proposals")));
+        new OnStateCallForPapers(), new OnConfigEnabled(ConfigConst.SHOW_MENU_PROPOSALS)));
     items.add(new MenuButton("conference", items.newChildId(), ConferencePage.class, new IsNotLoggedIn()));
     items.add(new MenuButton("register", items.newChildId(), RegisterPage.class, new IsNotLoggedIn()));
     items.add(new MenuButton("agenda", items.newChildId(), SchedulePage.class, new OnState(

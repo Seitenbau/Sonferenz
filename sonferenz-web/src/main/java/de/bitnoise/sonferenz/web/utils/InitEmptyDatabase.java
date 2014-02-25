@@ -96,6 +96,10 @@ public class InitEmptyDatabase
       {
         updateTo_v0_3_10();
       }
+      if (isDatabaseOlderThanVersion(12))
+      {
+        updateTo_v0_3_11();
+      }
     }
     finally
     {
@@ -104,11 +108,20 @@ public class InitEmptyDatabase
     }
   }
 
+  void updateTo_v0_3_11()
+  {
+    config.saveStringValue("suggestions.show.count", "true");
+    config.saveStringValue("suggestions.show.owner", "true");
+
+    logger.warn("# DATABASE update to version 12 #");
+    config.saveIntegerValue(INIT_MARKER_KEY, 12);
+  }
+  
   void updateTo_v0_3_10()
   {
     config.saveStringValue("menu.suggestions", "true");
     config.saveStringValue("menu.proposals", "false");
-
+    
     logger.warn("# DATABASE update to version 11 #");
     config.saveIntegerValue(INIT_MARKER_KEY, 11);
   }
